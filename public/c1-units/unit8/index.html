@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 8 – Movement and Transport | Destination C1</title>
+<style>
+:root {
+  --accent: #2d6a4f;
+  --accent-dark: #1b4332;
+  --accent-light: #d8f3e3;
+  --accent2: #52b788;
+  --bg: #f8faf9;
+  --surface: #ffffff;
+  --border: #d8e8df;
+  --text: #1a2e23;
+  --muted: #5a7a68;
+  --sidebar-w: 260px;
+  --correct: #2d6a4f;
+  --wrong: #c1121f;
+  --correct-bg: #d8f3e3;
+  --wrong-bg: #ffe5e5;
+  --yellow-bg: #fff9e6;
+  --yellow-border: #f9c74f;
+  --blue-bg: #e8f4fd;
+  --blue-border: #4ea8de;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+#sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: #b7d5c4; border-radius: 4px; }
+#sidebar-header {
+  padding: 16px 14px 12px;
+  background: var(--accent-dark);
+  color: #fff;
+  flex-shrink: 0;
+}
+#sidebar-header h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+#sidebar-header p { font-size: 11px; opacity: 0.7; margin-top: 3px; }
+#sidebar nav a {
+  display: block;
+  padding: 9px 14px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 12.5px;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+#sidebar nav a:hover { color: var(--accent); background: var(--accent-light); }
+#sidebar nav a.active { color: var(--accent); background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; }
+.nav-group {
+  padding: 8px 14px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  background: #f0f7f3;
+  border-top: 1px solid var(--border);
+}
+#score-panel {
+  margin: 0 12px 12px;
+  padding: 12px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  border: 1px solid var(--accent2);
+  flex-shrink: 0;
+}
+#score-panel .score-label { font-size: 11px; font-weight: 600; color: var(--accent-dark); margin-bottom: 6px; }
+#score-bar-bg { background: #b7d5c4; border-radius: 100px; height: 6px; overflow: hidden; margin-bottom: 6px; }
+#score-bar-fill { height: 100%; background: var(--accent); border-radius: 100px; transition: width 0.5s ease; width: 0%; }
+#score-text { font-size: 12px; color: var(--accent-dark); font-weight: 600; }
+#main { flex: 1; padding: 32px 40px 60px; max-width: 900px; }
+.page-title { font-size: 22px; font-weight: 700; color: var(--accent-dark); margin-bottom: 4px; }
+.page-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
+.section { margin-bottom: 48px; scroll-margin-top: 20px; }
+.section-title { font-size: 17px; font-weight: 700; color: var(--accent-dark); border-bottom: 2px solid var(--accent); padding-bottom: 6px; margin-bottom: 20px; }
+.exercise { margin-bottom: 32px; }
+.exercise-label { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.ex-letter { width: 28px; height: 28px; background: var(--accent-dark); color: #fff; border-radius: 50%; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ex-instruction { font-size: 13px; font-style: italic; color: var(--text); font-weight: 500; }
+.word-box { background: #f0f7f3; border: 1px solid var(--accent2); border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; color: var(--accent-dark); text-align: center; line-height: 2; }
+.fill-list { list-style: none; }
+.fill-item { display: flex; align-items: baseline; gap: 6px; padding: 6px 0; border-bottom: 1px solid #edf2ef; flex-wrap: wrap; }
+.fill-item:last-child { border-bottom: none; }
+.item-num { font-size: 12px; font-weight: 700; color: var(--muted); min-width: 22px; flex-shrink: 0; }
+.item-text { flex: 1; }
+.fill-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  min-width: 120px;
+  outline: none;
+  transition: border-color 0.2s;
+  text-align: center;
+}
+.fill-input:focus { border-bottom-color: var(--accent-dark); }
+.fill-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.fill-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+.choose-item { padding: 8px 0; border-bottom: 1px solid #edf2ef; font-size: 13.5px; }
+.choose-item:last-child { border-bottom: none; }
+.choose-pair { display: inline-flex; gap: 0; border-radius: 6px; overflow: hidden; border: 1.5px solid var(--border); }
+.choose-btn { padding: 3px 10px; border: none; background: var(--surface); cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 600; transition: all 0.15s; color: var(--muted); }
+.choose-btn + .choose-btn { border-left: 1.5px solid var(--border); }
+.choose-btn:hover { background: var(--accent-light); color: var(--accent); }
+.choose-btn.selected { background: var(--accent); color: #fff; }
+.choose-btn.correct { background: var(--correct); color: #fff; }
+.choose-btn.wrong { background: var(--wrong); color: #fff; }
+.passage-box { background: var(--yellow-bg); border: 1px solid var(--yellow-border); border-radius: 10px; padding: 18px 20px; margin-bottom: 12px; font-size: 13.5px; line-height: 2; }
+.passage-box h3 { font-family: 'Georgia', serif; font-size: 16px; color: var(--accent-dark); margin-bottom: 10px; text-align: center; }
+.passage-box.blue-box { background: var(--blue-bg); border-color: var(--blue-border); }
+.gap-num { font-weight: 700; color: var(--accent-dark); font-size: 12px; vertical-align: middle; }
+/* Tick exercise */
+.tick-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid #edf2ef; }
+.tick-item:last-child { border-bottom: none; }
+.tick-num { font-size: 12px; font-weight: 700; color: var(--muted); min-width: 22px; }
+.tick-text { flex: 1; font-size: 13.5px; }
+.tick-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.tick-btn { padding: 3px 10px; border: 1.5px solid var(--border); border-radius: 6px; background: var(--surface); cursor: pointer; font-size: 12px; font-family: inherit; transition: all 0.15s; }
+.tick-btn.tick-yes { color: var(--correct); }
+.tick-btn.tick-yes:hover, .tick-btn.tick-yes.selected { background: var(--correct-bg); border-color: var(--correct); }
+.tick-input { border: none; border-bottom: 1.5px solid var(--accent2); background: transparent; padding: 2px 4px; font-size: 13px; font-family: inherit; color: var(--text); min-width: 100px; outline: none; }
+.tick-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.tick-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+/* word-grid for N */
+.word-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.word-chip { padding: 6px 14px; border: 1.5px solid var(--border); border-radius: 20px; background: var(--surface); cursor: pointer; font-size: 13px; font-family: inherit; transition: all 0.15s; color: var(--text); }
+.word-chip:hover { border-color: var(--accent2); background: var(--accent-light); }
+.word-chip.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 600; }
+.word-chip.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); font-weight: 600; }
+.word-chip.wrong { border-color: var(--wrong); background: var(--wrong-bg); color: var(--wrong); }
+.word-chip.missed { border-color: var(--yellow-border); background: var(--yellow-bg); }
+.btn-row { display: flex; gap: 10px; margin-top: 16px; }
+.btn-check { padding: 8px 20px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.btn-check:hover { background: var(--accent-dark); }
+.btn-reset { padding: 8px 16px; background: var(--surface); color: var(--muted); border: 1.5px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 13px; cursor: pointer; transition: all 0.2s; }
+.btn-reset:hover { border-color: var(--wrong); color: var(--wrong); }
+@media (max-width: 768px) { #sidebar { display: none; } #main { padding: 20px 16px 40px; } }
+#toast { position: fixed; bottom: 20px; right: 20px; background: var(--accent-dark); color: #fff; padding: 10px 18px; border-radius: 10px; font-size: 13px; font-weight: 600; display: none; z-index: 9999; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+</style>
+</head>
+<body>
+
+<aside id="sidebar">
+  <div id="sidebar-header">
+    <h2>Unit 8</h2>
+    <p>Movement and Transport</p>
+  </div>
+  <div id="score-panel">
+    <div class="score-label">Progress</div>
+    <div id="score-bar-bg"><div id="score-bar-fill"></div></div>
+    <div id="score-text">0 / 0 answered</div>
+  </div>
+  <nav>
+    <div class="nav-group">Topic Vocab: Movement</div>
+    <a href="#exA">A — Fill in movement verbs</a>
+    <a href="#exB">B — Word form groups</a>
+    <div class="nav-group">Topic Vocab: Transport</div>
+    <a href="#exC">C — Let the Plane passage</a>
+    <a href="#exD">D — Circle correct word</a>
+    <div class="nav-group">Phrasal Verbs</div>
+    <a href="#exE">E — One word per gap</a>
+    <a href="#exF">F — Phrasal verb from box A+B</a>
+    <a href="#exG">G — Cordon off: tick words</a>
+    <div class="nav-group">Phrases &amp; Collocations</div>
+    <a href="#exH">H — Complete with phrase</a>
+    <a href="#exI">I — One word per gap</a>
+    <a href="#exJ">J — One word for 3 sentences</a>
+    <div class="nav-group">Idioms</div>
+    <a href="#exK">K — Idioms: one word</a>
+    <div class="nav-group">Word Formation</div>
+    <a href="#exL">L — The stairlift passage</a>
+    <a href="#exM">M — Incorrect word form</a>
+    <a href="#exN">N — de- prefix tick</a>
+    <a href="#exO">O — Use de- words</a>
+  </nav>
+</aside>
+
+<main id="main">
+  <div class="page-title">Unit 8 — Vocabulary</div>
+  <div class="page-subtitle">Movement and Transport &nbsp;·&nbsp; Destination C1 &amp; C2</div>
+
+  <!-- ════════ TOPIC VOCAB: MOVEMENT ════════ -->
+  <div class="section" id="sec-movement">
+    <div class="section-title">Topic vocabulary: Movement</div>
+
+    <!-- Exercise A -->
+    <div class="exercise" id="exA">
+      <div class="exercise-label">
+        <div class="ex-letter">A</div>
+        <div class="ex-instruction">Complete using the correct form of the words in the boxes.</div>
+      </div>
+      <div class="word-box">clench &nbsp;•&nbsp; clutch &nbsp;•&nbsp; fumble &nbsp;•&nbsp; gesture &nbsp;•&nbsp; grab &nbsp;•&nbsp; grasp &nbsp;•&nbsp; point &nbsp;•&nbsp; punch &nbsp;•&nbsp; wave</div>
+      <ol class="fill-list" id="A-list1">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">I <input class="fill-input" data-answer="grabbed" placeholder="..."> my school bag from the table and rushed out of the house.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">Grace <input class="fill-input" data-answer="fumbled" placeholder="..."> in her bag for her car keys and finally found them.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">A man ran from the burning house, <input class="fill-input" data-answer="clutching" placeholder="..."> a baby in his arms.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">The old man <input class="fill-input" data-answer="pointed" placeholder="..."> his finger straight at me and I felt a chill go down my spine.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">As the train left the station, Charlie <input class="fill-input" data-answer="waved" placeholder="..."> goodbye.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">Jamie came home from school with a black eye because someone had <input class="fill-input" data-answer="punched" placeholder="..."> him.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">I asked Karen where the phone was and without taking her eyes off the TV she <input class="fill-input" data-answer="gestured" placeholder="..."> lazily in the direction of the kitchen.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">Lina <input class="fill-input" data-answer="clenched" placeholder="..."> her fists tightly in anger but managed to control herself.</span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">He <input class="fill-input" data-answer="grasped" placeholder="..."> my hand firmly and I could see that he was trying to thank me.</span></li>
+      </ol>
+
+      <div class="word-box" style="margin-top:16px;">crawl &nbsp;•&nbsp; creep &nbsp;•&nbsp; dash &nbsp;•&nbsp; hop &nbsp;•&nbsp; jog &nbsp;•&nbsp; leap &nbsp;•&nbsp; march &nbsp;•&nbsp; skip &nbsp;•&nbsp; step &nbsp;•&nbsp; stride</div>
+      <ol class="fill-list" id="A-list2" start="10">
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">The burglar <input class="fill-input" data-answer="crept" placeholder="..."> very quietly along the corridor, trying not to wake anybody.</span></li>
+        <li class="fill-item"><span class="item-num">11</span><span class="item-text">How long do you think you could <input class="fill-input" data-answer="hop" placeholder="..."> on one leg?</span></li>
+        <li class="fill-item"><span class="item-num">12</span><span class="item-text">I <input class="fill-input" data-answer="jog" placeholder="..."> in the park most mornings because I like to keep myself in shape.</span></li>
+        <li class="fill-item"><span class="item-num">13</span><span class="item-text">Just <input class="fill-input" data-answer="step" placeholder="..."> this way, sir, and the customer services manager will be with you in a moment.</span></li>
+        <li class="fill-item"><span class="item-num">14</span><span class="item-text">When we heard the noise, we quickly <input class="fill-input" data-answer="dashed" placeholder="..."> round the corner to see what had happened.</span></li>
+        <li class="fill-item"><span class="item-num">15</span><span class="item-text">Before he learnt to walk, my younger brother used to <input class="fill-input" data-answer="crawl" placeholder="..."> everywhere on all fours.</span></li>
+        <li class="fill-item"><span class="item-num">16</span><span class="item-text">The army <input class="fill-input" data-answer="marched" placeholder="..."> for two days before they came to the outskirts of the city.</span></li>
+        <li class="fill-item"><span class="item-num">17</span><span class="item-text">The speaker <input class="fill-input" data-answer="strode" placeholder="..."> onto the stage and smiled confidently at the audience.</span></li>
+        <li class="fill-item"><span class="item-num">18</span><span class="item-text">When he saw me coming, our dog <input class="fill-input" data-answer="leapt|leaped" placeholder="..."> over the gate and came to greet me.</span></li>
+        <li class="fill-item"><span class="item-num">19</span><span class="item-text">Polly was so happy she <input class="fill-input" data-answer="skipped" placeholder="..."> along the pavement to school, jumping from one foot to the other.</span></li>
+      </ol>
+
+      <div class="word-box" style="margin-top:16px;">drift &nbsp;•&nbsp; roam &nbsp;•&nbsp; wander</div>
+      <ol class="fill-list" id="A-list3" start="20">
+        <li class="fill-item"><span class="item-num">20</span><span class="item-text">When the men were finally found, they had been <input class="fill-input" data-answer="drifting" placeholder="..."> at sea in a tiny boat for days.</span></li>
+        <li class="fill-item"><span class="item-num">21</span><span class="item-text">Wolves used to <input class="fill-input" data-answer="roam" placeholder="..."> this whole area, looking for food.</span></li>
+        <li class="fill-item"><span class="item-num">22</span><span class="item-text">I was bored so I <input class="fill-input" data-answer="wandered" placeholder="..."> into the centre of town and did a bit of window shopping.</span></li>
+      </ol>
+
+      <div class="word-box" style="margin-top:16px;">skid &nbsp;•&nbsp; slide &nbsp;•&nbsp; slip &nbsp;•&nbsp; trip</div>
+      <ol class="fill-list" id="A-list4" start="23">
+        <li class="fill-item"><span class="item-num">23</span><span class="item-text">I didn't see the oil on the floor and I <input class="fill-input" data-answer="slipped" placeholder="..."> on it.</span></li>
+        <li class="fill-item"><span class="item-num">24</span><span class="item-text">This wardrobe is really heavy, but maybe we can <input class="fill-input" data-answer="slide" placeholder="..."> it along the ground.</span></li>
+        <li class="fill-item"><span class="item-num">25</span><span class="item-text">I didn't see the step and I <input class="fill-input" data-answer="tripped" placeholder="..."> over it.</span></li>
+        <li class="fill-item"><span class="item-num">26</span><span class="item-text">The road was wet, so when I pressed the brakes the car <input class="fill-input" data-answer="skidded" placeholder="...">.</span></li>
+      </ol>
+
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exA')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exA')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise B -->
+    <div class="exercise" id="exB">
+      <div class="exercise-label">
+        <div class="ex-letter">B</div>
+        <div class="ex-instruction">Complete using the words in bold in the correct form.</div>
+      </div>
+      <ol class="fill-list" id="B-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">I <input class="fill-input" data-answer="clambered" placeholder="..."> over a rock and looked down into the valley below us. We had <input class="fill-input" data-answer="ascended" placeholder="..."> to 6,000 metres above sea level and the air was getting thin. Nick was injured, and I knew we would have to <input class="fill-input" data-answer="descend" placeholder="..."> soon to get medical treatment. <b>(ascend, clamber, descend)</b></span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">The pilot held the controls. The engines were dead and the plane was <input class="fill-input" data-answer="approaching" placeholder="..."> towards the airfield. She knew that if she didn't have the <input class="fill-input" data-answer="velocity" placeholder="..."> to reach the runway, there was no way she could <input class="fill-input" data-answer="glide" placeholder="...">. She just hoped that the air would continue to <input class="fill-input" data-answer="flow" placeholder="..."> over the wings and stop her from <input class="fill-input" data-answer="sinking" placeholder="..."> too low. She <input class="fill-input" data-answer="accelerated" placeholder="..."> the runway with her heart in her throat. <b>(accelerate, approach, flow, glide, sink, velocity)</b></span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">The arctic tern is an incredible bird. It <input class="fill-input" data-answer="migrates" placeholder="..."> thousands of miles each year, stopping occasionally to <input class="fill-input" data-answer="float" placeholder="..."> on the ocean to rest. How it remembers the <input class="fill-input" data-answer="route" placeholder="..."> is still not fully understood. <b>(float, migrate, route)</b></span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">In basketball, you must <input class="fill-input" data-answer="bounce" placeholder="..."> the ball when you are moving with it. When you take a shot, you should let the ball <input class="fill-input" data-answer="roll" placeholder="..."> off your fingers so that it <input class="fill-input" data-answer="rotates" placeholder="..."> in the air. That makes it more accurate. <b>(bounce, roll, rotate)</b></span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">In the 1950s, many people <input class="fill-input" data-answer="emigrated" placeholder="..."> from the West Indies to England. Life was often hard for these <input class="fill-input" data-answer="immigrants" placeholder="...">, but they eventually became part of British life. Today, Britain also welcomes <input class="fill-input" data-answer="refugees" placeholder="..."> from parts of the world that are affected by war. <b>(emigrate, immigrant, refugee)</b></span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('B-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('B-list')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ TOPIC VOCAB: TRANSPORT ════════ -->
+  <div class="section" id="sec-transport">
+    <div class="section-title">Topic vocabulary: Transport</div>
+
+    <!-- Exercise C -->
+    <div class="exercise" id="exC">
+      <div class="exercise-label">
+        <div class="ex-letter">C</div>
+        <div class="ex-instruction">Complete using the correct form of the words in the box.</div>
+      </div>
+      <div class="word-box">airline &nbsp;•&nbsp; carriage &nbsp;•&nbsp; charter &nbsp;•&nbsp; commute &nbsp;•&nbsp; destination &nbsp;•&nbsp; jet lag &nbsp;•&nbsp; legroom &nbsp;•&nbsp; steward</div>
+      <div class="passage-box blue-box">
+        <h3>LET THE PLANE TAKE THE STRAIN</h3>
+        The railways changed the way we live and work. People started to <span class="gap-num">(1)</span> <input class="fill-input" data-answer="commute" placeholder="..."> to work, travelling home in a crowded train <span class="gap-num">(2)</span> <input class="fill-input" data-answer="carriage" placeholder="..."> each day. Now a new <span class="gap-num">(3)</span> <input class="fill-input" data-answer="airline" placeholder="...">, <em>Officeways</em>, plans to extend the idea and hopes to get more of us taking the plane to work! In the past, getting to work by air was only for the very wealthy, who could afford to <span class="gap-num">(4)</span> <input class="fill-input" data-answer="charter" placeholder="..."> a plane or helicopter even if they didn't have their own private jet. Now, <em>Officeways</em>, which travels to <span class="gap-num">(5)</span> <input class="fill-input" data-answer="destinations" placeholder="..."> throughout Europe, is offering special deals on short trips to business travellers. You might have less <span class="gap-num">(6)</span> <input class="fill-input" data-answer="legroom" placeholder="..."> than on the train, but <em>Officeways</em> claims their <span class="gap-num">(7)</span> <input class="fill-input" data-answer="stewards" placeholder="..."> are specially trained to help you relax on the way to work. And with such short journey times, there's no risk of <span class="gap-num">(8)</span> <input class="fill-input" data-answer="jet lag" placeholder="...">! So what are you waiting for? Turn to page 37 for our <em>Officeways</em> competition!
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exC')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exC')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise D -->
+    <div class="exercise" id="exD">
+      <div class="exercise-label">
+        <div class="ex-letter">D</div>
+        <div class="ex-instruction">Circle the correct word or phrase.</div>
+      </div>
+      <div id="D-list">
+        <div class="choose-item"><span class="item-num">1</span> &nbsp;Running along the seafront, there was a short concrete <span class="choose-pair"><button class="choose-btn" data-q="D1" data-opt="A" data-answer="A" onclick="chooseOption(this)">pier</button><button class="choose-btn" data-q="D1" data-opt="B" data-answer="A" onclick="chooseOption(this)">quay</button></span>, where a dozen fishing boats bobbed in the afternoon sun.</div>
+        <div class="choose-item"><span class="item-num">2</span> &nbsp;Quite a few resorts in Britain have long <span class="choose-pair"><button class="choose-btn" data-q="D2" data-opt="A" data-answer="B" onclick="chooseOption(this)">piers</button><button class="choose-btn" data-q="D2" data-opt="B" data-answer="B" onclick="chooseOption(this)">quays</button></span>, which stick out into the sea, and which often have shows or other forms of entertainment on them.</div>
+        <div class="choose-item"><span class="item-num">3</span> &nbsp;This area is for <span class="choose-pair"><button class="choose-btn" data-q="D3" data-opt="A" data-answer="B" onclick="chooseOption(this)">passersby</button><button class="choose-btn" data-q="D3" data-opt="B" data-answer="B" onclick="chooseOption(this)">pedestrians</button></span> only and is closed to all traffic.</div>
+        <div class="choose-item"><span class="item-num">4</span> &nbsp;After the accident, <span class="choose-pair"><button class="choose-btn" data-q="D4" data-opt="A" data-answer="A" onclick="chooseOption(this)">passersby</button><button class="choose-btn" data-q="D4" data-opt="B" data-answer="A" onclick="chooseOption(this)">pedestrians</button></span> described the driver as a middle-aged man with a beard.</div>
+        <div class="choose-item"><span class="item-num">5</span> &nbsp;Keep both hands on the wheel and you'll find it easier to <span class="choose-pair"><button class="choose-btn" data-q="D5" data-opt="A" data-answer="B" onclick="chooseOption(this)">pilot</button><button class="choose-btn" data-q="D5" data-opt="B" data-answer="B" onclick="chooseOption(this)">steer</button></span> the car.</div>
+        <div class="choose-item"><span class="item-num">6</span> &nbsp;I'm hoping to train so that I can <span class="choose-pair"><button class="choose-btn" data-q="D6" data-opt="A" data-answer="A" onclick="chooseOption(this)">pilot</button><button class="choose-btn" data-q="D6" data-opt="B" data-answer="A" onclick="chooseOption(this)">steer</button></span> commercial aircraft.</div>
+        <div class="choose-item"><span class="item-num">7</span> &nbsp;As I came out of the petrol station, I saw a <span class="choose-pair"><button class="choose-btn" data-q="D7" data-opt="A" data-answer="B" onclick="chooseOption(this)">hiker</button><button class="choose-btn" data-q="D7" data-opt="B" data-answer="B" onclick="chooseOption(this)">hitchhiker</button></span> with his thumb out, trying to get a lift.</div>
+        <div class="choose-item"><span class="item-num">8</span> &nbsp;Local <span class="choose-pair"><button class="choose-btn" data-q="D8" data-opt="A" data-answer="A" onclick="chooseOption(this)">hikers</button><button class="choose-btn" data-q="D8" data-opt="B" data-answer="A" onclick="chooseOption(this)">hitchhikers</button></span> insist that they have the right to walk across the field, although the farmer who owns the land disagrees.</div>
+        <div class="choose-item"><span class="item-num">9</span> &nbsp;It's three and a half hours each way, so the <span class="choose-pair"><button class="choose-btn" data-q="D9" data-opt="A" data-answer="B" onclick="chooseOption(this)">return fare</button><button class="choose-btn" data-q="D9" data-opt="B" data-answer="B" onclick="chooseOption(this)">round trip</button></span> takes seven hours.</div>
+        <div class="choose-item"><span class="item-num">10</span> &nbsp;A single is €40, but the <span class="choose-pair"><button class="choose-btn" data-q="D10" data-opt="A" data-answer="A" onclick="chooseOption(this)">return fare</button><button class="choose-btn" data-q="D10" data-opt="B" data-answer="A" onclick="chooseOption(this)">round trip</button></span> is actually only €55.</div>
+        <div class="choose-item"><span class="item-num">11</span> &nbsp;A lorry lost its <span class="choose-pair"><button class="choose-btn" data-q="D11" data-opt="A" data-answer="A" onclick="chooseOption(this)">cargo</button><button class="choose-btn" data-q="D11" data-opt="B" data-answer="A" onclick="chooseOption(this)">load</button></span> on the motorway and there's white paint everywhere.</div>
+        <div class="choose-item"><span class="item-num">12</span> &nbsp;The area where the <span class="choose-pair"><button class="choose-btn" data-q="D12" data-opt="A" data-answer="B" onclick="chooseOption(this)">cargo</button><button class="choose-btn" data-q="D12" data-opt="B" data-answer="B" onclick="chooseOption(this)">load</button></span> is stored on a plane can actually get extremely cold during a flight.</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkChoose('D-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetChoose('D-list')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ PHRASAL VERBS ════════ -->
+  <div class="section" id="sec-phrasal">
+    <div class="section-title">Phrasal verbs</div>
+
+    <!-- Exercise E -->
+    <div class="exercise" id="exE">
+      <div class="exercise-label">
+        <div class="ex-letter">E</div>
+        <div class="ex-instruction">Write one word in each gap.</div>
+      </div>
+      <ol class="fill-list" id="E-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">The police officer told the homeless man to move <input class="fill-input" data-answer="along" placeholder="..."> and he walked slowly and painfully down the road.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">Len has already left on foot, but if we take the car then maybe we can still head him <input class="fill-input" data-answer="off" placeholder="..."> before he gets home.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">Would you mind moving <input class="fill-input" data-answer="up|along" placeholder="..."> so that I can sit here?</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">A young man was riding his motorbike on the pavement and everyone was forced to step <input class="fill-input" data-answer="aside|back" placeholder="..."> to let him go past.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">The area has been cordoned <input class="fill-input" data-answer="off" placeholder="..."> following a bomb threat.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">As I leant on the table, it tipped <input class="fill-input" data-answer="over" placeholder="..."> and I fell over.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">My mum's a bit upset because my sister's moving <input class="fill-input" data-answer="away|out" placeholder="..."> to go to university next week.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">Daryl managed to keep up with the leader for most of the race, but eventually he started to fall <input class="fill-input" data-answer="behind" placeholder="...">.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('E-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('E-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise F -->
+    <div class="exercise" id="exF">
+      <div class="exercise-label">
+        <div class="ex-letter">F</div>
+        <div class="ex-instruction">Complete using a phrasal verb with a word from box A in the right form and a word from box B.</div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px;">
+        <div class="word-box" style="margin-bottom:0;">A: creep &nbsp;•&nbsp; go &nbsp;•&nbsp; hold &nbsp;•&nbsp; move &nbsp;•&nbsp; pull &nbsp;•&nbsp; slip &nbsp;•&nbsp; stop &nbsp;•&nbsp; walk</div>
+        <div class="word-box" style="margin-bottom:0;">B: astray &nbsp;•&nbsp; away &nbsp;•&nbsp; back &nbsp;•&nbsp; in &nbsp;•&nbsp; off &nbsp;•&nbsp; out &nbsp;•&nbsp; over &nbsp;•&nbsp; up</div>
+      </div>
+      <ol class="fill-list" id="F-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">Dimitri thought he heard a funny noise coming from the car engine, so he <input class="fill-input" data-answer="pulled over" placeholder="..."> to investigate.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">The police <input class="fill-input" data-answer="held back|moved back" placeholder="..."> the crowd <input class="fill-input" data-answer="back|away" placeholder="..."> so that the ambulances could get to the scene more quickly.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">The show was so boring that we <input class="fill-input" data-answer="walked out" placeholder="..."> after half an hour.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">Remind me to <input class="fill-input" data-answer="stop off|stop in" placeholder="..."> on the way to your grandma's to get her a birthday card.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">I wish you wouldn't <input class="fill-input" data-answer="creep up" placeholder="..."> on me like that! You frightened me to death!</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">Martha didn't want to interrupt the party, so she just <input class="fill-input" data-answer="slipped away|slipped off|slipped out" placeholder="..."> quietly without anyone noticing.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">Are you really thinking of <input class="fill-input" data-answer="moving in" placeholder="..."> with Josie? What about your own flat?</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">It seems that the explorers <input class="fill-input" data-answer="went astray" placeholder="..."> after losing their map and wandered in the jungle for days.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('F-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('F-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise G -->
+    <div class="exercise" id="exG">
+      <div class="exercise-label">
+        <div class="ex-letter">G</div>
+        <div class="ex-instruction">The phrasal verb <em>cordon off</em> means something like 'prevent people entering'. Tick the words which could be used to complete this sentence to form phrasal verbs with a similar meaning: <em>The area has been ________ off by police.</em></div>
+      </div>
+      <div class="word-grid" id="G-grid">
+        <button class="word-chip" data-answer="yes" onclick="toggleChip(this)">1 block</button>
+        <button class="word-chip" data-answer="yes" onclick="toggleChip(this)">2 close</button>
+        <button class="word-chip" data-answer="no" onclick="toggleChip(this)">3 line</button>
+        <button class="word-chip" data-answer="yes" onclick="toggleChip(this)">4 fence</button>
+        <button class="word-chip" data-answer="no" onclick="toggleChip(this)">5 put</button>
+        <button class="word-chip" data-answer="yes" onclick="toggleChip(this)">6 rope</button>
+        <button class="word-chip" data-answer="yes" onclick="toggleChip(this)">7 seal</button>
+        <button class="word-chip" data-answer="no" onclick="toggleChip(this)">8 take</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkG()">Check answers</button>
+        <button class="btn-reset" onclick="resetG()">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ PHRASES & COLLOCATIONS ════════ -->
+  <div class="section" id="sec-phrases">
+    <div class="section-title">Phrases, patterns and collocations</div>
+
+    <!-- Exercise H -->
+    <div class="exercise" id="exH">
+      <div class="exercise-label">
+        <div class="ex-letter">H</div>
+        <div class="ex-instruction">Complete using the phrases in the box in the correct form. Change <em>sb</em>, <em>sth</em> or <em>do</em> into something appropriate.</div>
+      </div>
+      <div class="word-box" style="font-size:12px;">
+        back onto &nbsp;•&nbsp; do sth in a rush &nbsp;•&nbsp; drop sb at &nbsp;•&nbsp; fall in love &nbsp;•&nbsp; fly at &nbsp;•&nbsp; get a move on<br>
+        get sth out of the way &nbsp;•&nbsp; get sth wet &nbsp;•&nbsp; go and do &nbsp;•&nbsp; jump at the chance<br>
+        keep track of &nbsp;•&nbsp; raise sb's hopes
+      </div>
+      <ol class="fill-list" id="H-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">Look at the time! We'd better <input class="fill-input" data-answer="get a move on" placeholder="..."> or we're going to be late.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">My parents say they <input class="fill-input" data-answer="fell in love" placeholder="..."> when they met on holiday in Turkey.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">Your essay isn't good enough. It's obvious to me that you <input class="fill-input" data-answer="did it in a rush|did this in a rush" placeholder="...">, rather than taking your time.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">I've always wanted to fly and I would <input class="fill-input" data-answer="jump at the chance" placeholder="..."> to visit the pilot in the cockpit.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">One of the things I love about this house is that it <input class="fill-input" data-answer="backs onto" placeholder="..."> the river.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">I don't want to <input class="fill-input" data-answer="raise your hopes" placeholder="...">, but there's a chance we might be flying to America!</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">I can't believe you <input class="fill-input" data-answer="went and told|go and tell" placeholder="..."> Ben what I said about him.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">There's no need to <input class="fill-input" data-answer="fly at" placeholder="..."> me – I wasn't the one who crashed the car!</span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">I've got a lot of homework, so let me <input class="fill-input" data-answer="get it out of the way|get this out of the way" placeholder="..."> first and then I'll call you.</span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">You travel so much! I can't <input class="fill-input" data-answer="keep track of" placeholder="..."> all the countries you've been to.</span></li>
+        <li class="fill-item"><span class="item-num">11</span><span class="item-text">Since you're going that way, do you think you could <input class="fill-input" data-answer="drop me at" placeholder="..."> my house?</span></li>
+        <li class="fill-item"><span class="item-num">12</span><span class="item-text">Those sunglasses were expensive – take them off in the pool or you'll <input class="fill-input" data-answer="get them wet" placeholder="...">.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('H-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('H-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise I -->
+    <div class="exercise" id="exI">
+      <div class="exercise-label">
+        <div class="ex-letter">I</div>
+        <div class="ex-instruction">Write one word in each gap.</div>
+      </div>
+      <ol class="fill-list" id="I-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">In the distance, a steam train <input class="fill-input" data-answer="came" placeholder="..."> slowly into view.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">Don't <input class="fill-input" data-answer="raise" placeholder="..."> your voice at me! I haven't done anything wrong!</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">We need to book our ferry tickets <input class="fill-input" data-answer="at" placeholder="..."> some point, so remind me later.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">Suddenly, the door flew <input class="fill-input" data-answer="open" placeholder="..."> and there stood Mrs Singh.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">It's the <input class="fill-input" data-answer="rush" placeholder="..."> hour, so there'll be a lot of traffic on the roads.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">My dad's beginning to <input class="fill-input" data-answer="go|turn" placeholder="..."> grey, and he's only 35.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">Even when his flight was cancelled, Jake still managed to <input class="fill-input" data-answer="raise" placeholder="..."> a smile.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">Do you know the <input class="fill-input" data-answer="way" placeholder="..."> to Ed's house from here?</span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">Sam's not coming, but Isabelle's <input class="fill-input" data-answer="on" placeholder="..."> the way, so she should be here soon.</span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">I can't believe that woman just tried to <input class="fill-input" data-answer="jump" placeholder="..."> the queue and get to the front first.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('I-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('I-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise J -->
+    <div class="exercise" id="exJ">
+      <div class="exercise-label">
+        <div class="ex-letter">J</div>
+        <div class="ex-instruction">For each question, write one word which can be used in all three sentences.</div>
+      </div>
+      <div id="J-list">
+        <div class="mc-item">
+          <div style="margin-bottom:4px; font-weight:700;">1</div>
+          <div style="font-size:13px; line-height:2.2; margin-bottom:4px;">
+            I don't understand what <input class="fill-input" data-answer="made" placeholder="..."> Michael leave his family like that.<br>
+            The kids almost <input class="fill-input" data-answer="made" placeholder="..."> me crazy when we were on holiday.<br>
+            I thought the journalist <input class="fill-input" data-answer="made" placeholder="..."> his point home well, and the politician didn't know what to say.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:4px; font-weight:700;">2</div>
+          <div style="font-size:13px; line-height:2.2; margin-bottom:4px;">
+            We decided to <input class="fill-input" data-answer="head" placeholder="..."> towards the small town we could see in the distance.<br>
+            Joshua Reed has been appointed to <input class="fill-input" data-answer="head" placeholder="..."> the committee responsible for promoting local tourism.<br>
+            Which places would you say <input class="fill-input" data-answer="head" placeholder="..."> the list of most popular tourist destinations in Britain?
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:4px; font-weight:700;">3</div>
+          <div style="font-size:13px; line-height:2.2; margin-bottom:4px;">
+            I'm starting to <input class="fill-input" data-answer="come" placeholder="..."> to the conclusion that you don't want to go on holiday with me.<br>
+            How did you <input class="fill-input" data-answer="come" placeholder="..."> to lose your passport?<br>
+            I know it's going to <input class="fill-input" data-answer="come" placeholder="..."> as a bit of a shock to you, but I've decided to walk round the world.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:4px; font-weight:700;">4</div>
+          <div style="font-size:13px; line-height:2.2; margin-bottom:4px;">
+            We need to keep up a <input class="fill-input" data-answer="steady" placeholder="..."> pace if we're going to get there before it gets dark.<br>
+            Corey and Angela seem to have a very <input class="fill-input" data-answer="steady" placeholder="..."> relationship, and I can't imagine them splitting up, can you?<br>
+            Kelly gave me a <input class="fill-input" data-answer="steady" placeholder="..."> look as if to say, 'I know where you've been.'
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:4px; font-weight:700;">5</div>
+          <div style="font-size:13px; line-height:2.2; margin-bottom:4px;">
+            We always make a <input class="fill-input" data-answer="point" placeholder="..."> of inviting the old woman next door to join us for Christmas dinner.<br>
+            Don't mention the fact that Chris failed his driving test – it's a bit of a sore <input class="fill-input" data-answer="point" placeholder="..."> with him.<br>
+            I know she's your best friend, but that's beside the <input class="fill-input" data-answer="point" placeholder="..."> – you had no right to invite her on the trip without asking me.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:4px; font-weight:700;">6</div>
+          <div style="font-size:13px; line-height:2.2; margin-bottom:4px;">
+            It's hard to believe that Sandra <input class="fill-input" data-answer="turns" placeholder="..."> 50 this year, isn't it?<br>
+            The police officer <input class="fill-input" data-answer="turned" placeholder="..."> her gun on the man and told him to lie down on the floor.<br>
+            I <input class="fill-input" data-answer="turned" placeholder="..."> to say something to Connor, but he had already left.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:4px; font-weight:700;">7</div>
+          <div style="font-size:13px; line-height:2.2; margin-bottom:4px;">
+            Jacob <input class="fill-input" data-answer="followed" placeholder="..."> his doctor's advice and went away for a few days.<br>
+            Hannah decided to start wearing earrings and her friends soon <input class="fill-input" data-answer="followed" placeholder="..."> suit.<br>
+            I <input class="fill-input" data-answer="followed" placeholder="..."> the speaker's argument up to the final point, but I don't understand where his conclusions came from.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:4px; font-weight:700;">8</div>
+          <div style="font-size:13px; line-height:2.2; margin-bottom:4px;">
+            My dad's involved in <input class="fill-input" data-answer="running" placeholder="..."> a campaign to stop them building the new motorway near here.<br>
+            These vehicles have the advantage of <input class="fill-input" data-answer="running" placeholder="..."> on electricity, rather than petrol.<br>
+            You won't be able to avoid <input class="fill-input" data-answer="running" placeholder="..."> into problems, so just deal with them when they arise.
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exJ')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exJ')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ IDIOMS ════════ -->
+  <div class="section" id="sec-idioms">
+    <div class="section-title">Idioms</div>
+
+    <!-- Exercise K -->
+    <div class="exercise" id="exK">
+      <div class="exercise-label">
+        <div class="ex-letter">K</div>
+        <div class="ex-instruction">Write one word in each gap.</div>
+      </div>
+      <ol class="fill-list" id="K-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">From our house to the centre of town is about four miles as the <input class="fill-input" data-answer="crow" placeholder="..."> flies.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">I know the brochure said the villa was 'peaceful', but it was actually in the <input class="fill-input" data-answer="middle" placeholder="..."> of nowhere.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">As soon as we got to the pool, the kids made a <input class="fill-input" data-answer="beeline" placeholder="..."> for the shop selling ice creams.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">The soldier shouted 'Halt!' and I stopped dead in my <input class="fill-input" data-answer="tracks" placeholder="...">.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">Cambodia? That's a bit off the beaten <input class="fill-input" data-answer="track" placeholder="...">, isn't it?</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">Take the next left, then first right, and just follow your <input class="fill-input" data-answer="nose" placeholder="..."> until you see the stadium on your left.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">Wandering the streets of Prague, I lost my <input class="fill-input" data-answer="bearings" placeholder="...">, so I had to ask the way to the castle.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">We were quite lucky because our hotel was only a <input class="fill-input" data-answer="stone's" placeholder="..."> throw away from the beach.</span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">It's about 20 minutes longer, but if we take the scenic <input class="fill-input" data-answer="route" placeholder="..."> you'll be able to take some photos.</span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">Turn right here and we'll <input class="fill-input" data-answer="take" placeholder="..."> a short cut through the side roads.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('K-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('K-list')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ WORD FORMATION ════════ -->
+  <div class="section" id="sec-wordform">
+    <div class="section-title">Word formation</div>
+
+    <!-- Exercise L -->
+    <div class="exercise" id="exL">
+      <div class="exercise-label">
+        <div class="ex-letter">L</div>
+        <div class="ex-instruction">Use the word given in capitals at the end of the line to form a word that fits in the space in the same line.</div>
+      </div>
+      <div class="passage-box" style="background:#f0f7f3; border-color:#52b788;">
+        <h3>The stairlift</h3>
+        <table style="width:100%; border-collapse:collapse; font-size:13px; line-height:2;">
+          <tr><td>It's ironic that the very things that are supposed to provide access to the (1) <input class="fill-input" data-answer="upper" placeholder="..."> floors of buildings – stairs – often, in fact, make them (2) <input class="fill-input" data-answer="inaccessible" placeholder="...">.</td><td style="text-align:right; font-weight:700; color:var(--accent-dark); padding-left:8px; white-space:nowrap;">UP<br>ACCESS</td></tr>
+          <tr><td>For many elderly people and others with limited (3) <input class="fill-input" data-answer="mobility" placeholder="...">, getting upstairs can be a daily problem to be (4) <input class="fill-input" data-answer="overcome" placeholder="...">.</td><td style="text-align:right; font-weight:700; color:var(--accent-dark); padding-left:8px; white-space:nowrap;">MOBILE<br>COME</td></tr>
+          <tr><td>However, stairlifts have been helping people solve that problem since they first appeared in the US in the 1930s. Designs have (5) <input class="fill-input" data-answer="undergone" placeholder="..."> many changes over the years and stairlifts have become (6) <input class="fill-input" data-answer="progressively" placeholder="..."> safer and easier to use.</td><td style="text-align:right; font-weight:700; color:var(--accent-dark); padding-left:8px; white-space:nowrap;">GO<br>PROGRESS</td></tr>
+          <tr><td>The user controls how (7) <input class="fill-input" data-answer="rapidly" placeholder="..."> the seat moves along the rails as it travels from the bottom of the stairs to the (8) <input class="fill-input" data-answer="landing" placeholder="..."> at the top.</td><td style="text-align:right; font-weight:700; color:var(--accent-dark); padding-left:8px; white-space:nowrap;">RAPID<br>LAND</td></tr>
+          <tr><td>In today's models, the (9) <input class="fill-input" data-answer="movement" placeholder="..."> is controlled by computers to give a smooth ride and the components are designed to (10) <input class="fill-input" data-answer="withstand" placeholder="..."> constant use. Many people have been given a new lease of life by the stairlift.</td><td style="text-align:right; font-weight:700; color:var(--accent-dark); padding-left:8px; white-space:nowrap;">MOVE<br>STAND</td></tr>
+        </table>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exL')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exL')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise M -->
+    <div class="exercise" id="exM">
+      <div class="exercise-label">
+        <div class="ex-letter">M</div>
+        <div class="ex-instruction">Each of the words in bold is in an incorrect form. Rewrite them correctly.</div>
+      </div>
+      <ol class="fill-list" id="M-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">The situation has been getting <b>unsteady</b> worse for many years now. <input class="fill-input" data-answer="steadily" placeholder="correction..."></span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">The heavy snow meant that the mountain roads were <b>passage</b> for over a week. <input class="fill-input" data-answer="impassable" placeholder="correction..."></span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">People are being advised not to travel to the area because of the <b>outgoing</b> conflict. <input class="fill-input" data-answer="ongoing" placeholder="correction..."></span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">Luckily, Tyrone made a very <b>sped</b> recovery after the car accident. <input class="fill-input" data-answer="speedy" placeholder="correction..."></span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">The service at the hotel was <b>upstanding</b>, and I'd definitely recommend it. <input class="fill-input" data-answer="outstanding" placeholder="correction..."></span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">Every child needs security and <b>unstable</b> in their life. <input class="fill-input" data-answer="stability" placeholder="correction..."></span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">It's not always easy to make the <b>transitional</b> from primary school to secondary school. <input class="fill-input" data-answer="transition" placeholder="correction..."></span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">I sat completely <b>motion</b> as the spider crawled along my arm. <input class="fill-input" data-answer="motionless" placeholder="correction..."></span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('M-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('M-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise N -->
+    <div class="exercise" id="exN">
+      <div class="exercise-label">
+        <div class="ex-letter">N</div>
+        <div class="ex-instruction">The prefix <em>de-</em>, as in <em>destabilise</em>, can be added to some verbs, nouns and adjectives in order to give them a negative meaning. Tick the words which can be made negative by adding <em>de-</em>.</div>
+      </div>
+      <div class="word-grid" id="N-grid">
+        <button class="word-chip" data-answer="no" onclick="toggleChip(this)">1 caffeinated</button>
+        <button class="word-chip" data-answer="yes" onclick="toggleChip(this)">2 direct</button>
+        <button class="word-chip" data-answer="yes" onclick="toggleChip(this)">3 form</button>
+        <button class="word-chip" data-answer="yes" onclick="toggleChip(this)">4 hydrate</button>
+        <button class="word-chip" data-answer="yes" onclick="toggleChip(this)">5 motivate</button>
+        <button class="word-chip" data-answer="yes" onclick="toggleChip(this)">6 regulate</button>
+        <button class="word-chip" data-answer="yes" onclick="toggleChip(this)">7 satisfy</button>
+        <button class="word-chip" data-answer="yes" onclick="toggleChip(this)">8 sensitise</button>
+        <button class="word-chip" data-answer="no" onclick="toggleChip(this)">9 understand</button>
+        <button class="word-chip" data-answer="yes" onclick="toggleChip(this)">10 value</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkN()">Check answers</button>
+        <button class="btn-reset" onclick="resetN()">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise O -->
+    <div class="exercise" id="exO">
+      <div class="exercise-label">
+        <div class="ex-letter">O</div>
+        <div class="ex-instruction">Complete the sentences using words formed in exercise N.</div>
+      </div>
+      <ol class="fill-list" id="O-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">Drinking alcohol when it's very hot can <input class="fill-input" data-answer="dehydrate" placeholder="..."> you.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">The government should <input class="fill-input" data-answer="deregulate" placeholder="..."> this industry.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">I have to drink <input class="fill-input" data-answer="decaffeinated" placeholder="..."> coffee or I can't sleep.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">If you don't tell staff how well they're doing, it can <input class="fill-input" data-answer="demotivate" placeholder="..."> them.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">Don't you think violent films <input class="fill-input" data-answer="desensitise" placeholder="..."> people to violence in real life?</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">You'll <input class="fill-input" data-answer="deform" placeholder="..."> your feet if you don't get shoes that fit you properly.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">They've decided to <input class="fill-input" data-answer="devalue" placeholder="..."> the currency, so it'll be worth a lot less.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('O-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('O-list')">Reset</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<div id="toast"></div>
+
+<script>
+function normalize(s) { return s.trim().toLowerCase().replace(/\s+/g, ' '); }
+function isCorrect(input, answer) {
+  const val = normalize(input.value);
+  return answer.split('|').map(a => normalize(a)).includes(val);
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2000);
+}
+function updateScore() {
+  const all = document.querySelectorAll('.fill-input');
+  const answered = [...all].filter(i => i.value.trim() !== '').length;
+  const total = all.length;
+  const pct = total ? (answered / total * 100).toFixed(0) : 0;
+  document.getElementById('score-bar-fill').style.width = pct + '%';
+  document.getElementById('score-text').textContent = answered + ' / ' + total + ' answered';
+}
+document.addEventListener('input', updateScore);
+
+function checkFill(listId) {
+  const list = document.getElementById(listId);
+  let correct = 0, total = 0;
+  list.querySelectorAll('.fill-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetFill(listId) {
+  document.getElementById(listId).querySelectorAll('.fill-input').forEach(inp => {
+    inp.value = ''; inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+function checkAllFillInSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  let correct = 0, total = 0;
+  section.querySelectorAll('.fill-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetAllFillInSection(sectionId) {
+  document.getElementById(sectionId).querySelectorAll('.fill-input').forEach(inp => {
+    inp.value = ''; inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+// Choose option
+function chooseOption(btn) {
+  btn.closest('.choose-pair').querySelectorAll('.choose-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function checkChoose(listId) {
+  const list = document.getElementById(listId);
+  let correct = 0, total = 0;
+  const questions = {};
+  list.querySelectorAll('.choose-btn').forEach(btn => {
+    if (!questions[btn.dataset.q]) questions[btn.dataset.q] = [];
+    questions[btn.dataset.q].push(btn);
+  });
+  total = Object.keys(questions).length;
+  Object.values(questions).forEach(btns => {
+    const answer = btns[0].dataset.answer;
+    btns.forEach(b => {
+      b.classList.remove('correct', 'wrong');
+      if (b.classList.contains('selected')) {
+        if (b.dataset.opt === answer) { b.classList.add('correct'); correct++; }
+        else b.classList.add('wrong');
+      } else if (b.dataset.opt === answer) b.classList.add('correct');
+    });
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetChoose(listId) {
+  document.getElementById(listId).querySelectorAll('.choose-btn').forEach(b => b.classList.remove('selected','correct','wrong'));
+}
+
+// Word chip (G and N)
+function toggleChip(btn) { btn.classList.toggle('selected'); }
+function checkG() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#G-grid .word-chip').forEach(btn => {
+    total++;
+    const shouldSelect = btn.dataset.answer === 'yes';
+    const isSelected = btn.classList.contains('selected');
+    btn.classList.remove('correct','wrong','missed');
+    if (shouldSelect === isSelected) { btn.classList.add('correct'); correct++; }
+    else if (isSelected && !shouldSelect) btn.classList.add('wrong');
+    else btn.classList.add('missed');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetG() {
+  document.querySelectorAll('#G-grid .word-chip').forEach(b => b.classList.remove('selected','correct','wrong','missed'));
+}
+function checkN() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#N-grid .word-chip').forEach(btn => {
+    total++;
+    const shouldSelect = btn.dataset.answer === 'yes';
+    const isSelected = btn.classList.contains('selected');
+    btn.classList.remove('correct','wrong','missed');
+    if (shouldSelect === isSelected) { btn.classList.add('correct'); correct++; }
+    else if (isSelected && !shouldSelect) btn.classList.add('wrong');
+    else btn.classList.add('missed');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetN() {
+  document.querySelectorAll('#N-grid .word-chip').forEach(b => b.classList.remove('selected','correct','wrong','missed'));
+}
+
+// Sidebar active
+const sections = document.querySelectorAll('.exercise[id]');
+const navLinks = document.querySelectorAll('#sidebar nav a');
+function onScroll() {
+  let current = '';
+  sections.forEach(s => { if (s.getBoundingClientRect().top <= 80) current = s.id; });
+  navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+}
+window.addEventListener('scroll', onScroll);
+onScroll();
+updateScore();
+</script>
+</body>
+</html>

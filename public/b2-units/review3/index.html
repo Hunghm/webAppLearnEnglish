@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review 3 – Units 5 &amp; 6</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #333; min-height: 100vh; }
+  .header { background: #1565C0; color: white; padding: 16px 20px; text-align: center; }
+  .header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+  .header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+  .tab-bar { display: flex; background: #1976D2; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn { flex: 1; min-width: 48px; padding: 12px 8px; border: none; background: transparent; color: rgba(255,255,255,0.7); font-size: 0.95rem; font-weight: 600; cursor: pointer; border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap; }
+  .tab-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+  .tab-btn.active { color: white; border-bottom-color: #FFD600; }
+  .content { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+  .exercise { display: none; }
+  .exercise.active { display: block; }
+  .ex-header { margin-bottom: 16px; }
+  .ex-title { font-size: 1.1rem; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+  .ex-instruction { font-size: 0.9rem; color: #555; background: #E3F2FD; border-left: 4px solid #2196F3; padding: 8px 12px; border-radius: 0 6px 6px 0; }
+  .question-list { list-style: none; }
+  .question-item { background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s; }
+  .question-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .question-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+  .q-num { font-weight: 700; color: #1976D2; margin-right: 6px; }
+  input[type="text"] { border: 2px solid #BBDEFB; border-radius: 6px; padding: 5px 10px; font-size: 0.95rem; outline: none; background: #FAFAFA; transition: border .2s; min-width: 100px; }
+  input[type="text"]:focus { border-color: #2196F3; background: white; }
+  input[type="text"].correct { border-color: #4CAF50; background: #F1F8E9; color: #2E7D32; }
+  input[type="text"].wrong { border-color: #F44336; background: #FFF5F5; color: #C62828; }
+  /* Passage */
+  .passage-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .passage-title { font-weight: 700; text-align: center; margin-bottom: 12px; font-size: 1rem; }
+  .passage-line { margin-bottom: 10px; line-height: 2.2; }
+  .word-cap { font-weight: 700; font-style: italic; color: #555; margin-left: 6px; font-size: 0.85rem; }
+  .passage-input { min-width: 130px; width: 155px; }
+  /* Matching */
+  .options-box { background: #E8EAF6; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; }
+  .options-box p { font-weight: 700; color: #3949AB; margin-bottom: 8px; }
+  .option-row { font-size: 0.9rem; margin-bottom: 4px; }
+  .opt-label { font-weight: 700; color: #1976D2; margin-right: 6px; }
+  .match-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .match-btn { border: 2px solid #90CAF9; background: white; border-radius: 6px; width: 36px; height: 36px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all .2s; color: #1565C0; display: flex; align-items: center; justify-content: center; }
+  .match-btn:hover { background: #E3F2FD; }
+  .match-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .match-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .match-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+  /* KWT */
+  .kw-first { font-size: 0.93rem; color: #333; margin-bottom: 6px; line-height: 1.6; }
+  .kw-keyword { font-weight: 700; color: #E65100; background: #FFF3E0; padding: 2px 8px; border-radius: 4px; margin-left: 6px; }
+  .kw-second { font-size: 0.93rem; line-height: 2; }
+  .kw-input { min-width: 200px; width: 260px; }
+  /* MC4 */
+  .mc4-options { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+  .mc4-btn { border: 2px solid #BBDEFB; background: white; border-radius: 6px; padding: 6px 14px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #333; text-align: left; }
+  .mc4-btn:hover { background: #E3F2FD; }
+  .mc4-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .mc4-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .mc4-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+  .mc4-label { font-weight: 700; margin-right: 8px; }
+  /* Answer reveal */
+  .answer-reveal { font-size: 0.82rem; color: #388E3C; margin-top: 6px; display: none; font-style: italic; }
+  .show-answers .answer-reveal { display: block; }
+  /* Actions */
+  .action-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+  .btn { padding: 10px 22px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-check { background: #2196F3; color: white; } .btn-check:hover { background: #1976D2; }
+  .btn-reset { background: #FF9800; color: white; } .btn-reset:hover { background: #F57C00; }
+  .btn-show { background: #9C27B0; color: white; } .btn-show:hover { background: #7B1FA2; }
+  .score-display { font-size: 1rem; font-weight: 700; padding: 8px 16px; border-radius: 8px; background: #E8F5E9; color: #2E7D32; display: none; }
+  .score-display.visible { display: inline-block; }
+  .score-display.perfect { background: #4CAF50; color: white; }
+  @media (max-width: 500px) { .tab-btn { font-size: 0.8rem; padding: 10px 4px; } .content { padding: 12px 10px 50px; } .kw-input { width: 180px; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Review 3 – Units 5 &amp; 6</h1>
+  <p>5 exercises · 50 marks · Click a tab to start</p>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('a')">A</button>
+  <button class="tab-btn" onclick="switchTab('b')">B</button>
+  <button class="tab-btn" onclick="switchTab('c')">C</button>
+  <button class="tab-btn" onclick="switchTab('d')">D</button>
+  <button class="tab-btn" onclick="switchTab('e')">E</button>
+</div>
+
+<div class="content">
+
+  <!-- ===== EXERCISE A ===== -->
+  <div class="exercise active" id="ex-a">
+    <div class="ex-header">
+      <div class="ex-title">Exercise A – Word Formation <span style="font-size:0.8rem;color:#888">(1 mark each)</span></div>
+      <div class="ex-instruction">Use the word given in capitals at the end of each line to form a word that fits in the gap in the same line.</div>
+    </div>
+    <div class="passage-container" id="ql-a">
+      <div class="passage-title">Egypt and South America</div>
+      <div class="passage-line">
+        There is still no adequate (1) <input type="text" class="passage-input ex-a-input" data-answer="explanation" placeholder="…"> why, several thousand years
+        <span class="word-cap">EXPLAIN</span>
+        <div class="answer-reveal">✓ explanation</div>
+      </div>
+      <div class="passage-line">
+        ago, cultures in both Egypt and South America saw the (2) <input type="text" class="passage-input ex-a-input" data-answer="introduction" placeholder="…">
+        <span class="word-cap">INTRODUCE</span>
+        <div class="answer-reveal">✓ introduction</div>
+      </div>
+      <div class="passage-line">
+        of pyramids. Was it coincidence? Many (3) <input type="text" class="passage-input ex-a-input" data-answer="scientists" placeholder="…"> believe that it
+        <span class="word-cap">SCIENCE</span>
+        <div class="answer-reveal">✓ scientists</div>
+      </div>
+      <div class="passage-line">
+        was, and state that there is no (4) <input type="text" class="passage-input ex-a-input" data-answer="possibility" placeholder="…"> at all that people from
+        <span class="word-cap">POSSIBLE</span>
+        <div class="answer-reveal">✓ possibility</div>
+      </div>
+      <div class="passage-line">
+        two distant continents traded information on (5) <input type="text" class="passage-input ex-a-input" data-answer="building" placeholder="…"> techniques.
+        <span class="word-cap">BUILD</span>
+        <div class="answer-reveal">✓ building</div>
+      </div>
+      <div class="passage-line">
+        However, some (6) <input type="text" class="passage-input ex-a-input" data-answer="revolutionary" placeholder="…"> theories in recent years, based on the
+        <span class="word-cap">REVOLUTION</span>
+        <div class="answer-reveal">✓ revolutionary</div>
+      </div>
+      <div class="passage-line">
+        (7) <input type="text" class="passage-input ex-a-input" data-answer="discovery" placeholder="…"> that the two cultures also share key myths, legends
+        <span class="word-cap">DISCOVER</span>
+        <div class="answer-reveal">✓ discovery</div>
+      </div>
+      <div class="passage-line">
+        and beliefs, suggest that the (8) <input type="text" class="passage-input ex-a-input" data-answer="appearance" placeholder="…"> of pyramids on opposite
+        <span class="word-cap">APPEAR</span>
+        <div class="answer-reveal">✓ appearance</div>
+      </div>
+      <div class="passage-line">
+        sides of the world was no coincidence at all. One (9) <input type="text" class="passage-input ex-a-input" data-answer="researcher" placeholder="…">
+        <span class="word-cap">RESEARCH</span>
+        <div class="answer-reveal">✓ researcher</div>
+      </div>
+      <div class="passage-line">
+        working on this, Crystal Davis, said: 'The (10) <input type="text" class="passage-input ex-a-input" data-answer="importance" placeholder="…"> of finding out the truth here cannot be exaggerated. It could change our whole understanding of the history of the world.'
+        <span class="word-cap">IMPORTANT</span>
+        <div class="answer-reveal">✓ importance</div>
+      </div>
+    </div>
+    <div class="action-bar">
+      <button class="btn btn-check" onclick="checkEx('a')">Check Answers</button>
+      <button class="btn btn-show" onclick="showAnswers('a')">Show Answers</button>
+      <button class="btn btn-reset" onclick="resetEx('a')">Reset</button>
+      <span class="score-display" id="score-a"></span>
+    </div>
+  </div>
+
+  <!-- ===== EXERCISE B: Matching ===== -->
+  <div class="exercise" id="ex-b">
+    <div class="ex-header">
+      <div class="ex-title">Exercise B – Match to Make Sentences <span style="font-size:0.8rem;color:#888">(1 mark each)</span></div>
+      <div class="ex-instruction">Match each sentence beginning (11–18) with the correct ending (A–H).</div>
+    </div>
+    <div class="options-box">
+      <p>Options:</p>
+      <div class="option-row"><span class="opt-label">A</span>out by physicists which prove that time can speed up and slow down.</div>
+      <div class="option-row"><span class="opt-label">B</span>on enormously in recent years.</div>
+      <div class="option-row"><span class="opt-label">C</span>off for over three hours yesterday.</div>
+      <div class="option-row"><span class="opt-label">D</span>down, so I'm afraid you'll have to wait until tomorrow.</div>
+      <div class="option-row"><span class="opt-label">E</span>off a very nasty smell when it's heated.</div>
+      <div class="option-row"><span class="opt-label">F</span>up with that idea should have won the Nobel Prize.</div>
+      <div class="option-row"><span class="opt-label">G</span>through to the Radiology Department, please.</div>
+      <div class="option-row"><span class="opt-label">H</span>out much more about technology in the Bronze Age.</div>
+    </div>
+    <ul class="question-list" id="ql-b">
+      <li class="question-item" data-answer="D">
+        <span class="q-num">11.</span> <span>The fax machine has broken …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button><button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button><button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button><button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button><button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button><button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button><button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button><button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ D – down, so I'm afraid you'll have to wait until tomorrow.</div>
+      </li>
+      <li class="question-item" data-answer="A">
+        <span class="q-num">12.</span> <span>A number of experiments have been carried …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button><button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button><button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button><button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button><button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button><button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button><button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button><button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ A – out by physicists which prove that time can speed up and slow down.</div>
+      </li>
+      <li class="question-item" data-answer="F">
+        <span class="q-num">13.</span> <span>Whoever came …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button><button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button><button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button><button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button><button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button><button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button><button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button><button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ F – up with that idea should have won the Nobel Prize.</div>
+      </li>
+      <li class="question-item" data-answer="C">
+        <span class="q-num">14.</span> <span>The electricity was cut …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button><button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button><button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button><button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button><button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button><button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button><button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button><button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ C – off for over three hours yesterday.</div>
+      </li>
+      <li class="question-item" data-answer="H">
+        <span class="q-num">15.</span> <span>I'd like to find …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button><button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button><button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button><button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button><button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button><button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button><button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button><button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ H – out much more about technology in the Bronze Age.</div>
+      </li>
+      <li class="question-item" data-answer="E">
+        <span class="q-num">16.</span> <span>This chemical gives …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button><button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button><button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button><button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button><button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button><button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button><button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button><button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ E – off a very nasty smell when it's heated.</div>
+      </li>
+      <li class="question-item" data-answer="B">
+        <span class="q-num">17.</span> <span>Cancer treatments have come …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button><button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button><button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button><button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button><button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button><button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button><button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button><button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ B – on enormously in recent years.</div>
+      </li>
+      <li class="question-item" data-answer="G">
+        <span class="q-num">18.</span> <span>I wonder if you could put me …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button><button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button><button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button><button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button><button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button><button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button><button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button><button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ G – through to the Radiology Department, please.</div>
+      </li>
+    </ul>
+    <div class="action-bar">
+      <button class="btn btn-check" onclick="checkEx('b')">Check Answers</button>
+      <button class="btn btn-show" onclick="showAnswers('b')">Show Answers</button>
+      <button class="btn btn-reset" onclick="resetEx('b')">Reset</button>
+      <span class="score-display" id="score-b"></span>
+    </div>
+  </div>
+
+  <!-- ===== EXERCISE C: KWT ===== -->
+  <div class="exercise" id="ex-c">
+    <div class="ex-header">
+      <div class="ex-title">Exercise C – Key Word Transformation <span style="font-size:0.8rem;color:#888">(2 marks each)</span></div>
+      <div class="ex-instruction">Complete each second sentence using the word given so that it has a similar meaning to the first sentence. Write between two and five words in each gap.</div>
+    </div>
+    <ul class="question-list" id="ql-c">
+
+      <li class="question-item" data-answer="looking forward to doing|looking forward to">
+        <span class="q-num">19.</span>
+        <div class="kw-first">I can't wait until we do some experiments in the science lab. <span class="kw-keyword">forward</span></div>
+        <div class="kw-second">I'm really <input type="text" class="ex-c-input kw-input" placeholder="…"> some experiments in the science lab.</div>
+        <div class="answer-reveal">✓ looking forward to doing</div>
+      </li>
+
+      <li class="question-item" data-answer="with the introduction of|with the invention of">
+        <span class="q-num">20.</span>
+        <div class="kw-first">Communication changed completely when the telephone was introduced. <span class="kw-keyword">with</span></div>
+        <div class="kw-second">Communication changed completely <input type="text" class="ex-c-input kw-input" placeholder="…"> the telephone.</div>
+        <div class="answer-reveal">✓ with the introduction of</div>
+      </li>
+
+      <li class="question-item" data-answer="finally managed to bring|managed to bring">
+        <span class="q-num">21.</span>
+        <div class="kw-first">Dr Frankenstein was finally successful in bringing the monster to life. <span class="kw-keyword">managed</span></div>
+        <div class="kw-second">Dr Frankenstein <input type="text" class="ex-c-input kw-input" placeholder="…"> the monster to life.</div>
+        <div class="answer-reveal">✓ finally managed to bring</div>
+      </li>
+
+      <li class="question-item" data-answer="find it impossible to understand|find it impossible to">
+        <span class="q-num">22.</span>
+        <div class="kw-first">I can't understand how they built the Pyramids. <span class="kw-keyword">impossible</span></div>
+        <div class="kw-second">I <input type="text" class="ex-c-input kw-input" placeholder="…"> how they built the Pyramids.</div>
+        <div class="answer-reveal">✓ find it impossible to understand</div>
+      </li>
+
+      <li class="question-item" data-answer="resulted in fleming discovering|resulted in the discovery of">
+        <span class="q-num">23.</span>
+        <div class="kw-first">Fleming discovered penicillin as a result of a little luck. <span class="kw-keyword">resulted</span></div>
+        <div class="kw-second">A little luck <input type="text" class="ex-c-input kw-input" placeholder="…"> penicillin.</div>
+        <div class="answer-reveal">✓ resulted in Fleming discovering / resulted in the discovery of</div>
+      </li>
+
+      <li class="question-item" data-answer="are sometimes known as">
+        <span class="q-num">24.</span>
+        <div class="kw-first">People sometimes call nurses 'angels'. <span class="kw-keyword">known</span></div>
+        <div class="kw-second">Nurses <input type="text" class="ex-c-input kw-input" placeholder="…"> 'angels'.</div>
+        <div class="answer-reveal">✓ are sometimes known as</div>
+      </li>
+
+      <li class="question-item" data-answer="came to the conclusion|came to the conclusion that">
+        <span class="q-num">25.</span>
+        <div class="kw-first">Einstein eventually realised that he was wrong. <span class="kw-keyword">conclusion</span></div>
+        <div class="kw-second">Einstein eventually <input type="text" class="ex-c-input kw-input" placeholder="…"> that he was wrong.</div>
+        <div class="answer-reveal">✓ came to the conclusion</div>
+      </li>
+
+      <li class="question-item" data-answer="made an attempt at|made an attempt at explaining">
+        <span class="q-num">26.</span>
+        <div class="kw-first">Our physics teacher tried to explain the Theory of Relativity. <span class="kw-keyword">attempt</span></div>
+        <div class="kw-second">Our physics teacher <input type="text" class="ex-c-input kw-input" placeholder="…"> explaining the Theory of Relativity.</div>
+        <div class="answer-reveal">✓ made an attempt at</div>
+      </li>
+
+      <li class="question-item" data-answer="as soon as we've saved|as soon as we have saved">
+        <span class="q-num">27.</span>
+        <div class="kw-first">We'll save enough money and then we'll buy a computer. <span class="kw-keyword">soon</span></div>
+        <div class="kw-second">We'll buy a computer <input type="text" class="ex-c-input kw-input" placeholder="…"> enough money.</div>
+        <div class="answer-reveal">✓ as soon as we've saved</div>
+      </li>
+
+    </ul>
+    <div class="action-bar">
+      <button class="btn btn-check" onclick="checkEx('c')">Check Answers</button>
+      <button class="btn btn-show" onclick="showAnswers('c')">Show Answers</button>
+      <button class="btn btn-reset" onclick="resetEx('c')">Reset</button>
+      <span class="score-display" id="score-c"></span>
+    </div>
+  </div>
+
+  <!-- ===== EXERCISE D: MC Grammar ===== -->
+  <div class="exercise" id="ex-d">
+    <div class="ex-header">
+      <div class="ex-title">Exercise D – Choose the Correct Answer <span style="font-size:0.8rem;color:#888">(1 mark each)</span></div>
+      <div class="ex-instruction">Choose the correct answer.</div>
+    </div>
+    <ul class="question-list" id="ql-d">
+
+      <li class="question-item" data-answer="C">
+        <span class="q-num">28.</span>
+        <span class="q-sentence">This time next week, we ………… the chemistry exam.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>have finished</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>have been finishing</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>will have finished</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>will have been finishing</button>
+        </div>
+        <div class="answer-reveal">✓ C – will have finished (future perfect with "this time next week")</div>
+      </li>
+
+      <li class="question-item" data-answer="B">
+        <span class="q-num">29.</span>
+        <span class="q-sentence">When I grow up, ………… an inventor.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>I'm being</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>I'm going to be</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>I will have been</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>I will be being</button>
+        </div>
+        <div class="answer-reveal">✓ B – I'm going to be (plan/intention)</div>
+      </li>
+
+      <li class="question-item" data-answer="B">
+        <span class="q-num">30.</span>
+        <span class="q-sentence">Shirley will ………… her research for the next few weeks.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>have done</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>be doing</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>have been doing</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>have been done</button>
+        </div>
+        <div class="answer-reveal">✓ B – be doing (future continuous for ongoing activity)</div>
+      </li>
+
+      <li class="question-item" data-answer="A">
+        <span class="q-num">31.</span>
+        <span class="q-sentence">Next year, Sam will ………… patients at this hospital for twenty-five years.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>have been treating</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>treat</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>be treating</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>be going to treat</button>
+        </div>
+        <div class="answer-reveal">✓ A – have been treating (future perfect continuous with duration)</div>
+      </li>
+
+      <li class="question-item" data-answer="D">
+        <span class="q-num">32.</span>
+        <span class="q-sentence">'What is it?' 'We won't know until ………… at it under a microscope.'</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>we're going to look</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>we'll have looked</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>we'll be looking</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>we've looked</button>
+        </div>
+        <div class="answer-reveal">✓ D – we've looked (present perfect after "until" with future meaning)</div>
+      </li>
+
+      <li class="question-item" data-answer="C">
+        <span class="q-num">33.</span>
+        <span class="q-sentence">You won't get any radio reception while ………… through the tunnel.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>you've driven</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>you'll drive</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>you're driving</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>you'll be driving</button>
+        </div>
+        <div class="answer-reveal">✓ C – you're driving (present continuous after "while")</div>
+      </li>
+
+      <li class="question-item" data-answer="A">
+        <span class="q-num">34.</span>
+        <span class="q-sentence">'I'm going to set up the equipment in a minute.' '………… give you a hand?'</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>Shall I</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>Will I</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>Would I</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>Do I</button>
+        </div>
+        <div class="answer-reveal">✓ A – Shall I (offer to help)</div>
+      </li>
+
+    </ul>
+    <div class="action-bar">
+      <button class="btn btn-check" onclick="checkEx('d')">Check Answers</button>
+      <button class="btn btn-show" onclick="showAnswers('d')">Show Answers</button>
+      <button class="btn btn-reset" onclick="resetEx('d')">Reset</button>
+      <span class="score-display" id="score-d"></span>
+    </div>
+  </div>
+
+  <!-- ===== EXERCISE E: MC Vocabulary ===== -->
+  <div class="exercise" id="ex-e">
+    <div class="ex-header">
+      <div class="ex-title">Exercise E – Choose the Correct Answer <span style="font-size:0.8rem;color:#888">(1 mark each)</span></div>
+      <div class="ex-instruction">Choose the correct answer.</div>
+    </div>
+    <ul class="question-list" id="ql-e">
+
+      <li class="question-item" data-answer="C">
+        <span class="q-num">35.</span>
+        <span class="q-sentence">Do you know who ………… the fact that sound travels in waves?</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>invented</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>developed</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>discovered</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>found</button>
+        </div>
+        <div class="answer-reveal">✓ C – discovered (khám phá ra sự thật/hiện tượng)</div>
+      </li>
+
+      <li class="question-item" data-answer="A">
+        <span class="q-num">36.</span>
+        <span class="q-sentence">I'm thinking of getting a fax ………… .</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>machine</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>engine</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>motor</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>instrument</button>
+        </div>
+        <div class="answer-reveal">✓ A – machine (fax machine = máy fax)</div>
+      </li>
+
+      <li class="question-item" data-answer="C">
+        <span class="q-num">37.</span>
+        <span class="q-sentence">The ………… of the outbreak of the disease is still unknown.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>aim</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>reason</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>cause</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>motive</button>
+        </div>
+        <div class="answer-reveal">✓ C – cause (the cause of = nguyên nhân của)</div>
+      </li>
+
+      <li class="question-item" data-answer="D">
+        <span class="q-num">38.</span>
+        <span class="q-sentence">Ten million text messages are sent on ………… every minute.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>normal</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>common</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>general</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>average</button>
+        </div>
+        <div class="answer-reveal">✓ D – average (on average = tính trung bình)</div>
+      </li>
+
+      <li class="question-item" data-answer="D">
+        <span class="q-num">39.</span>
+        <span class="q-sentence">Once they've finished the extension to the …………, there'll be room for them to take on a lot more workers.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>manufacturing</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>trade</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>industry</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>factory</button>
+        </div>
+        <div class="answer-reveal">✓ D – factory (nhà máy)</div>
+      </li>
+
+      <li class="question-item" data-answer="B">
+        <span class="q-num">40.</span>
+        <span class="q-sentence">Shannen doesn't dye her hair; it's ………… blonde.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>physically</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>naturally</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>logically</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>organically</button>
+        </div>
+        <div class="answer-reveal">✓ B – naturally (tự nhiên, không nhuộm)</div>
+      </li>
+
+      <li class="question-item" data-answer="D">
+        <span class="q-num">41.</span>
+        <span class="q-sentence">I've ………… it in at the mains but it still doesn't seem to work.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>worked</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>turned</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>narrowed</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>plugged</button>
+        </div>
+        <div class="answer-reveal">✓ D – plugged (plugged in = cắm điện)</div>
+      </li>
+
+    </ul>
+    <div class="action-bar">
+      <button class="btn btn-check" onclick="checkEx('e')">Check Answers</button>
+      <button class="btn btn-show" onclick="showAnswers('e')">Show Answers</button>
+      <button class="btn btn-reset" onclick="resetEx('e')">Reset</button>
+      <span class="score-display" id="score-e"></span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const tabs = ['a','b','c','d','e'];
+function switchTab(id) {
+  document.querySelector('.exercise.active').classList.remove('active');
+  document.getElementById('ex-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => btn.classList.toggle('active', tabs[i] === id));
+}
+function chooseMC4(btn) {
+  btn.closest('.mc4-options').querySelectorAll('.mc4-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function chooseMatch(btn) {
+  btn.closest('.match-btns').querySelectorAll('.match-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function normalize(s) { return s.trim().toLowerCase().replace(/\s+/g,' '); }
+
+function checkEx(id) {
+  let correct = 0, total = 0;
+  if (id === 'a') {
+    document.querySelectorAll('#ql-a input[type="text"]').forEach(inp => {
+      total++;
+      const ok = normalize(inp.value) === normalize(inp.dataset.answer);
+      if (ok) correct++;
+      inp.classList.toggle('correct', ok); inp.classList.toggle('wrong', !ok);
+      const line = inp.closest('.passage-line');
+      if (line) { line.classList.toggle('correct', ok); line.classList.toggle('wrong', !ok); }
+    });
+  } else if (id === 'b') {
+    document.querySelectorAll('#ql-b .question-item').forEach(item => {
+      total++;
+      const sel = item.querySelector('.match-btn.selected');
+      const ok = sel && sel.dataset.val === item.dataset.answer;
+      if (ok) correct++;
+      item.classList.toggle('correct', ok); item.classList.toggle('wrong', !ok);
+      item.querySelectorAll('.match-btn').forEach(btn => {
+        btn.classList.remove('correct','wrong');
+        if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+        else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+      });
+    });
+  } else if (id === 'c') {
+    document.querySelectorAll('#ql-c .question-item').forEach(item => {
+      total++;
+      const inp = item.querySelector('input[type="text"]');
+      const ok = item.dataset.answer.split('|').some(a => normalize(inp.value) === normalize(a));
+      if (ok) correct++;
+      item.classList.toggle('correct', ok); item.classList.toggle('wrong', !ok);
+      inp.classList.toggle('correct', ok); inp.classList.toggle('wrong', !ok);
+    });
+    showScore('c', correct, total, 2); return;
+  } else if (id === 'd' || id === 'e') {
+    document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+      total++;
+      const sel = item.querySelector('.mc4-btn.selected');
+      const ok = sel && sel.dataset.val === item.dataset.answer;
+      if (ok) correct++;
+      item.classList.toggle('correct', ok); item.classList.toggle('wrong', !ok);
+      item.querySelectorAll('.mc4-btn').forEach(btn => {
+        btn.classList.remove('correct','wrong');
+        if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+        else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+      });
+    });
+  }
+  showScore(id, correct, total, 1);
+}
+function showScore(id, correct, total, m) {
+  const el = document.getElementById('score-' + id);
+  el.textContent = (correct*m) + ' / ' + (total*m);
+  el.classList.add('visible');
+  el.classList.toggle('perfect', correct === total);
+}
+function resetEx(id) {
+  const ex = document.getElementById('ex-' + id);
+  ex.querySelectorAll('input[type="text"]').forEach(inp => { inp.value=''; inp.classList.remove('correct','wrong'); });
+  ex.querySelectorAll('.question-item,.passage-line').forEach(el => el.classList.remove('correct','wrong'));
+  ex.querySelectorAll('.mc4-btn,.match-btn').forEach(btn => btn.classList.remove('selected','correct','wrong'));
+  document.getElementById('score-' + id).classList.remove('visible','perfect');
+  ex.classList.remove('show-answers');
+}
+function showAnswers(id) {
+  document.getElementById('ex-' + id).classList.add('show-answers');
+  if (id === 'a') document.querySelectorAll('#ql-a input[type="text"]').forEach(inp => { if (!inp.value) inp.value = inp.dataset.answer; });
+}
+</script>
+</body>
+</html>

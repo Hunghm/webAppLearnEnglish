@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review 11 – Units 21 &amp; 22</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #f5f5f5; color: #222; }
+header { background: #1565C0; color: #fff; padding: 16px 20px; }
+header h1 { font-size: 1.3rem; }
+header p { font-size: 0.9rem; opacity: 0.85; margin-top: 4px; }
+.tab-bar { display: flex; background: #1976D2; overflow-x: auto; }
+.tab-btn { padding: 10px 18px; border: none; background: transparent; color: #fff; font-size: 0.95rem; cursor: pointer; white-space: nowrap; border-bottom: 3px solid transparent; }
+.tab-btn.active { border-bottom-color: #FFD600; font-weight: bold; }
+.panel { display: none; padding: 16px; max-width: 820px; margin: 0 auto; }
+.panel.active { display: block; }
+.ex-header { margin-bottom: 12px; }
+.ex-header h2 { font-size: 1.1rem; color: #1565C0; }
+.ex-header p { font-size: 0.9rem; color: #555; margin-top: 4px; }
+.passage { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 14px 16px; margin-bottom: 16px; line-height: 2; font-size: 0.95rem; }
+.passage h3 { font-size: 1rem; color: #1565C0; margin-bottom: 10px; text-align: center; }
+.q-num { display: inline-block; background: #1565C0; color: #fff; border-radius: 50%; width: 24px; height: 24px; text-align: center; line-height: 24px; font-size: 0.82rem; margin-right: 4px; font-weight: bold; }
+.wf-input { border: 1px solid #999; border-radius: 4px; padding: 2px 6px; font-size: 0.9rem; min-width: 130px; }
+.wf-input.correct { background: #e8f5e9; border-color: #4caf50; }
+.wf-input.wrong { background: #ffebee; border-color: #f44336; }
+.match-answers { background: #f9f9f9; border: 1px solid #ddd; border-radius: 6px; padding: 12px; font-size: 0.9rem; line-height: 1.8; margin-bottom: 12px; }
+.match-row { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 12px 14px; margin-bottom: 8px; }
+.match-stem { margin-bottom: 8px; font-size: 0.95rem; line-height: 1.5; }
+.match-opts { display: flex; flex-wrap: wrap; gap: 6px; }
+.match-opts label { padding: 4px 12px; border: 1px solid #999; border-radius: 4px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 4px; }
+.match-opts label:hover { background: #f0f4ff; }
+.match-opts label.correct { background: #e8f5e9; border-color: #4caf50; color: #2e7d32; }
+.match-opts label.wrong { background: #ffebee; border-color: #f44336; color: #c62828; }
+.kwt-block { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 12px 14px; margin-bottom: 10px; }
+.kwt-q-stem { font-size: 0.9rem; color: #444; margin-bottom: 6px; }
+.kwt-line { font-size: 0.95rem; line-height: 2; }
+.kwt-input { border: 1px solid #999; border-radius: 4px; padding: 2px 8px; font-size: 0.9rem; min-width: 230px; display: inline-block; }
+.kwt-input.correct { background: #e8f5e9; border-color: #4caf50; }
+.kwt-input.wrong { background: #ffebee; border-color: #f44336; }
+.q-block { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 12px 14px; margin-bottom: 10px; }
+.q-stem { margin-bottom: 8px; line-height: 1.6; font-size: 0.95rem; }
+.opts { display: flex; flex-direction: column; gap: 5px; }
+.opts label { display: flex; align-items: center; gap: 8px; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+.opts label:hover { background: #f0f4ff; }
+.opts label.correct { background: #e8f5e9 !important; color: #2e7d32; }
+.opts label.wrong { background: #ffebee !important; color: #c62828; }
+.score-bar { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 12px; margin-top: 12px; font-size: 1rem; font-weight: bold; text-align: center; }
+.btn-row { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.btn { padding: 8px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: bold; }
+.btn-check { background: #1565C0; color: #fff; }
+.btn-reset { background: #757575; color: #fff; }
+.btn-show { background: #e65100; color: #fff; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Review 11 – Units 21 &amp; 22</h1>
+  <p>Total: 50 marks</p>
+</header>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('a')">A</button>
+  <button class="tab-btn" onclick="showTab('b')">B</button>
+  <button class="tab-btn" onclick="showTab('c')">C</button>
+  <button class="tab-btn" onclick="showTab('d')">D</button>
+  <button class="tab-btn" onclick="showTab('e')">E</button>
+</div>
+
+<!-- ===== EXERCISE A ===== -->
+<div class="panel active" id="panel-a">
+  <div class="ex-header">
+    <h2>Exercise A &nbsp;–&nbsp; Word Formation</h2>
+    <p>Questions 1–10 &nbsp;|&nbsp; 1 mark each &nbsp;|&nbsp; 10 marks</p>
+  </div>
+  <div class="passage">
+    <h3>Developing Countries</h3>
+    <p>Although too many people in the West do still live in <span class="q-num">1</span> <input type="text" class="wf-input" id="a1" data-answer="poverty"> , on the whole, Westerners are far more <span class="q-num">2</span> <input type="text" class="wf-input" id="a2" data-answer="wealthy|wealthier"> than those who live in developing countries. Things that are essential to our <span class="q-num">3</span> <input type="text" class="wf-input" id="a3" data-answer="daily"> lives, and which we take for granted, such as electricity, are <span class="q-num">4</span> <input type="text" class="wf-input" id="a4" data-answer="luxuries"> to millions of people around the world. Is this situation <span class="q-num">5</span> <input type="text" class="wf-input" id="a5" data-answer="acceptable|unacceptable"> or should the West be giving more <span class="q-num">6</span> <input type="text" class="wf-input" id="a6" data-answer="assistance"> to developing countries? Some politicians and <span class="q-num">7</span> <input type="text" class="wf-input" id="a7" data-answer="economists"> believe that Western financial <span class="q-num">8</span> <input type="text" class="wf-input" id="a8" data-answer="investment"> in developing countries would be in everyone's interest. As those countries get richer, they will become <span class="q-num">9</span> <input type="text" class="wf-input" id="a9" data-answer="valuable"> trading partners with the West. The <span class="q-num">10</span> <input type="text" class="wf-input" id="a10" data-answer="reality"> is, however, that there is an enormous amount of work to be done before people in developing countries can enjoy the kind of lives that most people lead in the West.</p>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-check" onclick="checkEx('a')">Check</button>
+    <button class="btn btn-reset" onclick="resetEx('a')">Reset</button>
+    <button class="btn btn-show" onclick="showAnswers('a')">Show Answers</button>
+  </div>
+  <div class="score-bar" id="score-a" style="display:none"></div>
+</div>
+
+<!-- ===== EXERCISE B ===== -->
+<div class="panel" id="panel-b">
+  <div class="ex-header">
+    <h2>Exercise B &nbsp;–&nbsp; Match to make sentences</h2>
+    <p>Questions 11–18 &nbsp;|&nbsp; 1 mark each &nbsp;|&nbsp; 8 marks</p>
+  </div>
+  <div class="match-answers">
+    <strong>Options:</strong><br>
+    A &nbsp; a little money by each month.<br>
+    B &nbsp; out the cheque to Peardrop Limited, that would be fine.<br>
+    C &nbsp; up to buy a new DVD player.<br>
+    D &nbsp; into some money when her aunt died.<br>
+    E &nbsp; away free software with every computer.<br>
+    F &nbsp; by on such a low salary.<br>
+    G &nbsp; on now I've lost my job.<br>
+    H &nbsp; on house prices coming down soon.
+  </div>
+
+  <div class="match-row" id="b-q11">
+    <p class="match-stem"><span class="q-num">11</span> Sharon came ............</p>
+    <div class="match-opts">
+      <label><input type="radio" name="b11" value="A"> A</label>
+      <label><input type="radio" name="b11" value="B"> B</label>
+      <label><input type="radio" name="b11" value="C"> C</label>
+      <label><input type="radio" name="b11" value="D"> D</label>
+      <label><input type="radio" name="b11" value="E"> E</label>
+      <label><input type="radio" name="b11" value="F"> F</label>
+      <label><input type="radio" name="b11" value="G"> G</label>
+      <label><input type="radio" name="b11" value="H"> H</label>
+    </div>
+  </div>
+  <div class="match-row" id="b-q12">
+    <p class="match-stem"><span class="q-num">12</span> I manage to put ............</p>
+    <div class="match-opts">
+      <label><input type="radio" name="b12" value="A"> A</label>
+      <label><input type="radio" name="b12" value="B"> B</label>
+      <label><input type="radio" name="b12" value="C"> C</label>
+      <label><input type="radio" name="b12" value="D"> D</label>
+      <label><input type="radio" name="b12" value="E"> E</label>
+      <label><input type="radio" name="b12" value="F"> F</label>
+      <label><input type="radio" name="b12" value="G"> G</label>
+      <label><input type="radio" name="b12" value="H"> H</label>
+    </div>
+  </div>
+  <div class="match-row" id="b-q13">
+    <p class="match-stem"><span class="q-num">13</span> You can bank ............</p>
+    <div class="match-opts">
+      <label><input type="radio" name="b13" value="A"> A</label>
+      <label><input type="radio" name="b13" value="B"> B</label>
+      <label><input type="radio" name="b13" value="C"> C</label>
+      <label><input type="radio" name="b13" value="D"> D</label>
+      <label><input type="radio" name="b13" value="E"> E</label>
+      <label><input type="radio" name="b13" value="F"> F</label>
+      <label><input type="radio" name="b13" value="G"> G</label>
+      <label><input type="radio" name="b13" value="H"> H</label>
+    </div>
+  </div>
+  <div class="match-row" id="b-q14">
+    <p class="match-stem"><span class="q-num">14</span> I don't know how they can get ............</p>
+    <div class="match-opts">
+      <label><input type="radio" name="b14" value="A"> A</label>
+      <label><input type="radio" name="b14" value="B"> B</label>
+      <label><input type="radio" name="b14" value="C"> C</label>
+      <label><input type="radio" name="b14" value="D"> D</label>
+      <label><input type="radio" name="b14" value="E"> E</label>
+      <label><input type="radio" name="b14" value="F"> F</label>
+      <label><input type="radio" name="b14" value="G"> G</label>
+      <label><input type="radio" name="b14" value="H"> H</label>
+    </div>
+  </div>
+  <div class="match-row" id="b-q15">
+    <p class="match-stem"><span class="q-num">15</span> If you could make ............</p>
+    <div class="match-opts">
+      <label><input type="radio" name="b15" value="A"> A</label>
+      <label><input type="radio" name="b15" value="B"> B</label>
+      <label><input type="radio" name="b15" value="C"> C</label>
+      <label><input type="radio" name="b15" value="D"> D</label>
+      <label><input type="radio" name="b15" value="E"> E</label>
+      <label><input type="radio" name="b15" value="F"> F</label>
+      <label><input type="radio" name="b15" value="G"> G</label>
+      <label><input type="radio" name="b15" value="H"> H</label>
+    </div>
+  </div>
+  <div class="match-row" id="b-q16">
+    <p class="match-stem"><span class="q-num">16</span> The shop's giving ............</p>
+    <div class="match-opts">
+      <label><input type="radio" name="b16" value="A"> A</label>
+      <label><input type="radio" name="b16" value="B"> B</label>
+      <label><input type="radio" name="b16" value="C"> C</label>
+      <label><input type="radio" name="b16" value="D"> D</label>
+      <label><input type="radio" name="b16" value="E"> E</label>
+      <label><input type="radio" name="b16" value="F"> F</label>
+      <label><input type="radio" name="b16" value="G"> G</label>
+      <label><input type="radio" name="b16" value="H"> H</label>
+    </div>
+  </div>
+  <div class="match-row" id="b-q17">
+    <p class="match-stem"><span class="q-num">17</span> I'm saving ............</p>
+    <div class="match-opts">
+      <label><input type="radio" name="b17" value="A"> A</label>
+      <label><input type="radio" name="b17" value="B"> B</label>
+      <label><input type="radio" name="b17" value="C"> C</label>
+      <label><input type="radio" name="b17" value="D"> D</label>
+      <label><input type="radio" name="b17" value="E"> E</label>
+      <label><input type="radio" name="b17" value="F"> F</label>
+      <label><input type="radio" name="b17" value="G"> G</label>
+      <label><input type="radio" name="b17" value="H"> H</label>
+    </div>
+  </div>
+  <div class="match-row" id="b-q18">
+    <p class="match-stem"><span class="q-num">18</span> I don't know what we're going to live ............</p>
+    <div class="match-opts">
+      <label><input type="radio" name="b18" value="A"> A</label>
+      <label><input type="radio" name="b18" value="B"> B</label>
+      <label><input type="radio" name="b18" value="C"> C</label>
+      <label><input type="radio" name="b18" value="D"> D</label>
+      <label><input type="radio" name="b18" value="E"> E</label>
+      <label><input type="radio" name="b18" value="F"> F</label>
+      <label><input type="radio" name="b18" value="G"> G</label>
+      <label><input type="radio" name="b18" value="H"> H</label>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-check" onclick="checkEx('b')">Check</button>
+    <button class="btn btn-reset" onclick="resetEx('b')">Reset</button>
+    <button class="btn btn-show" onclick="showAnswers('b')">Show Answers</button>
+  </div>
+  <div class="score-bar" id="score-b" style="display:none"></div>
+</div>
+
+<!-- ===== EXERCISE C ===== -->
+<div class="panel" id="panel-c">
+  <div class="ex-header">
+    <h2>Exercise C &nbsp;–&nbsp; Key Word Transformation</h2>
+    <p>Questions 19–27 &nbsp;|&nbsp; 2 marks each &nbsp;|&nbsp; 18 marks &nbsp;|&nbsp; Write between two and five words.</p>
+  </div>
+
+  <div class="kwt-block" id="c-q19">
+    <p class="kwt-q-stem"><span class="q-num">19</span> I had to pay to park in the supermarket car park! &nbsp;<strong>CHARGED</strong></p>
+    <p class="kwt-line">I <input type="text" class="kwt-input" id="c19" data-answer="was charged for"> parking in the supermarket car park!</p>
+  </div>
+  <div class="kwt-block" id="c-q20">
+    <p class="kwt-q-stem"><span class="q-num">20</span> Is this credit card yours? &nbsp;<strong>BELONG</strong></p>
+    <p class="kwt-line">Does <input type="text" class="kwt-input" id="c20" data-answer="this credit card belong to"> you?</p>
+  </div>
+  <div class="kwt-block" id="c-q21">
+    <p class="kwt-q-stem"><span class="q-num">21</span> I haven't got much money in the bank. &nbsp;<strong>AMOUNT</strong></p>
+    <p class="kwt-line">I've only got <input type="text" class="kwt-input" id="c21" data-answer="a small amount of"> money in the bank.</p>
+  </div>
+  <div class="kwt-block" id="c-q22">
+    <p class="kwt-q-stem"><span class="q-num">22</span> Getting the car repaired was so expensive! &nbsp;<strong>FORTUNE</strong></p>
+    <p class="kwt-line">It <input type="text" class="kwt-input" id="c22" data-answer="cost a fortune"> to get the car repaired!</p>
+  </div>
+  <div class="kwt-block" id="c-q23">
+    <p class="kwt-q-stem"><span class="q-num">23</span> Sophie demanded that the shop assistant apologise to her. &nbsp;<strong>APOLOGY</strong></p>
+    <p class="kwt-line">Sophie demanded <input type="text" class="kwt-input" id="c23" data-answer="an apology from"> the shop assistant.</p>
+  </div>
+  <div class="kwt-block" id="c-q24">
+    <p class="kwt-q-stem"><span class="q-num">24</span> Buying things online means I don't have to go into town so often. &nbsp;<strong>SAVES</strong></p>
+    <p class="kwt-line">Buying things online <input type="text" class="kwt-input" id="c24" data-answer="saves me having|saves me from having"> to go into town so often.</p>
+  </div>
+  <div class="kwt-block" id="c-q25">
+    <p class="kwt-q-stem"><span class="q-num">25</span> Don't pay attention to what Dan says; your new shoes are lovely! &nbsp;<strong>NOTICE</strong></p>
+    <p class="kwt-line">Take <input type="text" class="kwt-input" id="c25" data-answer="no notice of"> what Dan says; your new shoes are lovely!</p>
+  </div>
+  <div class="kwt-block" id="c-q26">
+    <p class="kwt-q-stem"><span class="q-num">26</span> I haven't got much cash at the moment. &nbsp;<strong>SHORT</strong></p>
+    <p class="kwt-line">I <input type="text" class="kwt-input" id="c26" data-answer="am short of|'m short of"> cash at the moment.</p>
+  </div>
+  <div class="kwt-block" id="c-q27">
+    <p class="kwt-q-stem"><span class="q-num">27</span> Can you lend me some money? &nbsp;<strong>BORROW</strong></p>
+    <p class="kwt-line">Can <input type="text" class="kwt-input" id="c27" data-answer="i borrow some money from"> you?</p>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-check" onclick="checkEx('c')">Check</button>
+    <button class="btn btn-reset" onclick="resetEx('c')">Reset</button>
+    <button class="btn btn-show" onclick="showAnswers('c')">Show Answers</button>
+  </div>
+  <div class="score-bar" id="score-c" style="display:none"></div>
+</div>
+
+<!-- ===== EXERCISE D ===== -->
+<div class="panel" id="panel-d">
+  <div class="ex-header">
+    <h2>Exercise D &nbsp;–&nbsp; Choose the correct answer</h2>
+    <p>Questions 28–34 &nbsp;|&nbsp; 1 mark each &nbsp;|&nbsp; 7 marks</p>
+  </div>
+
+  <div class="q-block" id="d-q28">
+    <p class="q-stem"><span class="q-num">28</span> The shop assistant finally agreed ............ a full refund.</p>
+    <div class="opts">
+      <label><input type="radio" name="d28" value="A"> A &nbsp; giving me</label>
+      <label><input type="radio" name="d28" value="B"> B &nbsp; to give me</label>
+      <label><input type="radio" name="d28" value="C"> C &nbsp; give to me</label>
+      <label><input type="radio" name="d28" value="D"> D &nbsp; to me to give</label>
+    </div>
+  </div>
+  <div class="q-block" id="d-q29">
+    <p class="q-stem"><span class="q-num">29</span> Bill asked me why ............ to go shopping with me.</p>
+    <div class="opts">
+      <label><input type="radio" name="d29" value="A"> A &nbsp; I hadn't invited him</label>
+      <label><input type="radio" name="d29" value="B"> B &nbsp; hadn't I invited him</label>
+      <label><input type="radio" name="d29" value="C"> C &nbsp; I hadn't him invited</label>
+      <label><input type="radio" name="d29" value="D"> D &nbsp; hadn't I him invited</label>
+    </div>
+  </div>
+  <div class="q-block" id="d-q30">
+    <p class="q-stem"><span class="q-num">30</span> Ellie asked Stan ............ to look at the new catalogue.</p>
+    <div class="opts">
+      <label><input type="radio" name="d30" value="A"> A &nbsp; did he want</label>
+      <label><input type="radio" name="d30" value="B"> B &nbsp; do you want</label>
+      <label><input type="radio" name="d30" value="C"> C &nbsp; whether he wants</label>
+      <label><input type="radio" name="d30" value="D"> D &nbsp; if he wanted</label>
+    </div>
+  </div>
+  <div class="q-block" id="d-q31">
+    <p class="q-stem"><span class="q-num">31</span> Stephen ............ me he'd bought that suit in a sale.</p>
+    <div class="opts">
+      <label><input type="radio" name="d31" value="A"> A &nbsp; said</label>
+      <label><input type="radio" name="d31" value="B"> B &nbsp; spoke</label>
+      <label><input type="radio" name="d31" value="C"> C &nbsp; told</label>
+      <label><input type="radio" name="d31" value="D"> D &nbsp; claimed</label>
+    </div>
+  </div>
+  <div class="q-block" id="d-q32">
+    <p class="q-stem"><span class="q-num">32</span> 'What did the man say when you challenged him?' &nbsp; 'He said he ............ pay for the things in his bag, but I didn't believe him!'</p>
+    <div class="opts">
+      <label><input type="radio" name="d32" value="A"> A &nbsp; is going to</label>
+      <label><input type="radio" name="d32" value="B"> B &nbsp; has been going to</label>
+      <label><input type="radio" name="d32" value="C"> C &nbsp; goes to</label>
+      <label><input type="radio" name="d32" value="D"> D &nbsp; was going to</label>
+    </div>
+  </div>
+  <div class="q-block" id="d-q33">
+    <p class="q-stem"><span class="q-num">33</span> When I last saw Carrie, she told me she ............ of buying a house, but now she's changed her mind.</p>
+    <div class="opts">
+      <label><input type="radio" name="d33" value="A"> A &nbsp; thought</label>
+      <label><input type="radio" name="d33" value="B"> B &nbsp; is thinking</label>
+      <label><input type="radio" name="d33" value="C"> C &nbsp; was thinking</label>
+      <label><input type="radio" name="d33" value="D"> D &nbsp; has been thinking</label>
+    </div>
+  </div>
+  <div class="q-block" id="d-q34">
+    <p class="q-stem"><span class="q-num">34</span> 'What did they say when they realised you weren't a shoplifter?' &nbsp; 'They apologised ............ me.'</p>
+    <div class="opts">
+      <label><input type="radio" name="d34" value="A"> A &nbsp; to doubt</label>
+      <label><input type="radio" name="d34" value="B"> B &nbsp; they had doubted</label>
+      <label><input type="radio" name="d34" value="C"> C &nbsp; for doubting</label>
+      <label><input type="radio" name="d34" value="D"> D &nbsp; the doubt of</label>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-check" onclick="checkEx('d')">Check</button>
+    <button class="btn btn-reset" onclick="resetEx('d')">Reset</button>
+    <button class="btn btn-show" onclick="showAnswers('d')">Show Answers</button>
+  </div>
+  <div class="score-bar" id="score-d" style="display:none"></div>
+</div>
+
+<!-- ===== EXERCISE E ===== -->
+<div class="panel" id="panel-e">
+  <div class="ex-header">
+    <h2>Exercise E &nbsp;–&nbsp; Choose the correct answer</h2>
+    <p>Questions 35–41 &nbsp;|&nbsp; 1 mark each &nbsp;|&nbsp; 7 marks</p>
+  </div>
+
+  <div class="q-block" id="e-q35">
+    <p class="q-stem"><span class="q-num">35</span> This car is very ............ as it goes so far on one tank of petrol.</p>
+    <div class="opts">
+      <label><input type="radio" name="e35" value="A"> A &nbsp; financial</label>
+      <label><input type="radio" name="e35" value="B"> B &nbsp; economical</label>
+      <label><input type="radio" name="e35" value="C"> C &nbsp; costly</label>
+      <label><input type="radio" name="e35" value="D"> D &nbsp; endless</label>
+    </div>
+  </div>
+  <div class="q-block" id="e-q36">
+    <p class="q-stem"><span class="q-num">36</span> I can't believe how cheap these shorts were. They were a real ............ !</p>
+    <div class="opts">
+      <label><input type="radio" name="e36" value="A"> A &nbsp; bargain</label>
+      <label><input type="radio" name="e36" value="B"> B &nbsp; sale</label>
+      <label><input type="radio" name="e36" value="C"> C &nbsp; discount</label>
+      <label><input type="radio" name="e36" value="D"> D &nbsp; offer</label>
+    </div>
+  </div>
+  <div class="q-block" id="e-q37">
+    <p class="q-stem"><span class="q-num">37</span> What ............ of car does your mum drive?</p>
+    <div class="opts">
+      <label><input type="radio" name="e37" value="A"> A &nbsp; name</label>
+      <label><input type="radio" name="e37" value="B"> B &nbsp; brand</label>
+      <label><input type="radio" name="e37" value="C"> C &nbsp; make</label>
+      <label><input type="radio" name="e37" value="D"> D &nbsp; form</label>
+    </div>
+  </div>
+  <div class="q-block" id="e-q38">
+    <p class="q-stem"><span class="q-num">38</span> Could you tell me who's in ............ here, please?</p>
+    <div class="opts">
+      <label><input type="radio" name="e38" value="A"> A &nbsp; charge</label>
+      <label><input type="radio" name="e38" value="B"> B &nbsp; responsibility</label>
+      <label><input type="radio" name="e38" value="C"> C &nbsp; rule</label>
+      <label><input type="radio" name="e38" value="D"> D &nbsp; organisation</label>
+    </div>
+  </div>
+  <div class="q-block" id="e-q39">
+    <p class="q-stem"><span class="q-num">39</span> I paid the assistant and took the books but then stupidly left the bookshop without waiting for my ............ .</p>
+    <div class="opts">
+      <label><input type="radio" name="e39" value="A"> A &nbsp; cash</label>
+      <label><input type="radio" name="e39" value="B"> B &nbsp; fee</label>
+      <label><input type="radio" name="e39" value="C"> C &nbsp; refund</label>
+      <label><input type="radio" name="e39" value="D"> D &nbsp; change</label>
+    </div>
+  </div>
+  <div class="q-block" id="e-q40">
+    <p class="q-stem"><span class="q-num">40</span> I think she ............ her fortune in the shipping industry.</p>
+    <div class="opts">
+      <label><input type="radio" name="e40" value="A"> A &nbsp; took</label>
+      <label><input type="radio" name="e40" value="B"> B &nbsp; made</label>
+      <label><input type="radio" name="e40" value="C"> C &nbsp; won</label>
+      <label><input type="radio" name="e40" value="D"> D &nbsp; saved</label>
+    </div>
+  </div>
+  <div class="q-block" id="e-q41">
+    <p class="q-stem"><span class="q-num">41</span> I didn't find a new top but at ............ I got some new jeans.</p>
+    <div class="opts">
+      <label><input type="radio" name="e41" value="A"> A &nbsp; less</label>
+      <label><input type="radio" name="e41" value="B"> B &nbsp; the less</label>
+      <label><input type="radio" name="e41" value="C"> C &nbsp; least</label>
+      <label><input type="radio" name="e41" value="D"> D &nbsp; the least</label>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-check" onclick="checkEx('e')">Check</button>
+    <button class="btn btn-reset" onclick="resetEx('e')">Reset</button>
+    <button class="btn btn-show" onclick="showAnswers('e')">Show Answers</button>
+  </div>
+  <div class="score-bar" id="score-e" style="display:none"></div>
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  const tabs = ['a','b','c','d','e'];
+  document.querySelectorAll('.tab-btn')[tabs.indexOf(id)].classList.add('active');
+}
+function normalize(s) { return s.toLowerCase().trim().replace(/\s+/g, ' '); }
+function checkAnswer(u, d) { return d.split('|').map(a => normalize(a)).some(a => a === normalize(u)); }
+const exConfig = {
+  a: { type: 'wf',  prefix: 'a', ids: [1,2,3,4,5,6,7,8,9,10], marks: 1 },
+  b: { type: 'mc', qs: [11,12,13,14,15,16,17,18], marks: 1,
+       answers: {11:'D',12:'A',13:'H',14:'F',15:'B',16:'E',17:'C',18:'G'} },
+  c: { type: 'kwt', prefix: 'c', ids: [19,20,21,22,23,24,25,26,27], marks: 2 },
+  d: { type: 'mc', qs: [28,29,30,31,32,33,34], marks: 1,
+       answers: {28:'B',29:'A',30:'D',31:'C',32:'D',33:'C',34:'C'} },
+  e: { type: 'mc', qs: [35,36,37,38,39,40,41], marks: 1,
+       answers: {35:'B',36:'A',37:'C',38:'A',39:'D',40:'B',41:'C'} }
+};
+function checkEx(id) {
+  const cfg = exConfig[id]; let correct = 0, total = 0;
+  if (cfg.type === 'mc') {
+    cfg.qs.forEach(q => {
+      const sel = document.querySelector('input[name="' + id + q + '"]:checked');
+      const block = document.getElementById(id + '-q' + q);
+      block.querySelectorAll('.opts label, .match-opts label').forEach(l => l.classList.remove('correct','wrong'));
+      total += cfg.marks; const ans = cfg.answers[q];
+      if (sel) {
+        const lbl = block.querySelector('input[value="' + sel.value + '"]').parentElement;
+        if (sel.value === ans) { lbl.classList.add('correct'); correct += cfg.marks; }
+        else { lbl.classList.add('wrong'); block.querySelector('input[value="' + ans + '"]').parentElement.classList.add('correct'); }
+      } else { block.querySelector('input[value="' + ans + '"]').parentElement.classList.add('correct'); }
+    });
+  } else {
+    cfg.ids.forEach(q => {
+      const inp = document.getElementById(cfg.prefix + q); if (!inp) return;
+      inp.classList.remove('correct','wrong'); total += cfg.marks;
+      if (checkAnswer(inp.value, inp.dataset.answer)) { inp.classList.add('correct'); correct += cfg.marks; }
+      else { inp.classList.add('wrong'); }
+    });
+  }
+  const scoreEl = document.getElementById('score-' + id); scoreEl.style.display = 'block';
+  const pct = total > 0 ? Math.round(correct/total*100) : 0;
+  scoreEl.textContent = 'Score: ' + correct + ' / ' + total + ' marks (' + pct + '%)';
+  scoreEl.style.color = pct >= 70 ? '#2e7d32' : pct >= 50 ? '#e65100' : '#c62828';
+}
+function resetEx(id) {
+  const cfg = exConfig[id];
+  if (cfg.type === 'mc') {
+    cfg.qs.forEach(q => {
+      document.querySelectorAll('input[name="' + id + q + '"]').forEach(r => r.checked = false);
+      document.getElementById(id + '-q' + q).querySelectorAll('.opts label, .match-opts label').forEach(l => l.classList.remove('correct','wrong'));
+    });
+  } else {
+    cfg.ids.forEach(q => { const inp = document.getElementById(cfg.prefix + q); if (inp) { inp.value = ''; inp.classList.remove('correct','wrong'); } });
+  }
+  const s = document.getElementById('score-' + id); s.style.display = 'none'; s.textContent = '';
+}
+function showAnswers(id) {
+  const cfg = exConfig[id];
+  if (cfg.type === 'mc') {
+    cfg.qs.forEach(q => {
+      document.querySelectorAll('input[name="' + id + q + '"]').forEach(r => r.checked = false);
+      const block = document.getElementById(id + '-q' + q);
+      block.querySelectorAll('.opts label, .match-opts label').forEach(l => l.classList.remove('correct','wrong'));
+      block.querySelector('input[value="' + cfg.answers[q] + '"]').parentElement.classList.add('correct');
+    });
+  } else {
+    cfg.ids.forEach(q => {
+      const inp = document.getElementById(cfg.prefix + q); if (!inp) return;
+      inp.classList.remove('correct','wrong'); inp.value = inp.dataset.answer.split('|')[0]; inp.classList.add('correct');
+    });
+  }
+  document.getElementById('score-' + id).style.display = 'none';
+}
+</script>
+</body>
+</html>

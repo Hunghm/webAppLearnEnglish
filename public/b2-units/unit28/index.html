@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 28 – Vocabulary Exercises</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #333; min-height: 100vh; }
+
+  .header { background: #1565C0; color: white; padding: 16px 20px; text-align: center; }
+  .header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+  .header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+
+  .tab-bar { display: flex; background: #1976D2; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 1; min-width: 44px; padding: 12px 6px; border: none; background: transparent;
+    color: rgba(255,255,255,0.7); font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap;
+  }
+  .tab-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+  .tab-btn.active { color: white; border-bottom-color: #FFD600; }
+  .tab-badge {
+    display: inline-block; font-size: 0.65rem; background: rgba(255,255,255,0.25);
+    border-radius: 10px; padding: 1px 5px; margin-left: 4px; vertical-align: middle;
+  }
+  .tab-badge.perfect { background: #4CAF50; }
+
+  .content { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+  .exercise { display: none; }
+  .exercise.active { display: block; }
+
+  .ex-header { margin-bottom: 16px; }
+  .ex-title { font-size: 1.1rem; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+  .ex-instruction {
+    font-size: 0.9rem; color: #555; background: #E3F2FD; border-left: 4px solid #2196F3;
+    padding: 8px 12px; border-radius: 0 6px 6px 0;
+  }
+
+  .question-list { list-style: none; }
+  .question-item {
+    background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s;
+  }
+  .question-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .question-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+
+  .q-num { font-weight: 700; color: #1976D2; margin-right: 6px; }
+  .q-sentence { line-height: 1.8; }
+
+  input[type="text"] {
+    border: 2px solid #BBDEFB; border-radius: 6px; padding: 5px 10px;
+    font-size: 0.95rem; outline: none; background: #FAFAFA; transition: border .2s;
+    min-width: 100px;
+  }
+  input[type="text"]:focus { border-color: #2196F3; background: white; }
+  input[type="text"].correct { border-color: #4CAF50; background: #F1F8E9; color: #2E7D32; }
+  input[type="text"].wrong { border-color: #F44336; background: #FFF5F5; color: #C62828; }
+
+  .cap-word { font-weight: 700; color: #5D4037; font-size: 0.88rem; margin-left: 4px; background: #FFF9C4; border-radius: 3px; padding: 1px 5px; }
+
+  /* Two Choice */
+  .two-choice-btns { display: inline-flex; gap: 8px; margin-left: 6px; flex-wrap: wrap; }
+  .choice-btn {
+    border: 2px solid #90CAF9; background: white; border-radius: 6px;
+    padding: 4px 14px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #1565C0;
+  }
+  .choice-btn:hover { background: #E3F2FD; }
+  .choice-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .choice-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .choice-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+
+  /* MCQ */
+  .mcq-options { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .mcq-btn {
+    border: 2px solid #CE93D8; background: white; border-radius: 6px;
+    padding: 5px 16px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #6A1B9A;
+  }
+  .mcq-btn:hover { background: #F3E5F5; }
+  .mcq-btn.selected { background: #8E24AA; color: white; border-color: #8E24AA; }
+  .mcq-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .mcq-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+
+  /* Match */
+  .match-select {
+    border: 2px solid #CE93D8; border-radius: 6px; padding: 5px 8px;
+    font-size: 0.9rem; background: white; color: #333; cursor: pointer; margin-left: 6px;
+  }
+  .match-select.correct { border-color: #4CAF50; background: #F1F8E9; }
+  .match-select.wrong { border-color: #F44336; background: #FFF5F5; }
+
+  /* Passage */
+  .passage-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .passage-line { margin-bottom: 10px; line-height: 2.1; }
+  .passage-title { font-weight: 700; font-size: 1.05rem; text-align: center; color: #1565C0; margin-bottom: 12px; }
+  .passage-input { min-width: 80px; width: 110px; }
+
+  /* Word bank */
+  .word-bank { background: #E8F5E9; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; }
+  .word-bank-label { font-size: 0.8rem; color: #555; margin-bottom: 6px; }
+  .word-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .word-chip {
+    background: white; border: 2px solid #A5D6A7; border-radius: 20px;
+    padding: 3px 12px; font-size: 0.88rem; cursor: pointer; transition: all .2s;
+  }
+  .word-chip:hover { background: #C8E6C9; }
+  .word-chip.used { opacity: 0.4; text-decoration: line-through; cursor: default; }
+
+  /* Answer reveal */
+  .answer-reveal { font-size: 0.82rem; color: #388E3C; margin-top: 4px; display: none; }
+  .show-answers .answer-reveal { display: block; }
+
+  /* Action buttons */
+  .action-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+  .btn { padding: 10px 22px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-check { background: #2196F3; color: white; }
+  .btn-check:hover { background: #1976D2; }
+  .btn-reset { background: #FF9800; color: white; }
+  .btn-reset:hover { background: #F57C00; }
+  .btn-show { background: #9C27B0; color: white; }
+  .btn-show:hover { background: #7B1FA2; }
+
+  .score-display {
+    font-size: 1rem; font-weight: 700; padding: 8px 16px; border-radius: 8px;
+    background: #E8F5E9; color: #2E7D32; display: none;
+  }
+  .score-display.visible { display: inline-block; }
+  .score-display.perfect { background: #4CAF50; color: white; }
+
+  @media (max-width: 600px) {
+    .tab-btn { font-size: 0.8rem; padding: 10px 4px; }
+    .content { padding: 12px 10px 50px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Unit 28 – Vocabulary</h1>
+  <p>Work and business · 9 exercises · Click a tab to start</p>
+</div>
+
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" onclick="switchTab('a')">A</button>
+  <button class="tab-btn" onclick="switchTab('b')">B</button>
+  <button class="tab-btn" onclick="switchTab('c')">C</button>
+  <button class="tab-btn" onclick="switchTab('d')">D</button>
+  <button class="tab-btn" onclick="switchTab('e')">E</button>
+  <button class="tab-btn" onclick="switchTab('f')">F</button>
+  <button class="tab-btn" onclick="switchTab('g')">G</button>
+  <button class="tab-btn" onclick="switchTab('h')">H</button>
+  <button class="tab-btn" onclick="switchTab('i')">I</button>
+</div>
+
+<div class="content">
+
+<!-- ===== EXERCISE A: Two Choice – circle correct word ===== -->
+<div class="exercise active" id="ex-a">
+  <div class="ex-header">
+    <div class="ex-title">Exercise A – Circle the correct word</div>
+    <div class="ex-instruction">Topic vocabulary in contrast. Choose the correct word or phrase in bold.</div>
+  </div>
+  <ul class="question-list" id="ql-a">
+    <li class="question-item" data-answer="b" data-a="charity" data-b="union">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">The <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">charity</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">union</button>
+      </span> I'm a member of is calling for a nationwide strike next week.</span>
+      <div class="answer-reveal">✓ union (a trade union calls for strikes)</div>
+    </li>
+    <li class="question-item" data-answer="b" data-a="company" data-b="firm">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">It's <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">company</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">firm</button>
+      </span> policy not to allow the use of phones for personal calls during working hours.</span>
+      <div class="answer-reveal">✓ firm (firm policy = strict/company policy)</div>
+    </li>
+    <li class="question-item" data-answer="b" data-a="raise" data-b="rise">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">The recent <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">raise</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">rise</button>
+      </span> in the cost of petrol has affected loads of small businesses round here.</span>
+      <div class="answer-reveal">✓ rise (rise = increase in cost; raise = pay increase)</div>
+    </li>
+    <li class="question-item" data-answer="b" data-a="retire" data-b="resign">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">In some professions, you have to <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">retire</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">resign</button>
+      </span> when you're 60 or 65 years old.</span>
+      <div class="answer-reveal">✓ retire (retire = stop working at a certain age)</div>
+    </li>
+    <li class="question-item" data-answer="a" data-a="pension" data-b="promotion">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">My grandfather gets a <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">pension</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">promotion</button>
+      </span> from the company he used to work for.</span>
+      <div class="answer-reveal">✓ pension (pension = money received after retiring)</div>
+    </li>
+    <li class="question-item" data-answer="a" data-a="overtime" data-b="promotion">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Not only did we all have to work <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">overtime</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">promotion</button>
+      </span> this weekend, but we didn't get paid for it!</span>
+      <div class="answer-reveal">✓ overtime (overtime = extra hours worked)</div>
+    </li>
+    <li class="question-item" data-answer="b" data-a="work" data-b="job">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Have you had any news about that <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">work</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">job</button>
+      </span> you applied for yet?</span>
+      <div class="answer-reveal">✓ job (job = a specific position applied for)</div>
+    </li>
+    <li class="question-item" data-answer="a" data-a="salary" data-b="wage">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">The starting <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">salary</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">wage</button>
+      </span> is €20,000 per year.</span>
+      <div class="answer-reveal">✓ salary (salary = annual fixed payment)</div>
+    </li>
+    <li class="question-item" data-answer="b" data-a="pay" data-b="wage">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">You'll get a weekly <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">pay</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">wage</button>
+      </span> of about €300 before deductions.</span>
+      <div class="answer-reveal">✓ wage (weekly wage = payment for manual/hourly work)</div>
+    </li>
+    <li class="question-item" data-answer="b" data-a="employees" data-b="staff">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">She became a full-time member of <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">employees</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">staff</button>
+      </span> last year.</span>
+      <div class="answer-reveal">✓ staff (member of staff = one person in a group)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExMC('a')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('a')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('a')">Reset</button>
+    <span class="score-display" id="score-a"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE B: Word bank fill – correct form ===== -->
+<div class="exercise" id="ex-b">
+  <div class="ex-header">
+    <div class="ex-title">Exercise B – Complete using the correct form of the words in the box</div>
+    <div class="ex-instruction">Topic vocabulary. Use the correct form of: commute · deliver · earn · gain · make · sack · win</div>
+  </div>
+  <div class="word-bank">
+    <div class="word-bank-label">Word bank (click to mark as used):</div>
+    <div class="word-chips">
+      <span class="word-chip" onclick="useWord(this)">commute</span>
+      <span class="word-chip" onclick="useWord(this)">deliver</span>
+      <span class="word-chip" onclick="useWord(this)">earn</span>
+      <span class="word-chip" onclick="useWord(this)">gain</span>
+      <span class="word-chip" onclick="useWord(this)">make</span>
+      <span class="word-chip" onclick="useWord(this)">sack</span>
+      <span class="word-chip" onclick="useWord(this)">win</span>
+    </div>
+  </div>
+  <ul class="question-list" id="ql-b">
+    <li class="question-item" data-answer="won">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">No sooner had Denzil <input type="text" placeholder="…" style="min-width:110px"> the lottery than he decided to quit his job.</span>
+      <div class="answer-reveal">✓ won (win the lottery)</div>
+    </li>
+    <li class="question-item" data-answer="commute">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">How long does it take you to <input type="text" placeholder="…" style="min-width:110px"> to work every day?</span>
+      <div class="answer-reveal">✓ commute (commute = travel to work regularly)</div>
+    </li>
+    <li class="question-item" data-answer="earn">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">How much does a state school teacher <input type="text" placeholder="…" style="min-width:100px"> each year?</span>
+      <div class="answer-reveal">✓ earn (earn = receive money for work)</div>
+    </li>
+    <li class="question-item" data-answer="made">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Over a hundred workers were <input type="text" placeholder="…" style="min-width:100px"> redundant when the factory closed.</span>
+      <div class="answer-reveal">✓ made (made redundant = lost their jobs)</div>
+    </li>
+    <li class="question-item" data-answer="sacked">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Our next-door neighbour was <input type="text" placeholder="…" style="min-width:110px"> for stealing company property.</span>
+      <div class="answer-reveal">✓ sacked (sacked = dismissed from job)</div>
+    </li>
+    <li class="question-item" data-answer="deliver">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Does your local supermarket <input type="text" placeholder="…" style="min-width:110px">?</span>
+      <div class="answer-reveal">✓ deliver (deliver = bring goods to your home)</div>
+    </li>
+    <li class="question-item" data-answer="gained">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Rarely have I <input type="text" placeholder="…" style="min-width:110px"> so much valuable experience in such a short space of time.</span>
+      <div class="answer-reveal">✓ gained (gain experience)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('b')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('b')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('b')">Reset</button>
+    <span class="score-display" id="score-b"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE C: Phrasal Verbs – passage fill ===== -->
+<div class="exercise" id="ex-c">
+  <div class="ex-header">
+    <div class="ex-title">Exercise C – Write one word in each gap</div>
+    <div class="ex-instruction">Phrasal verbs. Complete the passage with one word in each numbered gap.</div>
+  </div>
+  <div class="passage-container" id="ql-c">
+    <div class="passage-title">It just takes hard work and commitment</div>
+    <p style="font-size:0.85rem;color:#666;text-align:center;margin-bottom:10px"><em>Entrepreneur Jane Dickson describes how she got started</em></p>
+    <p class="passage-line">I was working as an IT Manager for a small publishing company (in fact, I was standing (1) <input type="text" class="passage-input" data-answer="in" placeholder="…"> for the actual manager while she was away on maternity leave) when the company was taken (2) <input type="text" class="passage-input" data-answer="over" placeholder="…"> by a large multinational media organisation. It was in the depths of the recession, and initially our new owners promised to see our small company (3) <input type="text" class="passage-input" data-answer="through" placeholder="…"> the hard times. Things got worse, though, and they finally backed (4) <input type="text" class="passage-input" data-answer="out" placeholder="…"> of their agreement. Our company closed (5) <input type="text" class="passage-input" data-answer="down" placeholder="…">. We were all made redundant – it was horrible!</p>
+    <p class="passage-line">I wasn't sure what I wanted to do next. I (6) <input type="text" class="passage-input" data-answer="turned" placeholder="…"> down several offers of work as I didn't want to rush into anything. Then, one day, I woke up and thought: 'I'm going to set (7) <input type="text" class="passage-input" data-answer="up" placeholder="…"> my own business!' At first it was tough. I had to (8) <input type="text" class="passage-input" data-answer="see" placeholder="…"> to everything myself – I was the only employee! – but I set (9) <input type="text" class="passage-input" data-answer="out" placeholder="…"> with dedication and refused to give up, whatever happened. Over the last five years, as the company's grown, I've taken (10) <input type="text" class="passage-input" data-answer="on" placeholder="…"> more and more staff. Dickson's now employs over five hundred people! I set (11) <input type="text" class="passage-input" data-answer="out" placeholder="…"> to be successful, and I've managed it. I feel very lucky, although, to be honest, luck has nothing to do with it. It just takes hard work and commitment. I don't feel satisfied yet, though. We're bringing (12) <input type="text" class="passage-input" data-answer="out" placeholder="…"> new products all the time, and I want to continue doing that. I also want to speed (13) <input type="text" class="passage-input" data-answer="up" placeholder="…"> our production process to make it more efficient. I'm not planning to slow (14) <input type="text" class="passage-input" data-answer="down" placeholder="…"> any time soon!</p>
+    <div class="answer-reveal" style="margin-top:10px">
+      ✓ (1) in &nbsp;(2) over &nbsp;(3) through &nbsp;(4) out &nbsp;(5) down &nbsp;(6) turned &nbsp;(7) up &nbsp;(8) see &nbsp;(9) out &nbsp;(10) on &nbsp;(11) out &nbsp;(12) out &nbsp;(13) up &nbsp;(14) down
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExPassage('c')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('c')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('c')">Reset</button>
+    <span class="score-display" id="score-c"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE D: Match to make sentences ===== -->
+<div class="exercise" id="ex-d">
+  <div class="ex-header">
+    <div class="ex-title">Exercise D – Match to make sentences</div>
+    <div class="ex-instruction">Phrases and collocations. Match each sentence beginning (1–10) with the correct ending (A–J).</div>
+  </div>
+  <div style="background:white;border-radius:8px;padding:14px 16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.08)">
+    <strong>Endings:</strong><br>
+    <span style="font-size:0.88rem;line-height:2">
+      A on hold for ages.&nbsp;&nbsp;
+      B about who's going to get promoted.&nbsp;&nbsp;
+      C of work for over two months now.&nbsp;&nbsp;
+      D into writing this report.&nbsp;&nbsp;
+      E business long.&nbsp;&nbsp;
+      F in your work.&nbsp;&nbsp;
+      G for that position.&nbsp;&nbsp;
+      H accept a pay cut.&nbsp;&nbsp;
+      I work, doesn't he?&nbsp;&nbsp;
+      J on this, aren't we?
+    </span>
+  </div>
+  <ul class="question-list" id="ql-d">
+    <li class="question-item" data-answer="d">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">I put a lot of effort …………
+      <select class="match-select" onchange="selectMatch(this)">
+        <option value="">–</option>
+        <option value="a">A</option><option value="b">B</option><option value="c">C</option>
+        <option value="d">D</option><option value="e">E</option><option value="f">F</option>
+        <option value="g">G</option><option value="h">H</option><option value="i">I</option>
+        <option value="j">J</option>
+      </select></span>
+      <div class="answer-reveal">✓ D – into writing this report (put effort into doing)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">They've made their decision …………
+      <select class="match-select" onchange="selectMatch(this)">
+        <option value="">–</option>
+        <option value="a">A</option><option value="b">B</option><option value="c">C</option>
+        <option value="d">D</option><option value="e">E</option><option value="f">F</option>
+        <option value="g">G</option><option value="h">H</option><option value="i">I</option>
+        <option value="j">J</option>
+      </select></span>
+      <div class="answer-reveal">✓ B – about who's going to get promoted</div>
+    </li>
+    <li class="question-item" data-answer="h">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">It's not in your interest to …………
+      <select class="match-select" onchange="selectMatch(this)">
+        <option value="">–</option>
+        <option value="a">A</option><option value="b">B</option><option value="c">C</option>
+        <option value="d">D</option><option value="e">E</option><option value="f">F</option>
+        <option value="g">G</option><option value="h">H</option><option value="i">I</option>
+        <option value="j">J</option>
+      </select></span>
+      <div class="answer-reveal">✓ H – accept a pay cut</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">The secretary's kept me …………
+      <select class="match-select" onchange="selectMatch(this)">
+        <option value="">–</option>
+        <option value="a">A</option><option value="b">B</option><option value="c">C</option>
+        <option value="d">D</option><option value="e">E</option><option value="f">F</option>
+        <option value="g">G</option><option value="h">H</option><option value="i">I</option>
+        <option value="j">J</option>
+      </select></span>
+      <div class="answer-reveal">✓ A – on hold for ages (keep sb on hold)</div>
+    </li>
+    <li class="question-item" data-answer="g">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">I don't know why you didn't apply …………
+      <select class="match-select" onchange="selectMatch(this)">
+        <option value="">–</option>
+        <option value="a">A</option><option value="b">B</option><option value="c">C</option>
+        <option value="d">D</option><option value="e">E</option><option value="f">F</option>
+        <option value="g">G</option><option value="h">H</option><option value="i">I</option>
+        <option value="j">J</option>
+      </select></span>
+      <div class="answer-reveal">✓ G – for that position (apply for a position)</div>
+    </li>
+    <li class="question-item" data-answer="j">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">I think we're all in agreement …………
+      <select class="match-select" onchange="selectMatch(this)">
+        <option value="">–</option>
+        <option value="a">A</option><option value="b">B</option><option value="c">C</option>
+        <option value="d">D</option><option value="e">E</option><option value="f">F</option>
+        <option value="g">G</option><option value="h">H</option><option value="i">I</option>
+        <option value="j">J</option>
+      </select></span>
+      <div class="answer-reveal">✓ J – on this, aren't we? (in agreement on sth)</div>
+    </li>
+    <li class="question-item" data-answer="c">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Dean's been out …………
+      <select class="match-select" onchange="selectMatch(this)">
+        <option value="">–</option>
+        <option value="a">A</option><option value="b">B</option><option value="c">C</option>
+        <option value="d">D</option><option value="e">E</option><option value="f">F</option>
+        <option value="g">G</option><option value="h">H</option><option value="i">I</option>
+        <option value="j">J</option>
+      </select></span>
+      <div class="answer-reveal">✓ C – of work for over two months now</div>
+    </li>
+    <li class="question-item" data-answer="e">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">The shop hasn't been in …………
+      <select class="match-select" onchange="selectMatch(this)">
+        <option value="">–</option>
+        <option value="a">A</option><option value="b">B</option><option value="c">C</option>
+        <option value="d">D</option><option value="e">E</option><option value="f">F</option>
+        <option value="g">G</option><option value="h">H</option><option value="i">I</option>
+        <option value="j">J</option>
+      </select></span>
+      <div class="answer-reveal">✓ E – business long (not in business long)</div>
+    </li>
+    <li class="question-item" data-answer="f">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">I'm glad you're finally taking an interest …………
+      <select class="match-select" onchange="selectMatch(this)">
+        <option value="">–</option>
+        <option value="a">A</option><option value="b">B</option><option value="c">C</option>
+        <option value="d">D</option><option value="e">E</option><option value="f">F</option>
+        <option value="g">G</option><option value="h">H</option><option value="i">I</option>
+        <option value="j">J</option>
+      </select></span>
+      <div class="answer-reveal">✓ F – in your work (take an interest in)</div>
+    </li>
+    <li class="question-item" data-answer="i">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">Jason lives fairly near his place of …………
+      <select class="match-select" onchange="selectMatch(this)">
+        <option value="">–</option>
+        <option value="a">A</option><option value="b">B</option><option value="c">C</option>
+        <option value="d">D</option><option value="e">E</option><option value="f">F</option>
+        <option value="g">G</option><option value="h">H</option><option value="i">I</option>
+        <option value="j">J</option>
+      </select></span>
+      <div class="answer-reveal">✓ I – work, doesn't he? (place of work)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExMatch('d')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('d')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExMatch('d')">Reset</button>
+    <span class="score-display" id="score-d"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE E: Write one word ===== -->
+<div class="exercise" id="ex-e">
+  <div class="ex-header">
+    <div class="ex-title">Exercise E – Write one word in each gap</div>
+    <div class="ex-instruction">Phrases and collocations. Write one word in each gap.</div>
+  </div>
+  <ul class="question-list" id="ql-e">
+    <li class="question-item" data-answer="of">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Maybe you should write a letter <input type="text" placeholder="…" style="min-width:70px"> complaint to the manager.</span>
+      <div class="answer-reveal">✓ of (letter of complaint)</div>
+    </li>
+    <li class="question-item" data-answer="day">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">When was the last time you had a <input type="text" placeholder="…" style="min-width:80px"> off?</span>
+      <div class="answer-reveal">✓ day (a day off = a day not at work)</div>
+    </li>
+    <li class="question-item" data-answer="off">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Hardly had the police officer come <input type="text" placeholder="…" style="min-width:80px"> duty when he had to respond to an emergency.</span>
+      <div class="answer-reveal">✓ off (come off duty = finish a shift)</div>
+    </li>
+    <li class="question-item" data-answer="on">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">My dad's <input type="text" placeholder="…" style="min-width:70px"> work at the moment, I'm afraid. Can you call back later?</span>
+      <div class="answer-reveal">✓ on (on work / at work — both possible, but on work = busy)</div>
+    </li>
+    <li class="question-item" data-answer="attend">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">I am available to <input type="text" placeholder="…" style="min-width:100px"> an interview at your convenience.</span>
+      <div class="answer-reveal">✓ attend (attend an interview)</div>
+    </li>
+    <li class="question-item" data-answer="doing|in">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">He's been <input type="text" placeholder="…" style="min-width:80px"> this job for over thirty years.</span>
+      <div class="answer-reveal">✓ doing (he's been doing this job) / in (he's been in this job)</div>
+    </li>
+    <li class="question-item" data-answer="does">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Our company <input type="text" placeholder="…" style="min-width:80px"> a lot of business with Altech Industries.</span>
+      <div class="answer-reveal">✓ does (do business with)</div>
+    </li>
+    <li class="question-item" data-answer="with">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Sol's made an arrangement <input type="text" placeholder="…" style="min-width:80px"> the wholesalers to deliver more frequently in future.</span>
+      <div class="answer-reveal">✓ with (make an arrangement with sb)</div>
+    </li>
+    <li class="question-item" data-answer="in">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">June's got several years' experience <input type="text" placeholder="…" style="min-width:70px"> dealing with young children.</span>
+      <div class="answer-reveal">✓ in (experience in doing)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('e')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('e')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('e')">Reset</button>
+    <span class="score-display" id="score-e"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE F: MCQ – Word Patterns ===== -->
+<div class="exercise" id="ex-f">
+  <div class="ex-header">
+    <div class="ex-title">Exercise F – Choose the correct answer</div>
+    <div class="ex-instruction">Word patterns. Choose A, B, C or D.</div>
+  </div>
+  <ul class="question-list" id="ql-f">
+    <li class="question-item" data-answer="b">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Who is responsible ………… dealing with complaints?</span>
+      <div class="mcq-options">
+        <button class="mcq-btn" data-val="a" onclick="chooseMC(this)">A with</button>
+        <button class="mcq-btn" data-val="b" onclick="chooseMC(this)">B for</button>
+        <button class="mcq-btn" data-val="c" onclick="chooseMC(this)">C in</button>
+        <button class="mcq-btn" data-val="d" onclick="chooseMC(this)">D at</button>
+      </div>
+      <div class="answer-reveal">✓ B for (responsible for doing)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">We began ………… looking round for advertising agencies which had experience of our market.</span>
+      <div class="mcq-options">
+        <button class="mcq-btn" data-val="a" onclick="chooseMC(this)">A to</button>
+        <button class="mcq-btn" data-val="b" onclick="chooseMC(this)">B with</button>
+        <button class="mcq-btn" data-val="c" onclick="chooseMC(this)">C by</button>
+        <button class="mcq-btn" data-val="d" onclick="chooseMC(this)">D at</button>
+      </div>
+      <div class="answer-reveal">✓ A to (begin to do / begin by doing — here "to" fits "began to look")</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">The covering letter wasn't attached ………… the CV.</span>
+      <div class="mcq-options">
+        <button class="mcq-btn" data-val="a" onclick="chooseMC(this)">A to</button>
+        <button class="mcq-btn" data-val="b" onclick="chooseMC(this)">B with</button>
+        <button class="mcq-btn" data-val="c" onclick="chooseMC(this)">C from</button>
+        <button class="mcq-btn" data-val="d" onclick="chooseMC(this)">D by</button>
+      </div>
+      <div class="answer-reveal">✓ A to (attached to)</div>
+    </li>
+    <li class="question-item" data-answer="d">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Don't you think you should apply for the job ………… writing?</span>
+      <div class="mcq-options">
+        <button class="mcq-btn" data-val="a" onclick="chooseMC(this)">A with</button>
+        <button class="mcq-btn" data-val="b" onclick="chooseMC(this)">B for</button>
+        <button class="mcq-btn" data-val="c" onclick="chooseMC(this)">C at</button>
+        <button class="mcq-btn" data-val="d" onclick="chooseMC(this)">D in</button>
+      </div>
+      <div class="answer-reveal">✓ D in (apply in writing)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">I was only absent ………… the office for a few minutes!</span>
+      <div class="mcq-options">
+        <button class="mcq-btn" data-val="a" onclick="chooseMC(this)">A for</button>
+        <button class="mcq-btn" data-val="b" onclick="chooseMC(this)">B from</button>
+        <button class="mcq-btn" data-val="c" onclick="chooseMC(this)">C in</button>
+        <button class="mcq-btn" data-val="d" onclick="chooseMC(this)">D about</button>
+      </div>
+      <div class="answer-reveal">✓ B from (absent from)</div>
+    </li>
+    <li class="question-item" data-answer="d">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Success in this industry depends a lot ………… luck!</span>
+      <div class="mcq-options">
+        <button class="mcq-btn" data-val="a" onclick="chooseMC(this)">A with</button>
+        <button class="mcq-btn" data-val="b" onclick="chooseMC(this)">B from</button>
+        <button class="mcq-btn" data-val="c" onclick="chooseMC(this)">C at</button>
+        <button class="mcq-btn" data-val="d" onclick="chooseMC(this)">D on</button>
+      </div>
+      <div class="answer-reveal">✓ D on (depend on)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExMC('f')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('f')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('f')">Reset</button>
+    <span class="score-display" id="score-f"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE G: Cross out incorrect word ===== -->
+<div class="exercise" id="ex-g">
+  <div class="ex-header">
+    <div class="ex-title">Exercise G – Cross out the incorrect word and write the correct word</div>
+    <div class="ex-instruction">Word patterns. Find the incorrect word in each sentence and write the correct word in the box.</div>
+  </div>
+  <ul class="question-list" id="ql-g">
+    <li class="question-item" data-answer="at">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Sadie's quite good <u>in</u> typing. <input type="text" placeholder="correct word" style="min-width:90px"></span>
+      <div class="answer-reveal">✓ at (good at sth)</div>
+    </li>
+    <li class="question-item" data-answer="as">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Jimmy qualified <u>at</u> a doctor a couple of years ago. <input type="text" placeholder="correct word" style="min-width:90px"></span>
+      <div class="answer-reveal">✓ as (qualify as a doctor)</div>
+    </li>
+    <li class="question-item" data-answer="as">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">You need to be good at languages to work <u>in</u> an interpreter. <input type="text" placeholder="correct word" style="min-width:90px"></span>
+      <div class="answer-reveal">✓ as (work as an interpreter)</div>
+    </li>
+    <li class="question-item" data-answer="for">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">It'll be good <u>that</u> Rudy to get some work experience this summer. <input type="text" placeholder="correct word" style="min-width:90px"></span>
+      <div class="answer-reveal">✓ for (good for sb to do)</div>
+    </li>
+    <li class="question-item" data-answer="in|at">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">You've got to be experienced <u>from</u> dealing with difficult authors if you want to be an editor. <input type="text" placeholder="correct word" style="min-width:90px"></span>
+      <div class="answer-reveal">✓ in (experienced in doing)</div>
+    </li>
+    <li class="question-item" data-answer="in">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">We specialise <u>for</u> manufacturing tiles for the building industry. <input type="text" placeholder="correct word" style="min-width:90px"></span>
+      <div class="answer-reveal">✓ in (specialise in doing)</div>
+    </li>
+    <li class="question-item" data-answer="in">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">After qualifying <u>as</u> veterinary medicine, she decided to move to Yorkshire. <input type="text" placeholder="correct word" style="min-width:90px"></span>
+      <div class="answer-reveal">✓ in (qualify in a subject/field)</div>
+    </li>
+    <li class="question-item" data-answer="in">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">I'd love to work <u>as</u> advertising. <input type="text" placeholder="correct word" style="min-width:90px"></span>
+      <div class="answer-reveal">✓ in (work in advertising)</div>
+    </li>
+    <li class="question-item" data-answer="to">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">Joanne is training <u>for</u> become a trapeze artist at the moment! <input type="text" placeholder="correct word" style="min-width:90px"></span>
+      <div class="answer-reveal">✓ to (training to become)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('g')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('g')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('g')">Reset</button>
+    <span class="score-display" id="score-g"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE H: Word Formation – sentences ===== -->
+<div class="exercise" id="ex-h">
+  <div class="ex-header">
+    <div class="ex-title">Exercise H – Complete by changing the form of the word in capitals</div>
+    <div class="ex-instruction">Word formation. Change the form of the word in capitals to fit each sentence.</div>
+  </div>
+  <ul class="question-list" id="ql-h">
+    <li class="question-item" data-answer="machinery">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">All the heavy <input type="text" placeholder="…" style="min-width:130px"> <span class="cap-word">MACHINE</span> in the factory has been manufactured on site.</span>
+      <div class="answer-reveal">✓ machinery</div>
+    </li>
+    <li class="question-item" data-answer="works">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Al is a manager at the local water <input type="text" placeholder="…" style="min-width:110px"> <span class="cap-word">WORK</span>.</span>
+      <div class="answer-reveal">✓ works (waterworks)</div>
+    </li>
+    <li class="question-item" data-answer="industrial">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">An <input type="text" placeholder="…" style="min-width:120px"> <span class="cap-word">INDUSTRY</span> dispute is threatening to delay production of the new car.</span>
+      <div class="answer-reveal">✓ industrial</div>
+    </li>
+    <li class="question-item" data-answer="supervision">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">We work under close <input type="text" placeholder="…" style="min-width:130px"> <span class="cap-word">SUPERVISE</span>, so there's not much opportunity for initiative.</span>
+      <div class="answer-reveal">✓ supervision</div>
+    </li>
+    <li class="question-item" data-answer="workers">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Farm <input type="text" placeholder="…" style="min-width:110px"> <span class="cap-word">WORK</span> in Belgium have accepted a 5% pay increase.</span>
+      <div class="answer-reveal">✓ workers</div>
+    </li>
+    <li class="question-item" data-answer="additional">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">There'll be an <input type="text" placeholder="…" style="min-width:120px"> <span class="cap-word">ADD</span> charge of €30 for delivery.</span>
+      <div class="answer-reveal">✓ additional</div>
+    </li>
+    <li class="question-item" data-answer="commercial">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Supersonic planes have never been a <input type="text" placeholder="…" style="min-width:130px"> <span class="cap-word">COMMERCE</span> success.</span>
+      <div class="answer-reveal">✓ commercial</div>
+    </li>
+    <li class="question-item" data-answer="dedication">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">We couldn't have built this new train without the <input type="text" placeholder="…" style="min-width:130px"> <span class="cap-word">DEDICATE</span> and expertise of the entire workforce.</span>
+      <div class="answer-reveal">✓ dedication</div>
+    </li>
+    <li class="question-item" data-answer="unworkable">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">The plan is completely <input type="text" placeholder="…" style="min-width:130px"> <span class="cap-word">WORK</span>. Let's just forget it!</span>
+      <div class="answer-reveal">✓ unworkable</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('h')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('h')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('h')">Reset</button>
+    <span class="score-display" id="score-h"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE I: Word Formation Passage "Job fairs" ===== -->
+<div class="exercise" id="ex-i">
+  <div class="ex-header">
+    <div class="ex-title">Exercise I – Complete the text by changing the form of the word in brackets</div>
+    <div class="ex-instruction">Word formation passage. Change the form of each word in brackets to fit the gap.</div>
+  </div>
+  <div class="passage-container" id="ql-i">
+    <div class="passage-title">Job fairs</div>
+    <p class="passage-line">Although a certain percentage of graduates will still be (1) <input type="text" class="passage-input" data-answer="unemployed" placeholder="…"> <strong>(employ)</strong> six months after leaving university, the majority will have found (2) <input type="text" class="passage-input" data-answer="employment" placeholder="…"> <strong>(employ)</strong> by then. Many of these will even have been offered a job while at university, as a result of visiting a job fair.</p>
+    <p class="passage-line">Job fairs are held at many universities each year. Companies come along to advertise jobs, which are usually in (3) <input type="text" class="passage-input" data-answer="management" placeholder="…"> <strong>(manage)</strong>, and the career structures and benefit packages that go with them. Job fairs are an (4) <input type="text" class="passage-input" data-answer="effective" placeholder="…"> <strong>(effect)</strong> way for undergraduates to find out what kind of job they might be interested in.</p>
+    <p class="passage-line">If you go to a job fair, dress (5) <input type="text" class="passage-input" data-answer="professionally" placeholder="…"> <strong>(profession)</strong>. Don't wear jeans and a T-shirt. Wear a suit! You don't want to look (6) <input type="text" class="passage-input" data-answer="irresponsible" placeholder="…"> <strong>(responsible)</strong> when you have your first (7) <input type="text" class="passage-input" data-answer="meeting" placeholder="…"> <strong>(meet)</strong> with your potential (8) <input type="text" class="passage-input" data-answer="employer" placeholder="…"> <strong>(employ)</strong>. If you're interested in a job on offer, you may have to fill out an (9) <input type="text" class="passage-input" data-answer="application" placeholder="…"> <strong>(apply)</strong> form, so it's (10) <input type="text" class="passage-input" data-answer="helpful" placeholder="…"> <strong>(help)</strong> to take along relevant information with you. You'll also need proof of all your (11) <input type="text" class="passage-input" data-answer="qualifications" placeholder="…"> <strong>(qualify)</strong>, so don't forget to take photocopies of all your certificates with you.</p>
+    <div class="answer-reveal" style="margin-top:10px">
+      ✓ (1) unemployed &nbsp;(2) employment &nbsp;(3) management &nbsp;(4) effective &nbsp;(5) professionally &nbsp;(6) irresponsible &nbsp;(7) meeting &nbsp;(8) employer &nbsp;(9) application &nbsp;(10) helpful &nbsp;(11) qualifications
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExPassage('i')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('i')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('i')">Reset</button>
+    <span class="score-display" id="score-i"></span>
+  </div>
+</div>
+
+</div><!-- end .content -->
+
+<script>
+const tabs = ['a','b','c','d','e','f','g','h','i'];
+
+function normalize(s) {
+  return s.trim().toLowerCase().replace(/[.!?,;]+$/, '');
+}
+
+function switchTab(id) {
+  tabs.forEach(t => {
+    const ex = document.getElementById('ex-' + t);
+    const btn = document.querySelector(`.tab-btn[onclick="switchTab('${t}')"]`);
+    if (ex) ex.classList.toggle('active', t === id);
+    if (btn) btn.classList.toggle('active', t === id);
+  });
+}
+
+function chooseBtn(btn) {
+  const group = btn.closest('.two-choice-btns');
+  group.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function chooseMC(btn) {
+  const item = btn.closest('.question-item');
+  item.querySelectorAll('.mcq-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function selectMatch(sel) {
+  // just store value in select, no extra toggle needed
+}
+
+function useWord(chip) {
+  chip.classList.toggle('used');
+}
+
+function updateScore(exId, correct, total) {
+  const el = document.getElementById('score-' + exId);
+  if (!el) return;
+  el.textContent = correct + ' / ' + total;
+  el.classList.add('visible');
+  el.classList.toggle('perfect', correct === total);
+  const btn = document.querySelector(`.tab-btn[onclick="switchTab('${exId}')"]`);
+  if (btn) {
+    let badge = btn.querySelector('.tab-badge');
+    if (!badge) { badge = document.createElement('span'); badge.className = 'tab-badge'; btn.appendChild(badge); }
+    badge.textContent = correct + '/' + total;
+    badge.classList.toggle('perfect', correct === total);
+  }
+}
+
+function checkExMC(exId) {
+  const items = document.querySelectorAll('#ql-' + exId + ' .question-item');
+  let correct = 0;
+  items.forEach(item => {
+    const ans = item.dataset.answer;
+    const selected = item.querySelector('.choice-btn.selected, .mcq-btn.selected');
+    item.classList.remove('correct', 'wrong');
+    if (!selected) { item.classList.add('wrong'); return; }
+    if (selected.dataset.val === ans) {
+      correct++; item.classList.add('correct'); selected.classList.add('correct');
+    } else {
+      item.classList.add('wrong'); selected.classList.add('wrong');
+    }
+  });
+  updateScore(exId, correct, items.length);
+}
+
+function checkExText(exId) {
+  const items = document.querySelectorAll('#ql-' + exId + ' .question-item');
+  let correct = 0;
+  items.forEach(item => {
+    const input = item.querySelector('input[type="text"]');
+    if (!input) return;
+    const ans = item.dataset.answer || '';
+    const alternatives = ans.split('|').map(a => normalize(a));
+    item.classList.remove('correct', 'wrong');
+    input.classList.remove('correct', 'wrong');
+    if (alternatives.includes(normalize(input.value))) {
+      correct++; item.classList.add('correct'); input.classList.add('correct');
+    } else {
+      item.classList.add('wrong'); input.classList.add('wrong');
+    }
+  });
+  updateScore(exId, correct, items.length);
+}
+
+function checkExMatch(exId) {
+  const items = document.querySelectorAll('#ql-' + exId + ' .question-item');
+  let correct = 0;
+  items.forEach(item => {
+    const ans = item.dataset.answer;
+    const sel = item.querySelector('.match-select');
+    item.classList.remove('correct', 'wrong');
+    if (sel) sel.classList.remove('correct', 'wrong');
+    if (!sel || !sel.value) { item.classList.add('wrong'); return; }
+    if (sel.value === ans) {
+      correct++; item.classList.add('correct'); sel.classList.add('correct');
+    } else {
+      item.classList.add('wrong'); sel.classList.add('wrong');
+    }
+  });
+  updateScore(exId, correct, items.length);
+}
+
+function checkExPassage(exId) {
+  const container = document.getElementById('ql-' + exId);
+  if (!container) return;
+  const inputs = container.querySelectorAll('input[type="text"]');
+  let correct = 0;
+  inputs.forEach(inp => {
+    const ans = inp.dataset.answer || '';
+    const alternatives = ans.split('|').map(a => normalize(a));
+    inp.classList.remove('correct', 'wrong');
+    if (alternatives.includes(normalize(inp.value))) {
+      correct++; inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+    }
+  });
+  updateScore(exId, correct, inputs.length);
+}
+
+function resetEx(exId) {
+  const items = document.querySelectorAll('#ql-' + exId + ' .question-item');
+  items.forEach(item => {
+    item.classList.remove('correct', 'wrong');
+    item.querySelectorAll('input[type="text"]').forEach(i => { i.value = ''; i.classList.remove('correct','wrong'); });
+    item.querySelectorAll('.choice-btn, .mcq-btn').forEach(b => b.classList.remove('selected','correct','wrong'));
+    item.querySelectorAll('.match-select').forEach(s => { s.value = ''; s.classList.remove('correct','wrong'); });
+  });
+  const score = document.getElementById('score-' + exId);
+  if (score) { score.textContent = ''; score.classList.remove('visible','perfect'); }
+  const ex = document.getElementById('ex-' + exId);
+  if (ex) ex.classList.remove('show-answers');
+}
+
+function resetExMatch(exId) {
+  resetEx(exId);
+}
+
+function resetExPassage(exId) {
+  const container = document.getElementById('ql-' + exId);
+  if (container) container.querySelectorAll('input[type="text"]').forEach(i => { i.value = ''; i.classList.remove('correct','wrong'); });
+  const score = document.getElementById('score-' + exId);
+  if (score) { score.textContent = ''; score.classList.remove('visible','perfect'); }
+  const ex = document.getElementById('ex-' + exId);
+  if (ex) ex.classList.remove('show-answers');
+}
+
+function showAnswers(exId) {
+  const ex = document.getElementById('ex-' + exId);
+  if (ex) ex.classList.toggle('show-answers');
+}
+</script>
+</body>
+</html>

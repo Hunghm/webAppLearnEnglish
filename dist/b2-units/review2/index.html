@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review 2 – Units 3 &amp; 4</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #333; min-height: 100vh; }
+
+  .header { background: #1565C0; color: white; padding: 16px 20px; text-align: center; }
+  .header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+  .header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+
+  .tab-bar { display: flex; background: #1976D2; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 1; min-width: 48px; padding: 12px 8px; border: none; background: transparent;
+    color: rgba(255,255,255,0.7); font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap;
+  }
+  .tab-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+  .tab-btn.active { color: white; border-bottom-color: #FFD600; }
+
+  .content { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+  .exercise { display: none; }
+  .exercise.active { display: block; }
+
+  .ex-header { margin-bottom: 16px; }
+  .ex-title { font-size: 1.1rem; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+  .ex-instruction { font-size: 0.9rem; color: #555; background: #E3F2FD; border-left: 4px solid #2196F3; padding: 8px 12px; border-radius: 0 6px 6px 0; }
+
+  .question-list { list-style: none; }
+  .question-item {
+    background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s;
+  }
+  .question-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .question-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+
+  .q-num { font-weight: 700; color: #1976D2; margin-right: 6px; }
+  .q-sentence { line-height: 1.9; }
+
+  input[type="text"] {
+    border: 2px solid #BBDEFB; border-radius: 6px; padding: 5px 10px;
+    font-size: 0.95rem; outline: none; background: #FAFAFA; transition: border .2s; min-width: 100px;
+  }
+  input[type="text"]:focus { border-color: #2196F3; background: white; }
+  input[type="text"].correct { border-color: #4CAF50; background: #F1F8E9; color: #2E7D32; }
+  input[type="text"].wrong { border-color: #F44336; background: #FFF5F5; color: #C62828; }
+
+  /* Passage fill */
+  .passage-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .passage-title { font-weight: 700; text-align: center; margin-bottom: 12px; font-size: 1rem; }
+  .passage-line { margin-bottom: 10px; line-height: 2.2; }
+  .gap-num { font-weight: 700; color: #1976D2; font-size: 0.82rem; }
+  .passage-input { min-width: 130px; width: 150px; }
+  .word-cap { font-weight: 700; font-style: italic; color: #555; margin-left: 6px; font-size: 0.85rem; }
+
+  /* Matching (Ex B) */
+  .options-box { background: #E8EAF6; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; }
+  .options-box p { font-weight: 700; color: #3949AB; margin-bottom: 8px; }
+  .option-row { font-size: 0.9rem; margin-bottom: 4px; }
+  .opt-label { font-weight: 700; color: #1976D2; margin-right: 6px; }
+
+  .match-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .match-btn {
+    border: 2px solid #90CAF9; background: white; border-radius: 6px;
+    width: 36px; height: 36px; font-size: 0.9rem; font-weight: 700; cursor: pointer;
+    transition: all .2s; color: #1565C0; display: flex; align-items: center; justify-content: center;
+  }
+  .match-btn:hover { background: #E3F2FD; }
+  .match-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .match-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .match-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+
+  /* Key word transform */
+  .kw-first { font-size: 0.93rem; color: #333; margin-bottom: 6px; line-height: 1.6; }
+  .kw-keyword { font-weight: 700; color: #E65100; background: #FFF3E0; padding: 2px 8px; border-radius: 4px; margin-left: 6px; }
+  .kw-second { font-size: 0.93rem; line-height: 2; }
+  .kw-input { min-width: 200px; width: 260px; }
+
+  /* MC4 */
+  .mc4-options { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+  .mc4-btn {
+    border: 2px solid #BBDEFB; background: white; border-radius: 6px;
+    padding: 6px 14px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #333; text-align: left;
+  }
+  .mc4-btn:hover { background: #E3F2FD; }
+  .mc4-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .mc4-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .mc4-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+  .mc4-label { font-weight: 700; margin-right: 8px; }
+
+  /* Answer reveal */
+  .answer-reveal { font-size: 0.82rem; color: #388E3C; margin-top: 6px; display: none; font-style: italic; }
+  .show-answers .answer-reveal { display: block; }
+
+  /* Action bar */
+  .action-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+  .btn { padding: 10px 22px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-check { background: #2196F3; color: white; }
+  .btn-check:hover { background: #1976D2; }
+  .btn-reset { background: #FF9800; color: white; }
+  .btn-reset:hover { background: #F57C00; }
+  .btn-show { background: #9C27B0; color: white; }
+  .btn-show:hover { background: #7B1FA2; }
+
+  .score-display { font-size: 1rem; font-weight: 700; padding: 8px 16px; border-radius: 8px; background: #E8F5E9; color: #2E7D32; display: none; }
+  .score-display.visible { display: inline-block; }
+  .score-display.perfect { background: #4CAF50; color: white; }
+
+  @media (max-width: 500px) {
+    .tab-btn { font-size: 0.8rem; padding: 10px 4px; }
+    .content { padding: 12px 10px 50px; }
+    .kw-input { width: 180px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Review 2 – Units 3 &amp; 4</h1>
+  <p>5 exercises · 50 marks · Click a tab to start</p>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('a')">A</button>
+  <button class="tab-btn" onclick="switchTab('b')">B</button>
+  <button class="tab-btn" onclick="switchTab('c')">C</button>
+  <button class="tab-btn" onclick="switchTab('d')">D</button>
+  <button class="tab-btn" onclick="switchTab('e')">E</button>
+</div>
+
+<div class="content">
+
+  <!-- ===== EXERCISE A: Word Formation Passage ===== -->
+  <div class="exercise active" id="ex-a">
+    <div class="ex-header">
+      <div class="ex-title">Exercise A – Word Formation <span style="font-size:0.8rem;color:#888">(1 mark each)</span></div>
+      <div class="ex-instruction">Use the word given in capitals at the end of each line to form a word that fits in the gap in the same line.</div>
+    </div>
+    <div class="passage-container" id="ql-a">
+      <div class="passage-title">A new hobby</div>
+      <div class="passage-line" data-answer="interesting">
+        I saw some badminton on TV and found it quite (1) <input type="text" class="passage-input ex-a-input" data-answer="interesting" placeholder="…">, so I
+        <span class="word-cap">INTEREST</span>
+        <div class="answer-reveal">✓ interesting</div>
+      </div>
+      <div class="passage-line" data-answer="association">
+        thought I'd see if there was a club or (2) <input type="text" class="passage-input ex-a-input" data-answer="association" placeholder="…"> in my area. I looked
+        <span class="word-cap">ASSOCIATE</span>
+        <div class="answer-reveal">✓ association</div>
+      </div>
+      <div class="passage-line" data-answer="fortunately">
+        everywhere but, (3) <input type="text" class="passage-input ex-a-input" data-answer="fortunately" placeholder="…">, the nearest club was 80 kilometres
+        <span class="word-cap">FORTUNE</span>
+        <div class="answer-reveal">✓ fortunately</div>
+      </div>
+      <div class="passage-line" data-answer="knowledge">
+        away. So, without any (4) <input type="text" class="passage-input ex-a-input" data-answer="knowledge" placeholder="…">, I decided to form my own club.
+        <span class="word-cap">KNOW</span>
+        <div class="answer-reveal">✓ knowledge</div>
+      </div>
+      <div class="passage-line" data-answer="equipment">
+        It was very hard in the beginning – I didn't have any (5) <input type="text" class="passage-input ex-a-input" data-answer="equipment" placeholder="…"> and I
+        <span class="word-cap">EQUIP</span>
+        <div class="answer-reveal">✓ equipment</div>
+      </div>
+      <div class="passage-line" data-answer="enjoyable">
+        had to convince a few people that it was an (6) <input type="text" class="passage-input ex-a-input" data-answer="enjoyable" placeholder="…"> way to keep
+        <span class="word-cap">ENJOY</span>
+        <div class="answer-reveal">✓ enjoyable</div>
+      </div>
+      <div class="passage-line" data-answer="competition">
+        fit. I organised a small (7) <input type="text" class="passage-input ex-a-input" data-answer="competition" placeholder="…">, which was a lot of fun, and things
+        <span class="word-cap">COMPETE</span>
+        <div class="answer-reveal">✓ competition</div>
+      </div>
+      <div class="passage-line" data-answer="trainer">
+        started to grow from there. Now we've got a full-time (8) <input type="text" class="passage-input ex-a-input" data-answer="trainer" placeholder="…"> and
+        <span class="word-cap">TRAIN</span>
+        <div class="answer-reveal">✓ trainer</div>
+      </div>
+      <div class="passage-line" data-answer="opponents">
+        our (9) <input type="text" class="passage-input ex-a-input" data-answer="opponents" placeholder="…"> come from all over the country. One of our members
+        <span class="word-cap">OPPOSE</span>
+        <div class="answer-reveal">✓ opponents</div>
+      </div>
+      <div class="passage-line" data-answer="medallist">
+        was even a bronze (10) <input type="text" class="passage-input ex-a-input" data-answer="medallist" placeholder="…"> in the national championship!
+        <span class="word-cap">MEDAL</span>
+        <div class="answer-reveal">✓ medallist</div>
+      </div>
+    </div>
+    <div class="action-bar">
+      <button class="btn btn-check" onclick="checkEx('a')">Check Answers</button>
+      <button class="btn btn-show" onclick="showAnswers('a')">Show Answers</button>
+      <button class="btn btn-reset" onclick="resetEx('a')">Reset</button>
+      <span class="score-display" id="score-a"></span>
+    </div>
+  </div>
+
+  <!-- ===== EXERCISE B: Matching ===== -->
+  <div class="exercise" id="ex-b">
+    <div class="ex-header">
+      <div class="ex-title">Exercise B – Match to Make Sentences <span style="font-size:0.8rem;color:#888">(1 mark each)</span></div>
+      <div class="ex-instruction">Match each sentence beginning (11–18) with the correct ending (A–H).</div>
+    </div>
+    <div class="options-box">
+      <p>Options:</p>
+      <div class="option-row"><span class="opt-label">A</span>up a martial art, to defend yourself.</div>
+      <div class="option-row"><span class="opt-label">B</span>to swimming as soon as she tried it.</div>
+      <div class="option-row"><span class="opt-label">C</span>out in the second round of the competition.</div>
+      <div class="option-row"><span class="opt-label">D</span>out of the race because of a last minute injury.</div>
+      <div class="option-row"><span class="opt-label">E</span>on with the activity while he answered the phone.</div>
+      <div class="option-row"><span class="opt-label">F</span>off team sports lately.</div>
+      <div class="option-row"><span class="opt-label">G</span>the race forward by a week.</div>
+      <div class="option-row"><span class="opt-label">H</span>up with people who cheat at games.</div>
+    </div>
+    <ul class="question-list" id="ql-b">
+      <li class="question-item" data-answer="H">
+        <span class="q-num">11.</span>
+        <span class="q-sentence">I refuse to put …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button>
+          <button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button>
+          <button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button>
+          <button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button>
+          <button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button>
+          <button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button>
+          <button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button>
+          <button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ H – up with people who cheat at games.</div>
+      </li>
+      <li class="question-item" data-answer="C">
+        <span class="q-num">12.</span>
+        <span class="q-sentence">The current champion was knocked …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button>
+          <button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button>
+          <button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button>
+          <button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button>
+          <button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button>
+          <button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button>
+          <button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button>
+          <button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ C – out in the second round of the competition.</div>
+      </li>
+      <li class="question-item" data-answer="F">
+        <span class="q-num">13.</span>
+        <span class="q-sentence">I used to love basketball, but I've gone …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button>
+          <button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button>
+          <button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button>
+          <button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button>
+          <button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button>
+          <button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button>
+          <button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button>
+          <button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ F – off team sports lately.</div>
+      </li>
+      <li class="question-item" data-answer="E">
+        <span class="q-num">14.</span>
+        <span class="q-sentence">The trainer asked us to carry …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button>
+          <button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button>
+          <button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button>
+          <button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button>
+          <button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button>
+          <button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button>
+          <button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button>
+          <button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ E – on with the activity while he answered the phone.</div>
+      </li>
+      <li class="question-item" data-answer="G">
+        <span class="q-num">15.</span>
+        <span class="q-sentence">The organisers had to bring …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button>
+          <button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button>
+          <button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button>
+          <button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button>
+          <button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button>
+          <button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button>
+          <button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button>
+          <button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ G – the race forward by a week.</div>
+      </li>
+      <li class="question-item" data-answer="A">
+        <span class="q-num">16.</span>
+        <span class="q-sentence">You should think about taking …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button>
+          <button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button>
+          <button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button>
+          <button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button>
+          <button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button>
+          <button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button>
+          <button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button>
+          <button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ A – up a martial art, to defend yourself.</div>
+      </li>
+      <li class="question-item" data-answer="B">
+        <span class="q-num">17.</span>
+        <span class="q-sentence">Although she was very young, Olivia took …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button>
+          <button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button>
+          <button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button>
+          <button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button>
+          <button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button>
+          <button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button>
+          <button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button>
+          <button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ B – to swimming as soon as she tried it.</div>
+      </li>
+      <li class="question-item" data-answer="D">
+        <span class="q-num">18.</span>
+        <span class="q-sentence">Rob had to pull …</span>
+        <div class="match-btns">
+          <button class="match-btn" data-val="A" onclick="chooseMatch(this)">A</button>
+          <button class="match-btn" data-val="B" onclick="chooseMatch(this)">B</button>
+          <button class="match-btn" data-val="C" onclick="chooseMatch(this)">C</button>
+          <button class="match-btn" data-val="D" onclick="chooseMatch(this)">D</button>
+          <button class="match-btn" data-val="E" onclick="chooseMatch(this)">E</button>
+          <button class="match-btn" data-val="F" onclick="chooseMatch(this)">F</button>
+          <button class="match-btn" data-val="G" onclick="chooseMatch(this)">G</button>
+          <button class="match-btn" data-val="H" onclick="chooseMatch(this)">H</button>
+        </div>
+        <div class="answer-reveal">✓ D – out of the race because of a last minute injury.</div>
+      </li>
+    </ul>
+    <div class="action-bar">
+      <button class="btn btn-check" onclick="checkEx('b')">Check Answers</button>
+      <button class="btn btn-show" onclick="showAnswers('b')">Show Answers</button>
+      <button class="btn btn-reset" onclick="resetEx('b')">Reset</button>
+      <span class="score-display" id="score-b"></span>
+    </div>
+  </div>
+
+  <!-- ===== EXERCISE C: Key Word Transformation ===== -->
+  <div class="exercise" id="ex-c">
+    <div class="ex-header">
+      <div class="ex-title">Exercise C – Key Word Transformation <span style="font-size:0.8rem;color:#888">(2 marks each)</span></div>
+      <div class="ex-instruction">Complete each second sentence using the word given, so that it has a similar meaning to the first sentence. Write between two and five words in each gap.</div>
+    </div>
+    <ul class="question-list" id="ql-c">
+
+      <li class="question-item" data-answer="had been playing for">
+        <span class="q-num">19.</span>
+        <div class="kw-first">Our tennis match started at one o'clock and we were still playing at four. <span class="kw-keyword">been</span></div>
+        <div class="kw-second">At four o'clock, we <input type="text" class="ex-c-input kw-input" placeholder="…"> three hours.</div>
+        <div class="answer-reveal">✓ had been playing for</div>
+      </li>
+
+      <li class="question-item" data-answer="didn't use to spend|did not use to spend">
+        <span class="q-num">20.</span>
+        <div class="kw-first">Terry never used to spend so much time playing on his computer. <span class="kw-keyword">use</span></div>
+        <div class="kw-second">Terry <input type="text" class="ex-c-input kw-input" placeholder="…"> so much time playing on his computer.</div>
+        <div class="answer-reveal">✓ didn't use to spend</div>
+      </li>
+
+      <li class="question-item" data-answer="make certain that|be certain that|make sure that|be sure that">
+        <span class="q-num">21.</span>
+        <div class="kw-first">Before we play, check all the cards are there. <span class="kw-keyword">certain</span></div>
+        <div class="kw-second">Before we play, <input type="text" class="ex-c-input kw-input" placeholder="…"> all the cards are there.</div>
+        <div class="answer-reveal">✓ make certain that</div>
+      </li>
+
+      <li class="question-item" data-answer="get used to|get used to doing">
+        <span class="q-num">22.</span>
+        <div class="kw-first">Hang-gliding can be dangerous, but after a while you don't mind it. <span class="kw-keyword">used</span></div>
+        <div class="kw-second">Hang-gliding can be dangerous, but after a while you <input type="text" class="ex-c-input kw-input" placeholder="…"> it.</div>
+        <div class="answer-reveal">✓ get used to</div>
+      </li>
+
+      <li class="question-item" data-answer="had already run">
+        <span class="q-num">23.</span>
+        <div class="kw-first">I ran fifteen miles, and then my trainer told me to do fifty push-ups! <span class="kw-keyword">already</span></div>
+        <div class="kw-second">When my trainer told me to do fifty push-ups, I <input type="text" class="ex-c-input kw-input" placeholder="…"> fifteen miles!</div>
+        <div class="answer-reveal">✓ had already run</div>
+      </li>
+
+      <li class="question-item" data-answer="didn't use to spend|did not use to spend|wouldn't spend">
+        <span class="q-num">24.</span>
+        <div class="kw-first">We wouldn't spend so much time indoors when I was young. <span class="kw-keyword">used</span></div>
+        <div class="kw-second">We <input type="text" class="ex-c-input kw-input" placeholder="…"> so much time indoors when I was young.</div>
+        <div class="answer-reveal">✓ didn't use to spend</div>
+      </li>
+
+      <li class="question-item" data-answer="take up a lot of">
+        <span class="q-num">25.</span>
+        <div class="kw-first">I spend a lot of my time on my hobbies. <span class="kw-keyword">up</span></div>
+        <div class="kw-second">My hobbies <input type="text" class="ex-c-input kw-input" placeholder="…"> my time.</div>
+        <div class="answer-reveal">✓ take up a lot of</div>
+      </li>
+
+      <li class="question-item" data-answer="prefer playing ludo to|prefer ludo to">
+        <span class="q-num">26.</span>
+        <div class="kw-first">I would rather play ludo than snakes and ladders. <span class="kw-keyword">prefer</span></div>
+        <div class="kw-second">I <input type="text" class="ex-c-input kw-input" placeholder="…"> snakes and ladders.</div>
+        <div class="answer-reveal">✓ prefer playing ludo to / prefer ludo to</div>
+      </li>
+
+      <li class="question-item" data-answer="little chance of winning|not much chance of winning|little chance of you winning">
+        <span class="q-num">27.</span>
+        <div class="kw-first">I don't think it's likely that you'll win the competition. <span class="kw-keyword">chance</span></div>
+        <div class="kw-second">I think there's <input type="text" class="ex-c-input kw-input" placeholder="…"> the competition.</div>
+        <div class="answer-reveal">✓ little chance of winning</div>
+      </li>
+
+    </ul>
+    <div class="action-bar">
+      <button class="btn btn-check" onclick="checkEx('c')">Check Answers</button>
+      <button class="btn btn-show" onclick="showAnswers('c')">Show Answers</button>
+      <button class="btn btn-reset" onclick="resetEx('c')">Reset</button>
+      <span class="score-display" id="score-c"></span>
+    </div>
+  </div>
+
+  <!-- ===== EXERCISE D: Multiple Choice (Grammar) ===== -->
+  <div class="exercise" id="ex-d">
+    <div class="ex-header">
+      <div class="ex-title">Exercise D – Choose the Correct Answer <span style="font-size:0.8rem;color:#888">(1 mark each)</span></div>
+      <div class="ex-instruction">Choose the correct answer.</div>
+    </div>
+    <ul class="question-list" id="ql-d">
+
+      <li class="question-item" data-answer="C">
+        <span class="q-num">28.</span>
+        <span class="q-sentence">'Why were you so tired yesterday?' 'Because I ……… all morning.'</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>jog</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>was jogged</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>had been jogging</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>had been jogged</button>
+        </div>
+        <div class="answer-reveal">✓ C – had been jogging (past perfect continuous)</div>
+      </li>
+
+      <li class="question-item" data-answer="C">
+        <span class="q-num">29.</span>
+        <span class="q-sentence">It was the first time I ……… a live match.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>was ever seeing</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>had ever been seeing</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>had ever seen</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>was ever seen</button>
+        </div>
+        <div class="answer-reveal">✓ C – had ever seen (first time + past perfect)</div>
+      </li>
+
+      <li class="question-item" data-answer="A">
+        <span class="q-num">30.</span>
+        <span class="q-sentence">'You live in a huge house, don't you?' 'Yes, but we ……… !'</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>didn't use to</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>wouldn't</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>use not</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>weren't used to</button>
+        </div>
+        <div class="answer-reveal">✓ A – didn't use to (past habit no longer true)</div>
+      </li>
+
+      <li class="question-item" data-answer="C">
+        <span class="q-num">31.</span>
+        <span class="q-sentence">I ……… the whole of War and Peace by the time I was seven years old.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>was reading</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>had been reading</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>had read</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>had been read</button>
+        </div>
+        <div class="answer-reveal">✓ C – had read (completed action before a past point)</div>
+      </li>
+
+      <li class="question-item" data-answer="A">
+        <span class="q-num">32.</span>
+        <span class="q-sentence">Karate hurt my hands at first, but I finally ……… it in the end.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>got used to</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>was used to</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>was used</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>got use to</button>
+        </div>
+        <div class="answer-reveal">✓ A – got used to (became accustomed to)</div>
+      </li>
+
+      <li class="question-item" data-answer="C">
+        <span class="q-num">33.</span>
+        <span class="q-sentence">I ……… for the match to begin when suddenly a dog ran onto the pitch.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>had waited</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>waited</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>was waiting</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>wait</button>
+        </div>
+        <div class="answer-reveal">✓ C – was waiting (past continuous interrupted by event)</div>
+      </li>
+
+      <li class="question-item" data-answer="B">
+        <span class="q-num">34.</span>
+        <span class="q-sentence">Before she retired, my grandma …… go for a run every morning before work.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>use to</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>would</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>got used to</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>was used to</button>
+        </div>
+        <div class="answer-reveal">✓ B – would (past habitual action)</div>
+      </li>
+
+    </ul>
+    <div class="action-bar">
+      <button class="btn btn-check" onclick="checkEx('d')">Check Answers</button>
+      <button class="btn btn-show" onclick="showAnswers('d')">Show Answers</button>
+      <button class="btn btn-reset" onclick="resetEx('d')">Reset</button>
+      <span class="score-display" id="score-d"></span>
+    </div>
+  </div>
+
+  <!-- ===== EXERCISE E: Multiple Choice (Vocabulary) ===== -->
+  <div class="exercise" id="ex-e">
+    <div class="ex-header">
+      <div class="ex-title">Exercise E – Choose the Correct Answer <span style="font-size:0.8rem;color:#888">(1 mark each)</span></div>
+      <div class="ex-instruction">Choose the correct answer.</div>
+    </div>
+    <ul class="question-list" id="ql-e">
+
+      <li class="question-item" data-answer="C">
+        <span class="q-num">35.</span>
+        <span class="q-sentence">The ……… in the stadium all cheered the athletes.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>viewers</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>witnesses</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>spectators</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>onlookers</button>
+        </div>
+        <div class="answer-reveal">✓ C – spectators (khán giả thể thao)</div>
+      </li>
+
+      <li class="question-item" data-answer="D">
+        <span class="q-num">36.</span>
+        <span class="q-sentence">I got a new baseball ……… yesterday.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>stick</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>club</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>racket</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>bat</button>
+        </div>
+        <div class="answer-reveal">✓ D – bat (gậy bóng chày)</div>
+      </li>
+
+      <li class="question-item" data-answer="C">
+        <span class="q-num">37.</span>
+        <span class="q-sentence">After a hard match, United managed to ……… with City, 1-1.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>equal</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>exact</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>draw</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>score</button>
+        </div>
+        <div class="answer-reveal">✓ C – draw (hòa)</div>
+      </li>
+
+      <li class="question-item" data-answer="A">
+        <span class="q-num">38.</span>
+        <span class="q-sentence">In this game, the players ……… it in turns to throw the dice.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>take</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>do</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>make</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>have</button>
+        </div>
+        <div class="answer-reveal">✓ A – take (take it in turns = lần lượt)</div>
+      </li>
+
+      <li class="question-item" data-answer="D">
+        <span class="q-num">39.</span>
+        <span class="q-sentence">It's nice to win, but the important thing is to ……… your best.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>make</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>take</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>have</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>do</button>
+        </div>
+        <div class="answer-reveal">✓ D – do (do your best = cố hết sức)</div>
+      </li>
+
+      <li class="question-item" data-answer="B">
+        <span class="q-num">40.</span>
+        <span class="q-sentence">Just ask them if you can play and I'm sure they'll let you ……… .</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>take up</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>join in</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>go off</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>take to</button>
+        </div>
+        <div class="answer-reveal">✓ B – join in (tham gia)</div>
+      </li>
+
+      <li class="question-item" data-answer="A">
+        <span class="q-num">41.</span>
+        <span class="q-sentence">Everyone expects Johnson to ……… Smith in today's final.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>beat</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>score</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>win</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>champion</button>
+        </div>
+        <div class="answer-reveal">✓ A – beat (đánh bại)</div>
+      </li>
+
+    </ul>
+    <div class="action-bar">
+      <button class="btn btn-check" onclick="checkEx('e')">Check Answers</button>
+      <button class="btn btn-show" onclick="showAnswers('e')">Show Answers</button>
+      <button class="btn btn-reset" onclick="resetEx('e')">Reset</button>
+      <span class="score-display" id="score-e"></span>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<script>
+const tabs = ['a','b','c','d','e'];
+
+function switchTab(id) {
+  document.querySelector('.exercise.active').classList.remove('active');
+  document.getElementById('ex-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', tabs[i] === id);
+  });
+}
+
+function chooseMC4(btn) {
+  const opts = btn.closest('.mc4-options').querySelectorAll('.mc4-btn');
+  opts.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function chooseMatch(btn) {
+  const btns = btn.closest('.match-btns').querySelectorAll('.match-btn');
+  btns.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function normalize(s) { return s.trim().toLowerCase().replace(/\s+/g,' '); }
+
+function checkEx(id) {
+  let correct = 0, total = 0;
+
+  if (id === 'a') {
+    document.querySelectorAll('#ql-a input[type="text"]').forEach(inp => {
+      total++;
+      const ok = normalize(inp.value) === normalize(inp.dataset.answer);
+      if (ok) correct++;
+      inp.classList.toggle('correct', ok);
+      inp.classList.toggle('wrong', !ok);
+      inp.closest('.passage-line').classList.toggle('correct', ok);
+      inp.closest('.passage-line').classList.toggle('wrong', !ok);
+    });
+  }
+
+  else if (id === 'b') {
+    document.querySelectorAll('#ql-b .question-item').forEach(item => {
+      total++;
+      const selected = item.querySelector('.match-btn.selected');
+      const ok = selected && selected.dataset.val === item.dataset.answer;
+      if (ok) correct++;
+      item.classList.toggle('correct', ok);
+      item.classList.toggle('wrong', !ok);
+      item.querySelectorAll('.match-btn').forEach(btn => {
+        btn.classList.remove('correct','wrong');
+        if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+        else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+      });
+    });
+  }
+
+  else if (id === 'c') {
+    document.querySelectorAll('#ql-c .question-item').forEach(item => {
+      total++;
+      const inp = item.querySelector('input[type="text"]');
+      const rawAnswers = item.dataset.answer.split('|');
+      const ok = rawAnswers.some(a => normalize(inp.value) === normalize(a));
+      if (ok) correct++;
+      item.classList.toggle('correct', ok);
+      item.classList.toggle('wrong', !ok);
+      inp.classList.toggle('correct', ok);
+      inp.classList.toggle('wrong', !ok);
+    });
+    showScore('c', correct, total, 2);
+    return;
+  }
+
+  else if (id === 'd' || id === 'e') {
+    document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+      total++;
+      const selected = item.querySelector('.mc4-btn.selected');
+      const ok = selected && selected.dataset.val === item.dataset.answer;
+      if (ok) correct++;
+      item.classList.toggle('correct', ok);
+      item.classList.toggle('wrong', !ok);
+      item.querySelectorAll('.mc4-btn').forEach(btn => {
+        btn.classList.remove('correct','wrong');
+        if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+        else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+      });
+    });
+  }
+
+  showScore(id, correct, total, 1);
+}
+
+function showScore(id, correct, total, marksEach) {
+  const score = correct * marksEach;
+  const maxScore = total * marksEach;
+  const el = document.getElementById('score-' + id);
+  el.textContent = score + ' / ' + maxScore;
+  el.classList.add('visible');
+  el.classList.toggle('perfect', score === maxScore);
+}
+
+function resetEx(id) {
+  const ex = document.getElementById('ex-' + id);
+  ex.querySelectorAll('input[type="text"]').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct','wrong');
+  });
+  ex.querySelectorAll('.question-item,.passage-line').forEach(item => {
+    item.classList.remove('correct','wrong');
+  });
+  ex.querySelectorAll('.mc4-btn,.match-btn').forEach(btn => {
+    btn.classList.remove('selected','correct','wrong');
+  });
+  document.getElementById('score-' + id).classList.remove('visible','perfect');
+  ex.classList.remove('show-answers');
+}
+
+function showAnswers(id) {
+  document.getElementById('ex-' + id).classList.add('show-answers');
+  if (id === 'a') {
+    document.querySelectorAll('#ql-a input[type="text"]').forEach(inp => {
+      if (!inp.value) inp.value = inp.dataset.answer;
+    });
+  }
+}
+</script>
+
+</body>
+</html>

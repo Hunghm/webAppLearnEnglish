@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Vietnamese font support ── */
+@layer base {
+  body {
+    font-family: 'Segoe UI', Tahoma, 'Liberation Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* ── Flashcard 3D Flip Animation ── */
+.flashcard-scene {
+  perspective: 1200px;
+}
+
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  will-change: transform;
+}
+
+.flashcard-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flashcard-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.flashcard-face--back {
+  transform: rotateY(180deg);
+}
+
+/* ── Page transitions ── */
+.page-enter {
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Safe bottom padding for mobile ── */
+.pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+/* ── Swipe card fly off animation ── */
+@keyframes flyLeft {
+  0%   { opacity: 1; }
+  100% { transform: translateX(-130%) rotate(-25deg); opacity: 0; }
+}
+@keyframes flyRight {
+  0%   { opacity: 1; }
+  100% { transform: translateX(130%) rotate(25deg); opacity: 0; }
+}
+
+.fly-left  { animation: flyLeft  0.32s cubic-bezier(0.4, 0, 1, 1) forwards; }
+.fly-right { animation: flyRight 0.32s cubic-bezier(0.4, 0, 1, 1) forwards; }
+
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }

@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find E:/androidStudioProject/webApp/src -name *b2* -o -name *B2*)",
+      "Bash(cp -r \"E:/destinaiton b2 source/source/review1\" \"E:/androidStudioProject/webApp/public/b2-units/\")",
+      "Bash(cp -r \"E:/destinaiton b2 source/source/review2\" \"E:/androidStudioProject/webApp/public/b2-units/\")",
+      "Bash(cp -r \"E:/destinaiton b2 source/source/review3\" \"E:/androidStudioProject/webApp/public/b2-units/\")",
+      "Bash(cp -r \"E:/destinaiton b2 source/source/review4\" \"E:/androidStudioProject/webApp/public/b2-units/\")",
+      "Bash(cp -r \"E:/destinaiton b2 source/source/review5\" \"E:/androidStudioProject/webApp/public/b2-units/\")",
+      "Bash(cp -r \"E:/destinaiton b2 source/source/review8\" \"E:/androidStudioProject/webApp/public/b2-units/\")",
+      "Bash(cp -r \"E:/destinaiton b2 source/source/review9\" \"E:/androidStudioProject/webApp/public/b2-units/\")",
+      "Bash(cp -r \"E:/destinaiton b2 source/source/review10\" \"E:/androidStudioProject/webApp/public/b2-units/\")",
+      "Bash(cp -r \"E:/destinaiton b2 source/source/review11\" \"E:/androidStudioProject/webApp/public/b2-units/\")",
+      "Bash(cp -r \"E:/destinaiton b2 source/source/review12\" \"E:/androidStudioProject/webApp/public/b2-units/\")",
+      "Bash(cp -r \"E:/destinaiton b2 source/source/progress-test-1\" \"E:/androidStudioProject/webApp/public/b2-units/\")",
+      "Bash(cp -r \"E:/destinaiton b2 source/source/progress-test-2\" \"E:/androidStudioProject/webApp/public/b2-units/\")"
+    ]
+  }
+}

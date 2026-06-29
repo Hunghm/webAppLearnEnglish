@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trò chơi Ô chữ Tiếng Anh</title>
+    <style>
+        :root {
+            --cell-size: 32px;
+            --bg-correct: #c8e6c9;
+            --bg-wrong: #ffcdd2;
+            --bg-hint: #fff9c4;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #eef2f6;
+            margin: 15px;
+        }
+        h1 { color: #0f172a; margin-bottom: 10px; font-size: 26px;}
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 750px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .puzzle-wrapper {
+            overflow-x: auto;
+            width: 100%;
+            padding: 10px 0;
+        }
+        #puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(12, var(--cell-size));
+            grid-template-rows: repeat(12, var(--cell-size));
+            gap: 2px;
+            background: #cbd5e1;
+            border: 2px solid #94a3b8;
+            padding: 2px;
+            margin: 0 auto;
+            width: fit-content;
+        }
+        .cell {
+            width: 100%;
+            height: 100%;
+            background: #f8fafc;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+        }
+        .cell.black {
+            background: #334155;
+            border: none;
+        }
+        .cell input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            background: transparent;
+            outline: none;
+            text-transform: uppercase;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .cell input:focus {
+            background: #e0f2fe;
+            box-shadow: inset 0 0 0 2px #0284c7;
+            z-index: 10;
+        }
+        .cell .number {
+            position: absolute;
+            top: 1px;
+            left: 2px;
+            font-size: 10px;
+            font-weight: bold;
+            color: #1e293b;
+            pointer-events: none;
+            z-index: 5;
+        }
+        .cell.correct input { background: var(--bg-correct); }
+        .cell.wrong input { background: var(--bg-wrong); }
+        .cell.hint input { background: var(--bg-hint); }
+        
+        .clues-section {
+            width: 100%;
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            text-align: left;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15px;
+        }
+        .clue-column h3 { margin: 0 0 8px 0; border-bottom: 2px solid #e2e8f0; padding-bottom: 4px; font-size: 16px;}
+        .clue-column ul { list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 1.6; }
+        .clue-column li { margin-bottom: 6px; }
+        .clue-column li strong { background: #e2e8f0; padding: 0 6px; border-radius: 4px; margin-right: 4px; }
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .controls button {
+            padding: 9px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.1s, opacity 0.2s;
+        }
+        .controls button:hover { transform: scale(1.02); opacity: 0.9; }
+        .btn-check { background: #22c55e; color: white; }
+        .btn-hint { background: #facc15; color: #0f172a; }
+        .btn-reset { background: #ef4444; color: white; }
+        .message {
+            margin-top: 15px;
+            font-size: 15px;
+            font-weight: 600;
+            min-height: 24px;
+            text-align: center;
+            color: #0f172a;
+        }
+        @media (max-width: 600px) {
+            :root { --cell-size: 26px; }
+            .clues-section { grid-template-columns: 1fr; }
+            #puzzle-grid { gap: 1px; padding: 1px; }
+            .cell input { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Crossword Puzzle</h1>
+        <div class="puzzle-wrapper">
+            <div id="puzzle-grid"></div>
+        </div>
+
+        <div class="clues-section">
+            <div class="clue-column">
+                <h3>Hàng Ngang (Across)</h3>
+                <ul>
+                    <li><strong>1</strong> If he wins this match, he'll be the world ......................... ! (8)</li>
+                    <li><strong>4</strong> I'm thinking of joining a ... ...................... to get more exercise. (3)</li>
+                    <li><strong>5</strong> Our basketball ......................... said that I can play on Saturday! (5)</li>
+                    <li><strong>8</strong> The ......................... blew his whistle and the game started . (7)</li>
+                    <li><strong>9</strong> Which team do you ......................... ? (7)</li>
+                    <li><strong>11</strong> Mark's band play traditional ......................... music - they often perform at country fairs and festivals. (4)</li>
+                </ul>
+            </div>
+            <div class="clue-column">
+                <h3>Hàng Dọc (Down)</h3>
+                <ul>
+                    <li><strong>2</strong> I'm sorry, but you have to be a ......................... of the golf club to play here. (6)</li>
+                    <li><strong>3</strong> My ......................... was a brilliant player and I didn't manage to win the match. (8)</li>
+                    <li><strong>6</strong> Tom is really good at cards. He would never ......................... ! (5)</li>
+                    <li><strong>7</strong> Lisa's ......................... has just reached number one with their new song! (5)</li>
+                    <li><strong>10</strong> I took a big ......................... by doing the parachute jump, but I loved every second of it! (4)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn-check" onclick="checkAnswers()">✔ Kiểm tra</button>
+            <button class="btn-hint" onclick="giveHint()">💡 Gợi ý</button>
+            <button class="btn-reset" onclick="resetGame()">🔄 Làm lại</button>
+        </div>
+        <div class="message" id="message-area">Hãy bấm vào ô trống và điền chữ cái!</div>
+    </div>
+
+    <script>
+        // Dữ liệu ô chữ dựa trên tọa độ bạn cung cấp (Code dùng 0-indexed)
+        const words = [
+            { id: 1, dir: 'across', row: 0, col: 0, answer: "CHAMPION" },
+            { id: 2, dir: 'down',   row: 0, col: 3, answer: "MEMBER" },   // Bắt đầu ô thứ 4 của câu 1
+            { id: 3, dir: 'down',   row: 0, col: 6, answer: "OPPONENT" }, // Bắt đầu ô thứ 7 của câu 1
+            
+            // Tọa độ bạn mới cung cấp
+            { id: 4, dir: 'across', row: 2, col: 1, answer: "GYM" },       // User: Hàng 3, Cột 2
+            { id: 5, dir: 'across', row: 3, col: 5, answer: "COACH" },     // User: Hàng 4, Cột 6
+            { id: 6, dir: 'down',   row: 3, col: 8, answer: "CHEAT" },     // User: Hàng 4, Cột 9
+            { id: 7, dir: 'down',   row: 4, col: 1, answer: "GROUP" },     // User: Hàng 5, Cột 2
+            
+            { id: 8, dir: 'across', row: 5, col: 3, answer: "REFEREE" },   // User: Hàng 6, Cột 4
+            { id: 9, dir: 'across', row: 7, col: 0, answer: "SUPPORT" },   // User: Hàng 8, Cột 1
+            
+            { id: 10, dir: 'down',  row: 7, col: 5, answer: "RISK" },      // User: Hàng 8, Cột 6
+            { id: 11, dir: 'across', row: 10, col: 2, answer: "FOLK" }     // User: Hàng 11, Cột 3
+        ];
+
+        const rows = 11; // Lưới 11x10
+        const cols = 10;
+        const grid = document.getElementById('puzzle-grid');
+        const msgArea = document.getElementById('message-area');
+        let inputCells = [];
+
+        function buildGrid() {
+            grid.innerHTML = '';
+            inputCells = [];
+            
+            const validCells = new Set();
+            words.forEach(word => {
+                const len = word.answer.length;
+                for(let k=0; k<len; k++) {
+                    const r = word.dir === 'across' ? word.row : word.row + k;
+                    const c = word.dir === 'across' ? word.col + k : word.col;
+                    validCells.add(`${r},${c}`);
+                }
+            });
+
+            for(let r=0; r<rows; r++) {
+                for(let c=0; c<cols; c++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.dataset.row = r;
+                    cell.dataset.col = c;
+
+                    if (validCells.has(`${r},${c}`)) {
+                        let numbers = [];
+                        words.forEach(w => {
+                            const startR = w.dir === 'across' ? w.row : w.row;
+                            const startC = w.dir === 'across' ? w.col : w.col;
+                            if (r === startR && c === startC) numbers.push(w.id);
+                        });
+                        if (numbers.length > 0) {
+                            const numSpan = document.createElement('span');
+                            numSpan.className = 'number';
+                            numSpan.innerText = numbers.join(' ');
+                            cell.appendChild(numSpan);
+                        }
+
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.maxLength = 1;
+                        input.dataset.row = r;
+                        input.dataset.col = c;
+                        
+                        input.addEventListener('input', function(e) {
+                            const val = this.value.toUpperCase();
+                            this.value = val;
+                            this.parentElement.classList.remove('correct', 'wrong', 'hint');
+                            moveToNext(this);
+                        });
+
+                        input.addEventListener('keydown', function(e) {
+                            const key = e.key;
+                            if (key === 'Backspace' && this.value === '') {
+                                moveToPrev(this);
+                            }
+                        });
+
+                        cell.appendChild(input);
+                        inputCells.push(input);
+                    } else {
+                        cell.classList.add('black');
+                    }
+                    grid.appendChild(cell);
+                }
+            }
+            grid.style.gridTemplateColumns = `repeat(${cols}, var(--cell-size))`;
+            grid.style.gridTemplateRows = `repeat(${rows}, var(--cell-size))`;
+        }
+
+        function moveToNext(input) {
+            const row = parseInt(input.dataset.row);
+            const col = parseInt(input.dataset.col);
+            let r = row, c = col + 1;
+            while(true) {
+                if (c >= cols) { r++; c = 0; }
+                if (r >= rows) return;
+                let cell = document.querySelector(`.cell[data-row="${r}"][data-col="${c}"]`);
+                let inp = cell ? cell.querySelector('input') : null;
+                if (inp) { inp.focus(); return; }
+                c++;
+            }
+        }
+
+        function moveToPrev(input) {
+            const row = parseInt(input.dataset.row);
+            const col = parseInt(input.dataset.col);
+            let r = row, c = col - 1;
+            while(true) {
+                if (c < 0) { r--; c = cols - 1; }
+                if (r < 0) return;
+                let cell = document.querySelector(`.cell[data-row="${r}"][data-col="${c}"]`);
+                let inp = cell ? cell.querySelector('input') : null;
+                if (inp) { inp.focus(); return; }
+                c--;
+            }
+        }
+
+        function checkAnswers() {
+            msgArea.innerText = '';
+            let allCorrect = true, hasEmpty = false;
+
+            words.forEach(word => {
+                let wordCorrect = true;
+                const len = word.answer.length;
+                for(let k=0; k<len; k++) {
+                    const r = word.dir === 'across' ? word.row : word.row + k;
+                    const c = word.dir === 'across' ? word.col + k : word.col;
+                    const cell = document.querySelector(`.cell[data-row="${r}"][data-col="${c}"]`);
+                    const input = cell.querySelector('input');
+                    const userVal = input.value.toUpperCase();
+                    const targetVal = word.answer[k];
+
+                    if (userVal === '') { hasEmpty = true; wordCorrect = false; } 
+                    else if (userVal !== targetVal) wordCorrect = false;
+                }
+
+                for(let k=0; k<len; k++) {
+                    const r = word.dir === 'across' ? word.row : word.row + k;
+                    const c = word.dir === 'across' ? word.col + k : word.col;
+                    const cell = document.querySelector(`.cell[data-row="${r}"][data-col="${c}"]`);
+                    const input = cell.querySelector('input');
+                    if (input.value.toUpperCase() !== '') {
+                        if (wordCorrect) {
+                            cell.classList.add('correct');
+                            cell.classList.remove('wrong', 'hint');
+                        } else {
+                            if (input.value.toUpperCase() !== word.answer[k]) {
+                                cell.classList.add('wrong');
+                                cell.classList.remove('correct', 'hint');
+                            } else {
+                                cell.classList.remove('wrong');
+                                cell.classList.add('correct');
+                            }
+                        }
+                    }
+                }
+                if (!wordCorrect) allCorrect = false;
+            });
+
+            if (allCorrect && !hasEmpty) {
+                msgArea.style.color = '#166534';
+                msgArea.innerText = '🎉 Chúc mừng! Bạn đã giải đúng hoàn toàn!';
+            } else if (hasEmpty) {
+                msgArea.style.color = '#9a3412';
+                msgArea.innerText = '⚠️ Vẫn còn ô trống, hãy điền hết trước khi kiểm tra!';
+            } else {
+                msgArea.style.color = '#991b1b';
+                msgArea.innerText = '❌ Có chữ cái bị sai, hãy dùng Gợi ý hoặc kiểm tra lại!';
+            }
+        }
+
+        function giveHint() {
+            let hinted = false;
+            for(let w of words) {
+                const len = w.answer.length;
+                for(let k=0; k<len; k++) {
+                    const r = w.dir === 'across' ? w.row : w.row + k;
+                    const c = w.dir === 'across' ? w.col + k : w.col;
+                    const cell = document.querySelector(`.cell[data-row="${r}"][data-col="${c}"]`);
+                    const input = cell.querySelector('input');
+                    if (input.value.toUpperCase() !== w.answer[k]) {
+                        input.value = w.answer[k];
+                        cell.classList.add('hint');
+                        cell.classList.remove('wrong', 'correct');
+                        hinted = true;
+                        msgArea.style.color = '#0369a1';
+                        msgArea.innerText = `💡 Gợi ý tại (Hàng ${r+1}, Cột ${c+1}): Chữ '${w.answer[k]}'`;
+                        break;
+                    }
+                }
+                if (hinted) break;
+            }
+            if (!hinted) {
+                msgArea.style.color = '#166534';
+                msgArea.innerText = '✨ Đã điền đúng hết, bạn thật giỏi!';
+            }
+        }
+
+        function resetGame() {
+            msgArea.innerText = 'Hãy bấm vào ô trống và điền chữ cái!';
+            msgArea.style.color = '#0f172a';
+            document.querySelectorAll('.cell input').forEach(inp => {
+                inp.value = '';
+                inp.parentElement.classList.remove('correct', 'wrong', 'hint');
+            });
+        }
+
+        buildGrid();
+    </script>
+</body>
+</html>

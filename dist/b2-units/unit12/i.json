@@ -1,0 +1,22 @@
+{
+  "title": "Word patterns",
+  "instruction": "Write one word in each gap.",
+  "type": "fill_in_the_blank",
+  "content": "I’m very fond (1) ______ my husband, William. I’ve been married (2) ______ him for over sixty years. I know he cares (3) ______ me now just as much as when we first met all those years ago. I’d got lost, and I asked him for directions. He was so kind (4) ______ me. He offered to drive me wherever I wanted to go. It was love at first sight and since then my relationship (5) ______ him has always been wonderful.\n\nWilliam is proud (6) ______ my success as an artist, and he’s never been jealous (7) ______ my fame. I really admire him (8) ______ supporting me so much over the years. Every evening, we chat (9) ______ each other (10) ______ the day’s events. Of course, we do sometimes argue (11) ______ things. All couples do. But whenever I have an argument (12) ______ him, we soon start laughing and both apologise (13) ______ each other (14) ______ getting angry. I can’t imagine life without him!",
+  "answers": [
+    { "id": 1, "answer": "of" },
+    { "id": 2, "answer": "to" },
+    { "id": 3, "answer": "about" },
+    { "id": 4, "answer": "to" },
+    { "id": 5, "answer": "with" },
+    { "id": 6, "answer": "of" },
+    { "id": 7, "answer": "of" },
+    { "id": 8, "answer": "for" },
+    { "id": 9, "answer": "to" },
+    { "id": 10, "answer": "about" },
+    { "id": 11, "answer": "about" },
+    { "id": 12, "answer": "with" },
+    { "id": 13, "answer": "to" },
+    { "id": 14, "answer": "for" }
+  ]
+}

@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 2 – Thinking and Learning | Destination C1</title>
+<style>
+:root {
+  --accent: #2d6a4f;
+  --accent-dark: #1b4332;
+  --accent-light: #d8f3e3;
+  --accent2: #52b788;
+  --bg: #f8faf9;
+  --surface: #ffffff;
+  --border: #d8e8df;
+  --text: #1a2e23;
+  --muted: #5a7a68;
+  --sidebar-w: 260px;
+  --correct: #2d6a4f;
+  --wrong: #c1121f;
+  --correct-bg: #d8f3e3;
+  --wrong-bg: #ffe5e5;
+  --yellow-bg: #fff9e6;
+  --yellow-border: #f9c74f;
+  --blue-bg: #e8f4fd;
+  --blue-border: #4ea8de;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: #b7d5c4; border-radius: 4px; }
+
+#sidebar-header {
+  padding: 16px 14px 12px;
+  background: var(--accent-dark);
+  color: #fff;
+  flex-shrink: 0;
+}
+#sidebar-header h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+#sidebar-header p { font-size: 11px; opacity: 0.7; margin-top: 3px; }
+
+#sidebar nav a {
+  display: block;
+  padding: 9px 14px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 12.5px;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+#sidebar nav a:hover { color: var(--accent); background: var(--accent-light); }
+#sidebar nav a.active {
+  color: var(--accent);
+  background: var(--accent-light);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+.nav-group {
+  padding: 8px 14px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  background: #f0f7f3;
+  border-top: 1px solid var(--border);
+}
+
+/* Score panel */
+#score-panel {
+  margin: 0 12px 12px;
+  padding: 12px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  border: 1px solid var(--accent2);
+  flex-shrink: 0;
+}
+#score-panel .score-label { font-size: 11px; font-weight: 600; color: var(--accent-dark); margin-bottom: 6px; }
+#score-bar-bg { background: #b7d5c4; border-radius: 100px; height: 6px; overflow: hidden; margin-bottom: 6px; }
+#score-bar-fill { height: 100%; background: var(--accent); border-radius: 100px; transition: width 0.5s ease; width: 0%; }
+#score-text { font-size: 12px; color: var(--accent-dark); font-weight: 600; }
+
+/* ── MAIN ── */
+#main {
+  flex: 1;
+  padding: 32px 40px 60px;
+  max-width: 900px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-bottom: 4px;
+}
+.page-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+/* ── SECTIONS ── */
+.section {
+  margin-bottom: 48px;
+  scroll-margin-top: 20px;
+}
+.section-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+}
+
+/* Exercise label */
+.exercise {
+  margin-bottom: 32px;
+}
+.exercise-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.ex-letter {
+  width: 28px;
+  height: 28px;
+  background: var(--accent-dark);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ex-instruction {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Word box */
+.word-box {
+  background: #f0f7f3;
+  border: 1px solid var(--accent2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--accent-dark);
+  text-align: center;
+  line-height: 2;
+}
+.word-box span { margin: 0 6px; }
+
+/* Fill-in items */
+.fill-list { list-style: none; }
+.fill-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 0;
+  border-bottom: 1px solid #edf2ef;
+  flex-wrap: wrap;
+}
+.fill-item:last-child { border-bottom: none; }
+.item-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  min-width: 22px;
+  flex-shrink: 0;
+}
+.item-text { flex: 1; }
+.fill-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  min-width: 120px;
+  outline: none;
+  transition: border-color 0.2s;
+  text-align: center;
+}
+.fill-input:focus { border-bottom-color: var(--accent-dark); }
+.fill-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.fill-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Multiple choice */
+.mc-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+.mc-item:last-child { border-bottom: none; }
+.mc-question { margin-bottom: 8px; font-size: 13.5px; }
+.mc-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 6px;
+}
+.mc-btn {
+  padding: 6px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 12.5px;
+  font-family: inherit;
+  text-align: left;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.mc-btn:hover { border-color: var(--accent2); background: var(--accent-light); }
+.mc-btn.selected { border-color: var(--accent); background: var(--accent-light); }
+.mc-btn.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); font-weight: 600; }
+.mc-btn.wrong { border-color: var(--wrong); background: var(--wrong-bg); color: var(--wrong); }
+
+/* Choose between two */
+.choose-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13.5px;
+}
+.choose-item:last-child { border-bottom: none; }
+.choose-pair { display: inline-flex; gap: 0; border-radius: 6px; overflow: hidden; border: 1.5px solid var(--border); }
+.choose-btn {
+  padding: 3px 10px;
+  border: none;
+  background: var(--surface);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.15s;
+  color: var(--muted);
+}
+.choose-btn + .choose-btn { border-left: 1.5px solid var(--border); }
+.choose-btn:hover { background: var(--accent-light); color: var(--accent); }
+.choose-btn.selected { background: var(--accent); color: #fff; }
+.choose-btn.correct { background: var(--correct); color: #fff; }
+.choose-btn.wrong { background: var(--wrong); color: #fff; }
+
+/* Tick exercise */
+.tick-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+.tick-item:last-child { border-bottom: none; }
+.tick-num { font-size: 12px; font-weight: 700; color: var(--muted); min-width: 22px; }
+.tick-text { flex: 1; font-size: 13.5px; }
+.tick-text b { color: var(--accent-dark); }
+.tick-actions { display: flex; gap: 6px; align-items: center; }
+.tick-btn {
+  padding: 3px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.tick-btn.tick-yes { color: var(--correct); }
+.tick-btn.tick-yes:hover, .tick-btn.tick-yes.selected { background: var(--correct-bg); border-color: var(--correct); }
+.tick-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  min-width: 100px;
+  outline: none;
+}
+.tick-input:focus { border-bottom-color: var(--accent-dark); }
+.tick-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.tick-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Passage / text exercise */
+.passage-box {
+  background: var(--yellow-bg);
+  border: 1px solid var(--yellow-border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  font-size: 13.5px;
+  line-height: 2;
+}
+.passage-box h3 {
+  font-family: 'Georgia', serif;
+  font-size: 16px;
+  color: var(--accent-dark);
+  margin-bottom: 10px;
+}
+.passage-box.blue-box {
+  background: var(--blue-bg);
+  border-color: var(--blue-border);
+}
+.gap-num {
+  font-weight: 700;
+  color: var(--accent-dark);
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+/* Check / Reset buttons */
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.btn-check {
+  padding: 8px 20px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-check:hover { background: var(--accent-dark); }
+.btn-reset {
+  padding: 8px 16px;
+  background: var(--surface);
+  color: var(--muted);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-reset:hover { border-color: var(--wrong); color: var(--wrong); }
+
+/* Answer reveal */
+.answer-reveal {
+  display: none;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--accent-dark);
+  background: var(--accent-light);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border-left: 3px solid var(--accent);
+}
+.answer-reveal.visible { display: block; }
+
+/* H exercise - two-column fill */
+.h-item {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13px;
+}
+.h-item:last-child { border-bottom: none; }
+.h-small-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 13px;
+  font-family: inherit;
+  width: 90px;
+  outline: none;
+  text-align: center;
+}
+.h-small-input:focus { border-bottom-color: var(--accent-dark); }
+.h-small-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.h-small-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Word grid */
+.word-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.word-chip {
+  padding: 6px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.word-chip:hover { border-color: var(--accent2); background: var(--accent-light); }
+.word-chip.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 600; }
+.word-chip.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); font-weight: 600; }
+.word-chip.wrong { border-color: var(--wrong); background: var(--wrong-bg); color: var(--wrong); }
+.word-chip.missed { border-color: var(--yellow-border); background: var(--yellow-bg); }
+
+/* Match exercise */
+.match-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13px;
+}
+.match-item:last-child { border-bottom: none; }
+.match-left { flex: 1; }
+.match-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  width: 50px;
+  outline: none;
+  text-align: center;
+}
+.match-input:focus { border-bottom-color: var(--accent-dark); }
+.match-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.match-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  #sidebar { display: none; }
+  #main { padding: 20px 16px 40px; }
+  .mc-options { grid-template-columns: 1fr 1fr; }
+}
+
+/* Progress toast */
+#toast {
+  position: fixed;
+  bottom: 20px; right: 20px;
+  background: var(--accent-dark);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  display: none;
+  z-index: 9999;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div id="sidebar-header">
+    <h2>Unit 2</h2>
+    <p>Thinking and Learning</p>
+  </div>
+
+  <div id="score-panel">
+    <div class="score-label">Progress</div>
+    <div id="score-bar-bg"><div id="score-bar-fill"></div></div>
+    <div id="score-text">0 / 0 answered</div>
+  </div>
+
+  <nav>
+    <div class="nav-group">Topic Vocab: Thinking</div>
+    <a href="#exA">A — Circle correct word</a>
+    <a href="#exB">B — Complete from box</a>
+    <a href="#exC">C — Correct bold words</a>
+
+    <div class="nav-group">Topic Vocab: Learning</div>
+    <a href="#exD">D — Choose correct word (passage)</a>
+
+    <div class="nav-group">Phrasal Verbs</div>
+    <a href="#exE">E — Match sentences</a>
+    <a href="#exF">F — One word (similar meaning)</a>
+    <a href="#exG">G — Phrasal verbs with "out"</a>
+
+    <div class="nav-group">Phrases &amp; Collocations</div>
+    <a href="#exH">H — One word per gap</a>
+    <a href="#exI">I — One word for three sentences</a>
+    <a href="#exJ">J — Passage: one word per gap</a>
+    <a href="#exK">K — Key word transformation</a>
+
+    <div class="nav-group">Idioms</div>
+    <a href="#exL">L — Complete from box</a>
+
+    <div class="nav-group">Word Formation</div>
+    <a href="#exM">M — Change form of word</a>
+    <a href="#exN">N — Prefix il- (identify negatives)</a>
+    <a href="#exO">O — Rhetoric passage</a>
+  </nav>
+</aside>
+
+<!-- MAIN -->
+<main id="main">
+  <div class="page-title">Unit 2 — Vocabulary</div>
+  <div class="page-subtitle">Thinking and Learning &nbsp;·&nbsp; Destination C1 &amp; C2</div>
+
+  <!-- ════════ TOPIC VOCABULARY: THINKING ════════ -->
+  <div class="section" id="sec-thinking">
+    <div class="section-title">Topic vocabulary: Thinking</div>
+
+    <!-- Exercise A -->
+    <div class="exercise" id="exA">
+      <div class="exercise-label">
+        <div class="ex-letter">A</div>
+        <div class="ex-instruction">Circle the correct word.</div>
+      </div>
+      <div id="A-list">
+        <div class="choose-item">
+          <span class="item-num" style="margin-right:6px;">1</span>
+          Don't be so <span class="choose-pair">
+            <button class="choose-btn" data-q="A1" data-opt="optimistic" data-answer="pessimistic" onclick="chooseOption(this)">optimistic</button>
+            <button class="choose-btn" data-q="A1" data-opt="pessimistic" data-answer="pessimistic" onclick="chooseOption(this)">pessimistic</button>
+          </span>. Everything's going to be fine, you'll see!
+        </div>
+        <div class="choose-item">
+          <span class="item-num" style="margin-right:6px;">2</span>
+          Most newspapers are usually <span class="choose-pair">
+            <button class="choose-btn" data-q="A2" data-opt="biased" data-answer="biased" onclick="chooseOption(this)">biased</button>
+            <button class="choose-btn" data-q="A2" data-opt="prejudiced" data-answer="biased" onclick="chooseOption(this)">prejudiced</button>
+          </span> towards a certain political outlook.
+        </div>
+        <div class="choose-item">
+          <span class="item-num" style="margin-right:6px;">3</span>
+          I'm slightly <span class="choose-pair">
+            <button class="choose-btn" data-q="A3" data-opt="dubious" data-answer="dubious" onclick="chooseOption(this)">dubious</button>
+            <button class="choose-btn" data-q="A3" data-opt="cynical" data-answer="dubious" onclick="chooseOption(this)">cynical</button>
+          </span> about whether Sean's idea is going to work.
+        </div>
+        <div class="choose-item">
+          <span class="item-num" style="margin-right:6px;">4</span>
+          To suggest that it's possible to create a society without crime is a little <span class="choose-pair">
+            <button class="choose-btn" data-q="A4" data-opt="naïve" data-answer="naïve" onclick="chooseOption(this)">naïve</button>
+            <button class="choose-btn" data-q="A4" data-opt="sceptical" data-answer="naïve" onclick="chooseOption(this)">sceptical</button>
+          </span>, isn't it?
+        </div>
+        <div class="choose-item">
+          <span class="item-num" style="margin-right:6px;">5</span>
+          The only <span class="choose-pair">
+            <button class="choose-btn" data-q="A5" data-opt="ingenious" data-answer="plausible" onclick="chooseOption(this)">ingenious</button>
+            <button class="choose-btn" data-q="A5" data-opt="plausible" data-answer="plausible" onclick="chooseOption(this)">plausible</button>
+          </span> explanation I can think of is that Jenna got the dates wrong.
+        </div>
+        <div class="choose-item">
+          <span class="item-num" style="margin-right:6px;">6</span>
+          Please don't <span class="choose-pair">
+            <button class="choose-btn" data-q="A6" data-opt="baffle" data-answer="baffle" onclick="chooseOption(this)">baffle</button>
+            <button class="choose-btn" data-q="A6" data-opt="discriminate" data-answer="baffle" onclick="chooseOption(this)">discriminate</button>
+          </span> me with loads of technical terminology. Use plain, simple English!
+        </div>
+        <div class="choose-item">
+          <span class="item-num" style="margin-right:6px;">7</span>
+          It's not always easy to <span class="choose-pair">
+            <button class="choose-btn" data-q="A7" data-opt="assume" data-answer="assess" onclick="chooseOption(this)">assume</button>
+            <button class="choose-btn" data-q="A7" data-opt="assess" data-answer="assess" onclick="chooseOption(this)">assess</button>
+          </span> someone's suitability for a job just by talking to them in a short interview.
+        </div>
+        <div class="choose-item">
+          <span class="item-num" style="margin-right:6px;">8</span>
+          How can the government <span class="choose-pair">
+            <button class="choose-btn" data-q="A8" data-opt="justify" data-answer="justify" onclick="chooseOption(this)">justify</button>
+            <button class="choose-btn" data-q="A8" data-opt="speculate" data-answer="justify" onclick="chooseOption(this)">speculate</button>
+          </span> spending so much on the armed forces?
+        </div>
+        <div class="choose-item">
+          <span class="item-num" style="margin-right:6px;">9</span>
+          Looking at the damage, I would <span class="choose-pair">
+            <button class="choose-btn" data-q="A9" data-opt="estimate" data-answer="deduce" onclick="chooseOption(this)">estimate</button>
+            <button class="choose-btn" data-q="A9" data-opt="deduce" data-answer="deduce" onclick="chooseOption(this)">deduce</button>
+          </span> that the painting will cost at least €2,000 to restore properly.
+        </div>
+        <div class="choose-item">
+          <span class="item-num" style="margin-right:6px;">10</span>
+          I don't think you should <span class="choose-pair">
+            <button class="choose-btn" data-q="A10" data-opt="reflect" data-answer="presume" onclick="chooseOption(this)">reflect</button>
+            <button class="choose-btn" data-q="A10" data-opt="presume" data-answer="presume" onclick="chooseOption(this)">presume</button>
+          </span> that lots of people are going to help you with this project.
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkChoose('A-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetChoose('A-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise B -->
+    <div class="exercise" id="exB">
+      <div class="exercise-label">
+        <div class="ex-letter">B</div>
+        <div class="ex-instruction">Complete using the correct form of the words in the box. More than one word might fit in each gap, but try to use all the words.</div>
+      </div>
+      <div class="word-box">
+        concentrate &nbsp;•&nbsp; consider &nbsp;•&nbsp; contemplate &nbsp;•&nbsp; deliberate &nbsp;•&nbsp; gather &nbsp;•&nbsp; grasp &nbsp;•&nbsp; ponder &nbsp;•&nbsp; reckon &nbsp;•&nbsp; suppose
+      </div>
+      <ol class="fill-list" id="B-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">It took me quite a long time to <input class="fill-input" data-answer="grasp|gather|understand" placeholder="..."> what the aim of the game was.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">The jury are still <input class="fill-input" data-answer="deliberating|considering" placeholder="...">, but they're expected to reach a verdict soon.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">I <input class="fill-input" data-answer="gather|suppose|reckon" placeholder="..."> from your tutor that you're thinking of changing course.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">You really have to <input class="fill-input" data-answer="concentrate" placeholder="..."> very hard when you are doing calligraphy.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">I'm seriously <input class="fill-input" data-answer="contemplating|considering|pondering" placeholder="..."> asking for a pay rise tomorrow.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">How long do you <input class="fill-input" data-answer="reckon|suppose|gather" placeholder="..."> it'll take to get to Manchester?</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">I don't <input class="fill-input" data-answer="suppose|reckon" placeholder="..."> I could borrow your lecture notes this weekend, could I?</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">If you've ever <input class="fill-input" data-answer="pondered|considered|contemplated" placeholder="..."> the question 'Why does the universe bother to exist?', then this is the book for you.</span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">Let's not even <input class="fill-input" data-answer="consider|contemplate|ponder" placeholder="..."> the possibility of failure.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('B-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('B-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise C -->
+    <div class="exercise" id="exC">
+      <div class="exercise-label">
+        <div class="ex-letter">C</div>
+        <div class="ex-instruction">Each of the words in bold is in the wrong sentence. Write the correct words on the lines.</div>
+      </div>
+      <ol class="fill-list" id="C-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">I'm in a real <b>hunch</b> because I've been invited to two parties on Saturday and I don't know which one to go to. <input class="fill-input" data-answer="dilemma" placeholder="correct word..."></span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">Dave said he's got complete <b>guesswork</b> in us, and thinks we're going to do a great job. <input class="fill-input" data-answer="faith" placeholder="correct word..."></span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">Sarah's a/an <b>intuition</b> when it comes to astrophysics, but she's not very practical in everyday things. <input class="fill-input" data-answer="genius" placeholder="correct word..."></span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">You often need to use a little educated <b>notion</b> when you're starting a cryptic crossword. <input class="fill-input" data-answer="guesswork" placeholder="correct word..."></span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">I've got a/an <b>ideology</b> that someone in this office is going to get promoted soon. <input class="fill-input" data-answer="hunch" placeholder="correct word..."></span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">Communism and capitalism are very different types of <b>dilemma</b>. <input class="fill-input" data-answer="ideology" placeholder="correct word..."></span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">Who gave you the <b>faith</b> for the main character in the book? <input class="fill-input" data-answer="inspiration" placeholder="correct word..."></span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">Detective Tacker had absolutely no evidence that Roddard was involved, but all his <b>paradox</b> told him that he was. <input class="fill-input" data-answer="intuition" placeholder="correct word..."></span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">I've got a small <b>inspiration</b> about the exam syllabus. Should I talk to Mrs Jacobs about it? <input class="fill-input" data-answer="query" placeholder="correct word..."></span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">Paying mothers a salary to raise their children is an interesting <b>genius</b>. <input class="fill-input" data-answer="notion" placeholder="correct word..."></span></li>
+        <li class="fill-item"><span class="item-num">11</span><span class="item-text">The fact that more people would come here if the place wasn't so crowded is a real <b>query</b>. <input class="fill-input" data-answer="paradox" placeholder="correct word..."></span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('C-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('C-list')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ TOPIC VOCABULARY: LEARNING ════════ -->
+  <div class="section" id="sec-learning">
+    <div class="section-title">Topic vocabulary: Learning</div>
+
+    <!-- Exercise D -->
+    <div class="exercise" id="exD">
+      <div class="exercise-label">
+        <div class="ex-letter">D</div>
+        <div class="ex-instruction">Choose the correct word.</div>
+      </div>
+      <div class="passage-box" style="font-style: italic; font-family: Georgia, serif;">
+        <h3 style="font-style:normal;">Letter to the editor</h3>
+        The Prime Minister's comments yesterday on education spending miss the point, as the secondary education system also needs a major overhaul. Firstly, the system only views the weakest learners as having special
+        (<b>1</b>) <input class="fill-input" style="min-width:80px;" data-answer="C" placeholder="1">. The brightest and most
+        (<b>2</b>) <input class="fill-input" style="min-width:80px;" data-answer="D" placeholder="2"> students are not encouraged to develop to their full potential. Secondly, there's too much testing and not enough learning. My fifteen-year-old daughter, for example, has just spent the last month or so
+        (<b>3</b>) <input class="fill-input" style="min-width:80px;" data-answer="C" placeholder="3"> for exams. These aren't even real, important exams, as her GCSEs will be next year. They're just
+        (<b>4</b>) <input class="fill-input" style="min-width:80px;" data-answer="C" placeholder="4"> exams. Is the work she's been doing really going to make her more
+        (<b>5</b>) <input class="fill-input" style="min-width:80px;" data-answer="C" placeholder="5"> about her subjects, or will she forget it all tomorrow? I suspect the latter.
+        Thirdly, the standard
+        (<b>6</b>) <input class="fill-input" style="min-width:80px;" data-answer="B" placeholder="6"> doesn't give students any
+        (<b>7</b>) <input class="fill-input" style="min-width:80px;" data-answer="D" placeholder="7"> in developing practical work-related, living and social skills, or in skills necessary for higher education. How many students entering university have the first idea what the difference is between
+        (<b>8</b>) <input class="fill-input" style="min-width:80px;" data-answer="C" placeholder="8"> someone else's work and making good use of someone else's ideas? Shouldn't they have been taught this at school? How many of them are really able to go about
+        (<b>9</b>) <input class="fill-input" style="min-width:80px;" data-answer="B" placeholder="9"> — a skill that's essential at university because there are no teachers to tell you what to do — in an efficient way? Indeed, how many students
+        (<b>10</b>) <input class="fill-input" style="min-width:80px;" data-answer="B" placeholder="10"> from university totally unable to spell even simple English words correctly? The system is letting our children down.
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:6px; font-size:13px; margin-bottom:8px;">
+        <div><b>1</b> A requests &nbsp; B desires &nbsp; C needs &nbsp; D wants</div>
+        <div><b>2</b> A inattentive &nbsp; B ignorant &nbsp; C intensive &nbsp; D conscientious</div>
+        <div><b>3</b> A cramming &nbsp; B lecturing &nbsp; C reading &nbsp; D practising</div>
+        <div><b>4</b> A false &nbsp; B mock &nbsp; C fake &nbsp; D artificial</div>
+        <div><b>5</b> A knowledgeable &nbsp; B intellectual &nbsp; C academic &nbsp; D intelligent</div>
+        <div><b>6</b> A timetable &nbsp; B lecture &nbsp; C seminar &nbsp; D curriculum</div>
+        <div><b>7</b> A lesson &nbsp; B subject &nbsp; C tuition &nbsp; D tutorial</div>
+        <div><b>8</b> A writing &nbsp; B going over &nbsp; C plagiarising &nbsp; D repeating</div>
+        <div><b>9</b> A reviewing &nbsp; B revision &nbsp; C distance learning &nbsp; D self-study</div>
+        <div><b>10</b> A qualify &nbsp; B graduate &nbsp; C depart &nbsp; D exit</div>
+      </div>
+      <p style="font-size:11px; color:var(--muted);">Type the letter of the correct answer (A/B/C/D) in each gap in the passage above.</p>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exD')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exD')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ PHRASAL VERBS ════════ -->
+  <div class="section" id="sec-phrasal">
+    <div class="section-title">Phrasal verbs</div>
+
+    <!-- Exercise E -->
+    <div class="exercise" id="exE">
+      <div class="exercise-label">
+        <div class="ex-letter">E</div>
+        <div class="ex-instruction">Match to make sentences.</div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:12px;">
+        <div>
+          <ol class="fill-list" id="E-list">
+            <li class="fill-item"><span class="item-num">1</span><span class="item-text">I'm going to have to mull this <input class="fill-input match-input" data-answer="D" placeholder="..."></span></li>
+            <li class="fill-item"><span class="item-num">2</span><span class="item-text">Detectives are still trying to piece <input class="fill-input match-input" data-answer="A" placeholder="..."></span></li>
+            <li class="fill-item"><span class="item-num">3</span><span class="item-text">It took him a very long time to take <input class="fill-input match-input" data-answer="B" placeholder="..."></span></li>
+            <li class="fill-item"><span class="item-num">4</span><span class="item-text">Tell us how you hit <input class="fill-input match-input" data-answer="G" placeholder="..."></span></li>
+            <li class="fill-item"><span class="item-num">5</span><span class="item-text">It took us ages to figure <input class="fill-input match-input" data-answer="F" placeholder="..."></span></li>
+            <li class="fill-item"><span class="item-num">6</span><span class="item-text">I've just thought <input class="fill-input match-input" data-answer="C" placeholder="..."></span></li>
+            <li class="fill-item"><span class="item-num">7</span><span class="item-text">I'm not sure we've thought <input class="fill-input match-input" data-answer="E" placeholder="..."></span></li>
+          </ol>
+        </div>
+        <div style="font-size:13px; line-height:2;">
+          <div>A &nbsp; together exactly what happened that evening.</div>
+          <div>B &nbsp; in the fact that he'd never see her again.</div>
+          <div>C &nbsp; up a brilliant excuse to tell Rachel.</div>
+          <div>D &nbsp; over for a while before I make a final decision.</div>
+          <div>E &nbsp; this through properly yet.</div>
+          <div>F &nbsp; out how to get everyone to the sports centre without Phil knowing.</div>
+          <div>G &nbsp; upon such a great idea for a website.</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('E-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('E-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise F -->
+    <div class="exercise" id="exF">
+      <div class="exercise-label">
+        <div class="ex-letter">F</div>
+        <div class="ex-instruction">Write one word in each gap so that each second sentence has a similar meaning to the first sentence.</div>
+      </div>
+      <ol class="fill-list" id="F-list">
+        <li class="fill-item">
+          <span class="item-num">1</span>
+          <span class="item-text">
+            I need to consider your offer very carefully before I make a decision.<br>
+            I need to <input class="fill-input" data-answer="mull" placeholder="..."> over your offer very carefully before I make a decision.
+          </span>
+        </li>
+        <li class="fill-item">
+          <span class="item-num">2</span>
+          <span class="item-text">
+            Lee had the brilliant idea of booking a clown for the end-of-term party.<br>
+            Lee came <input class="fill-input" data-answer="up" placeholder="..."> <input class="fill-input" data-answer="with" placeholder="..."> the brilliant idea of booking a clown for the end-of-term party.
+          </span>
+        </li>
+        <li class="fill-item">
+          <span class="item-num">3</span>
+          <span class="item-text">
+            It's time you realised that you've got responsibilities now.<br>
+            It's time you faced <input class="fill-input" data-answer="up" placeholder="..."> <input class="fill-input" data-answer="to" placeholder="..."> the fact that you've got responsibilities now.
+          </span>
+        </li>
+        <li class="fill-item">
+          <span class="item-num">4</span>
+          <span class="item-text">
+            I'm going to have to improve my spoken German before I go to Munich.<br>
+            I'm going to have to brush <input class="fill-input" data-answer="up" placeholder="..."> <input class="fill-input" data-answer="on" placeholder="..."> my spoken German before I go to Munich.
+          </span>
+        </li>
+        <li class="fill-item">
+          <span class="item-num">5</span>
+          <span class="item-text">
+            I didn't like the idea at first but now I do.<br>
+            I didn't like the idea at first but I've <input class="fill-input" data-answer="come" placeholder="..."> round <input class="fill-input" data-answer="to" placeholder="..."> it now.
+          </span>
+        </li>
+        <li class="fill-item">
+          <span class="item-num">6</span>
+          <span class="item-text">
+            It's a general knowledge quiz so you can't do any revision for it.<br>
+            There's nothing to swot <input class="fill-input" data-answer="up" placeholder="..."> <input class="fill-input" data-answer="on" placeholder="..."> as it's a general knowledge quiz.
+          </span>
+        </li>
+        <li class="fill-item">
+          <span class="item-num">7</span>
+          <span class="item-text">
+            We were right at the back of the hall so I couldn't hear what the speaker was saying.<br>
+            I was unable to <input class="fill-input" data-answer="make" placeholder="..."> out what the speaker was saying because we were right at the back of the hall.
+          </span>
+        </li>
+        <li class="fill-item">
+          <span class="item-num">8</span>
+          <span class="item-text">
+            We finally thought of a way to get the band into the hotel without the press knowing.<br>
+            We finally puzzled <input class="fill-input" data-answer="out" placeholder="..."> a way to get the band into the hotel without the press knowing.
+          </span>
+        </li>
+        <li class="fill-item">
+          <span class="item-num">9</span>
+          <span class="item-text">
+            I've found out a lot of information about the history of English language teaching recently.<br>
+            I've been <input class="fill-input" data-answer="reading|swotting|brushing" placeholder="..."> up on the history of English language teaching recently.
+          </span>
+        </li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('F-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('F-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise G -->
+    <div class="exercise" id="exG">
+      <div class="exercise-label">
+        <div class="ex-letter">G</div>
+        <div class="ex-instruction">Phrasal verbs with <em>out</em>, such as <em>puzzle out</em>, are often connected to the idea of finding information. Which of these phrasal verbs with <em>out</em> are also connected to this idea? Click YES or NO for each.</div>
+      </div>
+      <div id="G-list">
+        <div class="tick-item">
+          <span class="tick-num">1</span>
+          <span class="tick-text">Did you <b>find out</b> what time the parents' meeting is?</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="G1" data-answer="yes" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="G1" data-answer="yes" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">2</span>
+          <span class="tick-text">I've been <b>checking out</b> whether it's better to go by ferry or plane.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="G2" data-answer="yes" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="G2" data-answer="yes" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">3</span>
+          <span class="tick-text">Susie reckons she's <b>sussed out</b> a great way to get into the club for free.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="G3" data-answer="yes" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="G3" data-answer="yes" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">4</span>
+          <span class="tick-text">We all <b>piled out</b> into the playground.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="G4" data-answer="no" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="G4" data-answer="no" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">5</span>
+          <span class="tick-text">I can't <b>figure out</b> how to change my password.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="G5" data-answer="yes" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="G5" data-answer="yes" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">6</span>
+          <span class="tick-text">The band were completely <b>drowned out</b> by all the screaming fans.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="G6" data-answer="no" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="G6" data-answer="no" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">7</span>
+          <span class="tick-text">I'm going to <b>sound Bob out</b> about his investing in the company.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="G7" data-answer="yes" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="G7" data-answer="yes" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">8</span>
+          <span class="tick-text">Two essays really do <b>stand out</b> from the rest.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="G8" data-answer="no" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="G8" data-answer="no" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">9</span>
+          <span class="tick-text">Jan's good at keeping secrets, so you'll have to <b>worm it out</b> of her!</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="G9" data-answer="yes" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="G9" data-answer="yes" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">10</span>
+          <span class="tick-text">None of us could <b>fathom out</b> why the experiment wasn't working.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="G10" data-answer="yes" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="G10" data-answer="yes" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkG()">Check answers</button>
+        <button class="btn-reset" onclick="resetG()">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ PHRASES, PATTERNS AND COLLOCATIONS ════════ -->
+  <div class="section" id="sec-phrases">
+    <div class="section-title">Phrases, patterns and collocations</div>
+
+    <!-- Exercise H -->
+    <div class="exercise" id="exH">
+      <div class="exercise-label">
+        <div class="ex-letter">H</div>
+        <div class="ex-instruction">Write one word in each gap.</div>
+      </div>
+      <ol class="fill-list" id="H-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">Jim seems to be <input class="fill-input" data-answer="under" placeholder="..."> the misapprehension that tomorrow's a holiday. It isn't.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">These findings cast doubt <input class="fill-input" data-answer="on" placeholder="..."> previous research done in this field.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">This photo's a little <input class="fill-input" data-answer="out" placeholder="..."> of focus, but you can still see their faces.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">Look <input class="fill-input" data-answer="on" placeholder="..."> the bright side – it's nearly the end of term.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">I'm not against animal testing <input class="fill-input" data-answer="on" placeholder="..."> principle.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">I think I'll always associate this song <input class="fill-input" data-answer="with" placeholder="..."> our holiday in Majorca.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">You have to bear <input class="fill-input" data-answer="in" placeholder="..."> mind that there'll be quite a few children there.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">Where did Susan's belief <input class="fill-input" data-answer="in" placeholder="..."> reincarnation come from?</span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">Dad said that my borrowing the car tonight was <input class="fill-input" data-answer="out" placeholder="..."> of the question.</span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">Hearing the news about Caroline put my small problems <input class="fill-input" data-answer="into" placeholder="..."> perspective.</span></li>
+        <li class="fill-item"><span class="item-num">11</span><span class="item-text">What's the best course of action from your point <input class="fill-input" data-answer="of" placeholder="..."> view?</span></li>
+        <li class="fill-item"><span class="item-num">12</span><span class="item-text">You were hired <input class="fill-input" data-answer="on" placeholder="..."> the basis that you would be able to work on Sundays.</span></li>
+        <li class="fill-item"><span class="item-num">13</span><span class="item-text"><input class="fill-input" data-answer="On" placeholder="..."> balance, I think the government's doing a reasonable job.</span></li>
+        <li class="fill-item"><span class="item-num">14</span><span class="item-text">We haven't taken Julie's thoughts <input class="fill-input" data-answer="into" placeholder="..."> account at all.</span></li>
+        <li class="fill-item"><span class="item-num">15</span><span class="item-text"><input class="fill-input" data-answer="In" placeholder="..."> conclusion, I'd like to thank everyone who supported me during the early years.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('H-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('H-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise I -->
+    <div class="exercise" id="exI">
+      <div class="exercise-label">
+        <div class="ex-letter">I</div>
+        <div class="ex-instruction">For each question, write one word which can be used in all three sentences.</div>
+      </div>
+      <div id="I-list">
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>1</b></div>
+          <div style="font-size:13px; line-height:2.2; margin-bottom:6px;">
+            I was so tired that I couldn't even think <input class="fill-input" data-answer="straight" placeholder="...">.<br>
+            I'll come <input class="fill-input" data-answer="straight" placeholder="..."> to the point – you're fired!<br>
+            It's time to set the record <input class="fill-input" data-answer="straight" placeholder="..."> about what really happened that night.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>2</b></div>
+          <div style="font-size:13px; line-height:2.2; margin-bottom:6px;">
+            She's only eight, but she has the <input class="fill-input" data-answer="mental" placeholder="..."> age of an 18-year-old.<br>
+            Many <input class="fill-input" data-answer="mental" placeholder="..."> illnesses can be cured these days.<br>
+            I'm not very good at <input class="fill-input" data-answer="mental" placeholder="..."> arithmetic.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>3</b></div>
+          <div style="font-size:13px; line-height:2.2; margin-bottom:6px;">
+            Philip does a very funny <input class="fill-input" data-answer="impression" placeholder="..."> of Tony.<br>
+            You really made an <input class="fill-input" data-answer="impression" placeholder="..."> on Pete – he hasn't stopped talking about you!<br>
+            Why was I under the <input class="fill-input" data-answer="impression" placeholder="..."> that the exam was on Thursday?
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>4</b></div>
+          <div style="font-size:13px; line-height:2.2; margin-bottom:6px;">
+            Carter was the <input class="fill-input" data-answer="brains|mind" placeholder="..."> behind the whole criminal operation.<br>
+            Could I just pick your <input class="fill-input" data-answer="brains" placeholder="..."> about good places to eat around here?<br>
+            We sat there racking our <input class="fill-input" data-answer="brains" placeholder="..."> trying to think of a place to take Paul and Doug in the evening.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>5</b></div>
+          <div style="font-size:13px; line-height:2.2; margin-bottom:6px;">
+            Someone with no <input class="fill-input" data-answer="sense" placeholder="..."> of smell can't taste food well either.<br>
+            I can't make <input class="fill-input" data-answer="sense" placeholder="..."> of this film at all – what's going on?<br>
+            Unplugging a toaster before you try to fix it is just common <input class="fill-input" data-answer="sense" placeholder="...">, isn't it?
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>6</b></div>
+          <div style="font-size:13px; line-height:2.2; margin-bottom:6px;">
+            I thought Gordon's new invention wouldn't work at all, but in fact it worked like a <input class="fill-input" data-answer="dream" placeholder="...">.<br>
+            Winning a cruise on the Queen Mary was a <input class="fill-input" data-answer="dream" placeholder="..."> come true for me and Albert.<br>
+            I've had the same recurring <input class="fill-input" data-answer="dream" placeholder="..."> for four nights in a row.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>7</b></div>
+          <div style="font-size:13px; line-height:2.2; margin-bottom:6px;">
+            Motorists should always show <input class="fill-input" data-answer="consideration" placeholder="..."> for pedestrians crossing the street at a zebra crossing.<br>
+            I'll give some <input class="fill-input" data-answer="consideration" placeholder="..."> to your proposals and get back to you.<br>
+            We stupidly didn't take changes in interest rates into <input class="fill-input" data-answer="consideration" placeholder="..."> when we got a mortgage for our house.
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('I-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('I-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise J -->
+    <div class="exercise" id="exJ">
+      <div class="exercise-label">
+        <div class="ex-letter">J</div>
+        <div class="ex-instruction">Write one word in each gap.</div>
+      </div>
+      <div class="passage-box blue-box">
+        I read this week that a new organisation called <em>Don't Trust Online Information</em> has been formed. The founder, Douglas Haverford-West, is quoted as saying, 'It's
+        (<b>1</b>) <input class="fill-input" data-answer="against" placeholder="..."> my principles to trust anything I read on the Internet. I've started this organisation
+        (<b>2</b>) <input class="fill-input" data-answer="on" placeholder="..."> the belief that there are millions like me who
+        (<b>3</b>) <input class="fill-input" data-answer="have" placeholder="..."> their doubts about information presented as fact that has not gone through a thorough editorial process. There's no question
+        (<b>4</b>) <input class="fill-input" data-answer="of" placeholder="..."> us shutting down the Internet – we don't want to do that – but DTOI has been set up with a
+        (<b>5</b>) <input class="fill-input" data-answer="view" placeholder="..."> to raising awareness.' I sympathise with Haverford-West, but I believe he's wrong. I made up my
+        (<b>6</b>) <input class="fill-input" data-answer="mind" placeholder="..."> long ago not to completely trust anything I heard or read. Whether it's on the Internet or, say, in a newspaper, is irrelevant in my opinion.
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exJ')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exJ')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise K -->
+    <div class="exercise" id="exK">
+      <div class="exercise-label">
+        <div class="ex-letter">K</div>
+        <div class="ex-instruction">Complete the second sentence so that it has a similar meaning to the first sentence, using the word given. Do not change the word given. You must use between three and eight words, including the word given.</div>
+      </div>
+      <ol class="fill-list" id="K-list">
+        <li class="fill-item">
+          <span class="item-num">1</span>
+          <span class="item-text">
+            I never thought that we'd have legal problems. <b>CROSSED</b><br>
+            It <input class="fill-input" style="min-width:200px;" data-answer="never crossed my mind|had never crossed my mind" placeholder="..."> that we'd have legal problems.
+          </span>
+        </li>
+        <li class="fill-item">
+          <span class="item-num">2</span>
+          <span class="item-text">
+            I've decided that teaching is not the right profession for me. <b>CONCLUSION</b><br>
+            I've <input class="fill-input" style="min-width:200px;" data-answer="come to the conclusion|reached the conclusion" placeholder="..."> that teaching is not the right profession for me.
+          </span>
+        </li>
+        <li class="fill-item">
+          <span class="item-num">3</span>
+          <span class="item-text">
+            Could you tell me where you were last night, Mr Johnson? <b>ACCOUNT</b><br>
+            Could you <input class="fill-input" style="min-width:200px;" data-answer="account for your whereabouts" placeholder="..."> last night, Mr Johnson?
+          </span>
+        </li>
+        <li class="fill-item">
+          <span class="item-num">4</span>
+          <span class="item-text">
+            The journalist pretended that she was a parent of one of the children. <b>FALSE</b><br>
+            The journalist <input class="fill-input" style="min-width:200px;" data-answer="was under the false impression|gave the false impression" placeholder="..."> that she was a parent of one of the children.
+          </span>
+        </li>
+        <li class="fill-item">
+          <span class="item-num">5</span>
+          <span class="item-text">
+            You have to use logic and lateral thinking in equal measure in this job. <b>STRIKE</b><br>
+            You have to <input class="fill-input" style="min-width:200px;" data-answer="strike a balance between" placeholder="..."> logic and lateral thinking in this job.
+          </span>
+        </li>
+        <li class="fill-item">
+          <span class="item-num">6</span>
+          <span class="item-text">
+            I didn't tell Angie because I didn't want to hurt Eddie's feelings. <b>CONSIDERATION</b><br>
+            I didn't tell Angie <input class="fill-input" style="min-width:200px;" data-answer="out of consideration for" placeholder="..."> Eddie.
+          </span>
+        </li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('K-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('K-list')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ IDIOMS ════════ -->
+  <div class="section" id="sec-idioms">
+    <div class="section-title">Idioms</div>
+
+    <!-- Exercise L -->
+    <div class="exercise" id="exL">
+      <div class="exercise-label">
+        <div class="ex-letter">L</div>
+        <div class="ex-instruction">Complete using the words in the box.</div>
+      </div>
+      <div class="word-box">
+        bell &nbsp;•&nbsp; bend &nbsp;•&nbsp; dark &nbsp;•&nbsp; hairs &nbsp;•&nbsp; head &nbsp;•&nbsp; leg &nbsp;•&nbsp; stock &nbsp;•&nbsp; two &nbsp;•&nbsp; uptake &nbsp;•&nbsp; what &nbsp;•&nbsp; wits &nbsp;•&nbsp; wood
+      </div>
+      <ol class="fill-list" id="L-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">The name Alan Hickson rings a <input class="fill-input" data-answer="bell" placeholder="...">, but I can't place him.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">Stop wasting time splitting <input class="fill-input" data-answer="hairs" placeholder="..."> and look at the big picture.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">Ask Simon about the sales targets. He always knows what's <input class="fill-input" data-answer="what" placeholder="...">.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">You've got to have your <input class="fill-input" data-answer="wits" placeholder="..."> about you to succeed in advertising.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">Don't let success go to your <input class="fill-input" data-answer="head" placeholder="...">, will you?</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">No one told us that Diana was leaving, but we all put two and <input class="fill-input" data-answer="two" placeholder="..."> together.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">I'm going to go round the <input class="fill-input" data-answer="bend" placeholder="..."> if they don't turn that music down soon.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">Let's take <input class="fill-input" data-answer="stock" placeholder="..."> of the situation before we make a final decision.</span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">How did they manage to keep me completely in the <input class="fill-input" data-answer="dark" placeholder="..."> about this for so long?</span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">The problem with Jane is that sometimes she can't see the <input class="fill-input" data-answer="wood" placeholder="..."> for the trees.</span></li>
+        <li class="fill-item"><span class="item-num">11</span><span class="item-text">It took Dan a long time to understand what was going on. He's usually quicker on the <input class="fill-input" data-answer="uptake" placeholder="..."> than that, isn't he?</span></li>
+        <li class="fill-item"><span class="item-num">12</span><span class="item-text">Frankly, you're completely wrong and you haven't got a <input class="fill-input" data-answer="leg" placeholder="..."> to stand on.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('L-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('L-list')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ WORD FORMATION ════════ -->
+  <div class="section" id="sec-wordform">
+    <div class="section-title">Word formation</div>
+
+    <!-- Exercise M -->
+    <div class="exercise" id="exM">
+      <div class="exercise-label">
+        <div class="ex-letter">M</div>
+        <div class="ex-instruction">Complete the sentences by changing the form of the word in capitals.</div>
+      </div>
+      <ol class="fill-list" id="M-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">There was quite a bit of <input class="fill-input" data-answer="confusion" placeholder="..."> because the examiner handed out the wrong exam papers. <b>CONFUSE</b></span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">You're acting completely <input class="fill-input" data-answer="irrationally" placeholder="...">. Just calm down and pull yourself together. <b>RATIONAL</b></span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">Einstein's <input class="fill-input" data-answer="brilliance" placeholder="..."> went unnoticed at school. <b>BRILLIANT</b></span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">This is generally considered to be the <input class="fill-input" data-answer="definitive" placeholder="..."> guide to Australia. <b>DEFINE</b></span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">It's absolutely <input class="fill-input" data-answer="inexplicable" placeholder="..."> why the council decided to close down the youth club. <b>EXPLAIN</b></span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">I just stood there and listened in <input class="fill-input" data-answer="disbelief" placeholder="..."> as Ben told me the news. <b>BELIEVE</b></span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">Greg's <input class="fill-input" data-answer="indecisiveness|indecision" placeholder="..."> to say the least, so I wouldn't ask him to choose a hotel. <b>DECIDE</b></span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">Many children create <input class="fill-input" data-answer="imaginary" placeholder="..."> friends to talk to. <b>IMAGINE</b></span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">He was found not guilty by reason of <input class="fill-input" data-answer="insanity" placeholder="..."> and so was sent to a mental institution rather than prison. <b>SANE</b></span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">Your argument is <input class="fill-input" data-answer="illogical" placeholder="...">. Just because you want me to be a doctor doesn't mean I want to be one. <b>LOGIC</b></span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('M-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('M-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise N -->
+    <div class="exercise" id="exN">
+      <div class="exercise-label">
+        <div class="ex-letter">N</div>
+        <div class="ex-instruction">The prefix <em>il-</em>, as in <em>illogical</em>, is often used to make a positive word negative. Which of the words in bold in the following sentences are negative forms of positive words? Click YES (negative form) or NO (positive word).</div>
+      </div>
+      <div id="N-list">
+        <div class="tick-item">
+          <span class="tick-num">1</span>
+          <span class="tick-text">Doctors' handwriting is usually <b>illegible</b>.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="N1" data-answer="yes" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="N1" data-answer="yes" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">2</span>
+          <span class="tick-text">There's a beautiful <b>illustration</b> on page six.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="N2" data-answer="no" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="N2" data-answer="no" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">3</span>
+          <span class="tick-text">People who are <b>illiterate</b> may need some help filling in forms.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="N3" data-answer="yes" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="N3" data-answer="yes" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">4</span>
+          <span class="tick-text">She had an <b>illustrious</b> career as a local politician.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="N4" data-answer="no" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="N4" data-answer="no" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">5</span>
+          <span class="tick-text">It's a totally <b>illiberal</b> law that's just going to restrict our freedoms further.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="N5" data-answer="yes" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="N5" data-answer="yes" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">6</span>
+          <span class="tick-text">Several senior politicians have resigned over the <b>illegality</b> of the war.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="N6" data-answer="yes" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="N6" data-answer="yes" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">7</span>
+          <span class="tick-text"><b>Illegitimate</b> children were given very little social recognition in the past.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="N7" data-answer="yes" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="N7" data-answer="yes" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">8</span>
+          <span class="tick-text">The magician didn't really cut his assistant in two – it was only an <b>illusion</b>.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="N8" data-answer="no" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="N8" data-answer="no" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">9</span>
+          <span class="tick-text">The lights <b>illuminated</b> the building beautifully at night.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="N9" data-answer="no" onclick="toggleTickG(this, 'yes')">YES</button>
+            <button class="tick-btn" data-q="N9" data-answer="no" onclick="toggleTickG(this, 'no')">NO</button>
+          </span>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkG()">Check answers (uses same checker as G)</button>
+        <button class="btn-reset" onclick="resetG()">Reset</button>
+      </div>
+      <p style="font-size:11px; color:var(--muted); margin-top:8px;">Note: YES = the bold word is a negative form (il- prefix makes it negative). Answers: 1-YES, 2-NO, 3-YES, 4-NO, 5-YES, 6-YES, 7-YES, 8-NO, 9-NO.</p>
+    </div>
+
+    <!-- Exercise O -->
+    <div class="exercise" id="exO">
+      <div class="exercise-label">
+        <div class="ex-letter">O</div>
+        <div class="ex-instruction">Use the word given in capitals to form a word that fits in the space.</div>
+      </div>
+      <div class="passage-box" style="background:#f0f7f3; border-color:#52b788;">
+        <h3 style="font-family:'Georgia',serif; font-size:16px; color:#1b4332; margin-bottom:10px; text-align:center; font-style:italic;">Rhetoric</h3>
+        The (<b>1</b>) <input class="fill-input" data-answer="concept" placeholder="..."> (<b>CONCEIVE</b>) of 'rhetoric', or effective public speaking, dates back thousands of years. The underlying (<b>2</b>) <input class="fill-input" data-answer="assumption" placeholder="..."> (<b>ASSUME</b>) behind rhetoric is that how you present an argument can greatly influence whether people are persuaded by you or not. There is (<b>3</b>) <input class="fill-input" data-answer="undoubtedly|no doubt" placeholder="..."> (<b>DOUBT</b>) plenty of evidence to support this idea – it's practically (<b>4</b>) <input class="fill-input" data-answer="unthinkable" placeholder="..."> (<b>THINK</b>), for example, for a successful politician to be a poor communicator – but is it just a question of style winning over substance? Certainly, it is often said of politicians that they talk complete (<b>5</b>) <input class="fill-input" data-answer="nonsense" placeholder="..."> (<b>SENSE</b>) but what they say they say with such (<b>6</b>) <input class="fill-input" data-answer="conviction" placeholder="..."> (<b>CONVINCE</b>) that we tend to believe them, at least when they're in opposition. On the other hand, (<b>7</b>) <input class="fill-input" data-answer="wisdom" placeholder="..."> (<b>WISE</b>) and knowledge are of little value if you cannot communicate them effectively to your peers or to the next generation. It is the combination of clear (<b>8</b>) <input class="fill-input" data-answer="reasoning" placeholder="..."> (<b>REASON</b>), sound (<b>9</b>) <input class="fill-input" data-answer="judgement|judgment" placeholder="..."> (<b>JUDGE</b>) and effective presentation and communication skills that defines true rhetoric. A true rhetorician should always come across as knowledgeable, and never as (<b>10</b>) <input class="fill-input" data-answer="opinionated" placeholder="..."> (<b>OPINION</b>) or ignorant.
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exO')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exO')">Reset</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="toast"></div>
+
+<script>
+// ── UTILITY ──────────────────────────────────────────────
+function normalize(s) {
+  return s.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+function isCorrect(input, answer) {
+  const val = normalize(input.value);
+  const alts = answer.split('|').map(a => normalize(a));
+  return alts.includes(val);
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2000);
+}
+
+// ── SCORE TRACKING ───────────────────────────────────────
+function updateScore() {
+  const all = document.querySelectorAll('.fill-input, .h-small-input');
+  const answered = [...all].filter(i => i.value.trim() !== '').length;
+  const total = all.length;
+  const pct = total ? (answered / total * 100).toFixed(0) : 0;
+  document.getElementById('score-bar-fill').style.width = pct + '%';
+  document.getElementById('score-text').textContent = answered + ' / ' + total + ' answered';
+}
+document.addEventListener('input', updateScore);
+
+// ── FILL IN THE BLANK ────────────────────────────────────
+function checkFill(listId) {
+  const list = document.getElementById(listId);
+  let correct = 0, total = 0;
+  list.querySelectorAll('.fill-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetFill(listId) {
+  document.getElementById(listId).querySelectorAll('.fill-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+// Check all fill-inputs within a section div
+function checkAllFillInSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  let correct = 0, total = 0;
+  section.querySelectorAll('.fill-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetAllFillInSection(sectionId) {
+  document.getElementById(sectionId).querySelectorAll('.fill-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+// ── MULTIPLE CHOICE ──────────────────────────────────────
+document.addEventListener('click', e => {
+  if (!e.target.matches('.mc-btn')) return;
+  const btn = e.target;
+  const q = btn.dataset.q;
+  document.querySelectorAll(`.mc-btn[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+});
+function checkMC(listId) {
+  const list = document.getElementById(listId);
+  const questions = {};
+  list.querySelectorAll('.mc-btn').forEach(btn => {
+    if (!questions[btn.dataset.q]) questions[btn.dataset.q] = [];
+    questions[btn.dataset.q].push(btn);
+  });
+  let correct = 0, total = Object.keys(questions).length;
+  Object.values(questions).forEach(btns => {
+    const answer = btns[0].dataset.answer;
+    btns.forEach(b => {
+      b.classList.remove('correct', 'wrong');
+      if (b.classList.contains('selected')) {
+        if (b.dataset.opt === answer) { b.classList.add('correct'); correct++; }
+        else b.classList.add('wrong');
+      } else if (b.dataset.opt === answer) {
+        b.classList.add('correct');
+      }
+    });
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetMC(listId) {
+  document.getElementById(listId).querySelectorAll('.mc-btn').forEach(b => {
+    b.classList.remove('selected', 'correct', 'wrong');
+  });
+}
+
+// ── CHOOSE OPTION ─────────────────────────────────────────
+function chooseOption(btn) {
+  const q = btn.dataset.q;
+  btn.closest('.choose-pair').querySelectorAll('.choose-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function checkChoose(listId) {
+  const list = document.getElementById(listId);
+  let correct = 0, total = 0;
+  const questions = {};
+  list.querySelectorAll('.choose-btn').forEach(btn => {
+    if (!questions[btn.dataset.q]) questions[btn.dataset.q] = [];
+    questions[btn.dataset.q].push(btn);
+  });
+  total = Object.keys(questions).length;
+  Object.values(questions).forEach(btns => {
+    const answer = btns[0].dataset.answer;
+    btns.forEach(b => {
+      b.classList.remove('correct', 'wrong');
+      if (b.classList.contains('selected')) {
+        if (b.dataset.opt === answer) { b.classList.add('correct'); correct++; }
+        else b.classList.add('wrong');
+      } else if (b.dataset.opt === answer) {
+        b.classList.add('correct');
+      }
+    });
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetChoose(listId) {
+  document.getElementById(listId).querySelectorAll('.choose-btn').forEach(b => {
+    b.classList.remove('selected', 'correct', 'wrong');
+  });
+}
+
+// ── EXERCISE G / N (YES/NO tick) ──────────────────────────
+function toggleTickG(btn, val) {
+  const q = btn.dataset.q;
+  btn.closest('.tick-actions').querySelectorAll('.tick-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  btn._selectedVal = val;
+}
+function checkG() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#G-list .tick-item, #N-list .tick-item').forEach(item => {
+    const btns = item.querySelectorAll('.tick-btn');
+    const correctAnswer = btns[0].dataset.answer;
+    let selected = null;
+    btns.forEach(b => { if (b.classList.contains('selected')) selected = b._selectedVal; });
+    total++;
+    btns.forEach(b => b.classList.remove('correct', 'wrong'));
+    if (selected !== null) {
+      if (selected === correctAnswer) { item.querySelectorAll('.tick-btn').forEach(b => { if (b.classList.contains('selected')) b.classList.add('correct'); }); correct++; }
+      else { item.querySelectorAll('.tick-btn').forEach(b => { if (b.classList.contains('selected')) b.classList.add('wrong'); }); }
+    }
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetG() {
+  document.querySelectorAll('#G-list .tick-btn, #N-list .tick-btn').forEach(b => { b.classList.remove('selected', 'correct', 'wrong'); b._selectedVal = undefined; });
+}
+
+// ── SIDEBAR ACTIVE ────────────────────────────────────────
+const sections = document.querySelectorAll('.exercise[id]');
+const navLinks = document.querySelectorAll('#sidebar nav a');
+function onScroll() {
+  let current = '';
+  sections.forEach(s => {
+    if (s.getBoundingClientRect().top <= 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', onScroll);
+onScroll();
+
+// ── INIT ──────────────────────────────────────────────────
+updateScore();
+</script>
+</body>
+</html>

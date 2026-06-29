@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 11 – Grammar Exercises</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #333; min-height: 100vh; }
+
+  .header { background: #1565C0; color: white; padding: 16px 20px; text-align: center; }
+  .header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+  .header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+
+  .tab-bar { display: flex; background: #1976D2; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 1; min-width: 40px; padding: 12px 4px; border: none; background: transparent;
+    color: rgba(255,255,255,0.7); font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap;
+  }
+  .tab-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+  .tab-btn.active { color: white; border-bottom-color: #FFD600; }
+  .tab-badge {
+    display: inline-block; font-size: 0.65rem; background: rgba(255,255,255,0.25);
+    border-radius: 10px; padding: 1px 5px; margin-left: 2px; vertical-align: middle;
+  }
+  .tab-badge.perfect { background: #4CAF50; }
+
+  .content { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+  .exercise { display: none; }
+  .exercise.active { display: block; }
+
+  .ex-header { margin-bottom: 16px; }
+  .ex-title { font-size: 1.1rem; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+  .ex-instruction {
+    font-size: 0.9rem; color: #555; background: #E3F2FD; border-left: 4px solid #2196F3;
+    padding: 8px 12px; border-radius: 0 6px 6px 0;
+  }
+
+  .question-list { list-style: none; }
+  .question-item {
+    background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s;
+  }
+  .question-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .question-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+
+  .q-num { font-weight: 700; color: #1976D2; margin-right: 6px; }
+  .q-sentence { line-height: 1.8; }
+
+  input[type="text"] {
+    border: 2px solid #BBDEFB; border-radius: 6px; padding: 5px 10px;
+    font-size: 0.95rem; outline: none; background: #FAFAFA; transition: border .2s;
+    min-width: 100px;
+  }
+  input[type="text"]:focus { border-color: #2196F3; background: white; }
+  input[type="text"].correct { border-color: #4CAF50; background: #F1F8E9; color: #2E7D32; }
+  input[type="text"].wrong { border-color: #F44336; background: #FFF5F5; color: #C62828; }
+
+  .cap-word { font-weight: 700; color: #5D4037; font-size: 0.88rem; margin-left: 4px; background: #FFF9C4; border-radius: 3px; padding: 1px 5px; }
+
+  /* Two Choice */
+  .two-choice-btns { display: inline-flex; gap: 8px; margin-left: 6px; flex-wrap: wrap; }
+  .choice-btn {
+    border: 2px solid #90CAF9; background: white; border-radius: 6px;
+    padding: 4px 12px; font-size: 0.88rem; cursor: pointer; transition: all .2s; color: #1565C0;
+  }
+  .choice-btn:hover { background: #E3F2FD; }
+  .choice-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .choice-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .choice-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+
+  /* Multiple choice */
+  .mc-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .mc-btn {
+    border: 2px solid #90CAF9; background: white; border-radius: 6px;
+    padding: 5px 16px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #1565C0;
+  }
+  .mc-btn:hover { background: #E3F2FD; }
+  .mc-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .mc-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .mc-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+
+  /* Passage */
+  .passage-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .passage-line { margin-bottom: 10px; line-height: 2.2; }
+  .passage-title { font-weight: 700; font-size: 1.05rem; text-align: center; color: #1565C0; margin-bottom: 12px; letter-spacing: 1px; }
+  .passage-input { min-width: 70px; width: 90px; }
+
+  /* Matching */
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .match-left, .match-right { display: flex; flex-direction: column; gap: 8px; }
+  .match-item {
+    background: white; border: 2px solid #90CAF9; border-radius: 8px;
+    padding: 10px 14px; cursor: pointer; font-size: 0.9rem; transition: all .2s;
+    user-select: none;
+  }
+  .match-item:hover { background: #E3F2FD; }
+  .match-item.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .match-item.matched { background: #E8F5E9; border-color: #4CAF50; cursor: default; }
+  .match-item.correct { border-color: #4CAF50; background: #E8F5E9; }
+  .match-item.wrong { border-color: #F44336; background: #FFF5F5; }
+  .match-label { font-weight: 700; color: #1976D2; margin-right: 6px; }
+
+  /* Sentence transform */
+  .transform-item { background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s; }
+  .transform-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .transform-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+  .transform-original { margin-bottom: 6px; color: #555; font-size: 0.92rem; }
+  .transform-key { display: inline-block; background: #FFF9C4; border: 1px solid #F9A825; border-radius: 4px; padding: 1px 8px; font-weight: 700; color: #5D4037; font-size: 0.88rem; margin: 0 6px; }
+  .transform-blank { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .transform-input { min-width: 200px; flex: 1; }
+
+  /* Answer reveal */
+  .answer-reveal { font-size: 0.82rem; color: #388E3C; margin-top: 4px; display: none; }
+  .show-answers .answer-reveal { display: block; }
+
+  /* Action buttons */
+  .action-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+  .btn { padding: 10px 22px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-check { background: #2196F3; color: white; }
+  .btn-check:hover { background: #1976D2; }
+  .btn-reset { background: #FF9800; color: white; }
+  .btn-reset:hover { background: #F57C00; }
+  .btn-show { background: #9C27B0; color: white; }
+  .btn-show:hover { background: #7B1FA2; }
+
+  .score-display {
+    font-size: 1rem; font-weight: 700; padding: 8px 16px; border-radius: 8px;
+    background: #E8F5E9; color: #2E7D32; display: none;
+  }
+  .score-display.visible { display: inline-block; }
+  .score-display.perfect { background: #4CAF50; color: white; }
+
+  @media (max-width: 600px) {
+    .tab-btn { font-size: 0.78rem; padding: 10px 3px; }
+    .content { padding: 12px 10px 50px; }
+    .match-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Unit 11 – Grammar</h1>
+  <p>Comparatives &amp; superlatives / so, such, enough, too · 10 exercises · Click a tab to start</p>
+</div>
+
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" onclick="switchTab('a')">A</button>
+  <button class="tab-btn" onclick="switchTab('b')">B</button>
+  <button class="tab-btn" onclick="switchTab('c')">C</button>
+  <button class="tab-btn" onclick="switchTab('d')">D</button>
+  <button class="tab-btn" onclick="switchTab('e')">E</button>
+  <button class="tab-btn" onclick="switchTab('f')">F</button>
+  <button class="tab-btn" onclick="switchTab('g')">G</button>
+  <button class="tab-btn" onclick="switchTab('h')">H</button>
+  <button class="tab-btn" onclick="switchTab('i')">I</button>
+  <button class="tab-btn" onclick="switchTab('j')">J</button>
+</div>
+
+<div class="content">
+
+<!-- ===== EXERCISE A: Comparative forms ===== -->
+<div class="exercise active" id="ex-a">
+  <div class="ex-header">
+    <div class="ex-title">Exercise A – Complete using the comparative forms of the words in capitals</div>
+    <div class="ex-instruction">Write the comparative form of the adjective or adverb in capitals.</div>
+  </div>
+  <ul class="question-list" id="ql-a">
+    <li class="question-item" data-answer="taller">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Your brother is much <input type="text" class="ex-a-input" placeholder="…" style="min-width:110px"> <span class="cap-word">TALL</span> than mine.</span>
+      <div class="answer-reveal">✓ taller</div>
+    </li>
+    <li class="question-item" data-answer="greener">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">This island used to be much <input type="text" class="ex-a-input" placeholder="…" style="min-width:110px"> <span class="cap-word">GREEN</span> before the forest fires.</span>
+      <div class="answer-reveal">✓ greener</div>
+    </li>
+    <li class="question-item" data-answer="fitter">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Slow down! You're <input type="text" class="ex-a-input" placeholder="…" style="min-width:110px"> <span class="cap-word">FIT</span> than me and I can't keep up!</span>
+      <div class="answer-reveal">✓ fitter (double the final consonant: fit → fitter)</div>
+    </li>
+    <li class="question-item" data-answer="happier">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Veronica seems <input type="text" class="ex-a-input" placeholder="…" style="min-width:110px"> <span class="cap-word">HAPPY</span> since she moved schools.</span>
+      <div class="answer-reveal">✓ happier (y → ier: happy → happier)</div>
+    </li>
+    <li class="question-item" data-answer="trendier">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">It's actually <input type="text" class="ex-a-input" placeholder="…" style="min-width:110px"> <span class="cap-word">TRENDY</span> to wear your hair up this year.</span>
+      <div class="answer-reveal">✓ trendier</div>
+    </li>
+    <li class="question-item" data-answer="more nervous">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">As the time for the performance got nearer, I got <input type="text" class="ex-a-input" placeholder="…" style="min-width:140px"> <span class="cap-word">NERVOUS</span>.</span>
+      <div class="answer-reveal">✓ more nervous (two-syllable adjectives ending in -ous use more)</div>
+    </li>
+    <li class="question-item" data-answer="wiser">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Old people are often <input type="text" class="ex-a-input" placeholder="…" style="min-width:110px"> <span class="cap-word">WISE</span> than young people.</span>
+      <div class="answer-reveal">✓ wiser</div>
+    </li>
+    <li class="question-item" data-answer="cheaper">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Why don't you try and find a <input type="text" class="ex-a-input" placeholder="…" style="min-width:110px"> <span class="cap-word">CHEAP</span> computer game and save some money?</span>
+      <div class="answer-reveal">✓ cheaper</div>
+    </li>
+    <li class="question-item" data-answer="lazier">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">Matt seems to have got even <input type="text" class="ex-a-input" placeholder="…" style="min-width:110px"> <span class="cap-word">LAZY</span> than he used to be and almost never studies.</span>
+      <div class="answer-reveal">✓ lazier</div>
+    </li>
+    <li class="question-item" data-answer="more serious">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">If the problem gets any <input type="text" class="ex-a-input" placeholder="…" style="min-width:130px"> <span class="cap-word">SERIOUS</span>, we may need to inform the manager about it.</span>
+      <div class="answer-reveal">✓ more serious</div>
+    </li>
+    <li class="question-item" data-answer="more quickly">
+      <span class="q-num">11.</span>
+      <span class="q-sentence">If you work <input type="text" class="ex-a-input" placeholder="…" style="min-width:130px"> <span class="cap-word">QUICKLY</span>, you'll finish sooner and then you can go home earlier.</span>
+      <div class="answer-reveal">✓ more quickly</div>
+    </li>
+    <li class="question-item" data-answer="better">
+      <span class="q-num">12.</span>
+      <span class="q-sentence">Ben says he's feeling much <input type="text" class="ex-a-input" placeholder="…" style="min-width:110px"> <span class="cap-word">WELL</span> after his illness.</span>
+      <div class="answer-reveal">✓ better (irregular: well → better)</div>
+    </li>
+    <li class="question-item" data-answer="less">
+      <span class="q-num">13.</span>
+      <span class="q-sentence">I have even <input type="text" class="ex-a-input" placeholder="…" style="min-width:80px"> <span class="cap-word">LITTLE</span> free time this year than I did last year.</span>
+      <div class="answer-reveal">✓ less (irregular: little → less)</div>
+    </li>
+    <li class="question-item" data-answer="worse">
+      <span class="q-num">14.</span>
+      <span class="q-sentence">The news was much <input type="text" class="ex-a-input" placeholder="…" style="min-width:110px"> <span class="cap-word">BAD</span> than anyone had feared.</span>
+      <div class="answer-reveal">✓ worse (irregular: bad → worse)</div>
+    </li>
+    <li class="question-item" data-answer="farther|further">
+      <span class="q-num">15.</span>
+      <span class="q-sentence">You'll need to be able to run <input type="text" class="ex-a-input" placeholder="…" style="min-width:110px"> <span class="cap-word">FAR</span> than this if you're going to do the marathon.</span>
+      <div class="answer-reveal">✓ farther / further</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('a')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('a')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('a')">Reset</button>
+    <span class="score-display" id="score-a"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE B: Superlative forms ===== -->
+<div class="exercise" id="ex-b">
+  <div class="ex-header">
+    <div class="ex-title">Exercise B – Complete using the superlative forms of the words in capitals</div>
+    <div class="ex-instruction">Write the superlative form of the adjective or adverb in capitals.</div>
+  </div>
+  <ul class="question-list" id="ql-b">
+    <li class="question-item" data-answer="the greatest">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">I think Mohammed Ali was <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> <span class="cap-word">GREAT</span> boxer that ever lived.</span>
+      <div class="answer-reveal">✓ the greatest</div>
+    </li>
+    <li class="question-item" data-answer="the most boring">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">It was <input type="text" class="ex-b-input" placeholder="…" style="min-width:150px"> <span class="cap-word">BORING</span> film I had ever seen.</span>
+      <div class="answer-reveal">✓ the most boring</div>
+    </li>
+    <li class="question-item" data-answer="the highest">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Our teacher told us that the student with <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> <span class="cap-word">HIGH</span> mark would get a prize.</span>
+      <div class="answer-reveal">✓ the highest</div>
+    </li>
+    <li class="question-item" data-answer="the luckiest">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Ginger is one of <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> <span class="cap-word">LUCKY</span> cats alive – he's been hit by a car three times!</span>
+      <div class="answer-reveal">✓ the luckiest</div>
+    </li>
+    <li class="question-item" data-answer="the most often|most often">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Out of all the students in my music school, I practise <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> <span class="cap-word">OFTEN</span>.</span>
+      <div class="answer-reveal">✓ the most often</div>
+    </li>
+    <li class="question-item" data-answer="the deepest">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">The Pacific is <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> <span class="cap-word">DEEP</span> ocean in the world.</span>
+      <div class="answer-reveal">✓ the deepest</div>
+    </li>
+    <li class="question-item" data-answer="the ugliest">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">That's <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> <span class="cap-word">UGLY</span> fish I've ever seen!</span>
+      <div class="answer-reveal">✓ the ugliest</div>
+    </li>
+    <li class="question-item" data-answer="the worst">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">I was ill before the exam and I did <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> <span class="cap-word">BADLY</span> out of the whole class.</span>
+      <div class="answer-reveal">✓ the worst (irregular: badly → worst)</div>
+    </li>
+    <li class="question-item" data-answer="the farthest|the furthest">
+      <span class="q-num">9.</span>
+      <span class="q-sentence"><input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> <span class="cap-word">FAR</span> I've run in one day is about ten kilometres.</span>
+      <div class="answer-reveal">✓ The farthest / The furthest</div>
+    </li>
+    <li class="question-item" data-answer="the loveliest">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">Don't you think this would be <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> <span class="cap-word">LOVELY</span> spot for a picnic?</span>
+      <div class="answer-reveal">✓ the loveliest</div>
+    </li>
+    <li class="question-item" data-answer="the craziest">
+      <span class="q-num">11.</span>
+      <span class="q-sentence">But that's <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> <span class="cap-word">CRAZY</span> idea I've ever heard!</span>
+      <div class="answer-reveal">✓ the craziest</div>
+    </li>
+    <li class="question-item" data-answer="the most modern">
+      <span class="q-num">12.</span>
+      <span class="q-sentence">I asked the assistant to show me <input type="text" class="ex-b-input" placeholder="…" style="min-width:150px"> <span class="cap-word">MODERN</span> phone they had.</span>
+      <div class="answer-reveal">✓ the most modern</div>
+    </li>
+    <li class="question-item" data-answer="the worst">
+      <span class="q-num">13.</span>
+      <span class="q-sentence">I told the manager that it was <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> <span class="cap-word">BAD</span> hotel I had ever stayed in.</span>
+      <div class="answer-reveal">✓ the worst</div>
+    </li>
+    <li class="question-item" data-answer="the least">
+      <span class="q-num">14.</span>
+      <span class="q-sentence">Who do you think is <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> <span class="cap-word">LITTLE</span> talented actor to win an Oscar?</span>
+      <div class="answer-reveal">✓ the least</div>
+    </li>
+    <li class="question-item" data-answer="the best">
+      <span class="q-num">15.</span>
+      <span class="q-sentence">Out of all the members of the choir, Jason sang <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> <span class="cap-word">WELL</span>.</span>
+      <div class="answer-reveal">✓ the best (irregular: well → best)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('b')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('b')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('b')">Reset</button>
+    <span class="score-display" id="score-b"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE C: Two choice – Film Review passage ===== -->
+<div class="exercise" id="ex-c">
+  <div class="ex-header">
+    <div class="ex-title">Exercise C – Circle the correct word</div>
+    <div class="ex-instruction">Choose the correct word from each pair in bold in the Film Review passage.</div>
+  </div>
+  <div class="passage-container" id="ql-c">
+    <div class="passage-title">FILM REVIEW</div>
+    <p class="passage-line">
+      <em>Crime Does Pay</em>, the
+      <span class="two-choice-btns">
+        <button class="choice-btn" data-id="c1" data-val="a" onclick="chooseBtnC(this)">later</button>
+        <button class="choice-btn" data-id="c1" data-val="b" onclick="chooseBtnC(this)">latest</button>
+      </span>
+      comedy from director Sam Martin, has to be one of the
+      <span class="two-choice-btns">
+        <button class="choice-btn" data-id="c2" data-val="a" onclick="chooseBtnC(this)">little</button>
+        <button class="choice-btn" data-id="c2" data-val="b" onclick="chooseBtnC(this)">least</button>
+      </span>
+      interesting films I have ever seen. The acting is terrible and the story is much
+      <span class="two-choice-btns">
+        <button class="choice-btn" data-id="c3" data-val="a" onclick="chooseBtnC(this)">worse</button>
+        <button class="choice-btn" data-id="c3" data-val="b" onclick="chooseBtnC(this)">worst</button>
+      </span>
+      than Martin's other flop, <em>Escape. Crime Does Pay</em> was apparently
+      <span class="two-choice-btns">
+        <button class="choice-btn" data-id="c4" data-val="a" onclick="chooseBtnC(this)">more</button>
+        <button class="choice-btn" data-id="c4" data-val="b" onclick="chooseBtnC(this)">most</button>
+      </span>
+      expensive than any other film this year, but it's hard to see where the money went.
+    </p>
+    <p class="passage-line">
+      The plot concerns a gang of burglars who decide to steal the
+      <span class="two-choice-btns">
+        <button class="choice-btn" data-id="c5" data-val="a" onclick="chooseBtnC(this)">more</button>
+        <button class="choice-btn" data-id="c5" data-val="b" onclick="chooseBtnC(this)">most</button>
+      </span>
+      valuable painting in the world. Fine, except these criminals are far
+      <span class="two-choice-btns">
+        <button class="choice-btn" data-id="c6" data-val="a" onclick="chooseBtnC(this)">less</button>
+        <button class="choice-btn" data-id="c6" data-val="b" onclick="chooseBtnC(this)">least</button>
+      </span>
+      amusing than they should be. There isn't a single real laugh in the whole movie. When I saw it, even
+      <span class="two-choice-btns">
+        <button class="choice-btn" data-id="c7" data-val="a" onclick="chooseBtnC(this)">younger</button>
+        <button class="choice-btn" data-id="c7" data-val="b" onclick="chooseBtnC(this)">youngest</button>
+      </span>
+      members of the audience thought it was stupidly childish.
+    </p>
+    <p class="passage-line">
+      Dean Richards, playing Scarnose, does a slightly
+      <span class="two-choice-btns">
+        <button class="choice-btn" data-id="c8" data-val="a" onclick="chooseBtnC(this)">better</button>
+        <button class="choice-btn" data-id="c8" data-val="b" onclick="chooseBtnC(this)">best</button>
+      </span>
+      job than the others, but there isn't much in it. When will Hollywood realise that as ticket prices get
+      <span class="two-choice-btns">
+        <button class="choice-btn" data-id="c9" data-val="a" onclick="chooseBtnC(this)">higher</button>
+        <button class="choice-btn" data-id="c9" data-val="b" onclick="chooseBtnC(this)">highest</button>
+      </span>,
+      more people are finding that the
+      <span class="two-choice-btns">
+        <button class="choice-btn" data-id="c10" data-val="a" onclick="chooseBtnC(this)">well</button>
+        <button class="choice-btn" data-id="c10" data-val="b" onclick="chooseBtnC(this)">best</button>
+      </span>
+      form of entertainment is to spend an evening at home with a DVD?
+    </p>
+    <div class="answer-reveal" style="margin-top:10px">✓ (1) latest &nbsp;(2) least &nbsp;(3) worse &nbsp;(4) more &nbsp;(5) most &nbsp;(6) less &nbsp;(7) younger &nbsp;(8) better &nbsp;(9) higher &nbsp;(10) best</div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExC()">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('c')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('c')">Reset</button>
+    <span class="score-display" id="score-c"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE D: Sentence transformation – superlative/comparative ===== -->
+<div class="exercise" id="ex-d">
+  <div class="ex-header">
+    <div class="ex-title">Exercise D – Sentence transformation</div>
+    <div class="ex-instruction">Complete each second sentence using the key word so it has a similar meaning. Write between two and five words.</div>
+  </div>
+  <ul class="question-list" id="ql-d">
+    <li class="transform-item" data-answer="best book i have ever|best book i've ever">
+      <span class="q-num">1.</span>
+      <div class="transform-original">I have never read a better book than this one. <span class="transform-key">ever</span></div>
+      <div class="transform-blank">This is the <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> read.</div>
+      <div class="answer-reveal">✓ best book I have ever / best book I've ever</div>
+    </li>
+    <li class="transform-item" data-answer="the farthest anyone|the furthest anyone">
+      <span class="q-num">2.</span>
+      <div class="transform-original">Nobody has ever been this far into the jungle. <span class="transform-key">the</span></div>
+      <div class="transform-blank">This is <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> has ever been into the jungle.</div>
+      <div class="answer-reveal">✓ the farthest / the furthest anyone</div>
+    </li>
+    <li class="transform-item" data-answer="hardest i have ever worked|hardest i've ever worked">
+      <span class="q-num">3.</span>
+      <div class="transform-original">I have never worked so hard in my whole life. <span class="transform-key">ever</span></div>
+      <div class="transform-blank">It was the <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> in my whole life.</div>
+      <div class="answer-reveal">✓ hardest I have ever worked / hardest I've ever worked</div>
+    </li>
+    <li class="transform-item" data-answer="is shorter than|is less tall than">
+      <span class="q-num">4.</span>
+      <div class="transform-original">Liam is the tallest boy in the class. <span class="transform-key">than</span></div>
+      <div class="transform-blank">Every other boy in the class <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> Liam.</div>
+      <div class="answer-reveal">✓ is shorter than</div>
+    </li>
+    <li class="transform-item" data-answer="is nicer than all|is nicer than any of">
+      <span class="q-num">5.</span>
+      <div class="transform-original">This is the nicest beach along this part of the coast. <span class="transform-key">than</span></div>
+      <div class="transform-blank">This <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> the others along this part of the coast.</div>
+      <div class="answer-reveal">✓ is nicer than all (the others)</div>
+    </li>
+    <li class="transform-item" data-answer="no mountain is higher than|no mountain is taller than">
+      <span class="q-num">6.</span>
+      <div class="transform-original">I read that Mount Everest is the highest mountain. <span class="transform-key">no</span></div>
+      <div class="transform-blank">I read that <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> Mount Everest.</div>
+      <div class="answer-reveal">✓ no mountain is higher than</div>
+    </li>
+    <li class="transform-item" data-answer="this the farthest north anyone|this the furthest north anyone">
+      <span class="q-num">7.</span>
+      <div class="transform-original">Has anyone ever been this far north before? <span class="transform-key">the</span></div>
+      <div class="transform-blank">Is <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> has ever been?</div>
+      <div class="answer-reveal">✓ this the farthest / furthest north anyone</div>
+    </li>
+    <li class="transform-item" data-answer="an uglier painting than|a more ugly painting than">
+      <span class="q-num">8.</span>
+      <div class="transform-original">The painting Ed did is the ugliest one you can imagine. <span class="transform-key">than</span></div>
+      <div class="transform-blank">You can't imagine <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> the one Ed did.</div>
+      <div class="answer-reveal">✓ an uglier painting than</div>
+    </li>
+    <li class="transform-item" data-answer="are not as rare as|are less rare than">
+      <span class="q-num">9.</span>
+      <div class="transform-original">This stamp is rarer than any other in my collection. <span class="transform-key">more</span></div>
+      <div class="transform-blank">The other stamps in my collection <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> this one.</div>
+      <div class="answer-reveal">✓ are not as rare as / are less rare than (this stamp is more rare)</div>
+    </li>
+    <li class="transform-item" data-answer="is the fastest runner|is the quickest runner">
+      <span class="q-num">10.</span>
+      <div class="transform-original">Nobody in the class runs as fast as Pedro. <span class="transform-key">runner</span></div>
+      <div class="transform-blank">Pedro <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> in the class.</div>
+      <div class="answer-reveal">✓ is the fastest runner</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExTransform('d')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('d')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('d')">Reset</button>
+    <span class="score-display" id="score-d"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE E: Rewrite using so…that ===== -->
+<div class="exercise" id="ex-e">
+  <div class="ex-header">
+    <div class="ex-title">Exercise E – Rewrite each sentence using so … that</div>
+    <div class="ex-instruction">Rewrite each sentence using the structure <em>so + adjective/adverb + that</em>.</div>
+  </div>
+  <ul class="question-list" id="ql-e">
+    <li class="question-item" data-answer="open">
+      <span class="q-num">1.</span>
+      <div style="margin-bottom:6px; color:#555">John can see over the wall because he is tall.</div>
+      <input type="text" class="ex-e-input" placeholder="John is so tall that …" style="width:100%; min-width:200px">
+      <div class="answer-reveal">✓ John is so tall that he can see over the wall.</div>
+    </li>
+    <li class="question-item" data-answer="open">
+      <span class="q-num">2.</span>
+      <div style="margin-bottom:6px; color:#555">I'm sure my sister will go to university because she is clever.</div>
+      <input type="text" class="ex-e-input" placeholder="My sister is so clever that …" style="width:100%; min-width:200px">
+      <div class="answer-reveal">✓ My sister is so clever that I'm sure she will go to university.</div>
+    </li>
+    <li class="question-item" data-answer="open">
+      <span class="q-num">3.</span>
+      <div style="margin-bottom:6px; color:#555">I can't stop playing this computer game because it's good.</div>
+      <input type="text" class="ex-e-input" placeholder="This computer game is so good that …" style="width:100%; min-width:200px">
+      <div class="answer-reveal">✓ This computer game is so good that I can't stop playing it.</div>
+    </li>
+    <li class="question-item" data-answer="open">
+      <span class="q-num">4.</span>
+      <div style="margin-bottom:6px; color:#555">Tim can't come out because he has a lot of work to do.</div>
+      <input type="text" class="ex-e-input" placeholder="Tim has so much work to do that …" style="width:100%; min-width:200px">
+      <div class="answer-reveal">✓ Tim has so much work to do that he can't come out.</div>
+    </li>
+    <li class="question-item" data-answer="open">
+      <span class="q-num">5.</span>
+      <div style="margin-bottom:6px; color:#555">It's hot, which means I can't sleep.</div>
+      <input type="text" class="ex-e-input" placeholder="It's so hot that …" style="width:100%; min-width:200px">
+      <div class="answer-reveal">✓ It's so hot that I can't sleep.</div>
+    </li>
+    <li class="question-item" data-answer="open">
+      <span class="q-num">6.</span>
+      <div style="margin-bottom:6px; color:#555">Tina arrived late, which meant she missed the train.</div>
+      <input type="text" class="ex-e-input" placeholder="Tina arrived so late that …" style="width:100%; min-width:200px">
+      <div class="answer-reveal">✓ Tina arrived so late that she missed the train.</div>
+    </li>
+    <li class="question-item" data-answer="open">
+      <span class="q-num">7.</span>
+      <div style="margin-bottom:6px; color:#555">We don't have any money for luxuries because we have a lot of bills to pay.</div>
+      <input type="text" class="ex-e-input" placeholder="We have so many bills to pay that …" style="width:100%; min-width:200px">
+      <div class="answer-reveal">✓ We have so many bills to pay that we don't have any money for luxuries.</div>
+    </li>
+    <li class="question-item" data-answer="open">
+      <span class="q-num">8.</span>
+      <div style="margin-bottom:6px; color:#555">It takes a day to get to Australia because it's very far away.</div>
+      <input type="text" class="ex-e-input" placeholder="Australia is so far away that …" style="width:100%; min-width:200px">
+      <div class="answer-reveal">✓ Australia is so far away that it takes a day to get there.</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-show" onclick="showAnswers('e')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('e')">Reset</button>
+    <span class="score-display" id="score-e"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE F: Matching – so/such/such a lot of ===== -->
+<div class="exercise" id="ex-f">
+  <div class="ex-header">
+    <div class="ex-title">Exercise F – Match to make sentences</div>
+    <div class="ex-instruction">Click a sentence beginning on the left, then the matching ending on the right.</div>
+  </div>
+  <div id="ql-f">
+    <div class="match-grid">
+      <div class="match-left" id="match-left-f">
+        <div class="match-item" data-id="1" data-answer="D" onclick="selectMatch(this,'left','f')"><span class="match-label">1.</span> Last year, winter started so …</div>
+        <div class="match-item" data-id="2" data-answer="A" onclick="selectMatch(this,'left','f')"><span class="match-label">2.</span> Last winter, there were so …</div>
+        <div class="match-item" data-id="3" data-answer="C" onclick="selectMatch(this,'left','f')"><span class="match-label">3.</span> Last year, we had such …</div>
+        <div class="match-item" data-id="4" data-answer="F" onclick="selectMatch(this,'left','f')"><span class="match-label">4.</span> Last winter, there was so …</div>
+        <div class="match-item" data-id="5" data-answer="E" onclick="selectMatch(this,'left','f')"><span class="match-label">5.</span> Last winter, there was such a lot of …</div>
+        <div class="match-item" data-id="6" data-answer="B" onclick="selectMatch(this,'left','f')"><span class="match-label">6.</span> Last winter was so …</div>
+      </div>
+      <div class="match-right" id="match-right-f">
+        <div class="match-item" data-id="A" onclick="selectMatch(this,'right','f')"><span class="match-label">A</span> many storms that we had floods.</div>
+        <div class="match-item" data-id="B" onclick="selectMatch(this,'right','f')"><span class="match-label">B</span> cold that the water in the pipes froze.</div>
+        <div class="match-item" data-id="C" onclick="selectMatch(this,'right','f')"><span class="match-label">C</span> a cold winter that I had to sleep with a hat on!</div>
+        <div class="match-item" data-id="D" onclick="selectMatch(this,'right','f')"><span class="match-label">D</span> suddenly that many people were taken by surprise.</div>
+        <div class="match-item" data-id="E" onclick="selectMatch(this,'right','f')"><span class="match-label">E</span> much snow that I skied nearly every day.</div>
+        <div class="match-item" data-id="F" onclick="selectMatch(this,'right','f')"><span class="match-label">F</span> snow that many wild animals died.</div>
+      </div>
+    </div>
+    <div id="match-pairs-f" style="margin-top:12px; font-size:0.85rem; color:#555;"></div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExMatch('f')">Check Answers</button>
+    <button class="btn btn-show" onclick="showMatchAnswers('f')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetMatch('f')">Reset</button>
+    <span class="score-display" id="score-f"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE G: Two choice – enough ===== -->
+<div class="exercise" id="ex-g">
+  <div class="ex-header">
+    <div class="ex-title">Exercise G – Circle the correct word or phrase</div>
+    <div class="ex-instruction">Choose the correct position/form of "enough".</div>
+  </div>
+  <ul class="question-list" id="ql-g">
+    <li class="question-item" data-answer="a">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">I don't think there's
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">enough pizza</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">pizza enough</button>
+        </span>
+        for everyone.</span>
+      <div class="answer-reveal">✓ enough pizza (enough before a noun)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">I'm afraid you're not
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">enough old</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">old enough</button>
+        </span>
+        to see this film.</span>
+      <div class="answer-reveal">✓ old enough (enough after an adjective)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Luckily, we got to the box office
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">enough early</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">early enough</button>
+        </span>
+        and got the tickets.</span>
+      <div class="answer-reveal">✓ early enough (enough after an adverb)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Anne's
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">enough sensible</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">sensible enough</button>
+        </span>
+        to realise she needs to work hard this year.</span>
+      <div class="answer-reveal">✓ sensible enough (enough after an adjective)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">If you don't train
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">enough hard</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">hard enough</button>
+        </span>
+        , you'll never win the race.</span>
+      <div class="answer-reveal">✓ hard enough (enough after an adverb)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Have you got
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">enough credits</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">credits enough</button>
+        </span>
+        to call Yiota on your mobile?</span>
+      <div class="answer-reveal">✓ enough credits (enough before a noun)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">It should be
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">enough warm</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">warm enough</button>
+        </span>
+        for a picnic this weekend.</span>
+      <div class="answer-reveal">✓ warm enough (enough after an adjective)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">I don't think I'm good enough
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">for getting</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">to get</button>
+        </span>
+        into the swimming team.</span>
+      <div class="answer-reveal">✓ to get (enough + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">Are you sure you've got enough chairs for
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">us all to sit down</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">we all sit down</button>
+        </span>?</span>
+      <div class="answer-reveal">✓ us all to sit down (object pronoun + to-infinitive after enough)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">In mountaineering, you have to be strong enough
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">for pull</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">to pull</button>
+        </span>
+        yourself up with your fingers.</span>
+      <div class="answer-reveal">✓ to pull (enough + to-infinitive)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExG()">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('g')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('g')">Reset</button>
+    <span class="score-display" id="score-g"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE H: Too – tick or replace ===== -->
+<div class="exercise" id="ex-h">
+  <div class="ex-header">
+    <div class="ex-title">Exercise H – Tick correct sentences; replace incorrect word in bold</div>
+    <div class="ex-instruction">If the sentence is correct, write ✓. If "too" is used incorrectly, write the correct word (e.g. very / so / such).</div>
+  </div>
+  <ul class="question-list" id="ql-h">
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">I wanted to get some new trainers but they were <strong>too</strong> expensive. <input type="text" class="ex-h-input" placeholder="✓ or word…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ (correct – too = excessively, I couldn't buy them)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Japanese is a <strong>too</strong> difficult language for Westerners to learn. <input type="text" class="ex-h-input" placeholder="✓ or word…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ (correct – too difficult for … to learn)</div>
+    </li>
+    <li class="question-item" data-answer="so|very">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Daniel's <strong>too</strong> good at art and he's starting art school next year. <input type="text" class="ex-h-input" placeholder="✓ or word…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ so / very (too implies it's a problem; here it's positive)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Don't invite <strong>too</strong> many people to the party or we won't have enough room. <input type="text" class="ex-h-input" placeholder="✓ or word…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ (correct – too many = more than is acceptable)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">If you try to write your essay <strong>too</strong> quickly, you'll make mistakes. <input type="text" class="ex-h-input" placeholder="✓ or word…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ (correct – too quickly = excessively fast, causing errors)</div>
+    </li>
+    <li class="question-item" data-answer="so|very">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">My new computer is <strong>too</strong> fast and can run all the latest programs. <input type="text" class="ex-h-input" placeholder="✓ or word…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ so / very (speed is positive here; too implies a problem)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Joanne was fined for driving <strong>too</strong> fast. <input type="text" class="ex-h-input" placeholder="✓ or word…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ (correct – too fast = excessively fast, resulting in a fine)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Carol couldn't climb over the wall because it was <strong>too</strong> high. <input type="text" class="ex-h-input" placeholder="✓ or word…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ (correct – too high = excessively high to climb over)</div>
+    </li>
+    <li class="question-item" data-answer="so|very">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">Cornwall is <strong>too</strong> beautiful and we go there every year on holiday. <input type="text" class="ex-h-input" placeholder="✓ or word…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ so / very (beauty is positive; too implies it's a problem)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">My grandparents are <strong>too</strong> old to work now and have retired. <input type="text" class="ex-h-input" placeholder="✓ or word…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ (correct – too old to work = excessively old)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">11.</span>
+      <span class="q-sentence">It was <strong>too</strong> dark for me to see the map and I got lost. <input type="text" class="ex-h-input" placeholder="✓ or word…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ (correct – too dark to see)</div>
+    </li>
+    <li class="question-item" data-answer="so|very">
+      <span class="q-num">12.</span>
+      <span class="q-sentence">My best friend is <strong>too</strong> funny and always makes me laugh. <input type="text" class="ex-h-input" placeholder="✓ or word…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ so / very (funniness is positive here)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('h')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('h')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('h')">Reset</button>
+    <span class="score-display" id="score-h"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE I: MCQ – so/such/enough/too ===== -->
+<div class="exercise" id="ex-i">
+  <div class="ex-header">
+    <div class="ex-title">Exercise I – Choose the correct answer</div>
+    <div class="ex-instruction">Choose A (so), B (such), C (enough) or D (too).</div>
+  </div>
+  <ul class="question-list" id="ql-i">
+    <li class="question-item" data-answer="A">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">It was ………… windy that I couldn't stand up!</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A so</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B such</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C enough</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D too</button>
+      </div>
+      <div class="answer-reveal">✓ A so (so + adjective + that)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Everyone had ………… a good time when we went bowling that we agreed to go again.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A so</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B such</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C enough</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D too</button>
+      </div>
+      <div class="answer-reveal">✓ B such (such a + noun phrase + that)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Emma and Karen used to be ………… good friends that I'm surprised they don't get on now.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A so</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B such</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C enough</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D too</button>
+      </div>
+      <div class="answer-reveal">✓ B such (such + adjective + plural noun + that)</div>
+    </li>
+    <li class="question-item" data-answer="C">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">I hope I've got ………… money to pay for this meal!</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A so</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B such</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C enough</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D too</button>
+      </div>
+      <div class="answer-reveal">✓ C enough (enough + noun)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">I'm sorry, but I've got ………… much work to do to come to the beach today.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A so</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B such</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C enough</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D too</button>
+      </div>
+      <div class="answer-reveal">✓ D too (too much work to do = excessively, preventing action)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">My mum was ………… angry that I knew I'd better disappear for a while.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A so</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B such</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C enough</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D too</button>
+      </div>
+      <div class="answer-reveal">✓ A so (so + adjective + that)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">They were ………… beautiful shoes that I decided I had to get them.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A so</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B such</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C enough</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D too</button>
+      </div>
+      <div class="answer-reveal">✓ B such (such + adjective + plural noun + that)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">The earthquake was ………… powerful that the town was destroyed.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A so</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B such</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C enough</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D too</button>
+      </div>
+      <div class="answer-reveal">✓ A so (so + adjective + that)</div>
+    </li>
+    <li class="question-item" data-answer="C">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">The shot was ………… quick for the goalkeeper and the ball hit the back of the net.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A so</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B such</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C enough</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D too</button>
+      </div>
+      <div class="answer-reveal">✓ D too (too quick for the goalkeeper = exceeded his ability)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">I had ………… a bad headache that I went to lie down for a while.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A so</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B such</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C enough</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D too</button>
+      </div>
+      <div class="answer-reveal">✓ B such (such a + adjective + singular noun + that)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExMC('i')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('i')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('i')">Reset</button>
+    <span class="score-display" id="score-i"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE J: One word per gap – Crimestoppers passage ===== -->
+<div class="exercise" id="ex-j">
+  <div class="ex-header">
+    <div class="ex-title">Exercise J – Write one word in each gap</div>
+    <div class="ex-instruction">Write exactly one word in each numbered gap.</div>
+  </div>
+  <div class="passage-container" id="ql-j">
+    <div class="passage-title">CRIMESTOPPERS</div>
+    <p class="passage-line">
+      'Hello, and welcome to <em>Crimestoppers</em>, the show that lets you, the viewer, help the police. We've
+      had (1) <input type="text" class="passage-input ex-j-input" data-answer="such" placeholder="…"> a lot of letters this week that it's difficult to know where to begin. We'll start
+      with the story of Mrs Pat Williams, of Cambridge. Last Friday, Pat decided to go into town with
+      her baby daughter. It's (2) <input type="text" class="passage-input ex-j-input" data-answer="too" placeholder="…"> far to walk so they went to the bus stop. They waited
+      (3) <input type="text" class="passage-input ex-j-input" data-answer="such" placeholder="…"> a long time that baby Caroline started to cry. Pat picked the baby up out of
+      the pram and she was (4) <input type="text" class="passage-input ex-j-input" data-answer="so" placeholder="…"> busy she didn't notice the man beside her until it was
+      (5) <input type="text" class="passage-input ex-j-input" data-answer="too" placeholder="…"> late. He grabbed her handbag and ran off (6) <input type="text" class="passage-input ex-j-input" data-answer="so|too" placeholder="…"> quickly for her to
+      catch him. It all happened (7) <input type="text" class="passage-input ex-j-input" data-answer="so" placeholder="…"> fast that there was nothing anyone could do. Police
+      are appealing for witnesses. Maybe you were in the area. Maybe you think that what you saw is
+      (8) <input type="text" class="passage-input ex-j-input" data-answer="too" placeholder="…"> unimportant that the police won't be interested. Remember that no detail is
+      (9) <input type="text" class="passage-input ex-j-input" data-answer="too" placeholder="…"> small to be useful to the police. Call us here at <em>Crimestoppers</em> now.'
+    </p>
+    <div class="answer-reveal" style="margin-top:10px">✓ (1) such &nbsp;(2) too &nbsp;(3) such &nbsp;(4) so &nbsp;(5) too &nbsp;(6) so/too &nbsp;(7) so &nbsp;(8) too &nbsp;(9) too</div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExPassage('j')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('j')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('j')">Reset</button>
+    <span class="score-display" id="score-j"></span>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+const tabs = ['a','b','c','d','e','f','g','h','i','j'];
+
+function switchTab(id) {
+  document.querySelector('.exercise.active').classList.remove('active');
+  document.getElementById('ex-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', tabs[i] === id);
+  });
+}
+
+function chooseBtn(btn) {
+  const btns = btn.closest('.two-choice-btns').querySelectorAll('.choice-btn');
+  btns.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function chooseBtnC(btn) {
+  const id = btn.dataset.id;
+  document.querySelectorAll('[data-id="' + id + '"]').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function chooseMC(btn) {
+  const opts = btn.closest('.mc-options').querySelectorAll('.mc-btn');
+  opts.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+// Matching
+let matchSelected = { left: null, right: null };
+let matchPairs = {};
+
+function selectMatch(item, side, exId) {
+  if (item.classList.contains('matched')) return;
+  const leftId = 'match-left-' + exId;
+  const rightId = 'match-right-' + exId;
+  if (side === 'left') {
+    document.querySelectorAll('#' + leftId + ' .match-item').forEach(i => i.classList.remove('selected'));
+    item.classList.add('selected');
+    matchSelected.left = item;
+  } else {
+    document.querySelectorAll('#' + rightId + ' .match-item').forEach(i => i.classList.remove('selected'));
+    item.classList.add('selected');
+    matchSelected.right = item;
+  }
+  if (matchSelected.left && matchSelected.right) {
+    const lId = matchSelected.left.dataset.id;
+    const rId = matchSelected.right.dataset.id;
+    matchPairs[lId] = rId;
+    matchSelected.left.classList.remove('selected');
+    matchSelected.right.classList.remove('selected');
+    matchSelected.left.classList.add('matched');
+    matchSelected.right.classList.add('matched');
+    matchSelected = { left: null, right: null };
+    renderMatchPairs(exId);
+  }
+}
+
+function renderMatchPairs(exId) {
+  const container = document.getElementById('match-pairs-' + exId);
+  container.innerHTML = Object.entries(matchPairs).map(([l,r]) =>
+    `<span style="display:inline-block;margin:3px 8px;background:#E3F2FD;border-radius:6px;padding:3px 10px;">${l} → ${r}</span>`
+  ).join('');
+}
+
+function checkExMatch(exId) {
+  const items = document.querySelectorAll('#match-left-' + exId + ' .match-item');
+  let correct = 0, total = items.length;
+  items.forEach(item => {
+    const leftId = item.dataset.id;
+    const expected = item.dataset.answer;
+    const actual = matchPairs[leftId];
+    const ok = actual === expected;
+    if (ok) correct++;
+    item.classList.remove('correct','wrong');
+    item.classList.add(ok ? 'correct' : 'wrong');
+    const rightItem = document.querySelector('#match-right-' + exId + ' .match-item[data-id="' + expected + '"]');
+    if (rightItem) { rightItem.classList.remove('correct','wrong'); rightItem.classList.add(ok ? 'correct' : 'wrong'); }
+  });
+  updateScore(exId, correct, total);
+}
+
+function showMatchAnswers(exId) {
+  checkExMatch(exId);
+  document.getElementById('ex-' + exId).classList.add('show-answers');
+}
+
+function resetMatch(exId) {
+  matchPairs = {};
+  matchSelected = { left: null, right: null };
+  document.querySelectorAll('#match-left-' + exId + ' .match-item, #match-right-' + exId + ' .match-item').forEach(i => {
+    i.classList.remove('selected','matched','correct','wrong');
+  });
+  const container = document.getElementById('match-pairs-' + exId);
+  if (container) container.innerHTML = '';
+  document.getElementById('ex-' + exId).classList.remove('show-answers');
+  const scoreEl = document.getElementById('score-' + exId);
+  scoreEl.textContent = ''; scoreEl.classList.remove('visible','perfect');
+  const badge = document.querySelector('.tab-btn:nth-child(' + (tabs.indexOf(exId)+1) + ') .tab-badge');
+  if (badge) badge.textContent = '';
+}
+
+function normalize(s) { return s.trim().toLowerCase().replace(/\s+/g,' '); }
+
+function updateScore(id, correct, total) {
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = correct + ' / ' + total + ' correct';
+  scoreEl.classList.add('visible');
+  scoreEl.classList.toggle('perfect', correct === total);
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabIdx = tabs.indexOf(id);
+  let badge = tabBtns[tabIdx].querySelector('.tab-badge');
+  if (!badge) { badge = document.createElement('span'); badge.className = 'tab-badge'; tabBtns[tabIdx].appendChild(badge); }
+  badge.textContent = correct + '/' + total;
+  badge.classList.toggle('perfect', correct === total);
+}
+
+// Text input
+function checkExText(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    const inp = item.querySelector('input[type="text"]');
+    if (!inp) return;
+    total++;
+    const answers = item.dataset.answer.split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+// MCQ
+function checkExMC(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    total++;
+    const sel = item.querySelector('.mc-btn.selected');
+    const ok = sel && sel.dataset.val === item.dataset.answer;
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    item.querySelectorAll('.mc-btn').forEach(btn => {
+      btn.classList.remove('correct','wrong');
+      if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+      else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+    });
+  });
+  updateScore(id, correct, total);
+}
+
+// Exercise C – Film Review two-choice passage
+const cAnswers = { c1:'b', c2:'b', c3:'a', c4:'a', c5:'b', c6:'a', c7:'a', c8:'a', c9:'a', c10:'b' };
+function checkExC() {
+  let correct = 0, total = Object.keys(cAnswers).length;
+  Object.entries(cAnswers).forEach(([gapId, expected]) => {
+    const btns = document.querySelectorAll('[data-id="' + gapId + '"]');
+    const sel = Array.from(btns).find(b => b.classList.contains('selected'));
+    const ok = sel && sel.dataset.val === expected;
+    if (ok) correct++;
+    btns.forEach(btn => {
+      btn.classList.remove('correct','wrong');
+      if (btn.dataset.val === expected) btn.classList.add('correct');
+      else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+    });
+  });
+  updateScore('c', correct, total);
+}
+
+// Exercise D – sentence transform (items have class transform-item not question-item)
+function checkExTransform(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .transform-item').forEach(item => {
+    const inp = item.querySelector('input[type="text"]');
+    if (!inp) return;
+    total++;
+    const answers = item.dataset.answer.split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+// Exercise G – two choice (question-item based)
+function checkExG() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-g .question-item').forEach(item => {
+    total++;
+    const sel = item.querySelector('.choice-btn.selected');
+    const ok = sel && sel.dataset.val === item.dataset.answer;
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    item.querySelectorAll('.choice-btn').forEach(btn => {
+      btn.classList.remove('correct','wrong');
+      if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+      else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+    });
+  });
+  updateScore('g', correct, total);
+}
+
+// Passage fill
+function checkExPassage(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .ex-' + id + '-input').forEach(inp => {
+    total++;
+    const answers = (inp.dataset.answer || '').split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+// Show answers
+function showAnswers(id) {
+  if (id === 'a' || id === 'b' || id === 'h') checkExText(id);
+  else if (id === 'c') checkExC();
+  else if (id === 'd') checkExTransform(id);
+  else if (id === 'g') checkExG();
+  else if (id === 'i') checkExMC(id);
+  else if (id === 'j') checkExPassage(id);
+  // e = open, f = matching
+  document.getElementById('ex-' + id).classList.add('show-answers');
+  if (id === 'c' || id === 'j') {
+    const reveal = document.querySelector('#ql-' + id + ' .answer-reveal');
+    if (reveal) reveal.style.display = 'block';
+  }
+}
+
+// Reset
+function resetEx(id) {
+  const exEl = document.getElementById('ex-' + id);
+  exEl.classList.remove('show-answers');
+  exEl.querySelectorAll('input[type="text"]').forEach(inp => {
+    inp.value = ''; inp.classList.remove('correct','wrong');
+  });
+  exEl.querySelectorAll('.question-item, .transform-item, .extra-line').forEach(item => {
+    item.classList.remove('correct','wrong');
+  });
+  exEl.querySelectorAll('.choice-btn, .mc-btn').forEach(btn => {
+    btn.classList.remove('selected','correct','wrong');
+  });
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = ''; scoreEl.classList.remove('visible','perfect');
+  const badge = document.querySelector('.tab-btn:nth-child(' + (tabs.indexOf(id)+1) + ') .tab-badge');
+  if (badge) badge.textContent = '';
+  if (id === 'c') {
+    const reveal = document.querySelector('#ql-c .answer-reveal');
+    if (reveal) reveal.style.display = '';
+  }
+}
+
+function resetExPassage(id) {
+  resetEx(id);
+  const reveal = document.querySelector('#ql-' + id + ' .answer-reveal');
+  if (reveal) reveal.style.display = '';
+}
+</script>
+</body>
+</html>

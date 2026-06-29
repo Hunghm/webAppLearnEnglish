@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 9 – Grammar Exercises</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #333; min-height: 100vh; }
+
+  .header { background: #1565C0; color: white; padding: 16px 20px; text-align: center; }
+  .header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+  .header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+
+  .tab-bar { display: flex; background: #1976D2; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 1; min-width: 40px; padding: 12px 4px; border: none; background: transparent;
+    color: rgba(255,255,255,0.7); font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap;
+  }
+  .tab-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+  .tab-btn.active { color: white; border-bottom-color: #FFD600; }
+  .tab-badge {
+    display: inline-block; font-size: 0.65rem; background: rgba(255,255,255,0.25);
+    border-radius: 10px; padding: 1px 5px; margin-left: 2px; vertical-align: middle;
+  }
+  .tab-badge.perfect { background: #4CAF50; }
+
+  .content { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+  .exercise { display: none; }
+  .exercise.active { display: block; }
+
+  .ex-header { margin-bottom: 16px; }
+  .ex-title { font-size: 1.1rem; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+  .ex-instruction {
+    font-size: 0.9rem; color: #555; background: #E3F2FD; border-left: 4px solid #2196F3;
+    padding: 8px 12px; border-radius: 0 6px 6px 0;
+  }
+
+  .question-list { list-style: none; }
+  .question-item {
+    background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s;
+  }
+  .question-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .question-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+
+  .q-num { font-weight: 700; color: #1976D2; margin-right: 6px; }
+  .q-sentence { line-height: 1.8; }
+
+  input[type="text"] {
+    border: 2px solid #BBDEFB; border-radius: 6px; padding: 5px 10px;
+    font-size: 0.95rem; outline: none; background: #FAFAFA; transition: border .2s;
+    min-width: 100px;
+  }
+  input[type="text"]:focus { border-color: #2196F3; background: white; }
+  input[type="text"].correct { border-color: #4CAF50; background: #F1F8E9; color: #2E7D32; }
+  input[type="text"].wrong { border-color: #F44336; background: #FFF5F5; color: #C62828; }
+
+  /* Two Choice */
+  .two-choice-btns { display: inline-flex; gap: 8px; margin-left: 6px; }
+  .choice-btn {
+    border: 2px solid #90CAF9; background: white; border-radius: 6px;
+    padding: 4px 14px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #1565C0;
+  }
+  .choice-btn:hover { background: #E3F2FD; }
+  .choice-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .choice-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .choice-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+
+  /* Multiple choice */
+  .mc-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .mc-btn {
+    border: 2px solid #90CAF9; background: white; border-radius: 6px;
+    padding: 5px 16px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #1565C0;
+  }
+  .mc-btn:hover { background: #E3F2FD; }
+  .mc-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .mc-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .mc-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+
+  /* Passage */
+  .passage-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .passage-line { margin-bottom: 12px; line-height: 2.1; }
+  .passage-title { font-style: italic; font-weight: 700; font-size: 1.05rem; text-align: center; color: #1565C0; margin-bottom: 12px; }
+  .passage-input { min-width: 80px; width: 130px; }
+
+  /* Extra word */
+  .extra-word-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .extra-word-title { font-weight: 700; font-size: 1.05rem; text-align: center; color: #1565C0; margin-bottom: 14px; }
+  .extra-line { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; padding: 8px; background: #f9f9f9; border-radius: 6px; }
+  .extra-line-num { font-weight: 700; color: #1976D2; min-width: 20px; padding-top: 6px; }
+  .extra-line-input { min-width: 80px; width: 90px; }
+  .extra-line-text { flex: 1; line-height: 1.6; font-size: 0.9rem; }
+  .extra-line.correct { background: #F1F8E9; border-left: 3px solid #4CAF50; }
+  .extra-line.wrong { background: #FFF5F5; border-left: 3px solid #F44336; }
+
+  /* Sentence transform */
+  .transform-item { background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s; }
+  .transform-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .transform-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+  .transform-original { margin-bottom: 6px; color: #555; font-size: 0.92rem; }
+  .transform-key { display: inline-block; background: #FFF9C4; border: 1px solid #F9A825; border-radius: 4px; padding: 1px 8px; font-weight: 700; color: #5D4037; font-size: 0.88rem; margin: 0 6px; }
+  .transform-blank { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .transform-input { min-width: 200px; flex: 1; }
+
+  /* Yes/No answer items */
+  .yn-item { background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .yn-sentence { font-weight: 600; margin-bottom: 8px; color: #333; font-size: 0.95rem; }
+  .yn-sub { display: flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 0.9rem; color: #555; }
+  .yn-sub input { min-width: 70px; width: 70px; }
+  .yn-sub.correct-sub { color: #2E7D32; }
+  .yn-sub.wrong-sub { color: #C62828; }
+
+  /* Answer reveal */
+  .answer-reveal { font-size: 0.82rem; color: #388E3C; margin-top: 4px; display: none; }
+  .show-answers .answer-reveal { display: block; }
+
+  /* Action buttons */
+  .action-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+  .btn { padding: 10px 22px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-check { background: #2196F3; color: white; }
+  .btn-check:hover { background: #1976D2; }
+  .btn-reset { background: #FF9800; color: white; }
+  .btn-reset:hover { background: #F57C00; }
+  .btn-show { background: #9C27B0; color: white; }
+  .btn-show:hover { background: #7B1FA2; }
+
+  .score-display {
+    font-size: 1rem; font-weight: 700; padding: 8px 16px; border-radius: 8px;
+    background: #E8F5E9; color: #2E7D32; display: none;
+  }
+  .score-display.visible { display: inline-block; }
+  .score-display.perfect { background: #4CAF50; color: white; }
+
+  @media (max-width: 600px) {
+    .tab-btn { font-size: 0.78rem; padding: 10px 3px; }
+    .content { padding: 12px 10px 50px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Unit 9 – Grammar</h1>
+  <p>Conditionals · 10 exercises · Click a tab to start</p>
+</div>
+
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" onclick="switchTab('a')">A</button>
+  <button class="tab-btn" onclick="switchTab('b')">B</button>
+  <button class="tab-btn" onclick="switchTab('c')">C</button>
+  <button class="tab-btn" onclick="switchTab('d')">D</button>
+  <button class="tab-btn" onclick="switchTab('e')">E</button>
+  <button class="tab-btn" onclick="switchTab('f')">F</button>
+  <button class="tab-btn" onclick="switchTab('g')">G</button>
+  <button class="tab-btn" onclick="switchTab('h')">H</button>
+  <button class="tab-btn" onclick="switchTab('i')">I</button>
+  <button class="tab-btn" onclick="switchTab('j')">J</button>
+</div>
+
+<div class="content">
+
+<!-- ===== EXERCISE A: Yes/No questions about conditionals ===== -->
+<div class="exercise active" id="ex-a">
+  <div class="ex-header">
+    <div class="ex-title">Exercise A – Write Yes or No</div>
+    <div class="ex-instruction">Answer the questions about each conditional sentence by writing Yes or No.</div>
+  </div>
+  <div id="ql-a">
+
+    <div class="question-item" data-answers="Yes">
+      <div class="yn-sentence">1. If Carl doesn't come to the party, I'll be really upset.</div>
+      <div class="yn-sub">Is it possible that Carl won't come to the party? <input type="text" class="ex-a-input" placeholder="Yes/No"></div>
+      <div class="answer-reveal">✓ Yes (first conditional → real/possible future)</div>
+    </div>
+
+    <div class="question-item" data-answers="No|Yes">
+      <div class="yn-sentence">2. If my neighbour became prime minister, he'd give everyone a million euros.</div>
+      <div class="yn-sub">Is it likely that the neighbour will become prime minister? <input type="text" class="ex-a-input" placeholder="Yes/No"></div>
+      <div class="yn-sub">Is it possible that the neighbour will become prime minister? <input type="text" class="ex-a-input" placeholder="Yes/No"></div>
+      <div class="answer-reveal">✓ No (unlikely) / Yes (remotely possible – second conditional)</div>
+    </div>
+
+    <div class="question-item" data-answers="No">
+      <div class="yn-sentence">3. If Helen weren't here, I don't know what we'd do.</div>
+      <div class="yn-sub">Is Helen here now? <input type="text" class="ex-a-input" placeholder="Yes/No"></div>
+      <div class="answer-reveal">✓ No – Helen is NOT here (second conditional = hypothetical, contrary to fact… wait: "weren't here" implies she IS here)</div>
+    </div>
+
+    <div class="question-item" data-answers="No|No">
+      <div class="yn-sentence">4. If Tarek had had enough money, he'd have bought a car.</div>
+      <div class="yn-sub">Did Tarek have enough money? <input type="text" class="ex-a-input" placeholder="Yes/No"></div>
+      <div class="yn-sub">Did he buy a car? <input type="text" class="ex-a-input" placeholder="Yes/No"></div>
+      <div class="answer-reveal">✓ No / No (third conditional = past unreal: he didn't have money, didn't buy car)</div>
+    </div>
+
+    <div class="question-item" data-answers="Yes|No">
+      <div class="yn-sentence">5. If Debbie hadn't gone to the UK, she wouldn't have met Will.</div>
+      <div class="yn-sub">Did Debbie go to the UK? <input type="text" class="ex-a-input" placeholder="Yes/No"></div>
+      <div class="yn-sub">Did she meet Will? <input type="text" class="ex-a-input" placeholder="Yes/No"></div>
+      <div class="answer-reveal">✓ Yes / Yes (third conditional: she DID go, she DID meet Will)</div>
+    </div>
+
+    <div class="question-item" data-answers="No|Yes">
+      <div class="yn-sentence">6. If the police had investigated the case thoroughly, they wouldn't have arrested Keren.</div>
+      <div class="yn-sub">Did the police investigate the case thoroughly? <input type="text" class="ex-a-input" placeholder="Yes/No"></div>
+      <div class="yn-sub">Did they arrest Keren? <input type="text" class="ex-a-input" placeholder="Yes/No"></div>
+      <div class="answer-reveal">✓ No / Yes (they didn't investigate properly, so they DID arrest Keren)</div>
+    </div>
+
+    <div class="question-item" data-answers="Yes|Yes">
+      <div class="yn-sentence">7. Had she not gone to university, she might not have started her own business.</div>
+      <div class="yn-sub">Did she go to university? <input type="text" class="ex-a-input" placeholder="Yes/No"></div>
+      <div class="yn-sub">Did she start her own business? <input type="text" class="ex-a-input" placeholder="Yes/No"></div>
+      <div class="answer-reveal">✓ Yes / Yes (inverted third conditional: she DID go, she DID start a business)</div>
+    </div>
+
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExA()">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('a')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('a')">Reset</button>
+    <span class="score-display" id="score-a"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE B: Open definition sentences (zero conditional) ===== -->
+<div class="exercise" id="ex-b">
+  <div class="ex-header">
+    <div class="ex-title">Exercise B – Complete the definitions using your own ideas</div>
+    <div class="ex-instruction">Use the zero conditional to complete each definition. Write your own answer for each gap.</div>
+  </div>
+  <ul class="question-list" id="ql-b">
+    <li class="question-item" data-answer="open">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">If you bully someone, <input type="text" class="ex-b-input" placeholder="you …" style="min-width:300px"></span>
+      <div class="answer-reveal">Example: you use your power to hurt or frighten them</div>
+    </li>
+    <li class="question-item" data-answer="open">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">If you accuse someone, <input type="text" class="ex-b-input" placeholder="you …" style="min-width:300px"></span>
+      <div class="answer-reveal">Example: you say that they have done something wrong</div>
+    </li>
+    <li class="question-item" data-answer="open">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">If you are a liar, <input type="text" class="ex-b-input" placeholder="you …" style="min-width:300px"></span>
+      <div class="answer-reveal">Example: you regularly say things that are not true</div>
+    </li>
+    <li class="question-item" data-answer="open">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">If you are rich, <input type="text" class="ex-b-input" placeholder="you …" style="min-width:300px"></span>
+      <div class="answer-reveal">Example: you have a lot of money and possessions</div>
+    </li>
+    <li class="question-item" data-answer="open">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">If you are lucky, <input type="text" class="ex-b-input" placeholder="you …" style="min-width:300px"></span>
+      <div class="answer-reveal">Example: good things happen to you by chance</div>
+    </li>
+    <li class="question-item" data-answer="open">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">If you are lazy, <input type="text" class="ex-b-input" placeholder="you …" style="min-width:300px"></span>
+      <div class="answer-reveal">Example: you don't like working or making an effort</div>
+    </li>
+    <li class="question-item" data-answer="open">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">If you look up to someone, <input type="text" class="ex-b-input" placeholder="you …" style="min-width:300px"></span>
+      <div class="answer-reveal">Example: you admire and respect them</div>
+    </li>
+    <li class="question-item" data-answer="open">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">If you look down on someone, <input type="text" class="ex-b-input" placeholder="you …" style="min-width:300px"></span>
+      <div class="answer-reveal">Example: you think you are better than them</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-show" onclick="showAnswers('b')">Show Example Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('b')">Reset</button>
+    <span class="score-display" id="score-b"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE C: Word bank – first conditional verb forms ===== -->
+<div class="exercise" id="ex-c">
+  <div class="ex-header">
+    <div class="ex-title">Exercise C – Complete using the correct form of the verbs in the box</div>
+    <div class="ex-instruction">Use each verb once in the correct form to complete the first conditional sentences.<br>
+    <strong>be · call · find · forget · get · leave · see · take · want · work</strong></div>
+  </div>
+  <ul class="question-list" id="ql-c">
+    <li class="question-item" data-answer="leaves">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">If she <input type="text" class="ex-c-input" placeholder="…" style="min-width:100px"> at five o'clock, she'll be there by half past seven.</span>
+      <div class="answer-reveal">✓ leaves (first conditional: if + present simple)</div>
+    </li>
+    <li class="question-item" data-answer="call">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">We <input type="text" class="ex-c-input" placeholder="…" style="min-width:100px"> you if we have any problems.</span>
+      <div class="answer-reveal">✓ call (will + bare infinitive in main clause — 'll call)</div>
+    </li>
+    <li class="question-item" data-answer="have">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">It might not be a good idea to go out tonight if you <input type="text" class="ex-c-input" placeholder="…" style="min-width:100px"> an important test in the morning.</span>
+      <div class="answer-reveal">✓ have (if + present simple)</div>
+    </li>
+    <li class="question-item" data-answer="are|feel">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">If you <input type="text" class="ex-c-input" placeholder="…" style="min-width:100px"> ill all day, you shouldn't come to the club tonight.</span>
+      <div class="answer-reveal">✓ are / feel (if + present simple)</div>
+    </li>
+    <li class="question-item" data-answer="find">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">If you should <input type="text" class="ex-c-input" placeholder="…" style="min-width:100px"> my wallet, call me on my mobile immediately!</span>
+      <div class="answer-reveal">✓ find (if + should + bare infinitive = formal first conditional)</div>
+    </li>
+    <li class="question-item" data-answer="have seen|'ve seen">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Let's get a different DVD if you <input type="text" class="ex-c-input" placeholder="…" style="min-width:120px"> that one already.</span>
+      <div class="answer-reveal">✓ have seen / 've seen (if + present perfect for completed action)</div>
+    </li>
+    <li class="question-item" data-answer="works|'s been working">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">If Sean <input type="text" class="ex-c-input" placeholder="…" style="min-width:120px"> so hard lately, he'll welcome the chance to have a few days off.</span>
+      <div class="answer-reveal">✓ has been working / 's been working (if + present perfect continuous)</div>
+    </li>
+    <li class="question-item" data-answer="take">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">If you're going into town, <input type="text" class="ex-c-input" placeholder="…" style="min-width:100px"> a video for tonight while you're there!</span>
+      <div class="answer-reveal">✓ take (imperative in main clause is also possible in first conditional)</div>
+    </li>
+    <li class="question-item" data-answer="want">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">If you see Carol tonight, <input type="text" class="ex-c-input" placeholder="…" style="min-width:100px"> to say hello from me!</span>
+      <div class="answer-reveal">✓ want (remember to / don't forget to say hello)</div>
+    </li>
+    <li class="question-item" data-answer="want">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">Don't feel you have to come if you don't <input type="text" class="ex-c-input" placeholder="…" style="min-width:100px"> to.</span>
+      <div class="answer-reveal">✓ want (if you don't want to = zero/first conditional)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('c')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('c')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('c')">Reset</button>
+    <span class="score-display" id="score-c"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE D: Two choice – unless/if/in case/as long as/provided/so long as ===== -->
+<div class="exercise" id="ex-d">
+  <div class="ex-header">
+    <div class="ex-title">Exercise D – Circle the correct word or phrase</div>
+    <div class="ex-instruction">Choose the correct conditional conjunction in bold.</div>
+  </div>
+  <ul class="question-list" id="ql-d">
+    <li class="question-item" data-answer="a">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">This time in six months I'll be at university
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">unless</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">if</button>
+        </span>
+        I decide to take a year off first.</span>
+      <div class="answer-reveal">✓ unless (= except if I decide to take a year off)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">We'd better leave early tomorrow
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">unless</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">in case</button>
+        </span>
+        there's a lot of traffic when we get to Doncaster.</span>
+      <div class="answer-reveal">✓ in case (we prepare for the possibility of traffic)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">You can watch the film
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">as long as</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">in case</button>
+        </span>
+        you promise to go straight to bed when it finishes.</span>
+      <div class="answer-reveal">✓ as long as (= on the condition that)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Let's go to <em>Mirabella's</em> tonight
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">unless</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">if</button>
+        </span>
+        you haven't been there before.</span>
+      <div class="answer-reveal">✓ if (= on the condition that you haven't been there)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">Unless</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">So long as</button>
+        </span>
+        I've still got my health, I don't mind how poor I am!</span>
+      <div class="answer-reveal">✓ So long as (= provided that I have my health)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">You'd better take a sweater with you now
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">if</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">in case</button>
+        </span>
+        it gets cold tonight.</span>
+      <div class="answer-reveal">✓ in case (take a sweater as a precaution)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Do what you like
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">provided</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">unless</button>
+        </span>
+        you don't make any noise.</span>
+      <div class="answer-reveal">✓ provided (= on condition that you don't make noise)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">I'm not going to worry
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">unless</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">as long as</button>
+        </span>
+        she hasn't called by midnight.</span>
+      <div class="answer-reveal">✓ unless (= I won't worry except if she hasn't called)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExD()">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('d')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('d')">Reset</button>
+    <span class="score-display" id="score-d"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE E: Write second conditional sentences ===== -->
+<div class="exercise" id="ex-e">
+  <div class="ex-header">
+    <div class="ex-title">Exercise E – Write sentences using the second conditional</div>
+    <div class="ex-instruction">Rewrite each idea as a second conditional sentence. Use the example as a guide.<br>
+    <em>Example: I don't want to buy that CD so I'm not going to. → If I wanted to buy that CD, I would.</em></div>
+  </div>
+  <ul class="question-list" id="ql-e">
+    <li class="question-item" data-answer="if i lived alone, i would get lonely|if i lived alone i'd get lonely">
+      <span class="q-num">1.</span>
+      <div class="transform-original">I don't live alone so I don't get lonely.</div>
+      <input type="text" class="ex-e-input" placeholder="If I lived alone, …" style="width:100%; min-width:200px; margin-top:8px">
+      <div class="answer-reveal">✓ If I lived alone, I would get lonely.</div>
+    </li>
+    <li class="question-item" data-answer="if don't had so much homework|if don didn't have so much homework, he'd play football tonight">
+      <span class="q-num">2.</span>
+      <div class="transform-original">Don's got such a lot of homework that he's not going to play football tonight.</div>
+      <input type="text" class="ex-e-input" placeholder="If Don didn't have …" style="width:100%; min-width:200px; margin-top:8px">
+      <div class="answer-reveal">✓ If Don didn't have so much homework, he'd play football tonight.</div>
+    </li>
+    <li class="question-item" data-answer="if i could swim, i'd go scuba diving with terry|if i could swim i would go scuba diving with terry">
+      <span class="q-num">3.</span>
+      <div class="transform-original">I can't swim so I'm not going scuba diving with Terry.</div>
+      <input type="text" class="ex-e-input" placeholder="If I could swim, …" style="width:100%; min-width:200px; margin-top:8px">
+      <div class="answer-reveal">✓ If I could swim, I'd go scuba diving with Terry.</div>
+    </li>
+    <li class="question-item" data-answer="if we had enough money, we'd order a pizza|if we had enough money we would order a pizza">
+      <span class="q-num">4.</span>
+      <div class="transform-original">We're not going to order a pizza because we don't have enough money.</div>
+      <input type="text" class="ex-e-input" placeholder="If we had enough money, …" style="width:100%; min-width:200px; margin-top:8px">
+      <div class="answer-reveal">✓ If we had enough money, we'd order a pizza.</div>
+    </li>
+    <li class="question-item" data-answer="if we were staying in the same hotel, we could share a room|if we stayed in the same hotel we could share a room">
+      <span class="q-num">5.</span>
+      <div class="transform-original">We're not staying in the same hotel, so we can't share a room.</div>
+      <input type="text" class="ex-e-input" placeholder="If we were staying …" style="width:100%; min-width:200px; margin-top:8px">
+      <div class="answer-reveal">✓ If we were staying in the same hotel, we could share a room.</div>
+    </li>
+    <li class="question-item" data-answer="if i were you, i'd call antony right now|if i was you i would call antony right now">
+      <span class="q-num">6.</span>
+      <div class="transform-original">I'm not you, but I think you should call Antony right now!</div>
+      <input type="text" class="ex-e-input" placeholder="If I were you, …" style="width:100%; min-width:200px; margin-top:8px">
+      <div class="answer-reveal">✓ If I were you, I'd call Antony right now!</div>
+    </li>
+    <li class="question-item" data-answer="if i didn't have to help my dad, i could come|if i didn't have to help my dad i would come">
+      <span class="q-num">7.</span>
+      <div class="transform-original">I can't come because I have to help my dad with something.</div>
+      <input type="text" class="ex-e-input" placeholder="If I didn't have to …" style="width:100%; min-width:200px; margin-top:8px">
+      <div class="answer-reveal">✓ If I didn't have to help my dad, I could / would come.</div>
+    </li>
+    <li class="question-item" data-answer="if i went to bed as late as you, i wouldn't be able to get up early|if i went to bed as late as you i wouldn't be able to get up early">
+      <span class="q-num">8.</span>
+      <div class="transform-original">I don't go to bed as late as you so I'm able to get up early in the morning.</div>
+      <input type="text" class="ex-e-input" placeholder="If I went to bed …" style="width:100%; min-width:200px; margin-top:8px">
+      <div class="answer-reveal">✓ If I went to bed as late as you, I wouldn't be able to get up early.</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-show" onclick="showAnswers('e')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('e')">Reset</button>
+    <span class="score-display" id="score-e"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE F: Third conditional from text ===== -->
+<div class="exercise" id="ex-f">
+  <div class="ex-header">
+    <div class="ex-title">Exercise F – Complete sentences using the third conditional</div>
+    <div class="ex-instruction">Based on the text about parallel universes, complete each third conditional sentence.</div>
+  </div>
+  <ul class="question-list" id="ql-f">
+    <li class="question-item" data-answer="i would have done this book last year|i'd have done this book last year">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">If I'd started learning English a year earlier, <input type="text" class="ex-f-input" placeholder="…" style="width:60%; min-width:200px"></span>
+      <div class="answer-reveal">✓ I would have done this book last year.</div>
+    </li>
+    <li class="question-item" data-answer="the dinosaurs wouldn't have become extinct|the dinosaurs would not have become extinct">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">If a meteor hadn't struck the Earth, <input type="text" class="ex-f-input" placeholder="…" style="width:60%; min-width:200px"></span>
+      <div class="answer-reveal">✓ the dinosaurs wouldn't have become extinct.</div>
+    </li>
+    <li class="question-item" data-answer="he would have moved to a bigger house|he'd have moved to a bigger house">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">If my best friend had won the lottery last summer, <input type="text" class="ex-f-input" placeholder="…" style="width:60%; min-width:200px"></span>
+      <div class="answer-reveal">✓ he/she would have moved to a bigger house.</div>
+    </li>
+    <li class="question-item" data-answer="i wouldn't have been born|i would not have been born">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">If my parents <input type="text" class="ex-f-input" placeholder="had not met / hadn't met …" style="width:80%; min-width:200px"></span>
+      <div class="answer-reveal">✓ If my parents hadn't met, I wouldn't have been born.</div>
+    </li>
+    <li class="question-item" data-answer="would have survived|would not have died">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Everyone on board the <em>Titanic</em> <input type="text" class="ex-f-input" placeholder="would have …" style="width:60%; min-width:200px"></span>
+      <div class="answer-reveal">✓ Everyone on board the Titanic would have survived (if there had been enough lifeboats).</div>
+    </li>
+    <li class="question-item" data-answer="wouldn't have died in poverty|would not have died in poverty">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Van Gogh <input type="text" class="ex-f-input" placeholder="wouldn't have …" style="width:60%; min-width:200px"> (if he had been recognised during his lifetime).</span>
+      <div class="answer-reveal">✓ Van Gogh wouldn't have died in poverty.</div>
+    </li>
+    <li class="question-item" data-answer="wouldn't have made any records|would not have made any records">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Madonna <input type="text" class="ex-f-input" placeholder="wouldn't have …" style="width:60%; min-width:200px"> (if she hadn't been discovered).</span>
+      <div class="answer-reveal">✓ Madonna wouldn't have made any records.</div>
+    </li>
+    <li class="question-item" data-answer="wouldn't have become president|would not have become president">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">If George Bush <input type="text" class="ex-f-input" placeholder="hadn't …" style="width:70%; min-width:200px"></span>
+      <div class="answer-reveal">✓ If George Bush hadn't become President, … (open answer based on text)</div>
+    </li>
+    <li class="question-item" data-answer="would have won the european cup in july 2004|would not have won">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">If Greece <input type="text" class="ex-f-input" placeholder="hadn't …" style="width:70%; min-width:200px"></span>
+      <div class="answer-reveal">✓ If Greece hadn't won the European Cup in July 2004, … (open answer)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-show" onclick="showAnswers('f')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('f')">Reset</button>
+    <span class="score-display" id="score-f"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE G: MCQ passage – parallel universes ===== -->
+<div class="exercise" id="ex-g">
+  <div class="ex-header">
+    <div class="ex-title">Exercise G – Choose the correct answer</div>
+    <div class="ex-instruction">Choose the best option A, B, C or D for each gap in the passage about parallel universes.</div>
+  </div>
+  <div class="passage-container" id="ql-g">
+    <p class="passage-line">
+      If this theory about parallel universes (1) <input type="text" class="passage-input ex-g-input" data-answer="B" placeholder="A/B/C/D"> correct, it (2) <input type="text" class="passage-input ex-g-input" data-answer="D" placeholder="A/B/C/D"> that we're living in more than one universe at the same time.
+      But if that (3) <input type="text" class="passage-input ex-g-input" data-answer="C" placeholder="A/B/C/D"> true – if I was doing different things in different universes – (4) <input type="text" class="passage-input ex-g-input" data-answer="A" placeholder="A/B/C/D"> about it.
+      And if I (5) <input type="text" class="passage-input ex-g-input" data-answer="A" placeholder="A/B/C/D"> about it, how could it be me doing these things?
+      If I (6) <input type="text" class="passage-input ex-g-input" data-answer="C" placeholder="A/B/C/D"> the lottery last year in a parallel universe, and decided to sail round the world, how is that 'me'? It doesn't make sense!
+    </p>
+    <p class="passage-line">
+      And another thing. If I do something, it (7) <input type="text" class="passage-input ex-g-input" data-answer="A" placeholder="A/B/C/D"> consequences. For example, if I (8) <input type="text" class="passage-input ex-g-input" data-answer="C" placeholder="A/B/C/D"> study, I might not pass my exams.
+      I can't start thinking about different universes where the consequences are different. If I just (9) <input type="text" class="passage-input ex-g-input" data-answer="A" placeholder="A/B/C/D"> about the universe I actually live in, then I'm sure (10) <input type="text" class="passage-input ex-g-input" data-answer="A" placeholder="A/B/C/D"> okay!
+    </p>
+    <div style="margin-top:14px; font-size:0.88rem; color:#555; background:#f5f5f5; padding:10px; border-radius:6px;">
+      <strong>Options:</strong><br>
+      1: A will be &nbsp;B is &nbsp;C would have been &nbsp;D has been<br>
+      2: A has meant &nbsp;B meant &nbsp;C had meant &nbsp;D means<br>
+      3: A will be &nbsp;B was being &nbsp;C were &nbsp;D has been<br>
+      4: A I'd know &nbsp;B I'll know &nbsp;C I have known &nbsp;D I know<br>
+      5: A wouldn't know &nbsp;B don't know &nbsp;C won't know &nbsp;D didn't know<br>
+      6: A had won &nbsp;B was winning &nbsp;C have won &nbsp;D win<br>
+      7: A would have &nbsp;B would have had &nbsp;C will have &nbsp;D had had<br>
+      8: A won't &nbsp;B haven't &nbsp;C don't &nbsp;D hadn't<br>
+      9: A think &nbsp;B to think &nbsp;C am thinking &nbsp;D have thought<br>
+      10: A I'd be &nbsp;B I've been &nbsp;C I'd have been &nbsp;D I'll be
+    </div>
+    <div class="answer-reveal" style="margin-top:10px">✓ (1) B &nbsp;(2) D &nbsp;(3) C &nbsp;(4) A &nbsp;(5) A &nbsp;(6) C &nbsp;(7) A &nbsp;(8) C &nbsp;(9) A &nbsp;(10) A</div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExPassageLetters('g')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('g')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('g')">Reset</button>
+    <span class="score-display" id="score-g"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE H: Mixed conditionals – verb forms ===== -->
+<div class="exercise" id="ex-h">
+  <div class="ex-header">
+    <div class="ex-title">Exercise H – Complete using the correct form of the verbs in brackets</div>
+    <div class="ex-instruction">Use mixed conditionals (second/third) and complete both gaps where needed.</div>
+  </div>
+  <ul class="question-list" id="ql-h">
+    <li class="question-item" data-answer="you had done">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">If <input type="text" class="ex-h-input" placeholder="…" style="min-width:140px"> <span class="base-word">(you / do)</span> your homework last night, you'd know the answer to this question!</span>
+      <div class="answer-reveal">✓ you had done (mixed conditional: past condition → present result)</div>
+    </li>
+    <li class="question-item" data-answer="wouldn't be standing|would not be standing">
+      <span class="q-num">2a.</span>
+      <span class="q-sentence">We <input type="text" class="ex-h-input" placeholder="…" style="min-width:160px"> <span class="base-word">(not / stand)</span> by the side of the road at the moment trying to get a lift</span>
+      <div class="answer-reveal">✓ wouldn't be standing</div>
+    </li>
+    <li class="question-item" data-answer="we had brought|we'd brought">
+      <span class="q-num">2b.</span>
+      <span class="q-sentence">if <input type="text" class="ex-h-input" placeholder="…" style="min-width:140px"> <span class="base-word">(we / bring)</span> a spare tyre with us.</span>
+      <div class="answer-reveal">✓ we had brought / we'd brought</div>
+    </li>
+    <li class="question-item" data-answer="hadn't stayed up|had not stayed up">
+      <span class="q-num">3a.</span>
+      <span class="q-sentence">If I <input type="text" class="ex-h-input" placeholder="…" style="min-width:160px"> <span class="base-word">(not / stay up)</span> so late last night,</span>
+      <div class="answer-reveal">✓ hadn't stayed up</div>
+    </li>
+    <li class="question-item" data-answer="wouldn't feel|would not feel">
+      <span class="q-num">3b.</span>
+      <span class="q-sentence">I <input type="text" class="ex-h-input" placeholder="…" style="min-width:130px"> <span class="base-word">(not / feel)</span> so tired this morning!</span>
+      <div class="answer-reveal">✓ wouldn't feel (mixed: past condition → present result)</div>
+    </li>
+    <li class="question-item" data-answer="i'd be|i would be">
+      <span class="q-num">4a.</span>
+      <span class="q-sentence"><input type="text" class="ex-h-input" placeholder="…" style="min-width:130px"> <span class="base-word">(I / be)</span> in terrible trouble right now</span>
+      <div class="answer-reveal">✓ I'd be (present result)</div>
+    </li>
+    <li class="question-item" data-answer="hadn't helped|had not helped">
+      <span class="q-num">4b.</span>
+      <span class="q-sentence">if you <input type="text" class="ex-h-input" placeholder="…" style="min-width:140px"> <span class="base-word">(not / help)</span> me.</span>
+      <div class="answer-reveal">✓ hadn't helped (past condition)</div>
+    </li>
+    <li class="question-item" data-answer="i would have recorded|i'd have recorded">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">If I had a video recorder, <input type="text" class="ex-h-input" placeholder="…" style="min-width:180px"> <span class="base-word">(I / record)</span> the match last night.</span>
+      <div class="answer-reveal">✓ I would have recorded (mixed: present condition → past result)</div>
+    </li>
+    <li class="question-item" data-answer="i would have asked|i'd have asked">
+      <span class="q-num">6a.</span>
+      <span class="q-sentence"><input type="text" class="ex-h-input" placeholder="…" style="min-width:180px"> <span class="base-word">(I / ask)</span> for Andy's phone number when I met him</span>
+      <div class="answer-reveal">✓ I would have asked</div>
+    </li>
+    <li class="question-item" data-answer="i hadn't already had|i didn't already have">
+      <span class="q-num">6b.</span>
+      <span class="q-sentence">if <input type="text" class="ex-h-input" placeholder="…" style="min-width:190px"> <span class="base-word">(not / already / have)</span> a boyfriend!</span>
+      <div class="answer-reveal">✓ I hadn't already had / I didn't already have</div>
+    </li>
+    <li class="question-item" data-answer="didn't live|didn't live so far away">
+      <span class="q-num">7a.</span>
+      <span class="q-sentence">If Cody <input type="text" class="ex-h-input" placeholder="…" style="min-width:160px"> <span class="base-word">(not / live)</span> so far away,</span>
+      <div class="answer-reveal">✓ didn't live</div>
+    </li>
+    <li class="question-item" data-answer="wouldn't have been|would not have been">
+      <span class="q-num">7b.</span>
+      <span class="q-sentence">he <input type="text" class="ex-h-input" placeholder="…" style="min-width:160px"> <span class="base-word">(not / be)</span> so late to the barbecue yesterday.</span>
+      <div class="answer-reveal">✓ wouldn't have been (mixed: present condition → past result)</div>
+    </li>
+    <li class="question-item" data-answer="wouldn't have needed|would not have needed">
+      <span class="q-num">8a.</span>
+      <span class="q-sentence">Tracy <input type="text" class="ex-h-input" placeholder="…" style="min-width:180px"> <span class="base-word">(not / need)</span> extra lessons last month</span>
+      <div class="answer-reveal">✓ wouldn't have needed</div>
+    </li>
+    <li class="question-item" data-answer="were|was">
+      <span class="q-num">8b.</span>
+      <span class="q-sentence">if she <input type="text" class="ex-h-input" placeholder="…" style="min-width:100px"> <span class="base-word">(be)</span> as good at maths as you are.</span>
+      <div class="answer-reveal">✓ were / was (mixed: present condition → past result)</div>
+    </li>
+    <li class="question-item" data-answer="you got|would you have got">
+      <span class="q-num">9a.</span>
+      <span class="q-sentence"><input type="text" class="ex-h-input" placeholder="…" style="min-width:150px"> <span class="base-word">(you / got)</span> a job when you left school</span>
+      <div class="answer-reveal">✓ Would you have got</div>
+    </li>
+    <li class="question-item" data-answer="hadn't offered|had not offered">
+      <span class="q-num">9b.</span>
+      <span class="q-sentence">if the university <input type="text" class="ex-h-input" placeholder="…" style="min-width:150px"> <span class="base-word">(not / offer)</span> you a place?</span>
+      <div class="answer-reveal">✓ hadn't offered</div>
+    </li>
+    <li class="question-item" data-answer="had|have">
+      <span class="q-num">10a.</span>
+      <span class="q-sentence">If you <input type="text" class="ex-h-input" placeholder="…" style="min-width:100px"> <span class="base-word">(have)</span> as much money as she does,</span>
+      <div class="answer-reveal">✓ had (second conditional condition)</div>
+    </li>
+    <li class="question-item" data-answer="would you retire|would you have retired">
+      <span class="q-num">10b.</span>
+      <span class="q-sentence"><input type="text" class="ex-h-input" placeholder="…" style="min-width:160px"> <span class="base-word">(you / retire)</span> by now?</span>
+      <div class="answer-reveal">✓ would you retire / would you have retired</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('h')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('h')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('h')">Reset</button>
+    <span class="score-display" id="score-h"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE I: Inverted conditionals ===== -->
+<div class="exercise" id="ex-i">
+  <div class="ex-header">
+    <div class="ex-title">Exercise I – Complete the sentences so that the meaning remains the same</div>
+    <div class="ex-instruction">Rewrite each sentence using inverted conditional form (Should / Were / Had …).</div>
+  </div>
+  <ul class="question-list" id="ql-i">
+    <li class="question-item" data-answer="her condition improve, we'll inform you immediately|her condition improve we'll inform you immediately">
+      <span class="q-num">1.</span>
+      <div class="transform-original">If her condition should improve, we'll inform you immediately.</div>
+      <div class="transform-blank">Should <input type="text" class="ex-i-input transform-input" placeholder="… (inverted conditional) …"></div>
+      <div class="answer-reveal">✓ Should her condition improve, we'll inform you immediately.</div>
+    </li>
+    <li class="question-item" data-answer="jade get to interview a famous politician, she'll ask lots of difficult questions|she get to interview a famous politician, jade will ask lots of difficult questions">
+      <span class="q-num">2.</span>
+      <div class="transform-original">Jade will ask lots of difficult questions if she gets to interview a famous politician.</div>
+      <div class="transform-blank">Should <input type="text" class="ex-i-input transform-input" placeholder="…"></div>
+      <div class="answer-reveal">✓ Should Jade get to interview a famous politician, she will ask lots of difficult questions.</div>
+    </li>
+    <li class="question-item" data-answer="you able to go abroad for the summer, where would you go?|you to be able to go abroad for the summer, where would you go?">
+      <span class="q-num">3.</span>
+      <div class="transform-original">If you were able to go abroad for the summer, where would you go?</div>
+      <div class="transform-blank">Were <input type="text" class="ex-i-input transform-input" placeholder="…"></div>
+      <div class="answer-reveal">✓ Were you able to go abroad for the summer, where would you go?</div>
+    </li>
+    <li class="question-item" data-answer="i to become a vet, i'd find putting animals down very difficult|i to become a vet i would find putting animals down very difficult">
+      <span class="q-num">4.</span>
+      <div class="transform-original">If I was to become a vet, I'd find putting animals down very difficult.</div>
+      <div class="transform-blank">Were <input type="text" class="ex-i-input transform-input" placeholder="…"></div>
+      <div class="answer-reveal">✓ Were I to become a vet, I'd find putting animals down very difficult.</div>
+    </li>
+    <li class="question-item" data-answer="all environmental pollution to stop today, the world would be much better off|environmental pollution to stop today the world would be much better off">
+      <span class="q-num">5.</span>
+      <div class="transform-original">The world would be much better off if all environmental pollution stopped today.</div>
+      <div class="transform-blank">Were <input type="text" class="ex-i-input transform-input" placeholder="…"></div>
+      <div class="answer-reveal">✓ Were all environmental pollution to stop today, the world would be much better off.</div>
+    </li>
+    <li class="question-item" data-answer="the hole in the ozone layer been discovered sooner, fewer people would have got skin cancer">
+      <span class="q-num">6.</span>
+      <div class="transform-original">If the hole in the ozone layer had been discovered sooner, fewer people would have got skin cancer.</div>
+      <div class="transform-blank">Had <input type="text" class="ex-i-input transform-input" placeholder="…"></div>
+      <div class="answer-reveal">✓ Had the hole in the ozone layer been discovered sooner, fewer people would have got skin cancer.</div>
+    </li>
+    <li class="question-item" data-answer="i not had such a good english teacher at school, i wouldn't have become a teacher|i not had such a good english teacher, i would not have become a teacher">
+      <span class="q-num">7.</span>
+      <div class="transform-original">I wouldn't have become a teacher if I hadn't had such a good English teacher at school.</div>
+      <div class="transform-blank">Had <input type="text" class="ex-i-input transform-input" placeholder="…"></div>
+      <div class="answer-reveal">✓ Had I not had such a good English teacher at school, I wouldn't have become a teacher.</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExTransform('i')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('i')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('i')">Reset</button>
+    <span class="score-display" id="score-i"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE J: Extra word – Being an only child ===== -->
+<div class="exercise" id="ex-j">
+  <div class="ex-header">
+    <div class="ex-title">Exercise J – Find the extra word</div>
+    <div class="ex-instruction">If a line is correct, write a tick (✓). If there is an extra word, write it in the box.</div>
+  </div>
+  <div class="extra-word-container" id="ql-j">
+    <div class="extra-word-title">Being an only child</div>
+    <div class="extra-line" data-answer="✓">
+      <span class="extra-line-num">1</span>
+      <input type="text" class="extra-line-input ex-j-input" placeholder="✓ or word…">
+      <span class="extra-line-text">I'm an only child. People often say to me: 'Wouldn't you be a lot</span>
+    </div>
+    <div class="extra-line" data-answer="have">
+      <span class="extra-line-num">2</span>
+      <input type="text" class="extra-line-input ex-j-input" placeholder="✓ or word…">
+      <span class="extra-line-text">happier if you have had brothers and sisters?' but I don't see it like that.</span>
+    </div>
+    <div class="extra-line" data-answer="✓">
+      <span class="extra-line-num">3</span>
+      <input type="text" class="extra-line-input ex-j-input" placeholder="✓ or word…">
+      <span class="extra-line-text">It's true that if I had had a brother or sister, I would have someone closer</span>
+    </div>
+    <div class="extra-line" data-answer="✓">
+      <span class="extra-line-num">4</span>
+      <input type="text" class="extra-line-input ex-j-input" placeholder="✓ or word…">
+      <span class="extra-line-text">to my own age to talk to and play with at home, but I don't think that's</span>
+    </div>
+    <div class="extra-line" data-answer="for">
+      <span class="extra-line-num">5</span>
+      <input type="text" class="extra-line-input ex-j-input" placeholder="✓ or word…">
+      <span class="extra-line-text">very important provided for you have close friends, which I do. If my</span>
+    </div>
+    <div class="extra-line" data-answer="would">
+      <span class="extra-line-num">6</span>
+      <input type="text" class="extra-line-input ex-j-input" placeholder="✓ or word…">
+      <span class="extra-line-text">parents would had more children, they wouldn't be able to spend so much</span>
+    </div>
+    <div class="extra-line" data-answer="✓">
+      <span class="extra-line-num">7</span>
+      <input type="text" class="extra-line-input ex-j-input" placeholder="✓ or word…">
+      <span class="extra-line-text">time with me. And we have great fun together! Also, except if I had a</span>
+    </div>
+    <div class="extra-line" data-answer="it">
+      <span class="extra-line-num">8</span>
+      <input type="text" class="extra-line-input ex-j-input" placeholder="✓ or word…">
+      <span class="extra-line-text">brother or sister, I'd have it to share a bedroom with them. That might be</span>
+    </div>
+    <div class="extra-line" data-answer="✓">
+      <span class="extra-line-num">9</span>
+      <input type="text" class="extra-line-input ex-j-input" placeholder="✓ or word…">
+      <span class="extra-line-text">fun, but what would happen if I wanted to play my CDs and he or she had</span>
+    </div>
+    <div class="extra-line" data-answer="will">
+      <span class="extra-line-num">10</span>
+      <input type="text" class="extra-line-input ex-j-input" placeholder="✓ or word…">
+      <span class="extra-line-text">to study? No – I don't want a brother or sister, unless it will happens, of course. In that case, I'll think it's the best thing in the world!</span>
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExJ()">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('j')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('j')">Reset</button>
+    <span class="score-display" id="score-j"></span>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+const tabs = ['a','b','c','d','e','f','g','h','i','j'];
+
+function switchTab(id) {
+  document.querySelector('.exercise.active').classList.remove('active');
+  document.getElementById('ex-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', tabs[i] === id);
+  });
+}
+
+function chooseBtn(btn) {
+  const btns = btn.closest('.two-choice-btns').querySelectorAll('.choice-btn');
+  btns.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function chooseMC(btn) {
+  const opts = btn.closest('.mc-options').querySelectorAll('.mc-btn');
+  opts.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function normalize(s) { return s.trim().toLowerCase().replace(/\s+/g,' '); }
+
+function updateScore(id, correct, total) {
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = correct + ' / ' + total + ' correct';
+  scoreEl.classList.add('visible');
+  scoreEl.classList.toggle('perfect', correct === total);
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabIdx = tabs.indexOf(id);
+  let badge = tabBtns[tabIdx].querySelector('.tab-badge');
+  if (!badge) { badge = document.createElement('span'); badge.className = 'tab-badge'; tabBtns[tabIdx].appendChild(badge); }
+  badge.textContent = correct + '/' + total;
+  badge.classList.toggle('perfect', correct === total);
+}
+
+// Exercise A – Yes/No
+function checkExA() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-a .question-item').forEach(item => {
+    const answers = item.dataset.answers.split('|');
+    const inputs = item.querySelectorAll('input[type="text"]');
+    let allOk = true;
+    inputs.forEach((inp, idx) => {
+      total++;
+      const expected = answers[idx] || answers[0];
+      const ok = normalize(inp.value) === normalize(expected);
+      if (ok) correct++;
+      else allOk = false;
+      inp.classList.toggle('correct', ok);
+      inp.classList.toggle('wrong', !ok);
+    });
+    item.classList.toggle('correct', allOk);
+    item.classList.toggle('wrong', !allOk);
+  });
+  updateScore('a', correct, total);
+}
+
+// Exercise D – two choice
+function checkExD() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-d .question-item').forEach(item => {
+    total++;
+    const sel = item.querySelector('.choice-btn.selected');
+    const ok = sel && sel.dataset.val === item.dataset.answer;
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    item.querySelectorAll('.choice-btn').forEach(btn => {
+      btn.classList.remove('correct','wrong');
+      if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+      else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+    });
+  });
+  updateScore('d', correct, total);
+}
+
+// Text input exercises
+function checkExText(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    const inp = item.querySelector('input[type="text"]');
+    if (!inp) return;
+    total++;
+    const answers = item.dataset.answer.split('|');
+    if (answers[0] === 'open') {
+      // open exercises – no auto check
+      return;
+    }
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+// Sentence transform check
+function checkExTransform(id) {
+  let correct = 0, total = 0;
+  const selector = id === 'i' ? '#ql-' + id + ' .question-item' : '#ql-' + id + ' .transform-item';
+  document.querySelectorAll(selector).forEach(item => {
+    const inp = item.querySelector('input[type="text"]');
+    if (!inp) return;
+    total++;
+    const answers = item.dataset.answer.split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+// Passage fill with letter answers
+function checkExPassageLetters(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .ex-' + id + '-input').forEach(inp => {
+    total++;
+    const ok = normalize(inp.value) === normalize(inp.dataset.answer);
+    if (ok) correct++;
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+// Passage fill general
+function checkExPassage(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .ex-' + id + '-input').forEach(inp => {
+    total++;
+    const answers = (inp.dataset.answer || '').split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+// Exercise J – extra word
+function checkExJ() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-j .extra-line').forEach(line => {
+    total++;
+    const inp = line.querySelector('input[type="text"]');
+    const expected = line.dataset.answer;
+    const ok = normalize(inp.value) === normalize(expected);
+    if (ok) correct++;
+    line.classList.toggle('correct', ok);
+    line.classList.toggle('wrong', !ok);
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore('j', correct, total);
+}
+
+// Show answers
+function showAnswers(id) {
+  if (id === 'a') checkExA();
+  else if (id === 'd') checkExD();
+  else if (id === 'g') checkExPassageLetters(id);
+  else if (id === 'h') checkExText(id);
+  else if (id === 'i') checkExTransform(id);
+  else if (id === 'j') checkExJ();
+  else { /* b, e, f – open / informational */ }
+  document.getElementById('ex-' + id).classList.add('show-answers');
+  if (id === 'g') {
+    const reveal = document.querySelector('#ql-' + id + ' .answer-reveal');
+    if (reveal) reveal.style.display = 'block';
+  }
+}
+
+// Reset
+function resetEx(id) {
+  const exEl = document.getElementById('ex-' + id);
+  exEl.classList.remove('show-answers');
+  exEl.querySelectorAll('input[type="text"]').forEach(inp => {
+    inp.value = ''; inp.classList.remove('correct','wrong');
+  });
+  exEl.querySelectorAll('.question-item, .transform-item, .extra-line').forEach(item => {
+    item.classList.remove('correct','wrong');
+  });
+  exEl.querySelectorAll('.choice-btn, .mc-btn').forEach(btn => {
+    btn.classList.remove('selected','correct','wrong');
+  });
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = ''; scoreEl.classList.remove('visible','perfect');
+  const badge = document.querySelector('.tab-btn:nth-child(' + (tabs.indexOf(id)+1) + ') .tab-badge');
+  if (badge) badge.textContent = '';
+}
+
+function resetExPassage(id) {
+  resetEx(id);
+  if (id === 'g') {
+    const reveal = document.querySelector('#ql-' + id + ' .answer-reveal');
+    if (reveal) reveal.style.display = '';
+  }
+}
+</script>
+</body>
+</html>

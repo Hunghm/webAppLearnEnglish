@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 17 – Grammar Exercises</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #333; min-height: 100vh; }
+
+  .header { background: #1565C0; color: white; padding: 16px 20px; text-align: center; }
+  .header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+  .header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+
+  .tab-bar { display: flex; background: #1976D2; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 1; min-width: 44px; padding: 12px 6px; border: none; background: transparent;
+    color: rgba(255,255,255,0.7); font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap;
+  }
+  .tab-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+  .tab-btn.active { color: white; border-bottom-color: #FFD600; }
+  .tab-badge {
+    display: inline-block; font-size: 0.65rem; background: rgba(255,255,255,0.25);
+    border-radius: 10px; padding: 1px 5px; margin-left: 4px; vertical-align: middle;
+  }
+  .tab-badge.perfect { background: #4CAF50; }
+
+  .content { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+  .exercise { display: none; }
+  .exercise.active { display: block; }
+
+  .ex-header { margin-bottom: 16px; }
+  .ex-title { font-size: 1.1rem; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+  .ex-instruction {
+    font-size: 0.9rem; color: #555; background: #E3F2FD; border-left: 4px solid #2196F3;
+    padding: 8px 12px; border-radius: 0 6px 6px 0;
+  }
+
+  .question-list { list-style: none; }
+  .question-item {
+    background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s;
+  }
+  .question-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .question-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+
+  .q-num { font-weight: 700; color: #1976D2; margin-right: 6px; }
+  .q-sentence { line-height: 1.8; }
+
+  input[type="text"] {
+    border: 2px solid #BBDEFB; border-radius: 6px; padding: 5px 10px;
+    font-size: 0.95rem; outline: none; background: #FAFAFA; transition: border .2s;
+    min-width: 100px;
+  }
+  input[type="text"]:focus { border-color: #2196F3; background: white; }
+  input[type="text"].correct { border-color: #4CAF50; background: #F1F8E9; color: #2E7D32; }
+  input[type="text"].wrong { border-color: #F44336; background: #FFF5F5; color: #C62828; }
+
+  /* Two Choice */
+  .two-choice-btns { display: inline-flex; gap: 8px; margin-left: 6px; }
+  .choice-btn {
+    border: 2px solid #90CAF9; background: white; border-radius: 6px;
+    padding: 4px 14px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #1565C0;
+  }
+  .choice-btn:hover { background: #E3F2FD; }
+  .choice-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .choice-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .choice-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+
+  /* Multiple choice */
+  .mc-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .mc-btn {
+    border: 2px solid #90CAF9; background: white; border-radius: 6px;
+    padding: 5px 16px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #1565C0;
+  }
+  .mc-btn:hover { background: #E3F2FD; }
+  .mc-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .mc-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .mc-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+
+  /* Word bank */
+  .word-bank { background: #E3F2FD; border-radius: 8px; padding: 12px 16px; margin-bottom: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .word-chip {
+    background: white; border: 2px solid #90CAF9; border-radius: 20px; padding: 4px 14px;
+    font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #1565C0; font-weight: 600;
+  }
+  .word-chip:hover { background: #1976D2; color: white; border-color: #1976D2; }
+  .word-chip.used { opacity: 0.4; text-decoration: line-through; cursor: default; }
+
+  /* Extra word */
+  .extra-word-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .extra-word-title { font-weight: 700; font-size: 1.05rem; text-align: center; color: #1565C0; margin-bottom: 14px; }
+  .extra-line { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; padding: 8px; background: #f9f9f9; border-radius: 6px; }
+  .extra-line-num { font-weight: 700; color: #1976D2; min-width: 20px; padding-top: 6px; }
+  .extra-line-input { min-width: 80px; width: 90px; }
+  .extra-line-text { flex: 1; line-height: 1.6; font-size: 0.9rem; }
+  .extra-line.correct { background: #F1F8E9; border-left: 3px solid #4CAF50; }
+  .extra-line.wrong { background: #FFF5F5; border-left: 3px solid #F44336; }
+
+  /* Passage container */
+  .passage-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .passage-line { margin-bottom: 10px; line-height: 2.1; }
+
+  /* Transform */
+  .transform-original { font-size: 0.9rem; color: #555; margin-bottom: 6px; }
+  .transform-key { font-weight: 700; color: #1565C0; background: #E3F2FD; border-radius: 4px; padding: 1px 6px; margin-left: 6px; }
+  .transform-blank { line-height: 2; }
+  .transform-input { min-width: 200px; }
+
+  /* Answer reveal */
+  .answer-reveal { font-size: 0.82rem; color: #388E3C; margin-top: 4px; display: none; }
+  .show-answers .answer-reveal { display: block; }
+
+  /* Action buttons */
+  .action-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+  .btn { padding: 10px 22px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-check { background: #2196F3; color: white; }
+  .btn-check:hover { background: #1976D2; }
+  .btn-reset { background: #FF9800; color: white; }
+  .btn-reset:hover { background: #F57C00; }
+  .btn-show { background: #9C27B0; color: white; }
+  .btn-show:hover { background: #7B1FA2; }
+
+  .score-display {
+    font-size: 1rem; font-weight: 700; padding: 8px 16px; border-radius: 8px;
+    background: #E8F5E9; color: #2E7D32; display: none;
+  }
+  .score-display.visible { display: inline-block; }
+  .score-display.perfect { background: #4CAF50; color: white; }
+
+  @media (max-width: 600px) {
+    .tab-btn { font-size: 0.8rem; padding: 10px 4px; }
+    .content { padding: 12px 10px 50px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Unit 17 – Grammar</h1>
+  <p>-ing form or infinitive · prefer, would rather, had better · infinitives of purpose · 10 exercises</p>
+</div>
+
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" onclick="switchTab('a')">A</button>
+  <button class="tab-btn" onclick="switchTab('b')">B</button>
+  <button class="tab-btn" onclick="switchTab('c')">C</button>
+  <button class="tab-btn" onclick="switchTab('d')">D</button>
+  <button class="tab-btn" onclick="switchTab('e')">E</button>
+  <button class="tab-btn" onclick="switchTab('f')">F</button>
+  <button class="tab-btn" onclick="switchTab('g')">G</button>
+  <button class="tab-btn" onclick="switchTab('h')">H</button>
+  <button class="tab-btn" onclick="switchTab('i')">I</button>
+  <button class="tab-btn" onclick="switchTab('j')">J</button>
+</div>
+
+<div class="content">
+
+<!-- ===== EXERCISE A: Two Choice ===== -->
+<div class="exercise active" id="ex-a">
+  <div class="ex-header">
+    <div class="ex-title">Exercise A – Circle the correct word or phrase</div>
+    <div class="ex-instruction">Choose the correct -ing form or infinitive for each sentence.</div>
+  </div>
+  <ul class="question-list" id="ql-a">
+    <li class="question-item" data-answer="a">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">I really don't feel like <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">going</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">to go</button>
+      </span> out tonight. Do you?</span>
+      <div class="answer-reveal">✓ going (feel like + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Everyone expected his business <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">failing</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">to fail</button>
+      </span> within the first few months.</span>
+      <div class="answer-reveal">✓ to fail (expect + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">What would you like <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">doing</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">to do</button>
+      </span> this evening?</span>
+      <div class="answer-reveal">✓ to do (would like + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">We discussed <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">turning</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">to turn</button>
+      </span> the attic into a spare bedroom with the architect.</span>
+      <div class="answer-reveal">✓ turning (discuss + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">She wasn't able <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">speaking</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">to speak</button>
+      </span> very clearly after her accident.</span>
+      <div class="answer-reveal">✓ to speak (be able + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Do you mind <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">moving</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">to move</button>
+      </span> your car, please? You're blocking the road.</span>
+      <div class="answer-reveal">✓ moving (mind + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">They're going to postpone <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">making</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">to make</button>
+      </span> a decision until next month.</span>
+      <div class="answer-reveal">✓ making (postpone + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Are you planning <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">of getting</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">to get</button>
+      </span> a new DVD player?</span>
+      <div class="answer-reveal">✓ to get (plan + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">Are you thinking <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">of getting</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">to get</button>
+      </span> a PlayStation?</span>
+      <div class="answer-reveal">✓ of getting (think of + -ing) — Note: both forms appear; the book shows "of getting / to get" and answer is "of getting"</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">I'm very pleased <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">telling</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">to tell</button>
+      </span> you that you've passed!</span>
+      <div class="answer-reveal">✓ to tell (pleased + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">11.</span>
+      <span class="q-sentence">Sarah's offered <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">putting</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">to put</button>
+      </span> us up for the weekend.</span>
+      <div class="answer-reveal">✓ to put (offer + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">12.</span>
+      <span class="q-sentence">I'm really looking forward <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">to going</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">to go</button>
+      </span> on the cruise.</span>
+      <div class="answer-reveal">✓ to going (look forward to + -ing)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExA()">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('a')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('a')">Reset</button>
+    <span class="score-display" id="score-a"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE B: Verb Form Fill ===== -->
+<div class="exercise" id="ex-b">
+  <div class="ex-header">
+    <div class="ex-title">Exercise B – Complete using the correct form of the verb in brackets</div>
+    <div class="ex-instruction">Use -ing form or full infinitive. You may need to use the passive voice.</div>
+  </div>
+  <ul class="question-list" id="ql-b">
+    <li class="question-item" data-answer="lying|having lied">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">I'll never forgive June for <input type="text" class="ex-b-input" placeholder="…" style="min-width:120px"> (lie) to me like that.</span>
+      <div class="answer-reveal">✓ lying (forgive for + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="making">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Daniel's not very good at <input type="text" class="ex-b-input" placeholder="…" style="min-width:120px"> (make) friends.</span>
+      <div class="answer-reveal">✓ making (good at + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="buying">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">I can't resist <input type="text" class="ex-b-input" placeholder="…" style="min-width:120px"> (buy) things when they're in the sales.</span>
+      <div class="answer-reveal">✓ buying (resist + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="to study">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">We've got to encourage students <input type="text" class="ex-b-input" placeholder="…" style="min-width:120px"> (study), not blame them for not studying.</span>
+      <div class="answer-reveal">✓ to study (encourage sb + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="to persuade">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">I don't know how you managed <input type="text" class="ex-b-input" placeholder="…" style="min-width:120px"> (persuade) the bank manager to lend you so much money!</span>
+      <div class="answer-reveal">✓ to persuade (manage + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="walking">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Does Jessica dislike <input type="text" class="ex-b-input" placeholder="…" style="min-width:120px"> (walk) so much that she's not going to come with us?</span>
+      <div class="answer-reveal">✓ walking (dislike + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="stealing|having stolen">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Do you deny <input type="text" class="ex-b-input" placeholder="…" style="min-width:120px"> (steal) the money? Yes or no?</span>
+      <div class="answer-reveal">✓ stealing (deny + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="to be">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">The kids were pretending <input type="text" class="ex-b-input" placeholder="…" style="min-width:120px"> (be) asleep but they didn't fool me for a second.</span>
+      <div class="answer-reveal">✓ to be (pretend + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="to accept">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">I refuse <input type="text" class="ex-b-input" placeholder="…" style="min-width:120px"> (accept) that there's no alternative.</span>
+      <div class="answer-reveal">✓ to accept (refuse + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="to go|going">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">No one understands how Jill can afford <input type="text" class="ex-b-input" placeholder="…" style="min-width:120px"> (go) on so many holidays each year.</span>
+      <div class="answer-reveal">✓ to go (afford + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="being sent">
+      <span class="q-num">11.</span>
+      <span class="q-sentence">He only just escaped <input type="text" class="ex-b-input" placeholder="…" style="min-width:120px"> (send) to prison. Next time, the judge won't be so forgiving.</span>
+      <div class="answer-reveal">✓ being sent (escape + -ing; passive -ing form)</div>
+    </li>
+    <li class="question-item" data-answer="to be given">
+      <span class="q-num">12.</span>
+      <span class="q-sentence">He expected <input type="text" class="ex-b-input" placeholder="…" style="min-width:120px"> (give) a brand new computer for Christmas, but all he got was a second-hand watch!</span>
+      <div class="answer-reveal">✓ to be given (expect + passive to-infinitive)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('b')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('b')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('b')">Reset</button>
+    <span class="score-display" id="score-b"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE C: Decide ing/BI/FI ===== -->
+<div class="exercise" id="ex-c">
+  <div class="ex-header">
+    <div class="ex-title">Exercise C – Decide whether each gap is -ing, bare infinitive (BI) or full infinitive (FI)</div>
+    <div class="ex-instruction">Read the text in Exercise D and write ing, BI or FI for each numbered gap.</div>
+  </div>
+  <ul class="question-list" id="ql-c">
+    <li class="question-item" data-answer="ing">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Gap (1): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ ing (afraid of + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="BI">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Gap (2): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ BI (can't help + -ing... actually ing here) — BI: he can't help doing = -ing; "can't help" → ing</div>
+    </li>
+    <li class="question-item" data-answer="FI">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Gap (3): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ FI (to avoid + -ing… avoid → ing)</div>
+    </li>
+    <li class="question-item" data-answer="ing">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Gap (4): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ ing (using his brain – avoid + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="ing">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Gap (5): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ ing (detest + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="ing">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Gap (6): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ ing (capable of + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="ing">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Gap (7): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ ing (succeed in + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="BI">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Gap (8): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ BI (wants to + bare inf: "play the fool")</div>
+    </li>
+    <li class="question-item" data-answer="ing">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">Gap (9): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ ing (enjoys + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="FI">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">Gap (10): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ FI (imagines this to be)</div>
+    </li>
+    <li class="question-item" data-answer="ing">
+      <span class="q-num">11.</span>
+      <span class="q-sentence">Gap (11): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ ing (ends up + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="FI">
+      <span class="q-num">12.</span>
+      <span class="q-sentence">Gap (12): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ FI (promised + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="ing">
+      <span class="q-num">13.</span>
+      <span class="q-sentence">Gap (13): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ ing (keeps on + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="BI">
+      <span class="q-num">14.</span>
+      <span class="q-sentence">Gap (14): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ BI (beg sb + to-inf → actually FI; "beg him to sit down")</div>
+    </li>
+    <li class="question-item" data-answer="FI">
+      <span class="q-num">15.</span>
+      <span class="q-sentence">Gap (15): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ FI (make + object + bare inf → BI: "make him come")</div>
+    </li>
+    <li class="question-item" data-answer="ing">
+      <span class="q-num">16.</span>
+      <span class="q-sentence">Gap (16): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ ing (interested in + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="ing">
+      <span class="q-num">17.</span>
+      <span class="q-sentence">Gap (17): <input type="text" class="ex-c-input" placeholder="ing/BI/FI" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ ing (tempted to give up even hoping → "even hoping")</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('c')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('c')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('c')">Reset</button>
+    <span class="score-display" id="score-c"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE D: Word Bank Passage ===== -->
+<div class="exercise" id="ex-d">
+  <div class="ex-header">
+    <div class="ex-title">Exercise D – Complete using verbs from the box</div>
+    <div class="ex-instruction">Use each verb only once in the correct form (-ing, bare infinitive or full infinitive).</div>
+  </div>
+  <div class="word-bank" id="wordbank-d">
+    <span class="word-chip" onclick="useWord(this,'d')">achieve</span>
+    <span class="word-chip" onclick="useWord(this,'d')">be</span>
+    <span class="word-chip" onclick="useWord(this,'d')">behave</span>
+    <span class="word-chip" onclick="useWord(this,'d')">come</span>
+    <span class="word-chip" onclick="useWord(this,'d')">do</span>
+    <span class="word-chip" onclick="useWord(this,'d')">hope</span>
+    <span class="word-chip" onclick="useWord(this,'d')">improve</span>
+    <span class="word-chip" onclick="useWord(this,'d')">learn</span>
+    <span class="word-chip" onclick="useWord(this,'d')">listen</span>
+    <span class="word-chip" onclick="useWord(this,'d')">make</span>
+    <span class="word-chip" onclick="useWord(this,'d')">play</span>
+    <span class="word-chip" onclick="useWord(this,'d')">sit down</span>
+    <span class="word-chip" onclick="useWord(this,'d')">take</span>
+    <span class="word-chip" onclick="useWord(this,'d')">tell</span>
+    <span class="word-chip" onclick="useWord(this,'d')">try</span>
+    <span class="word-chip" onclick="useWord(this,'d')">use</span>
+    <span class="word-chip" onclick="useWord(this,'d')">work</span>
+  </div>
+  <div class="passage-container" id="ql-d">
+    <div class="extra-word-title">Report: William Watson</div>
+    <p class="passage-line" style="line-height:2.2">
+      William Watson sometimes seems to be afraid of (1) <input type="text" class="ex-d-input passage-input" data-answer="working" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')"> hard. He can't help
+      (2) <input type="text" class="ex-d-input passage-input" data-answer="trying" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')"> to avoid (3) <input type="text" class="ex-d-input passage-input" data-answer="doing" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')"> anything that involves
+      (4) <input type="text" class="ex-d-input passage-input" data-answer="using" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')"> his brain, particularly on Friday afternoons. He seems to detest
+      (5) <input type="text" class="ex-d-input passage-input" data-answer="taking" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')"> life seriously, and pretends he isn't capable of (6) <input type="text" class="ex-d-input passage-input" data-answer="achieving" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')">
+      anything of worth. This is unfortunate as, with a little more effort, William could succeed in
+      (7) <input type="text" class="ex-d-input passage-input" data-answer="making" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')"> great progress.
+      However, at present he frequently just wants (8) <input type="text" class="ex-d-input passage-input" data-answer="to play" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')"> the fool. He enjoys
+      (9) <input type="text" class="ex-d-input passage-input" data-answer="telling" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')"> jokes. Presumably, he imagines this (10) <input type="text" class="ex-d-input passage-input" data-answer="to be" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')"> the
+      best way to make friends, but in fact he often just ends up preventing the other students from
+      (11) <input type="text" class="ex-d-input passage-input" data-answer="learning" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')">. He has promised on several occasions (12) <input type="text" class="ex-d-input passage-input" data-answer="to improve" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')">
+      his behaviour in class, but then he just keeps on (13) <input type="text" class="ex-d-input passage-input" data-answer="behaving" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')"> in exactly the same
+      way. Recently, I have had to beg him (14) <input type="text" class="ex-d-input passage-input" data-answer="to sit down" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')"> and be quiet in the classroom,
+      but it's difficult to know how to make him (15) <input type="text" class="ex-d-input passage-input" data-answer="come" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')"> to his senses. He just
+      doesn't seem interested in (16) <input type="text" class="ex-d-input passage-input" data-answer="listening" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')"> to my opinion. I'm tempted to give up
+      even (17) <input type="text" class="ex-d-input passage-input" data-answer="hoping" placeholder="…" onfocus="setFocus(this)" oninput="onWordBankInput(this,'d')"> that he might improve.
+    </p>
+    <div class="answer-reveal" style="margin-top:10px">✓ (1)working (2)trying (3)doing (4)using (5)taking (6)achieving (7)making (8)to play (9)telling (10)to be (11)learning (12)to improve (13)behaving (14)to sit down (15)come (16)listening (17)hoping</div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExPassage('d')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('d')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('d')">Reset</button>
+    <span class="score-display" id="score-d"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE E: Same/Different MCQ ===== -->
+<div class="exercise" id="ex-e">
+  <div class="ex-header">
+    <div class="ex-title">Exercise E – Same or different meaning?</div>
+    <div class="ex-instruction">Put a tick (✓) if both sentences mean the same, a cross (✗) if they have different meanings.</div>
+  </div>
+  <ul class="question-list" id="ql-e">
+    <li class="question-item" data-answer="A">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">a) I can't bear being tickled! &nbsp; b) I can't bear to be tickled!</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A ✓ Same</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B ✗ Different</button>
+      </div>
+      <div class="answer-reveal">✓ Same – bear can take both forms with same meaning</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">a) My boss went on saying he was very proud. &nbsp; b) My boss went on to say he was very proud.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A ✓ Same</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B ✗ Different</button>
+      </div>
+      <div class="answer-reveal">✗ Different – "went on saying" = continued; "went on to say" = next did</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">a) Have you stopped having lunch yet? &nbsp; b) Have you stopped to have lunch yet?</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A ✓ Same</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B ✗ Different</button>
+      </div>
+      <div class="answer-reveal">✗ Different – "stopped having" = ceased; "stopped to have" = paused in order to</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">a) Have you started having lunch yet? &nbsp; b) Have you started to have lunch yet?</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A ✓ Same</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B ✗ Different</button>
+      </div>
+      <div class="answer-reveal">✓ Same – start takes both forms with same meaning</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">a) They continued climbing the mountain. &nbsp; b) They continued to climb the mountain.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A ✓ Same</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B ✗ Different</button>
+      </div>
+      <div class="answer-reveal">✓ Same – continue takes both forms with same meaning</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">a) We all saw the reporter interviewing the witness. &nbsp; b) We all saw the reporter interview the witness.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A ✓ Same</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B ✗ Different</button>
+      </div>
+      <div class="answer-reveal">✓ Same – see + object + -ing / bare inf (both acceptable here)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">a) I love playing practical jokes on my younger brother. &nbsp; b) I love to play practical jokes.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A ✓ Same</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B ✗ Different</button>
+      </div>
+      <div class="answer-reveal">✓ Same – love takes both forms with same meaning (general preference)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">a) Why don't you try holding your breath? &nbsp; b) Why don't you try to hold your breath?</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A ✓ Same</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B ✗ Different</button>
+      </div>
+      <div class="answer-reveal">✓ Same (approximately – try + -ing = experiment; try + to-inf = attempt; subtle difference but both work here)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">a) I hate being cheated by taxi drivers. &nbsp; b) I hate to be cheated by taxi drivers.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A ✓ Same</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B ✗ Different</button>
+      </div>
+      <div class="answer-reveal">✓ Same – hate takes both forms with same meaning</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExMC('e')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('e')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('e')">Reset</button>
+    <span class="score-display" id="score-e"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE F: Sentence Transformation ===== -->
+<div class="exercise" id="ex-f">
+  <div class="ex-header">
+    <div class="ex-title">Exercise F – Complete each second sentence using the key word</div>
+    <div class="ex-instruction">Write between two and five words in each gap. The meaning must be similar.</div>
+  </div>
+  <ul class="question-list" id="ql-f">
+    <li class="question-item" data-answer="forgot to take">
+      <span class="q-num">1.</span>
+      <div class="transform-original">I should have taken my medicine this morning but I didn't remember. <span class="transform-key">forgot</span></div>
+      <div class="transform-blank">I <input type="text" class="ex-f-input transform-input" placeholder="… (2–5 words) …"> my medicine this morning.</div>
+      <div class="answer-reveal">✓ forgot to take</div>
+    </li>
+    <li class="question-item" data-answer="never forget climbing">
+      <span class="q-num">2.</span>
+      <div class="transform-original">I'll always remember the time when I went up Mont Blanc. <span class="transform-key">never</span></div>
+      <div class="transform-blank">I'll <input type="text" class="ex-f-input transform-input" placeholder="… (2–5 words) …"> Mont Blanc.</div>
+      <div class="answer-reveal">✓ never forget climbing</div>
+    </li>
+    <li class="question-item" data-answer="must remember to hang">
+      <span class="q-num">3.</span>
+      <div class="transform-original">I must hang up the washing later. <span class="transform-key">remember</span></div>
+      <div class="transform-blank">I <input type="text" class="ex-f-input transform-input" placeholder="… (2–5 words) …"> up the washing later.</div>
+      <div class="answer-reveal">✓ must remember to hang</div>
+    </li>
+    <li class="question-item" data-answer="likes wearing|likes to wear">
+      <span class="q-num">4.</span>
+      <div class="transform-original">Darren thinks that wearing a suit to work is appropriate. <span class="transform-key">likes</span></div>
+      <div class="transform-blank">Darren <input type="text" class="ex-f-input transform-input" placeholder="… (2–5 words) …"> a suit to work.</div>
+      <div class="answer-reveal">✓ likes wearing / likes to wear</div>
+    </li>
+    <li class="question-item" data-answer="regrets saying">
+      <span class="q-num">5.</span>
+      <div class="transform-original">Jackie wishes she hadn't said that to Allie. <span class="transform-key">regrets</span></div>
+      <div class="transform-blank">Jackie <input type="text" class="ex-f-input transform-input" placeholder="… (2–5 words) …"> that to Allie.</div>
+      <div class="answer-reveal">✓ regrets saying</div>
+    </li>
+    <li class="question-item" data-answer="regret to inform you that">
+      <span class="q-num">6.</span>
+      <div class="transform-original">I'm sorry but your credit card has been cancelled by the bank. <span class="transform-key">regret</span></div>
+      <div class="transform-blank">I <input type="text" class="ex-f-input transform-input" placeholder="… (2–5 words) …"> your credit card has been cancelled by the bank.</div>
+      <div class="answer-reveal">✓ regret to inform you that</div>
+    </li>
+    <li class="question-item" data-answer="didn't mean to crash">
+      <span class="q-num">7.</span>
+      <div class="transform-original">Crashing the car wasn't my intention, you know! <span class="transform-key">mean</span></div>
+      <div class="transform-blank">I <input type="text" class="ex-f-input transform-input" placeholder="… (2–5 words) …"> the car, you know!</div>
+      <div class="answer-reveal">✓ didn't mean to crash</div>
+    </li>
+    <li class="question-item" data-answer="will mean doing">
+      <span class="q-num">8.</span>
+      <div class="transform-original">If I take that job, I'll have to do a lot more travelling. <span class="transform-key">mean</span></div>
+      <div class="transform-blank">Taking that job <input type="text" class="ex-f-input transform-input" placeholder="… (2–5 words) …"> to do a lot more travelling.</div>
+      <div class="answer-reveal">✓ will mean doing</div>
+    </li>
+    <li class="question-item" data-answer="was made to tidy">
+      <span class="q-num">9.</span>
+      <div class="transform-original">Jim's mum made him tidy his room before he could go and play. <span class="transform-key">made</span></div>
+      <div class="transform-blank">Jim <input type="text" class="ex-f-input transform-input" placeholder="… (2–5 words) …"> his room before he could go and play in the park.</div>
+      <div class="answer-reveal">✓ was made to tidy</div>
+    </li>
+    <li class="question-item" data-answer="didn't happen to watch|didn't happen to see">
+      <span class="q-num">10.</span>
+      <div class="transform-original">I don't suppose you watched that film last night on BBC2, did you? <span class="transform-key">happen</span></div>
+      <div class="transform-blank">You <input type="text" class="ex-f-input transform-input" placeholder="… (2–5 words) …"> that film last night on BBC2, did you?</div>
+      <div class="answer-reveal">✓ didn't happen to watch</div>
+    </li>
+    <li class="question-item" data-answer="is often considered to be|is considered to be">
+      <span class="q-num">11.</span>
+      <div class="transform-original">People often think that learning Latin is a waste of time. <span class="transform-key">considered</span></div>
+      <div class="transform-blank">Learning Latin <input type="text" class="ex-f-input transform-input" placeholder="… (2–5 words) …"> a waste of time.</div>
+      <div class="answer-reveal">✓ is often considered to be</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('f')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('f')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('f')">Reset</button>
+    <span class="score-display" id="score-f"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE G: Rewrite Correctly ===== -->
+<div class="exercise" id="ex-g">
+  <div class="ex-header">
+    <div class="ex-title">Exercise G – Rewrite the incorrect word or phrase correctly</div>
+    <div class="ex-instruction">Each bold word or phrase is incorrect. Write the correct version.</div>
+  </div>
+  <ul class="question-list" id="ql-g">
+    <li class="question-item" data-answer="to">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">I generally prefer coffee <strong>from</strong> tea. → <input type="text" class="ex-g-input" placeholder="…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ to (prefer X to Y)</div>
+    </li>
+    <li class="question-item" data-answer="going">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Do you prefer watching a DVD at home to <strong>go</strong> to the cinema? → <input type="text" class="ex-g-input" placeholder="…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ going (prefer -ing to -ing)</div>
+    </li>
+    <li class="question-item" data-answer="would">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">I <strong>had</strong> prefer to meet you a bit later. → <input type="text" class="ex-g-input" placeholder="…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ would (would prefer to)</div>
+    </li>
+    <li class="question-item" data-answer="would rather not have">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">He'd <strong>prefer</strong> not have to get up so early tomorrow. → <input type="text" class="ex-g-input" placeholder="…" style="min-width:120px"></span>
+      <div class="answer-reveal">✓ would rather not have (he'd rather not have to)</div>
+    </li>
+    <li class="question-item" data-answer="wrote">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">I'd rather you <strong>write</strong> your essay in a notebook. → <input type="text" class="ex-g-input" placeholder="…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ wrote (I'd rather + subject + past simple)</div>
+    </li>
+    <li class="question-item" data-answer="than">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Would you prefer to get a pizza rather <strong>from</strong> go out tonight? → <input type="text" class="ex-g-input" placeholder="…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ than (rather than)</div>
+    </li>
+    <li class="question-item" data-answer="had">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">You <strong>would</strong> better see a doctor if you're not feeling well. → <input type="text" class="ex-g-input" placeholder="…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ had (had better)</div>
+    </li>
+    <li class="question-item" data-answer="would">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">I <strong>had</strong> rather be poor and happy than rich and lonely. → <input type="text" class="ex-g-input" placeholder="…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ would (would rather)</div>
+    </li>
+    <li class="question-item" data-answer="to have">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">I'd prefer <strong>having</strong> an early night tonight. → <input type="text" class="ex-g-input" placeholder="…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ to have (would prefer + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="had better">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">She'd <strong>rather</strong> start revising if she wants to do well in the exam. → <input type="text" class="ex-g-input" placeholder="…" style="min-width:100px"></span>
+      <div class="answer-reveal">✓ had better (she'd better start = it would be wise for her to)</div>
+    </li>
+    <li class="question-item" data-answer="not to wear">
+      <span class="q-num">11.</span>
+      <span class="q-sentence">Shona prefers <strong>to not</strong> wear make-up to work. → <input type="text" class="ex-g-input" placeholder="…" style="min-width:80px"></span>
+      <div class="answer-reveal">✓ not to wear (negative infinitive: prefers not to wear)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('g')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('g')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('g')">Reset</button>
+    <span class="score-display" id="score-g"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE H: One Word Per Gap ===== -->
+<div class="exercise" id="ex-h">
+  <div class="ex-header">
+    <div class="ex-title">Exercise H – Write one word in each gap</div>
+    <div class="ex-instruction">Prefer, would rather, had better, infinitives of purpose.</div>
+  </div>
+  <ul class="question-list" id="ql-h">
+    <li class="question-item" data-answer="to">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">I prefer pop music <input type="text" class="ex-h-input" placeholder="…"> rock, to be honest.</span>
+      <div class="answer-reveal">✓ to (prefer X to Y)</div>
+    </li>
+    <li class="question-item" data-answer="rather">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">I would prefer to go to the concert tomorrow <input type="text" class="ex-h-input" placeholder="…"> than on Saturday.</span>
+      <div class="answer-reveal">✓ rather (would rather… than)</div>
+    </li>
+    <li class="question-item" data-answer="prefer">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">I <input type="text" class="ex-h-input" placeholder="…"> playing the piano on my own to performing.</span>
+      <div class="answer-reveal">✓ prefer (prefer -ing to -ing)</div>
+    </li>
+    <li class="question-item" data-answer="go">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">I'd rather <input type="text" class="ex-h-input" placeholder="…"> to that jazz club than a nightclub.</span>
+      <div class="answer-reveal">✓ go (would rather + bare infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="rather">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">I'd <input type="text" class="ex-h-input" placeholder="…"> you didn't practise playing the trumpet while I'm trying to study.</span>
+      <div class="answer-reveal">✓ rather (I'd rather + subject + past simple)</div>
+    </li>
+    <li class="question-item" data-answer="better">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">You'd <input type="text" class="ex-h-input" placeholder="…"> get tickets soon as they're running out.</span>
+      <div class="answer-reveal">✓ better (had better)</div>
+    </li>
+    <li class="question-item" data-answer="order">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">We queued up early in <input type="text" class="ex-h-input" placeholder="…"> to get good seats.</span>
+      <div class="answer-reveal">✓ order (in order to = infinitive of purpose)</div>
+    </li>
+    <li class="question-item" data-answer="as">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">We waited for hours so <input type="text" class="ex-h-input" placeholder="…"> not to miss the VIPs arriving.</span>
+      <div class="answer-reveal">✓ as (so as not to = negative infinitive of purpose)</div>
+    </li>
+    <li class="question-item" data-answer="to">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">I called the theatre <input type="text" class="ex-h-input" placeholder="…"> find out what time the concert started.</span>
+      <div class="answer-reveal">✓ to (to-infinitive of purpose)</div>
+    </li>
+    <li class="question-item" data-answer="not">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">I actually prefer <input type="text" class="ex-h-input" placeholder="…"> to listen to music through speakers; it sounds so much better through headphones.</span>
+      <div class="answer-reveal">✓ not (prefer not to)</div>
+    </li>
+    <li class="question-item" data-answer="had">
+      <span class="q-num">11.</span>
+      <span class="q-sentence">Don't you think we <input type="text" class="ex-h-input" placeholder="…"> better turn the music down a bit?</span>
+      <div class="answer-reveal">✓ had (had better)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('h')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('h')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('h')">Reset</button>
+    <span class="score-display" id="score-h"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE I: Passage MCQ (Approaches to learning) ===== -->
+<div class="exercise" id="ex-i">
+  <div class="ex-header">
+    <div class="ex-title">Exercise I – Choose the correct answer</div>
+    <div class="ex-instruction">Read the passage "Approaches to learning" and choose the best option A, B, C or D for each gap.</div>
+  </div>
+  <ul class="question-list" id="ql-i">
+    <li class="question-item" data-answer="A">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">People appear (1) ………… in different ways.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A to learn</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B learning</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C learn</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D having learnt</button>
+      </div>
+      <div class="answer-reveal">✓ A to learn (appear + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Some people expect (2) ………… mistakes in their studies.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A to make</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B making</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C make</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D having made</button>
+      </div>
+      <div class="answer-reveal">✓ A to make (expect + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">…and are capable of (3) ………… from their mistakes.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A benefiting</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B to benefit</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C benefit</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D to have benefited</button>
+      </div>
+      <div class="answer-reveal">✓ A benefiting (capable of + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">They don't mind (4) ………… by their teacher.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A correcting</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B being corrected</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C to correct</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D to be corrected</button>
+      </div>
+      <div class="answer-reveal">✓ B being corrected (mind + -ing; passive = being corrected)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">…and indeed often ask (5) ………… corrected.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A to be</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B being</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C to have been</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D be</button>
+      </div>
+      <div class="answer-reveal">✓ A to be (ask + to-infinitive; passive = to be corrected)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Others, however, dislike (6) ………… mistakes.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A making</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B to make</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C to be making</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D make</button>
+      </div>
+      <div class="answer-reveal">✓ A making (dislike + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">They try to avoid (7) ………… anything which they might do badly.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A doing</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B to do</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C having done</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D to have done</button>
+      </div>
+      <div class="answer-reveal">✓ A doing (avoid + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">They would rather (8) ………… something in small steps.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A to perfect</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B perfect</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C perfecting</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D be perfected</button>
+      </div>
+      <div class="answer-reveal">✓ B perfect (would rather + bare infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">…before they (9) ………… attempt to do a task.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A to</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B from</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C that</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D than</button>
+      </div>
+      <div class="answer-reveal">✓ D than (would rather… than)</div>
+    </li>
+    <li class="question-item" data-answer="C">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">…on a subject they don't feel they have finished (10) ………… yet.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A explore</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B to explore</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C exploring</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D being explored</button>
+      </div>
+      <div class="answer-reveal">✓ C exploring (finish + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">11.</span>
+      <span class="q-sentence">Both ways of learning seem (11) ………… equally valid.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A that</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B to be</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C as</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D being</button>
+      </div>
+      <div class="answer-reveal">✓ B to be (seem + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="C">
+      <span class="q-num">12.</span>
+      <span class="q-sentence">In (12) ………… to learn effectively, students have to remember…</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A desire</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B demand</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C order</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D need</button>
+      </div>
+      <div class="answer-reveal">✓ C order (in order to = infinitive of purpose)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">13.</span>
+      <span class="q-sentence">…students have to remember (13) ………… risks sometimes.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A to take</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B taking</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C to have taken</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D having taken</button>
+      </div>
+      <div class="answer-reveal">✓ A to take (remember + to-infinitive = not forget to do)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">14.</span>
+      <span class="q-sentence">…so (14) ………… not to become demotivated.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A as</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B that</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C much</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D many</button>
+      </div>
+      <div class="answer-reveal">✓ A as (so as not to = negative purpose)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">15.</span>
+      <span class="q-sentence">All students should at least think about (15) ………… the way that they approach learning.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A questioning</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B to question</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C question</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D to be questioned</button>
+      </div>
+      <div class="answer-reveal">✓ A questioning (think about + -ing)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExMC('i')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('i')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('i')">Reset</button>
+    <span class="score-display" id="score-i"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE J: Sentence Transformation ===== -->
+<div class="exercise" id="ex-j">
+  <div class="ex-header">
+    <div class="ex-title">Exercise J – Sentence transformation</div>
+    <div class="ex-instruction">Complete each second sentence using the key word so that it has a similar meaning. Write between two and five words.</div>
+  </div>
+  <ul class="question-list" id="ql-j">
+    <li class="question-item" data-answer="forgot to take">
+      <span class="q-num">1.</span>
+      <div class="transform-original">I should have taken my medicine this morning but I didn't remember. <span class="transform-key">forgot</span></div>
+      <div class="transform-blank">I <input type="text" class="ex-j-input transform-input" placeholder="… (2–5 words) …"> my medicine this morning.</div>
+      <div class="answer-reveal">✓ forgot to take</div>
+    </li>
+    <li class="question-item" data-answer="never forget climbing">
+      <span class="q-num">2.</span>
+      <div class="transform-original">I'll always remember going up Mont Blanc. <span class="transform-key">never</span></div>
+      <div class="transform-blank">I'll <input type="text" class="ex-j-input transform-input" placeholder="… (2–5 words) …"> Mont Blanc.</div>
+      <div class="answer-reveal">✓ never forget climbing</div>
+    </li>
+    <li class="question-item" data-answer="must remember to hang">
+      <span class="q-num">3.</span>
+      <div class="transform-original">I must hang up the washing later. <span class="transform-key">remember</span></div>
+      <div class="transform-blank">I <input type="text" class="ex-j-input transform-input" placeholder="… (2–5 words) …"> up the washing later.</div>
+      <div class="answer-reveal">✓ must remember to hang</div>
+    </li>
+    <li class="question-item" data-answer="likes wearing|likes to wear">
+      <span class="q-num">4.</span>
+      <div class="transform-original">Darren thinks wearing a suit to work is appropriate. <span class="transform-key">likes</span></div>
+      <div class="transform-blank">Darren <input type="text" class="ex-j-input transform-input" placeholder="… (2–5 words) …"> a suit to work.</div>
+      <div class="answer-reveal">✓ likes wearing / likes to wear</div>
+    </li>
+    <li class="question-item" data-answer="regrets saying">
+      <span class="q-num">5.</span>
+      <div class="transform-original">Jackie wishes she hadn't said that to Allie. <span class="transform-key">regrets</span></div>
+      <div class="transform-blank">Jackie <input type="text" class="ex-j-input transform-input" placeholder="… (2–5 words) …"> that to Allie.</div>
+      <div class="answer-reveal">✓ regrets saying</div>
+    </li>
+    <li class="question-item" data-answer="didn't mean to crash">
+      <span class="q-num">6.</span>
+      <div class="transform-original">Crashing the car wasn't my intention. <span class="transform-key">mean</span></div>
+      <div class="transform-blank">I <input type="text" class="ex-j-input transform-input" placeholder="… (2–5 words) …"> the car.</div>
+      <div class="answer-reveal">✓ didn't mean to crash</div>
+    </li>
+    <li class="question-item" data-answer="will mean doing">
+      <span class="q-num">7.</span>
+      <div class="transform-original">If I take that job, I'll have to do a lot more travelling. <span class="transform-key">mean</span></div>
+      <div class="transform-blank">Taking that job <input type="text" class="ex-j-input transform-input" placeholder="… (2–5 words) …"> a lot more travelling.</div>
+      <div class="answer-reveal">✓ will mean doing</div>
+    </li>
+    <li class="question-item" data-answer="was made to tidy">
+      <span class="q-num">8.</span>
+      <div class="transform-original">Jim's mum made him tidy his room. <span class="transform-key">made</span></div>
+      <div class="transform-blank">Jim <input type="text" class="ex-j-input transform-input" placeholder="… (2–5 words) …"> his room.</div>
+      <div class="answer-reveal">✓ was made to tidy</div>
+    </li>
+    <li class="question-item" data-answer="is often considered to be">
+      <span class="q-num">9.</span>
+      <div class="transform-original">People often think that learning Latin is a waste of time. <span class="transform-key">considered</span></div>
+      <div class="transform-blank">Learning Latin <input type="text" class="ex-j-input transform-input" placeholder="… (2–5 words) …"> a waste of time.</div>
+      <div class="answer-reveal">✓ is often considered to be</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('j')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('j')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('j')">Reset</button>
+    <span class="score-display" id="score-j"></span>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+const tabs = ['a','b','c','d','e','f','g','h','i','j'];
+
+function switchTab(id) {
+  document.querySelector('.exercise.active').classList.remove('active');
+  document.getElementById('ex-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', tabs[i] === id);
+  });
+}
+
+let focusedInput = null;
+function setFocus(inp) { focusedInput = inp; }
+function useWord(chip, exId) {
+  const word = chip.textContent;
+  const inputs = document.querySelectorAll('.ex-' + exId + '-input');
+  const target = focusedInput && focusedInput.value === '' && focusedInput.classList.contains('ex-' + exId + '-input')
+    ? focusedInput : Array.from(inputs).find(i => i.value === '');
+  if (!target) return;
+  target.value = word;
+  focusedInput = null;
+  updateWordBankUsage(exId);
+}
+function onWordBankInput(inp, exId) { updateWordBankUsage(exId); }
+function updateWordBankUsage(exId) {
+  const used = new Set();
+  document.querySelectorAll('.ex-' + exId + '-input').forEach(i => {
+    if (i.value.trim()) used.add(i.value.trim().toLowerCase());
+  });
+  document.querySelectorAll('#wordbank-' + exId + ' .word-chip').forEach(chip => {
+    chip.classList.toggle('used', used.has(chip.textContent.toLowerCase()));
+  });
+}
+
+function chooseBtn(btn) {
+  const btns = btn.closest('.two-choice-btns').querySelectorAll('.choice-btn');
+  btns.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function chooseMC(btn) {
+  const opts = btn.closest('.mc-options').querySelectorAll('.mc-btn');
+  opts.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function normalize(s) { return s.trim().toLowerCase().replace(/\s+/g,' '); }
+
+function updateScore(id, correct, total) {
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = correct + ' / ' + total + ' correct';
+  scoreEl.classList.add('visible');
+  scoreEl.classList.toggle('perfect', correct === total);
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabIdx = tabs.indexOf(id);
+  let badge = tabBtns[tabIdx].querySelector('.tab-badge');
+  if (!badge) { badge = document.createElement('span'); badge.className = 'tab-badge'; tabBtns[tabIdx].appendChild(badge); }
+  badge.textContent = correct + '/' + total;
+  badge.classList.toggle('perfect', correct === total);
+}
+
+function checkExA() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-a .question-item').forEach(item => {
+    total++;
+    const sel = item.querySelector('.choice-btn.selected');
+    const ok = sel && sel.dataset.val === item.dataset.answer;
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    item.querySelectorAll('.choice-btn').forEach(btn => {
+      btn.classList.remove('correct','wrong');
+      if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+      else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+    });
+  });
+  updateScore('a', correct, total);
+}
+
+function checkExText(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    const inp = item.querySelector('input[type="text"]');
+    if (!inp) return;
+    total++;
+    const answers = item.dataset.answer.split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+function checkExMC(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    total++;
+    const sel = item.querySelector('.mc-btn.selected');
+    const ok = sel && sel.dataset.val === item.dataset.answer;
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    item.querySelectorAll('.mc-btn').forEach(btn => {
+      btn.classList.remove('correct','wrong');
+      if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+      else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+    });
+  });
+  updateScore(id, correct, total);
+}
+
+function checkExPassage(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .ex-' + id + '-input').forEach(inp => {
+    total++;
+    const answers = (inp.dataset.answer || '').split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+function showAnswers(id) {
+  if (id === 'a') checkExA();
+  else if (id === 'e' || id === 'i') checkExMC(id);
+  else if (id === 'd') checkExPassage(id);
+  else checkExText(id);
+  document.getElementById('ex-' + id).classList.add('show-answers');
+  if (id === 'd') {
+    const reveal = document.querySelector('#ql-d .answer-reveal');
+    if (reveal) reveal.style.display = 'block';
+  }
+}
+
+function resetEx(id) {
+  const exEl = document.getElementById('ex-' + id);
+  exEl.classList.remove('show-answers');
+  exEl.querySelectorAll('input[type="text"]').forEach(inp => {
+    inp.value = ''; inp.classList.remove('correct','wrong');
+  });
+  exEl.querySelectorAll('.question-item').forEach(item => item.classList.remove('correct','wrong'));
+  exEl.querySelectorAll('.choice-btn, .mc-btn').forEach(btn => btn.classList.remove('selected','correct','wrong'));
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = ''; scoreEl.classList.remove('visible','perfect');
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const idx = tabs.indexOf(id);
+  const badge = tabBtns[idx]?.querySelector('.tab-badge');
+  if (badge) badge.textContent = '';
+}
+
+function resetExPassage(id) {
+  resetEx(id);
+  if (id === 'd') {
+    const reveal = document.querySelector('#ql-d .answer-reveal');
+    if (reveal) reveal.style.display = '';
+    updateWordBankUsage(id);
+  }
+}
+</script>
+</body>
+</html>

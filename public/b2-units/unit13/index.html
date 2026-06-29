@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 13 – Grammar Exercises</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #333; min-height: 100vh; }
+
+  .header { background: #1565C0; color: white; padding: 16px 20px; text-align: center; }
+  .header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+  .header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+
+  .tab-bar { display: flex; background: #1976D2; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 1; min-width: 40px; padding: 12px 4px; border: none; background: transparent;
+    color: rgba(255,255,255,0.7); font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap;
+  }
+  .tab-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+  .tab-btn.active { color: white; border-bottom-color: #FFD600; }
+  .tab-badge {
+    display: inline-block; font-size: 0.65rem; background: rgba(255,255,255,0.25);
+    border-radius: 10px; padding: 1px 5px; margin-left: 2px; vertical-align: middle;
+  }
+  .tab-badge.perfect { background: #4CAF50; }
+
+  .content { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+  .exercise { display: none; }
+  .exercise.active { display: block; }
+
+  .ex-header { margin-bottom: 16px; }
+  .ex-title { font-size: 1.1rem; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+  .ex-instruction {
+    font-size: 0.9rem; color: #555; background: #E3F2FD; border-left: 4px solid #2196F3;
+    padding: 8px 12px; border-radius: 0 6px 6px 0;
+  }
+
+  .question-list { list-style: none; }
+  .question-item {
+    background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s;
+  }
+  .question-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .question-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+
+  .q-num { font-weight: 700; color: #1976D2; margin-right: 6px; }
+
+  input[type="text"] {
+    border: 2px solid #BBDEFB; border-radius: 6px; padding: 5px 10px;
+    font-size: 0.95rem; outline: none; background: #FAFAFA; transition: border .2s;
+    min-width: 100px;
+  }
+  input[type="text"]:focus { border-color: #2196F3; background: white; }
+  input[type="text"].correct { border-color: #4CAF50; background: #F1F8E9; color: #2E7D32; }
+  input[type="text"].wrong { border-color: #F44336; background: #FFF5F5; color: #C62828; }
+
+  /* Two Choice */
+  .two-choice-btns { display: inline-flex; gap: 8px; margin-left: 6px; flex-wrap: wrap; }
+  .choice-btn {
+    border: 2px solid #90CAF9; background: white; border-radius: 6px;
+    padding: 4px 12px; font-size: 0.88rem; cursor: pointer; transition: all .2s; color: #1565C0;
+  }
+  .choice-btn:hover { background: #E3F2FD; }
+  .choice-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .choice-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .choice-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+
+  /* Multiple choice */
+  .mc-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .mc-btn {
+    border: 2px solid #90CAF9; background: white; border-radius: 6px;
+    padding: 5px 16px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #1565C0;
+  }
+  .mc-btn:hover { background: #E3F2FD; }
+  .mc-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .mc-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .mc-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+
+  /* Passage */
+  .passage-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .passage-line { margin-bottom: 10px; line-height: 2.2; }
+  .passage-title { font-weight: 700; font-size: 1.05rem; text-align: center; color: #1565C0; margin-bottom: 12px; }
+  .passage-input { min-width: 100px; width: 130px; }
+
+  /* Sentence transform */
+  .transform-item { background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s; }
+  .transform-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .transform-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+  .transform-original { margin-bottom: 6px; color: #555; font-size: 0.92rem; }
+  .transform-key { display: inline-block; background: #FFF9C4; border: 1px solid #F9A825; border-radius: 4px; padding: 1px 8px; font-weight: 700; color: #5D4037; font-size: 0.88rem; margin: 0 6px; }
+  .transform-blank { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .transform-input { min-width: 200px; flex: 1; }
+
+  /* Word bank table */
+  .wb-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 0.9rem; }
+  .wb-table th { background: #1976D2; color: white; padding: 8px 12px; text-align: left; }
+  .wb-table td { padding: 8px 12px; border-bottom: 1px solid #E3F2FD; }
+  .wb-table tr:nth-child(even) td { background: #F5F5F5; }
+  .wb-table .hint { color: #888; font-style: italic; }
+
+  /* Answer reveal */
+  .answer-reveal { font-size: 0.82rem; color: #388E3C; margin-top: 4px; display: none; }
+  .show-answers .answer-reveal { display: block; }
+
+  /* Action buttons */
+  .action-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+  .btn { padding: 10px 22px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-check { background: #2196F3; color: white; }
+  .btn-check:hover { background: #1976D2; }
+  .btn-reset { background: #FF9800; color: white; }
+  .btn-reset:hover { background: #F57C00; }
+  .btn-show { background: #9C27B0; color: white; }
+  .btn-show:hover { background: #7B1FA2; }
+
+  .score-display {
+    font-size: 1rem; font-weight: 700; padding: 8px 16px; border-radius: 8px;
+    background: #E8F5E9; color: #2E7D32; display: none;
+  }
+  .score-display.visible { display: inline-block; }
+  .score-display.perfect { background: #4CAF50; color: white; }
+
+  @media (max-width: 600px) {
+    .tab-btn { font-size: 0.78rem; padding: 10px 3px; }
+    .content { padding: 12px 10px 50px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Unit 13 – Grammar</h1>
+  <p>Modals: ability, permission, advice, obligation, necessity, certainty · 9 exercises · Click a tab to start</p>
+</div>
+
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" onclick="switchTab('a')">A</button>
+  <button class="tab-btn" onclick="switchTab('b')">B</button>
+  <button class="tab-btn" onclick="switchTab('c')">C</button>
+  <button class="tab-btn" onclick="switchTab('d')">D</button>
+  <button class="tab-btn" onclick="switchTab('e')">E</button>
+  <button class="tab-btn" onclick="switchTab('f')">F</button>
+  <button class="tab-btn" onclick="switchTab('g')">G</button>
+  <button class="tab-btn" onclick="switchTab('h')">H</button>
+  <button class="tab-btn" onclick="switchTab('i')">I</button>
+</div>
+
+<div class="content">
+
+<!-- ===== EXERCISE A: Tick correct / rewrite incorrect modal ===== -->
+<div class="exercise active" id="ex-a">
+  <div class="ex-header">
+    <div class="ex-title">Exercise A – Tick (✓) correct phrases or rewrite incorrectly used ones</div>
+    <div class="ex-instruction">If the word or phrase in bold is correct, write ✓. If it is incorrect, write the correct form.</div>
+  </div>
+  <ul class="question-list" id="ql-a">
+    <li class="question-item" data-answer="speak">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Can you <strong>to speak</strong> French? <input type="text" class="ex-a-input" placeholder="✓ or correction…" style="min-width:140px"></span>
+      <div class="answer-reveal">✓ speak (can + bare infinitive, not to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">I <strong>can</strong> give you a hand tomorrow morning, if you like. <input type="text" class="ex-a-input" placeholder="✓ or correction…" style="min-width:140px"></span>
+      <div class="answer-reveal">✓ (correct – can = future offer/ability)</div>
+    </li>
+    <li class="question-item" data-answer="be able to">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">I'll <strong>can</strong> take my driving test after a few more lessons. <input type="text" class="ex-a-input" placeholder="✓ or correction…" style="min-width:140px"></span>
+      <div class="answer-reveal">✓ be able to (can cannot follow will; use will be able to)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Jack <strong>can</strong> play the guitar before he learnt to talk! <input type="text" class="ex-a-input" placeholder="✓ or correction…" style="min-width:140px"></span>
+      <div class="answer-reveal">✓ (correct – could also be used here; can for past ability in narrative context)</div>
+    </li>
+    <li class="question-item" data-answer="could">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">If only I <strong>can</strong> afford to buy that top! <input type="text" class="ex-a-input" placeholder="✓ or correction…" style="min-width:140px"></span>
+      <div class="answer-reveal">✓ could (if only + past modal = wish)</div>
+    </li>
+    <li class="question-item" data-answer="could have">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">We <strong>can</strong> have gone up the Eiffel Tower while we were in Paris, but we decided to go to the Louvre instead. <input type="text" class="ex-a-input" placeholder="✓ or correction…" style="min-width:140px"></span>
+      <div class="answer-reveal">✓ could have (past opportunity not taken = could have + past participle)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">I could <strong>get</strong> a more expensive computer, but it didn't seem worth it. <input type="text" class="ex-a-input" placeholder="✓ or correction…" style="min-width:140px"></span>
+      <div class="answer-reveal">✓ (correct – could get = was able to obtain)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">I wish I <strong>could</strong> get out of the maths test tomorrow! <input type="text" class="ex-a-input" placeholder="✓ or correction…" style="min-width:140px"></span>
+      <div class="answer-reveal">✓ (correct – I wish + could = impossible wish)</div>
+    </li>
+    <li class="question-item" data-answer="able">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">I bet you'd love to be <strong>can</strong> to get satellite TV. <input type="text" class="ex-a-input" placeholder="✓ or correction…" style="min-width:140px"></span>
+      <div class="answer-reveal">✓ able (be able to, not be can to)</div>
+    </li>
+    <li class="question-item" data-answer="play">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">You'd better tell the coach if you can't <strong>playing</strong> on Saturday. <input type="text" class="ex-a-input" placeholder="✓ or correction…" style="min-width:140px"></span>
+      <div class="answer-reveal">✓ play (modal + bare infinitive: can't play)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('a')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('a')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('a')">Reset</button>
+    <span class="score-display" id="score-a"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE B: Two choice – modals ===== -->
+<div class="exercise" id="ex-b">
+  <div class="ex-header">
+    <div class="ex-title">Exercise B – Circle the correct word or phrase</div>
+    <div class="ex-instruction">If both options are correct, choose both (select the one that best fits; both are accepted where noted).</div>
+  </div>
+  <ul class="question-list" id="ql-b">
+    <li class="question-item" data-answer="a|b">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Hello.
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">Could</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">Can</button>
+        </span>
+        I speak to Mrs Johnson, please?</span>
+      <div class="answer-reveal">✓ Both Could and Can (polite requests; Could is more formal)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">We
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">could</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">were allowed to</button>
+        </span>
+        go home early yesterday because our teacher was ill.</span>
+      <div class="answer-reveal">✓ were allowed to (specific past permission; "could" is not used for specific past permission)</div>
+    </li>
+    <li class="question-item" data-answer="a|b">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">The head teacher said we
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">could</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">were allowed to</button>
+        </span>
+        go home.</span>
+      <div class="answer-reveal">✓ Both (reported speech permission: could or were allowed to)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Do you think I
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">should</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">could</button>
+        </span>
+        be worried about these spots on my forehead?</span>
+      <div class="answer-reveal">✓ should (asking for advice)</div>
+    </li>
+    <li class="question-item" data-answer="a|b">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">You
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">ought to</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">should</button>
+        </span>
+        enter that talent contest!</span>
+      <div class="answer-reveal">✓ Both (ought to / should = advice/recommendation)</div>
+    </li>
+    <li class="question-item" data-answer="a|b">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">You
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">couldn't</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">shouldn't</button>
+        </span>
+        talk to people like that! It's rude!</span>
+      <div class="answer-reveal">✓ Both (shouldn't = advice; couldn't = past inability/impossibility)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Alan should
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">write</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">have written</button>
+        </span>
+        two essays in the exam yesterday, not one!</span>
+      <div class="answer-reveal">✓ have written (should have + past participle = criticism of past action)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">No, you
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">may</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">should</button>
+        </span>
+        not go out tonight. You know you're grounded!</span>
+      <div class="answer-reveal">✓ should (prohibition/strong advice; may not is also possible but should not is more natural)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">Diana should have
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">waited</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">been waiting</button>
+        </span>
+        for me at the corner. I wonder where she went.</span>
+      <div class="answer-reveal">✓ waited (should have waited = criticism of not doing something)</div>
+    </li>
+    <li class="question-item" data-answer="a|b">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">What were you doing in the park? You ought to have
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">done</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">been doing</button>
+        </span>
+        your homework then!</span>
+      <div class="answer-reveal">✓ Both (done = completed; been doing = been in the process of – both criticise past action)</div>
+    </li>
+    <li class="question-item" data-answer="a|b">
+      <span class="q-num">11.</span>
+      <span class="q-sentence">Yes, of course you
+        <span class="two-choice-btns">
+          <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">can</button>
+          <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">are able to</button>
+        </span>
+        open the window if you're too hot!</span>
+      <div class="answer-reveal">✓ Both (can / are able to = permission/ability)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExB()">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('b')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('b')">Reset</button>
+    <span class="score-display" id="score-b"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE C: must/have to/need/need to ===== -->
+<div class="exercise" id="ex-c">
+  <div class="ex-header">
+    <div class="ex-title">Exercise C – Write a form of must, have to, need or need to</div>
+    <div class="ex-instruction">Fill each gap with a suitable form of must, have to, need or need to. More than one answer may be correct.</div>
+  </div>
+  <ul class="question-list" id="ql-c">
+    <li class="question-item" data-answer="must|have to|need to">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Oh, I <input type="text" class="ex-c-input" placeholder="…" style="min-width:120px"> remember to get some potatoes on the way home tonight.</span>
+      <div class="answer-reveal">✓ must / have to / need to (personal obligation/reminder)</div>
+    </li>
+    <li class="question-item" data-answer="has to|must|needs to">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Jason <input type="text" class="ex-c-input" placeholder="…" style="min-width:120px"> see the headmaster during the next break. I wonder what it's about?</span>
+      <div class="answer-reveal">✓ has to / must / needs to (external obligation)</div>
+    </li>
+    <li class="question-item" data-answer="had to|needed to">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">We <input type="text" class="ex-c-input" placeholder="…" style="min-width:120px"> light lots of candles during the power cut two nights ago.</span>
+      <div class="answer-reveal">✓ had to / needed to (past necessity)</div>
+    </li>
+    <li class="question-item" data-answer="have to|need to|must">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">I'll <input type="text" class="ex-c-input" placeholder="…" style="min-width:120px"> start doing my Christmas cards soon. It's nearly December.</span>
+      <div class="answer-reveal">✓ have to / need to (future obligation)</div>
+    </li>
+    <li class="question-item" data-answer="mustn't">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Carl, you <input type="text" class="ex-c-input" placeholder="…" style="min-width:120px"> run into the street like that without looking first. It's dangerous!</span>
+      <div class="answer-reveal">✓ mustn't (prohibition – you are not allowed to)</div>
+    </li>
+    <li class="question-item" data-answer="don't have to|don't need to|needn't">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">People with solar-powered cars <input type="text" class="ex-c-input" placeholder="…" style="min-width:160px"> worry about the price of petrol.</span>
+      <div class="answer-reveal">✓ don't have to / don't need to / needn't (lack of obligation)</div>
+    </li>
+    <li class="question-item" data-answer="have to|need to">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">I wouldn't like to <input type="text" class="ex-c-input" placeholder="…" style="min-width:120px"> get up at five o'clock every morning.</span>
+      <div class="answer-reveal">✓ have to / need to (unwanted obligation)</div>
+    </li>
+    <li class="question-item" data-answer="didn't have to|didn't need to|needn't have">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">We <input type="text" class="ex-c-input" placeholder="…" style="min-width:160px"> do any washing-up after the picnic because we'd used disposable plates and cutlery.</span>
+      <div class="answer-reveal">✓ didn't have to / didn't need to (no obligation in the past)</div>
+    </li>
+    <li class="question-item" data-answer="have to|need to|must">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">Do professional musicians <input type="text" class="ex-c-input" placeholder="…" style="min-width:130px"> practise every day?</span>
+      <div class="answer-reveal">✓ have to / need to (question about obligation)</div>
+    </li>
+    <li class="question-item" data-answer="needn't have|didn't need to">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">I <input type="text" class="ex-c-input" placeholder="…" style="min-width:150px"> have bothered cooking all that food; they'd eaten before they arrived.</span>
+      <div class="answer-reveal">✓ needn't have (unnecessary past action that was done) / didn't need to</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('c')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('c')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('c')">Reset</button>
+    <span class="score-display" id="score-c"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE D: Sentence transformation – modals ===== -->
+<div class="exercise" id="ex-d">
+  <div class="ex-header">
+    <div class="ex-title">Exercise D – Sentence transformation</div>
+    <div class="ex-instruction">Complete each second sentence using the key word so that it has a similar meaning. Write between two and five words.</div>
+  </div>
+  <ul class="question-list" id="ql-d">
+    <li class="transform-item" data-answer="must be at home as|must be at home since">
+      <span class="q-num">1.</span>
+      <div class="transform-original">His lights are on so I'm pretty sure Dan is at home. <span class="transform-key">as</span></div>
+      <div class="transform-blank">Dan <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> his lights are on.</div>
+      <div class="answer-reveal">✓ must be at home as (deduction: must = I'm pretty sure)</div>
+    </li>
+    <li class="transform-item" data-answer="must be taking|must be driving">
+      <span class="q-num">2.</span>
+      <div class="transform-original">Susie's car's not here so she's almost certainly taking Dobber to the vet. <span class="transform-key">be</span></div>
+      <div class="transform-blank">Susie <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> Dobber to the vet since her car's not here.</div>
+      <div class="answer-reveal">✓ must be taking (deduction about present action)</div>
+    </li>
+    <li class="transform-item" data-answer="can't be simon|cannot be simon">
+      <span class="q-num">3.</span>
+      <div class="transform-original">There's no way that boy's Simon. He's much taller! <span class="transform-key">boy</span></div>
+      <div class="transform-blank">That <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …">. He's much taller!</div>
+      <div class="answer-reveal">✓ can't be Simon (impossibility deduction)</div>
+    </li>
+    <li class="transform-item" data-answer="can't be expecting us|couldn't be expecting us">
+      <span class="q-num">4.</span>
+      <div class="transform-original">I'm certain the Winners don't think we're coming tonight; we arranged it for next Tuesday. <span class="transform-key">expecting</span></div>
+      <div class="transform-blank">The Winners <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> tonight; we arranged it for next Tuesday.</div>
+      <div class="answer-reveal">✓ can't be expecting us (negative deduction)</div>
+    </li>
+    <li class="transform-item" data-answer="must have been">
+      <span class="q-num">5.</span>
+      <div class="transform-original">I bet you were exhausted after such a long journey! <span class="transform-key">have</span></div>
+      <div class="transform-blank">You <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> exhausted after such a long journey!</div>
+      <div class="answer-reveal">✓ must have been (deduction about past state)</div>
+    </li>
+    <li class="transform-item" data-answer="must have been talking">
+      <span class="q-num">6.</span>
+      <div class="transform-original">The only explanation is that Evan was on the phone to someone in Australia! <span class="transform-key">talking</span></div>
+      <div class="transform-blank">Evan <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> on the phone to someone in Australia!</div>
+      <div class="answer-reveal">✓ must have been talking (deduction about past continuous action)</div>
+    </li>
+    <li class="transform-item" data-answer="can't have won">
+      <span class="q-num">7.</span>
+      <div class="transform-original">There's no way Casey won the disco dancing competition – he's got two left feet! <span class="transform-key">have</span></div>
+      <div class="transform-blank">Casey <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> the disco dancing competition – he's got two left feet!</div>
+      <div class="answer-reveal">✓ can't have won (impossibility about past)</div>
+    </li>
+    <li class="transform-item" data-answer="can't have been trying">
+      <span class="q-num">8.</span>
+      <div class="transform-original">I don't believe Helen's been trying to call us all day. The phone hasn't rung once. <span class="transform-key">been</span></div>
+      <div class="transform-blank">Helen <input type="text" class="ex-d-input transform-input" placeholder="… (2–5 words) …"> to call us all day. The phone hasn't rung once.</div>
+      <div class="answer-reveal">✓ can't have been trying (impossibility about past continuous)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExTransform('d')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('d')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('d')">Reset</button>
+    <span class="score-display" id="score-d"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE E: Word bank – modals meanings ===== -->
+<div class="exercise" id="ex-e">
+  <div class="ex-header">
+    <div class="ex-title">Exercise E – Complete using the words in the box (each once)</div>
+    <div class="ex-instruction">Use: <strong>able · cannot · could · had · have · might · must · needn't · mustn't · ought · should · will</strong></div>
+  </div>
+  <ul class="question-list" id="ql-e">
+    <li class="question-item" data-answer="must">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">I <input type="text" class="ex-e-input" placeholder="…" style="min-width:90px"> have left my bag on the bus. <em class="hint">(expressing certainty)</em></span>
+      <div class="answer-reveal">✓ must (logical deduction/certainty)</div>
+    </li>
+    <li class="question-item" data-answer="able">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">In a few months, I'll be <input type="text" class="ex-e-input" placeholder="…" style="min-width:90px"> to buy a car. <em class="hint">(expressing future ability)</em></span>
+      <div class="answer-reveal">✓ able (will be able to = future ability)</div>
+    </li>
+    <li class="question-item" data-answer="could">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">I <input type="text" class="ex-e-input" placeholder="…" style="min-width:90px"> drive when I was thirteen years old! <em class="hint">(expressing past ability)</em></span>
+      <div class="answer-reveal">✓ could (past ability)</div>
+    </li>
+    <li class="question-item" data-answer="cannot|mustn't">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">No, you <input type="text" class="ex-e-input" placeholder="…" style="min-width:100px"> have any more pocket money! <em class="hint">(refusing a request)</em></span>
+      <div class="answer-reveal">✓ cannot / mustn't (refusal of permission)</div>
+    </li>
+    <li class="question-item" data-answer="ought|should">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">I think you <input type="text" class="ex-e-input" placeholder="…" style="min-width:90px"> consider a career in the armed forces. <em class="hint">(giving advice)</em></span>
+      <div class="answer-reveal">✓ ought (ought to / should = advice)</div>
+    </li>
+    <li class="question-item" data-answer="must">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">I <input type="text" class="ex-e-input" placeholder="…" style="min-width:90px"> forget to phone Julie tonight! <em class="hint">(expressing personal obligation)</em></span>
+      <div class="answer-reveal">✓ mustn't (I must not forget = personal obligation not to)</div>
+    </li>
+    <li class="question-item" data-answer="had">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">I <input type="text" class="ex-e-input" placeholder="…" style="min-width:90px"> to have a filling at the dentist's. <em class="hint">(expressing external obligation in the past)</em></span>
+      <div class="answer-reveal">✓ had (had to = past external obligation)</div>
+    </li>
+    <li class="question-item" data-answer="needn't|have">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">You don't <input type="text" class="ex-e-input" placeholder="…" style="min-width:90px"> to do Exercise D for homework. <em class="hint">(expressing a lack of obligation)</em></span>
+      <div class="answer-reveal">✓ have (don't have to = no obligation)</div>
+    </li>
+    <li class="question-item" data-answer="will">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">You <input type="text" class="ex-e-input" placeholder="…" style="min-width:90px"> have to work a lot harder if you want to get a good report. <em class="hint">(expressing future obligation)</em></span>
+      <div class="answer-reveal">✓ will (will have to = future obligation)</div>
+    </li>
+    <li class="question-item" data-answer="should|ought">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">They <input type="text" class="ex-e-input" placeholder="…" style="min-width:90px"> to arrive at about 8. <em class="hint">(expressing probability)</em></span>
+      <div class="answer-reveal">✓ should / ought (should arrive ≈ are expected to, probability)</div>
+    </li>
+    <li class="question-item" data-answer="might">
+      <span class="q-num">11.</span>
+      <span class="q-sentence">Sean <input type="text" class="ex-e-input" placeholder="…" style="min-width:90px"> have got stuck in traffic. <em class="hint">(expressing possibility)</em></span>
+      <div class="answer-reveal">✓ might (might have = past possibility)</div>
+    </li>
+    <li class="question-item" data-answer="needn't">
+      <span class="q-num">12.</span>
+      <span class="q-sentence">I <input type="text" class="ex-e-input" placeholder="…" style="min-width:90px"> have worried so much about Jan's present. She loved it! <em class="hint">(expressing a lack of past obligation)</em></span>
+      <div class="answer-reveal">✓ needn't (needn't have + past participle = unnecessary past worry)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('e')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('e')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('e')">Reset</button>
+    <span class="score-display" id="score-e"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE F: MCQ – modals ===== -->
+<div class="exercise" id="ex-f">
+  <div class="ex-header">
+    <div class="ex-title">Exercise F – Choose the correct answer</div>
+    <div class="ex-instruction">Choose the best modal option A, B, C or D.</div>
+  </div>
+  <ul class="question-list" id="ql-f">
+    <li class="question-item" data-answer="D">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">………… I have a look at those shoes in the window, please?</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A Must</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B Would</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C Should</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D Could</button>
+      </div>
+      <div class="answer-reveal">✓ D Could (polite request)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">We ………… pay for the tickets as Josie won them in a competition.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A mustn't</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B didn't have to</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C couldn't</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D hadn't to</button>
+      </div>
+      <div class="answer-reveal">✓ B didn't have to (no obligation – tickets were free)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">You really ………… make such a mountain out of a molehill!</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A can't</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B won't</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C mightn't</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D shouldn't</button>
+      </div>
+      <div class="answer-reveal">✓ D shouldn't (advice/criticism)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">You won't ………… to connect to the Internet once you've got broadband as you're online twenty-four hours a day.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A need</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B must</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C ought</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D able</button>
+      </div>
+      <div class="answer-reveal">✓ A need (won't need to = no future necessity)</div>
+    </li>
+    <li class="question-item" data-answer="C">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">I hope we ………… find the cinema easily.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A could</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B may</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C might</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D can</button>
+      </div>
+      <div class="answer-reveal">✓ C might (possibility about the future)</div>
+    </li>
+    <li class="question-item" data-answer="C">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">We couldn't find a hotel room so we ………… sleep in the car. It was awful!</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A must</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B should</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C had to</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D could</button>
+      </div>
+      <div class="answer-reveal">✓ C had to (past obligation/necessity)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">We'd love to ………… afford to go on a round-the-world cruise.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A can</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B be able to</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C will have to</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D have to</button>
+      </div>
+      <div class="answer-reveal">✓ B be able to (after would love to, use be able to, not can)</div>
+    </li>
+    <li class="question-item" data-answer="C">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Fiona can't ………… about the meeting. I reminded her this morning!</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A forget</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B be forgetting</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C have forgotten</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D have been forgetting</button>
+      </div>
+      <div class="answer-reveal">✓ C have forgotten (can't have + past participle = impossibility about past)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">She could ………… in the garage when we came round, which would explain why she didn't hear the bell.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A work</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B be working</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C have worked</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D have been working</button>
+      </div>
+      <div class="answer-reveal">✓ B be working (could be working = possibility at a past moment)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">You'll ………… tell the police that your house was broken into.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A have to</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B must</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C had to</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D should</button>
+      </div>
+      <div class="answer-reveal">✓ A have to (you'll have to = future obligation)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExMC('f')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('f')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('f')">Reset</button>
+    <span class="score-display" id="score-f"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE G: Replace phrase with modal ===== -->
+<div class="exercise" id="ex-g">
+  <div class="ex-header">
+    <div class="ex-title">Exercise G – Replace the phrase in brackets with a modal or semi-modal</div>
+    <div class="ex-instruction">Write a modal (or semi-modal) to replace the italicised phrase. Add any other words you need.</div>
+  </div>
+  <ul class="question-list" id="ql-g">
+    <li class="question-item" data-answer="can">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Bruce <input type="text" class="ex-g-input" placeholder="…" style="min-width:100px"> finish most crosswords in under ten minutes. <em class="hint">(is able to)</em></span>
+      <div class="answer-reveal">✓ can (can = is able to)</div>
+    </li>
+    <li class="question-item" data-answer="couldn't|wasn't able to">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Charlotte didn't get to the Craig David concert because she <input type="text" class="ex-g-input" placeholder="…" style="min-width:130px"> get tickets. <em class="hint">(wasn't able to)</em></span>
+      <div class="answer-reveal">✓ couldn't / wasn't able to</div>
+    </li>
+    <li class="question-item" data-answer="could have gone">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">I <input type="text" class="ex-g-input" placeholder="…" style="min-width:150px"> to Oxford but I decided to go to a more modern university. <em class="hint">(had the opportunity to go)</em></span>
+      <div class="answer-reveal">✓ could have gone (past opportunity not taken)</div>
+    </li>
+    <li class="question-item" data-answer="shouldn't have told">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">You <input type="text" class="ex-g-input" placeholder="…" style="min-width:160px"> Angus. You know he can't keep a secret! <em class="hint">(were wrong to tell)</em></span>
+      <div class="answer-reveal">✓ shouldn't have told (criticism of past action)</div>
+    </li>
+    <li class="question-item" data-answer="don't have to|needn't">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">If you have a cashpoint card, you <input type="text" class="ex-g-input" placeholder="…" style="min-width:140px"> go into the bank to get money from your account. <em class="hint">(are not forced to)</em></span>
+      <div class="answer-reveal">✓ don't have to / needn't (no obligation)</div>
+    </li>
+    <li class="question-item" data-answer="had to">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">We <input type="text" class="ex-g-input" placeholder="…" style="min-width:100px"> apologise to the police for wasting their time. <em class="hint">(were made to)</em></span>
+      <div class="answer-reveal">✓ had to (were made to = had to, past obligation)</div>
+    </li>
+    <li class="question-item" data-answer="can't have been">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">That <input type="text" class="ex-g-input" placeholder="…" style="min-width:150px"> the last can of soda in the fridge. I bought loads this morning! <em class="hint">(almost definitely wasn't)</em></span>
+      <div class="answer-reveal">✓ can't have been (impossibility deduction about past)</div>
+    </li>
+    <li class="question-item" data-answer="did you have to|were you obliged to">
+      <span class="q-num">8.</span>
+      <span class="q-sentence"><input type="text" class="ex-g-input" placeholder="…" style="min-width:180px"> talk about two photographs during the interview? <em class="hint">(Were you obliged to)</em></span>
+      <div class="answer-reveal">✓ Did you have to (past obligation question)</div>
+    </li>
+    <li class="question-item" data-answer="mustn't|cannot|can't">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">Children <input type="text" class="ex-g-input" placeholder="…" style="min-width:110px"> be left unattended. <em class="hint">(are not allowed to)</em></span>
+      <div class="answer-reveal">✓ mustn't / cannot (prohibition)</div>
+    </li>
+    <li class="question-item" data-answer="should|ought to">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">The weather <input type="text" class="ex-g-input" placeholder="…" style="min-width:110px"> be good tomorrow. <em class="hint">(will probably)</em></span>
+      <div class="answer-reveal">✓ should / ought to (probability/expectation)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('g')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('g')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('g')">Reset</button>
+    <span class="score-display" id="score-g"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE H: MCQ passage – Choosing a gym ===== -->
+<div class="exercise" id="ex-h">
+  <div class="ex-header">
+    <div class="ex-title">Exercise H – Choose the correct answer for the passage</div>
+    <div class="ex-instruction">Choose the best modal option for each gap in the passage "Choosing a gym".</div>
+  </div>
+  <div class="passage-container" id="ql-h">
+    <div class="passage-title">Choosing a gym</div>
+    <p class="passage-line">
+      Choosing to go to a gym regularly (1) <input type="text" class="passage-input ex-h-input" data-answer="C" placeholder="A/B/C/D"> change your life for the better. Don't let it be a decision you regret!
+      Good gyms have a lot to offer. They (2) <input type="text" class="passage-input ex-h-input" data-answer="A" placeholder="A/B/C/D"> provide exercise equipment that is just too expensive to buy and their trained staff are
+      (3) <input type="text" class="passage-input ex-h-input" data-answer="C" placeholder="A/B/C/D"> to provide quality health and fitness advice.
+      But if you're planning to join a gym, you (4) <input type="text" class="passage-input ex-h-input" data-answer="A" placeholder="A/B/C/D"> definitely ask to look round before you become a member.
+    </p>
+    <p class="passage-line">
+      Before the law changed a few years ago, anyone (5) <input type="text" class="passage-input ex-h-input" data-answer="B" placeholder="A/B/C/D"> set up a gym and even today gyms
+      (6) <input type="text" class="passage-input ex-h-input" data-answer="B" placeholder="A/B/C/D"> employ trained fitness instructors. Find out what qualifications the staff have. If they're untrained, it's best to go elsewhere.
+    </p>
+    <p class="passage-line">
+      You (7) <input type="text" class="passage-input ex-h-input" data-answer="A" placeholder="A/B/C/D"> be put off by the gym's hard sell. Just because they want you to sign up – they want your money, after all – that doesn't mean you
+      (8) <input type="text" class="passage-input ex-h-input" data-answer="C" placeholder="A/B/C/D"> decide there and then.
+    </p>
+    <p class="passage-line">
+      Ask yourself: What kind of equipment and facilities do they have? There's little point joining a gym and then thinking a few months later, 'I (9) <input type="text" class="passage-input ex-h-input" data-answer="A" placeholder="A/B/C/D"> have chosen a gym with a pool.'
+      Do you (10) <input type="text" class="passage-input ex-h-input" data-answer="C" placeholder="A/B/C/D"> book equipment in advance, or can you just turn up and use it?
+      How busy does the gym get? It (11) <input type="text" class="passage-input ex-h-input" data-answer="B" placeholder="A/B/C/D"> be very pleasant turning up to find there's no room in the changing room and there's a huge queue for each piece of equipment.
+      It (12) <input type="text" class="passage-input ex-h-input" data-answer="B" placeholder="A/B/C/D"> also be a good idea to talk to people who already go to that gym to find out their opinion.
+    </p>
+    <div style="margin-top:14px; font-size:0.85rem; color:#555; background:#f5f5f5; padding:10px; border-radius:6px;">
+      <strong>Options:</strong><br>
+      1: A must &nbsp;B would &nbsp;C should &nbsp;D will have to<br>
+      2: A can &nbsp;B could &nbsp;C would &nbsp;D must<br>
+      3: A made &nbsp;B forced &nbsp;C allowed &nbsp;D able<br>
+      4: A should &nbsp;B would &nbsp;C might &nbsp;D will<br>
+      5: A can &nbsp;B could &nbsp;C might &nbsp;D may<br>
+      6: A mustn't &nbsp;B don't have to &nbsp;C can't &nbsp;D shouldn't<br>
+      7: A mustn't &nbsp;B couldn't &nbsp;C won't &nbsp;D mightn't<br>
+      8: A can't &nbsp;B can &nbsp;C would &nbsp;D have to<br>
+      9: A ought to &nbsp;B must &nbsp;C have to &nbsp;D can't<br>
+      10: A able &nbsp;B must &nbsp;C have to &nbsp;D allowed<br>
+      11: A won't have to &nbsp;B doesn't have to &nbsp;C mustn't &nbsp;D won't<br>
+      12: A must &nbsp;B might &nbsp;C has to &nbsp;D ought to
+    </div>
+    <div class="answer-reveal" style="margin-top:10px">✓ (1) C &nbsp;(2) A &nbsp;(3) C &nbsp;(4) A &nbsp;(5) B &nbsp;(6) B &nbsp;(7) A &nbsp;(8) C &nbsp;(9) A &nbsp;(10) C &nbsp;(11) B &nbsp;(12) B</div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExPassage('h')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('h')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('h')">Reset</button>
+    <span class="score-display" id="score-h"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE I: One word per gap – broken arm passage ===== -->
+<div class="exercise" id="ex-i">
+  <div class="ex-header">
+    <div class="ex-title">Exercise I – Write one word in each gap</div>
+    <div class="ex-instruction">Write exactly one modal or semi-modal word in each numbered gap.</div>
+  </div>
+  <div class="passage-container" id="ql-i">
+    <p class="passage-line">
+      When I broke my arm a week ago, I guess it (1) <input type="text" class="passage-input ex-i-input" data-answer="ought" placeholder="…"> to have hurt. But it didn't! We were
+      doing PE at school, and we were making a pyramid. We (2) <input type="text" class="passage-input ex-i-input" data-answer="had" placeholder="…"> to stand on each other's
+      shoulders. I was right at the top. We (3) <input type="text" class="passage-input ex-i-input" data-answer="can't|couldn't" placeholder="…"> have been doing it properly because suddenly
+      the pyramid collapsed and we all fell. I landed on my arm.
+    </p>
+    <p class="passage-line">
+      Mr Jenkins (4) <input type="text" class="passage-input ex-i-input" data-answer="must" placeholder="…"> have known immediately that I'd broken my arm because he sent
+      someone to call an ambulance. 'Sit still, and don't move your arm at all until the ambulance comes,'
+      he said. I (5) <input type="text" class="passage-input ex-i-input" data-answer="can" placeholder="…"> still remember the feeling – my arm was numb, and looked very strange,
+      but there was no pain at all. I remember thinking: 'It (6) <input type="text" class="passage-input ex-i-input" data-answer="can't" placeholder="…"> be broken. If it was broken, I'd
+      be in agony.' I suppose not feeling any pain (7) <input type="text" class="passage-input ex-i-input" data-answer="must" placeholder="…"> have been because I was in shock.
+    </p>
+    <p class="passage-line">
+      The plaster (8) <input type="text" class="passage-input ex-i-input" data-answer="should" placeholder="…"> come off in about three weeks but it (9) <input type="text" class="passage-input ex-i-input" data-answer="might|may" placeholder="…"> have to stay on
+      longer. It depends on whether the break has healed properly or not. The next three weeks
+      (10) <input type="text" class="passage-input ex-i-input" data-answer="could|might|may" placeholder="…"> be the best three weeks of my life – no basketball, no playing in the playground,
+      no swimming – but I'm counting my blessings. It (11) <input type="text" class="passage-input ex-i-input" data-answer="could|might" placeholder="…"> have been a lot worse!
+    </p>
+    <div class="answer-reveal" style="margin-top:10px">✓ (1) ought &nbsp;(2) had &nbsp;(3) can't/couldn't &nbsp;(4) must &nbsp;(5) can &nbsp;(6) can't &nbsp;(7) must &nbsp;(8) should &nbsp;(9) might/may &nbsp;(10) could/might/may &nbsp;(11) could/might</div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExPassage('i')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('i')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('i')">Reset</button>
+    <span class="score-display" id="score-i"></span>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+const tabs = ['a','b','c','d','e','f','g','h','i'];
+
+function switchTab(id) {
+  document.querySelector('.exercise.active').classList.remove('active');
+  document.getElementById('ex-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', tabs[i] === id);
+  });
+}
+
+function chooseBtn(btn) {
+  const btns = btn.closest('.two-choice-btns').querySelectorAll('.choice-btn');
+  btns.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function chooseMC(btn) {
+  const opts = btn.closest('.mc-options').querySelectorAll('.mc-btn');
+  opts.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function normalize(s) { return s.trim().toLowerCase().replace(/\s+/g,' '); }
+
+function updateScore(id, correct, total) {
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = correct + ' / ' + total + ' correct';
+  scoreEl.classList.add('visible');
+  scoreEl.classList.toggle('perfect', correct === total);
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabIdx = tabs.indexOf(id);
+  let badge = tabBtns[tabIdx].querySelector('.tab-badge');
+  if (!badge) { badge = document.createElement('span'); badge.className = 'tab-badge'; tabBtns[tabIdx].appendChild(badge); }
+  badge.textContent = correct + '/' + total;
+  badge.classList.toggle('perfect', correct === total);
+}
+
+// Text input
+function checkExText(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    const inp = item.querySelector('input[type="text"]');
+    if (!inp) return;
+    total++;
+    const answers = item.dataset.answer.split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+// Exercise B – two choice (some allow both)
+function checkExB() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-b .question-item').forEach(item => {
+    total++;
+    const sel = item.querySelector('.choice-btn.selected');
+    const answers = item.dataset.answer.split('|');
+    // "a|b" means either is correct
+    let ok = false;
+    if (answers.length > 1) {
+      ok = !!sel; // any selection is correct when both are valid
+    } else {
+      ok = sel && sel.dataset.val === answers[0];
+    }
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    item.querySelectorAll('.choice-btn').forEach(btn => {
+      btn.classList.remove('correct','wrong');
+      if (answers.includes(btn.dataset.val)) btn.classList.add('correct');
+      else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+    });
+  });
+  updateScore('b', correct, total);
+}
+
+// Sentence transform
+function checkExTransform(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .transform-item').forEach(item => {
+    const inp = item.querySelector('input[type="text"]');
+    if (!inp) return;
+    total++;
+    const answers = item.dataset.answer.split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+// MCQ
+function checkExMC(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    total++;
+    const sel = item.querySelector('.mc-btn.selected');
+    const ok = sel && sel.dataset.val === item.dataset.answer;
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    item.querySelectorAll('.mc-btn').forEach(btn => {
+      btn.classList.remove('correct','wrong');
+      if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+      else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+    });
+  });
+  updateScore(id, correct, total);
+}
+
+// Passage fill
+function checkExPassage(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .ex-' + id + '-input').forEach(inp => {
+    total++;
+    const answers = (inp.dataset.answer || '').split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+// Show answers
+function showAnswers(id) {
+  if (id === 'b') checkExB();
+  else if (id === 'd') checkExTransform(id);
+  else if (id === 'f') checkExMC(id);
+  else if (id === 'h' || id === 'i') checkExPassage(id);
+  else checkExText(id);
+  document.getElementById('ex-' + id).classList.add('show-answers');
+  if (id === 'h' || id === 'i') {
+    const reveal = document.querySelector('#ql-' + id + ' .answer-reveal');
+    if (reveal) reveal.style.display = 'block';
+  }
+}
+
+// Reset
+function resetEx(id) {
+  const exEl = document.getElementById('ex-' + id);
+  exEl.classList.remove('show-answers');
+  exEl.querySelectorAll('input[type="text"]').forEach(inp => {
+    inp.value = ''; inp.classList.remove('correct','wrong');
+  });
+  exEl.querySelectorAll('.question-item, .transform-item').forEach(item => {
+    item.classList.remove('correct','wrong');
+  });
+  exEl.querySelectorAll('.choice-btn, .mc-btn').forEach(btn => {
+    btn.classList.remove('selected','correct','wrong');
+  });
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = ''; scoreEl.classList.remove('visible','perfect');
+  const badge = document.querySelector('.tab-btn:nth-child(' + (tabs.indexOf(id)+1) + ') .tab-badge');
+  if (badge) badge.textContent = '';
+}
+
+function resetExPassage(id) {
+  resetEx(id);
+  const reveal = document.querySelector('#ql-' + id + ' .answer-reveal');
+  if (reveal) reveal.style.display = '';
+}
+</script>
+</body>
+</html>

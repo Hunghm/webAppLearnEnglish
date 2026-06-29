@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review 13 – Units 25 &amp; 26</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #f5f5f5; color: #222; }
+header { background: #1565C0; color: #fff; padding: 16px 20px; }
+header h1 { font-size: 1.3rem; }
+header p { font-size: 0.9rem; opacity: 0.85; margin-top: 4px; }
+.tab-bar { display: flex; background: #1976D2; overflow-x: auto; }
+.tab-btn { padding: 10px 18px; border: none; background: transparent; color: #fff; font-size: 0.95rem; cursor: pointer; white-space: nowrap; border-bottom: 3px solid transparent; }
+.tab-btn.active { border-bottom-color: #FFD600; font-weight: bold; }
+.panel { display: none; padding: 16px; max-width: 820px; margin: 0 auto; }
+.panel.active { display: block; }
+.ex-header { margin-bottom: 12px; }
+.ex-header h2 { font-size: 1.1rem; color: #1565C0; }
+.ex-header p { font-size: 0.9rem; color: #555; margin-top: 4px; }
+.passage { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 14px 16px; margin-bottom: 16px; line-height: 1.9; font-size: 0.95rem; }
+.passage h3 { font-size: 1rem; color: #1565C0; margin-bottom: 10px; text-align: center; }
+.q-num { display: inline-block; background: #1565C0; color: #fff; border-radius: 50%; width: 24px; height: 24px; text-align: center; line-height: 24px; font-size: 0.82rem; margin-right: 4px; font-weight: bold; }
+.fill-input { border: 1px solid #999; border-radius: 4px; padding: 2px 6px; font-size: 0.9rem; min-width: 110px; }
+.fill-input.correct { background: #e8f5e9; border-color: #4caf50; }
+.fill-input.wrong { background: #ffebee; border-color: #f44336; }
+.wf-row { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 10px 14px; margin-bottom: 8px; font-size: 0.95rem; line-height: 1.8; }
+.wf-input { border: 1px solid #999; border-radius: 4px; padding: 2px 6px; font-size: 0.9rem; min-width: 150px; }
+.wf-input.correct { background: #e8f5e9; border-color: #4caf50; }
+.wf-input.wrong { background: #ffebee; border-color: #f44336; }
+.kwt-block { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 12px 14px; margin-bottom: 10px; }
+.kwt-q-stem { font-size: 0.9rem; color: #444; margin-bottom: 6px; }
+.kwt-line { font-size: 0.95rem; line-height: 2; }
+.kwt-input { border: 1px solid #999; border-radius: 4px; padding: 2px 8px; font-size: 0.9rem; min-width: 230px; display: inline-block; }
+.kwt-input.correct { background: #e8f5e9; border-color: #4caf50; }
+.kwt-input.wrong { background: #ffebee; border-color: #f44336; }
+.match-answers { background: #f9f9f9; border: 1px solid #ddd; border-radius: 6px; padding: 12px; font-size: 0.9rem; line-height: 1.8; margin-bottom: 12px; }
+.match-row { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 12px 14px; margin-bottom: 8px; }
+.match-stem { margin-bottom: 8px; font-size: 0.95rem; }
+.match-opts { display: flex; flex-wrap: wrap; gap: 6px; }
+.match-opts label { padding: 4px 12px; border: 1px solid #999; border-radius: 4px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 4px; }
+.match-opts label:hover { background: #f0f4ff; }
+.match-opts label.correct { background: #e8f5e9; border-color: #4caf50; color: #2e7d32; }
+.match-opts label.wrong { background: #ffebee; border-color: #f44336; color: #c62828; }
+.q-block { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 12px 14px; margin-bottom: 10px; }
+.q-stem { margin-bottom: 8px; line-height: 1.6; font-size: 0.95rem; }
+.opts { display: flex; flex-direction: column; gap: 5px; }
+.opts label { display: flex; align-items: center; gap: 8px; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+.opts label:hover { background: #f0f4ff; }
+.opts label.correct { background: #e8f5e9 !important; color: #2e7d32; }
+.opts label.wrong { background: #ffebee !important; color: #c62828; }
+.score-bar { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 12px; margin-top: 12px; font-size: 1rem; font-weight: bold; text-align: center; }
+.btn-row { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.btn { padding: 8px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: bold; }
+.btn-check { background: #1565C0; color: #fff; }
+.btn-reset { background: #757575; color: #fff; }
+.btn-show { background: #e65100; color: #fff; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Review 13 – Units 25 &amp; 26</h1>
+  <p>Total: 50 marks</p>
+</header>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('a')">A</button>
+  <button class="tab-btn" onclick="showTab('b')">B</button>
+  <button class="tab-btn" onclick="showTab('c')">C</button>
+  <button class="tab-btn" onclick="showTab('d')">D</button>
+  <button class="tab-btn" onclick="showTab('e')">E</button>
+</div>
+
+<!-- ===== EXERCISE A ===== -->
+<div class="panel active" id="panel-a">
+  <div class="ex-header">
+    <h2>Exercise A &nbsp;–&nbsp; Write one word in each gap</h2>
+    <p>Questions 1–10 &nbsp;|&nbsp; 1 mark each &nbsp;|&nbsp; 10 marks</p>
+  </div>
+  <div class="passage">
+    <h3>Does what we wear matter?</h3>
+    <p>In spite of there <span class="q-num">1</span> <input type="text" class="fill-input" id="a1" data-answer="being"> some truth in the expression 'Never judge a book by its cover', which reminds us that appearances can be deceptive, there <span class="q-num">2</span> <input type="text" class="fill-input" id="a2" data-answer="seems"> to be far more truth in the expression 'You never get a second chance to make a first impression'. There are plenty <span class="q-num">3</span> <input type="text" class="fill-input" id="a3" data-answer="of"> examples of people who have insisted <span class="q-num">4</span> <input type="text" class="fill-input" id="a4" data-answer="on"> expressing their individuality through their clothing and have suffered for it.</p>
+    <br>
+    <p>If you are going to wear outrageous clothes, you've got to be prepared <span class="q-num">5</span> <input type="text" class="fill-input" id="a5" data-answer="for"> the reaction of others. That reaction may not be positive. You may be stared <span class="q-num">6</span> <input type="text" class="fill-input" id="a6" data-answer="at"> , criticised <span class="q-num">7</span> <input type="text" class="fill-input" id="a7" data-answer="for"> wearing something unusual, or even insulted. On the other hand, you may be complimented <span class="q-num">8</span> <input type="text" class="fill-input" id="a8" data-answer="on"> your style. Location and situation are very important. At a job interview, for <span class="q-num">9</span> <input type="text" class="fill-input" id="a9" data-answer="example"> , you should probably be more anxious <span class="q-num">10</span> <input type="text" class="fill-input" id="a10" data-answer="to"> please your potential employers than interested in showing off the latest fashions.</p>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-check" onclick="checkEx('a')">Check</button>
+    <button class="btn btn-reset" onclick="resetEx('a')">Reset</button>
+    <button class="btn btn-show" onclick="showAnswers('a')">Show Answers</button>
+  </div>
+  <div class="score-bar" id="score-a" style="display:none"></div>
+</div>
+
+<!-- ===== EXERCISE B ===== -->
+<div class="panel" id="panel-b">
+  <div class="ex-header">
+    <h2>Exercise B &nbsp;–&nbsp; Word Formation</h2>
+    <p>Questions 11–18 &nbsp;|&nbsp; 1 mark each &nbsp;|&nbsp; 8 marks</p>
+  </div>
+  <div class="wf-row"><span class="q-num">11</span> Tracy works as a <input type="text" class="wf-input" id="b11" data-answer="stylist"> for a large modelling agency. <strong>(STYLE)</strong></div>
+  <div class="wf-row"><span class="q-num">12</span> There's a <input type="text" class="wf-input" id="b12" data-answer="similarity"> between the fashions of the 1980s and the 1960s. <strong>(SIMILAR)</strong></div>
+  <div class="wf-row"><span class="q-num">13</span> I think you should lower your <input type="text" class="wf-input" id="b13" data-answer="expectations"> a little; it's not easy to become a supermodel, you know. <strong>(EXPECT)</strong></div>
+  <div class="wf-row"><span class="q-num">14</span> Let me know when you make a <input type="text" class="wf-input" id="b14" data-answer="decision"> about what to wear for the wedding. <strong>(DECIDE)</strong></div>
+  <div class="wf-row"><span class="q-num">15</span> Fashion critics have greeted the new clothing line with <input type="text" class="wf-input" id="b15" data-answer="enthusiasm"> . <strong>(ENTHUSE)</strong></div>
+  <div class="wf-row"><span class="q-num">16</span> The factory has increased <input type="text" class="wf-input" id="b16" data-answer="production"> of its shoes in an attempt to keep up with demand. <strong>(PRODUCE)</strong></div>
+  <div class="wf-row"><span class="q-num">17</span> That necklace is <input type="text" class="wf-input" id="b17" data-answer="beautiful"> ! <strong>(BEAUTY)</strong></div>
+  <div class="wf-row"><span class="q-num">18</span> All our clothes are designed for men and women <input type="text" class="wf-input" id="b18" data-answer="alike"> . <strong>(LIKE)</strong></div>
+  <div class="btn-row">
+    <button class="btn btn-check" onclick="checkEx('b')">Check</button>
+    <button class="btn btn-reset" onclick="resetEx('b')">Reset</button>
+    <button class="btn btn-show" onclick="showAnswers('b')">Show Answers</button>
+  </div>
+  <div class="score-bar" id="score-b" style="display:none"></div>
+</div>
+
+<!-- ===== EXERCISE C ===== -->
+<div class="panel" id="panel-c">
+  <div class="ex-header">
+    <h2>Exercise C &nbsp;–&nbsp; Key Word Transformation</h2>
+    <p>Questions 19–27 &nbsp;|&nbsp; 2 marks each &nbsp;|&nbsp; 18 marks &nbsp;|&nbsp; Write between two and five words.</p>
+  </div>
+
+  <div class="kwt-block" id="c-q19">
+    <p class="kwt-q-stem"><span class="q-num">19</span> You should get some new sunglasses. &nbsp;<strong>ABOUT</strong></p>
+    <p class="kwt-line">It <input type="text" class="kwt-input" id="c19" data-answer="is about time you got|'s about time you got|is about time you get|'s about time you get"> some new sunglasses.</p>
+  </div>
+  <div class="kwt-block" id="c-q20">
+    <p class="kwt-q-stem"><span class="q-num">20</span> I hate it when you wear that silly tie! &nbsp;<strong>WISH</strong></p>
+    <p class="kwt-line">I <input type="text" class="kwt-input" id="c20" data-answer="wish you wouldn't|wish you would not"> wear that silly tie!</p>
+  </div>
+  <div class="kwt-block" id="c-q21">
+    <p class="kwt-q-stem"><span class="q-num">21</span> Janice regrets wearing such formal clothes to the party. &nbsp;<strong>HAD</strong></p>
+    <p class="kwt-line">Janice <input type="text" class="kwt-input" id="c21" data-answer="wishes she had not worn|wishes she hadn't worn"> such formal clothes to the party.</p>
+  </div>
+  <div class="kwt-block" id="c-q22">
+    <p class="kwt-q-stem"><span class="q-num">22</span> I bought the suit although it was second-hand. &nbsp;<strong>DESPITE</strong></p>
+    <p class="kwt-line">I bought the suit <input type="text" class="kwt-input" id="c22" data-answer="despite it being"> second-hand.</p>
+  </div>
+  <div class="kwt-block" id="c-q23">
+    <p class="kwt-q-stem"><span class="q-num">23</span> It's a shame I can't make it to the sales this weekend! &nbsp;<strong>ONLY</strong></p>
+    <p class="kwt-line">If <input type="text" class="kwt-input" id="c23" data-answer="only i could|only i could make it to"> make it to the sales this weekend!</p>
+  </div>
+  <div class="kwt-block" id="c-q24">
+    <p class="kwt-q-stem"><span class="q-num">24</span> In spite of my begging her for hours, Carol refused to lend me her new jacket. &nbsp;<strong>THOUGH</strong></p>
+    <p class="kwt-line">Carol refused to lend me her new jacket <input type="text" class="kwt-input" id="c24" data-answer="even though i begged her|even though i had begged her"> for hours.</p>
+  </div>
+  <div class="kwt-block" id="c-q25">
+    <p class="kwt-q-stem"><span class="q-num">25</span> I don't want you to buy exactly the same trainers as I've got. &nbsp;<strong>RATHER</strong></p>
+    <p class="kwt-line">I <input type="text" class="kwt-input" id="c25" data-answer="would rather you didn't|'d rather you didn't|would rather you did not|'d rather you did not"> buy exactly the same trainers as I've got.</p>
+  </div>
+  <div class="kwt-block" id="c-q26">
+    <p class="kwt-q-stem"><span class="q-num">26</span> I can't go to the party as I don't have anything to wear! &nbsp;<strong>SOMETHING</strong></p>
+    <p class="kwt-line">I'd go to the party <input type="text" class="kwt-input" id="c26" data-answer="if i had something"> to wear!</p>
+  </div>
+  <div class="kwt-block" id="c-q27">
+    <p class="kwt-q-stem"><span class="q-num">27</span> Despite being a grandmother, Edna still tries to dress fashionably. &nbsp;<strong>FACT</strong></p>
+    <p class="kwt-line">In spite <input type="text" class="kwt-input" id="c27" data-answer="of the fact that she"> is a grandmother, Edna still tries to dress fashionably.</p>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-check" onclick="checkEx('c')">Check</button>
+    <button class="btn btn-reset" onclick="resetEx('c')">Reset</button>
+    <button class="btn btn-show" onclick="showAnswers('c')">Show Answers</button>
+  </div>
+  <div class="score-bar" id="score-c" style="display:none"></div>
+</div>
+
+<!-- ===== EXERCISE D ===== -->
+<div class="panel" id="panel-d">
+  <div class="ex-header">
+    <h2>Exercise D &nbsp;–&nbsp; Match to make sentences</h2>
+    <p>Questions 28–34 &nbsp;|&nbsp; 1 mark each &nbsp;|&nbsp; 7 marks</p>
+  </div>
+  <div class="match-answers">
+    <strong>Options:</strong><br>
+    A &nbsp; on that jacket you've got hanging in the window.<br>
+    B &nbsp; off my shoes but I think my feet smell!<br>
+    C &nbsp; into that new boutique for a few minutes.<br>
+    D &nbsp; up and they took our measurements.<br>
+    E &nbsp; up for the Halloween party!<br>
+    F &nbsp; out of these shoes so my mum's going to get me some new ones.<br>
+    G &nbsp; on, but they have!
+  </div>
+
+  <div class="match-row" id="d-q28">
+    <p class="match-stem"><span class="q-num">28</span> I'm just going to pop ..........</p>
+    <div class="match-opts">
+      <label><input type="radio" name="d28" value="A"> A</label>
+      <label><input type="radio" name="d28" value="B"> B</label>
+      <label><input type="radio" name="d28" value="C"> C</label>
+      <label><input type="radio" name="d28" value="D"> D</label>
+      <label><input type="radio" name="d28" value="E"> E</label>
+      <label><input type="radio" name="d28" value="F"> F</label>
+      <label><input type="radio" name="d28" value="G"> G</label>
+    </div>
+  </div>
+  <div class="match-row" id="d-q29">
+    <p class="match-stem"><span class="q-num">29</span> I've grown ..........</p>
+    <div class="match-opts">
+      <label><input type="radio" name="d29" value="A"> A</label>
+      <label><input type="radio" name="d29" value="B"> B</label>
+      <label><input type="radio" name="d29" value="C"> C</label>
+      <label><input type="radio" name="d29" value="D"> D</label>
+      <label><input type="radio" name="d29" value="E"> E</label>
+      <label><input type="radio" name="d29" value="F"> F</label>
+      <label><input type="radio" name="d29" value="G"> G</label>
+    </div>
+  </div>
+  <div class="match-row" id="d-q30">
+    <p class="match-stem"><span class="q-num">30</span> I'd like to try ..........</p>
+    <div class="match-opts">
+      <label><input type="radio" name="d30" value="A"> A</label>
+      <label><input type="radio" name="d30" value="B"> B</label>
+      <label><input type="radio" name="d30" value="C"> C</label>
+      <label><input type="radio" name="d30" value="D"> D</label>
+      <label><input type="radio" name="d30" value="E"> E</label>
+      <label><input type="radio" name="d30" value="F"> F</label>
+      <label><input type="radio" name="d30" value="G"> G</label>
+    </div>
+  </div>
+  <div class="match-row" id="d-q31">
+    <p class="match-stem"><span class="q-num">31</span> I never thought that skirts for men would catch ..........</p>
+    <div class="match-opts">
+      <label><input type="radio" name="d31" value="A"> A</label>
+      <label><input type="radio" name="d31" value="B"> B</label>
+      <label><input type="radio" name="d31" value="C"> C</label>
+      <label><input type="radio" name="d31" value="D"> D</label>
+      <label><input type="radio" name="d31" value="E"> E</label>
+      <label><input type="radio" name="d31" value="F"> F</label>
+      <label><input type="radio" name="d31" value="G"> G</label>
+    </div>
+  </div>
+  <div class="match-row" id="d-q32">
+    <p class="match-stem"><span class="q-num">32</span> We all lined ..........</p>
+    <div class="match-opts">
+      <label><input type="radio" name="d32" value="A"> A</label>
+      <label><input type="radio" name="d32" value="B"> B</label>
+      <label><input type="radio" name="d32" value="C"> C</label>
+      <label><input type="radio" name="d32" value="D"> D</label>
+      <label><input type="radio" name="d32" value="E"> E</label>
+      <label><input type="radio" name="d32" value="F"> F</label>
+      <label><input type="radio" name="d32" value="G"> G</label>
+    </div>
+  </div>
+  <div class="match-row" id="d-q33">
+    <p class="match-stem"><span class="q-num">33</span> I'd take ..........</p>
+    <div class="match-opts">
+      <label><input type="radio" name="d33" value="A"> A</label>
+      <label><input type="radio" name="d33" value="B"> B</label>
+      <label><input type="radio" name="d33" value="C"> C</label>
+      <label><input type="radio" name="d33" value="D"> D</label>
+      <label><input type="radio" name="d33" value="E"> E</label>
+      <label><input type="radio" name="d33" value="F"> F</label>
+      <label><input type="radio" name="d33" value="G"> G</label>
+    </div>
+  </div>
+  <div class="match-row" id="d-q34">
+    <p class="match-stem"><span class="q-num">34</span> Let's all dress ..........</p>
+    <div class="match-opts">
+      <label><input type="radio" name="d34" value="A"> A</label>
+      <label><input type="radio" name="d34" value="B"> B</label>
+      <label><input type="radio" name="d34" value="C"> C</label>
+      <label><input type="radio" name="d34" value="D"> D</label>
+      <label><input type="radio" name="d34" value="E"> E</label>
+      <label><input type="radio" name="d34" value="F"> F</label>
+      <label><input type="radio" name="d34" value="G"> G</label>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-check" onclick="checkEx('d')">Check</button>
+    <button class="btn btn-reset" onclick="resetEx('d')">Reset</button>
+    <button class="btn btn-show" onclick="showAnswers('d')">Show Answers</button>
+  </div>
+  <div class="score-bar" id="score-d" style="display:none"></div>
+</div>
+
+<!-- ===== EXERCISE E ===== -->
+<div class="panel" id="panel-e">
+  <div class="ex-header">
+    <h2>Exercise E &nbsp;–&nbsp; Choose the correct answer</h2>
+    <p>Questions 35–41 &nbsp;|&nbsp; 1 mark each &nbsp;|&nbsp; 7 marks</p>
+  </div>
+
+  <div class="q-block" id="e-q35">
+    <p class="q-stem"><span class="q-num">35</span> Could you wipe the table with a damp ............ , please?</p>
+    <div class="opts">
+      <label><input type="radio" name="e35" value="A"> A &nbsp; clothe</label>
+      <label><input type="radio" name="e35" value="B"> B &nbsp; clothing</label>
+      <label><input type="radio" name="e35" value="C"> C &nbsp; cloth</label>
+      <label><input type="radio" name="e35" value="D"> D &nbsp; clothes</label>
+    </div>
+  </div>
+  <div class="q-block" id="e-q36">
+    <p class="q-stem"><span class="q-num">36</span> I've decided to ............ my hair green for the party!</p>
+    <div class="opts">
+      <label><input type="radio" name="e36" value="A"> A &nbsp; dye</label>
+      <label><input type="radio" name="e36" value="B"> B &nbsp; paint</label>
+      <label><input type="radio" name="e36" value="C"> C &nbsp; sketch</label>
+      <label><input type="radio" name="e36" value="D"> D &nbsp; draw</label>
+    </div>
+  </div>
+  <div class="q-block" id="e-q37">
+    <p class="q-stem"><span class="q-num">37</span> That top doesn't ............ me; it's just not my style.</p>
+    <div class="opts">
+      <label><input type="radio" name="e37" value="A"> A &nbsp; fit</label>
+      <label><input type="radio" name="e37" value="B"> B &nbsp; suit</label>
+      <label><input type="radio" name="e37" value="C"> C &nbsp; match</label>
+      <label><input type="radio" name="e37" value="D"> D &nbsp; go with</label>
+    </div>
+  </div>
+  <div class="q-block" id="e-q38">
+    <p class="q-stem"><span class="q-num">38</span> That's the most incredible ............ of art I've ever seen!</p>
+    <div class="opts">
+      <label><input type="radio" name="e38" value="A"> A &nbsp; job</label>
+      <label><input type="radio" name="e38" value="B"> B &nbsp; creation</label>
+      <label><input type="radio" name="e38" value="C"> C &nbsp; brand</label>
+      <label><input type="radio" name="e38" value="D"> D &nbsp; work</label>
+    </div>
+  </div>
+  <div class="q-block" id="e-q39">
+    <p class="q-stem"><span class="q-num">39</span> Jeans and T-shirts will never go out of ............ .</p>
+    <div class="opts">
+      <label><input type="radio" name="e39" value="A"> A &nbsp; trend</label>
+      <label><input type="radio" name="e39" value="B"> B &nbsp; image</label>
+      <label><input type="radio" name="e39" value="C"> C &nbsp; fashion</label>
+      <label><input type="radio" name="e39" value="D"> D &nbsp; tendency</label>
+    </div>
+  </div>
+  <div class="q-block" id="e-q40">
+    <p class="q-stem"><span class="q-num">40</span> I need a funny ............ for the fancy-dress party. Any ideas?</p>
+    <div class="opts">
+      <label><input type="radio" name="e40" value="A"> A &nbsp; dress</label>
+      <label><input type="radio" name="e40" value="B"> B &nbsp; uniform</label>
+      <label><input type="radio" name="e40" value="C"> C &nbsp; suit</label>
+      <label><input type="radio" name="e40" value="D"> D &nbsp; costume</label>
+    </div>
+  </div>
+  <div class="q-block" id="e-q41">
+    <p class="q-stem"><span class="q-num">41</span> Tim forgot to use clothes ............ and all his clean clothes fell off the line into the mud!</p>
+    <div class="opts">
+      <label><input type="radio" name="e41" value="A"> A &nbsp; pegs</label>
+      <label><input type="radio" name="e41" value="B"> B &nbsp; clips</label>
+      <label><input type="radio" name="e41" value="C"> C &nbsp; hooks</label>
+      <label><input type="radio" name="e41" value="D"> D &nbsp; pins</label>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-check" onclick="checkEx('e')">Check</button>
+    <button class="btn btn-reset" onclick="resetEx('e')">Reset</button>
+    <button class="btn btn-show" onclick="showAnswers('e')">Show Answers</button>
+  </div>
+  <div class="score-bar" id="score-e" style="display:none"></div>
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  const tabs = ['a','b','c','d','e'];
+  document.querySelectorAll('.tab-btn')[tabs.indexOf(id)].classList.add('active');
+}
+function normalize(s) { return s.toLowerCase().trim().replace(/\s+/g, ' '); }
+function checkAnswer(u, d) { return d.split('|').map(a => normalize(a)).some(a => a === normalize(u)); }
+const exConfig = {
+  a: { type: 'fill', prefix: 'a', ids: [1,2,3,4,5,6,7,8,9,10], marks: 1 },
+  b: { type: 'wf',   prefix: 'b', ids: [11,12,13,14,15,16,17,18], marks: 1 },
+  c: { type: 'kwt',  prefix: 'c', ids: [19,20,21,22,23,24,25,26,27], marks: 2 },
+  d: { type: 'mc', qs: [28,29,30,31,32,33,34], marks: 1,
+       answers: {28:'C',29:'F',30:'A',31:'G',32:'D',33:'B',34:'E'} },
+  e: { type: 'mc', qs: [35,36,37,38,39,40,41], marks: 1,
+       answers: {35:'C',36:'A',37:'B',38:'D',39:'C',40:'D',41:'A'} }
+};
+function checkEx(id) {
+  const cfg = exConfig[id]; let correct = 0, total = 0;
+  if (cfg.type === 'mc') {
+    cfg.qs.forEach(q => {
+      const sel = document.querySelector('input[name="' + id + q + '"]:checked');
+      const block = document.getElementById(id + '-q' + q);
+      block.querySelectorAll('.opts label, .match-opts label').forEach(l => l.classList.remove('correct','wrong'));
+      total += cfg.marks; const ans = cfg.answers[q];
+      if (sel) {
+        const lbl = block.querySelector('input[value="' + sel.value + '"]').parentElement;
+        if (sel.value === ans) { lbl.classList.add('correct'); correct += cfg.marks; }
+        else { lbl.classList.add('wrong'); block.querySelector('input[value="' + ans + '"]').parentElement.classList.add('correct'); }
+      } else { block.querySelector('input[value="' + ans + '"]').parentElement.classList.add('correct'); }
+    });
+  } else {
+    cfg.ids.forEach(q => {
+      const inp = document.getElementById(cfg.prefix + q); if (!inp) return;
+      inp.classList.remove('correct','wrong'); total += cfg.marks;
+      if (checkAnswer(inp.value, inp.dataset.answer)) { inp.classList.add('correct'); correct += cfg.marks; }
+      else { inp.classList.add('wrong'); }
+    });
+  }
+  const scoreEl = document.getElementById('score-' + id); scoreEl.style.display = 'block';
+  const pct = total > 0 ? Math.round(correct/total*100) : 0;
+  scoreEl.textContent = 'Score: ' + correct + ' / ' + total + ' marks (' + pct + '%)';
+  scoreEl.style.color = pct >= 70 ? '#2e7d32' : pct >= 50 ? '#e65100' : '#c62828';
+}
+function resetEx(id) {
+  const cfg = exConfig[id];
+  if (cfg.type === 'mc') {
+    cfg.qs.forEach(q => {
+      document.querySelectorAll('input[name="' + id + q + '"]').forEach(r => r.checked = false);
+      document.getElementById(id + '-q' + q).querySelectorAll('.opts label, .match-opts label').forEach(l => l.classList.remove('correct','wrong'));
+    });
+  } else {
+    cfg.ids.forEach(q => { const inp = document.getElementById(cfg.prefix + q); if (inp) { inp.value = ''; inp.classList.remove('correct','wrong'); } });
+  }
+  const s = document.getElementById('score-' + id); s.style.display = 'none'; s.textContent = '';
+}
+function showAnswers(id) {
+  const cfg = exConfig[id];
+  if (cfg.type === 'mc') {
+    cfg.qs.forEach(q => {
+      document.querySelectorAll('input[name="' + id + q + '"]').forEach(r => r.checked = false);
+      const block = document.getElementById(id + '-q' + q);
+      block.querySelectorAll('.opts label, .match-opts label').forEach(l => l.classList.remove('correct','wrong'));
+      block.querySelector('input[value="' + cfg.answers[q] + '"]').parentElement.classList.add('correct');
+    });
+  } else {
+    cfg.ids.forEach(q => {
+      const inp = document.getElementById(cfg.prefix + q); if (!inp) return;
+      inp.classList.remove('correct','wrong'); inp.value = inp.dataset.answer.split('|')[0]; inp.classList.add('correct');
+    });
+  }
+  document.getElementById('score-' + id).style.display = 'none';
+}
+</script>
+</body>
+</html>

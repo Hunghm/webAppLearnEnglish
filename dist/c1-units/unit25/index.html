@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 25 – Reporting | Destination C1</title>
+<style>
+:root {
+  --accent: #2d6a4f;
+  --accent-dark: #1b4332;
+  --accent-light: #d8f3e3;
+  --accent2: #52b788;
+  --bg: #f8faf9;
+  --surface: #ffffff;
+  --border: #d8e8df;
+  --text: #1a2e23;
+  --muted: #5a7a68;
+  --sidebar-w: 260px;
+  --correct: #2d6a4f;
+  --wrong: #c1121f;
+  --correct-bg: #d8f3e3;
+  --wrong-bg: #ffe5e5;
+  --yellow-bg: #fff9e6;
+  --yellow-border: #f9c74f;
+  --blue-bg: #e8f4fd;
+  --blue-border: #4ea8de;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: #b7d5c4; border-radius: 4px; }
+
+#sidebar-header {
+  padding: 16px 14px 12px;
+  background: var(--accent-dark);
+  color: #fff;
+  flex-shrink: 0;
+}
+#sidebar-header h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+#sidebar-header p { font-size: 11px; opacity: 0.7; margin-top: 3px; }
+
+#sidebar nav a {
+  display: block;
+  padding: 9px 14px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 12.5px;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+#sidebar nav a:hover { color: var(--accent); background: var(--accent-light); }
+#sidebar nav a.active {
+  color: var(--accent);
+  background: var(--accent-light);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+.nav-group {
+  padding: 8px 14px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  background: #f0f7f3;
+  border-top: 1px solid var(--border);
+}
+
+/* Score panel */
+#score-panel {
+  margin: 0 12px 12px;
+  padding: 12px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  border: 1px solid var(--accent2);
+  flex-shrink: 0;
+}
+#score-panel .score-label { font-size: 11px; font-weight: 600; color: var(--accent-dark); margin-bottom: 6px; }
+#score-bar-bg { background: #b7d5c4; border-radius: 100px; height: 6px; overflow: hidden; margin-bottom: 6px; }
+#score-bar-fill { height: 100%; background: var(--accent); border-radius: 100px; transition: width 0.5s ease; width: 0%; }
+#score-text { font-size: 12px; color: var(--accent-dark); font-weight: 600; }
+
+/* ── MAIN ── */
+#main {
+  flex: 1;
+  padding: 32px 40px 60px;
+  max-width: 900px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-bottom: 4px;
+}
+.page-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+/* ── SECTIONS ── */
+.section {
+  margin-bottom: 48px;
+  scroll-margin-top: 20px;
+}
+.section-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+}
+
+/* Exercise label */
+.exercise {
+  margin-bottom: 32px;
+}
+.exercise-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.ex-letter {
+  width: 28px;
+  height: 28px;
+  background: var(--accent-dark);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ex-instruction {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Word box */
+.word-box {
+  background: #f0f7f3;
+  border: 1px solid var(--accent2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--accent-dark);
+  text-align: center;
+  line-height: 2;
+}
+.word-box span { margin: 0 6px; }
+
+/* Fill-in items */
+.fill-list { list-style: none; }
+.fill-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 0;
+  border-bottom: 1px solid #edf2ef;
+  flex-wrap: wrap;
+}
+.fill-item:last-child { border-bottom: none; }
+.item-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  min-width: 22px;
+  flex-shrink: 0;
+}
+.item-text { flex: 1; }
+.fill-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  min-width: 120px;
+  outline: none;
+  transition: border-color 0.2s;
+  text-align: center;
+}
+.fill-input:focus { border-bottom-color: var(--accent-dark); }
+.fill-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.fill-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Multiple choice */
+.mc-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+.mc-item:last-child { border-bottom: none; }
+.mc-question { margin-bottom: 8px; font-size: 13.5px; }
+.mc-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 6px;
+}
+.mc-btn {
+  padding: 6px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 12.5px;
+  font-family: inherit;
+  text-align: left;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.mc-btn:hover { border-color: var(--accent2); background: var(--accent-light); }
+.mc-btn.selected { border-color: var(--accent); background: var(--accent-light); }
+.mc-btn.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); font-weight: 600; }
+.mc-btn.wrong { border-color: var(--wrong); background: var(--wrong-bg); color: var(--wrong); }
+
+/* Choose between two */
+.choose-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13.5px;
+}
+.choose-item:last-child { border-bottom: none; }
+.choose-pair { display: inline-flex; gap: 0; border-radius: 6px; overflow: hidden; border: 1.5px solid var(--border); }
+.choose-btn {
+  padding: 3px 10px;
+  border: none;
+  background: var(--surface);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.15s;
+  color: var(--muted);
+}
+.choose-btn + .choose-btn { border-left: 1.5px solid var(--border); }
+.choose-btn:hover { background: var(--accent-light); color: var(--accent); }
+.choose-btn.selected { background: var(--accent); color: #fff; }
+.choose-btn.correct { background: var(--correct); color: #fff; }
+.choose-btn.wrong { background: var(--wrong); color: #fff; }
+
+/* Tick exercise */
+.tick-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+.tick-item:last-child { border-bottom: none; }
+.tick-num { font-size: 12px; font-weight: 700; color: var(--muted); min-width: 22px; }
+.tick-text { flex: 1; font-size: 13.5px; }
+.tick-text b { color: var(--accent-dark); }
+.tick-actions { display: flex; gap: 6px; align-items: center; }
+.tick-btn {
+  padding: 3px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.tick-btn.tick-yes { color: var(--correct); }
+.tick-btn.tick-yes:hover, .tick-btn.tick-yes.selected { background: var(--correct-bg); border-color: var(--correct); }
+.tick-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  min-width: 100px;
+  outline: none;
+}
+.tick-input:focus { border-bottom-color: var(--accent-dark); }
+.tick-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.tick-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Passage / text exercise */
+.passage-box {
+  background: var(--yellow-bg);
+  border: 1px solid var(--yellow-border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  font-size: 13.5px;
+  line-height: 2;
+}
+.passage-box h3 {
+  font-family: 'Georgia', serif;
+  font-size: 16px;
+  color: var(--accent-dark);
+  margin-bottom: 10px;
+}
+.passage-box.blue-box {
+  background: var(--blue-bg);
+  border-color: var(--blue-border);
+}
+.gap-num {
+  font-weight: 700;
+  color: var(--accent-dark);
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+/* Check / Reset buttons */
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.btn-check {
+  padding: 8px 20px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-check:hover { background: var(--accent-dark); }
+.btn-reset {
+  padding: 8px 16px;
+  background: var(--surface);
+  color: var(--muted);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-reset:hover { border-color: var(--wrong); color: var(--wrong); }
+
+/* Key word transform */
+.kwt-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13px;
+}
+.kwt-item:last-child { border-bottom: none; }
+.kwt-key {
+  display: inline-block;
+  background: var(--accent-dark);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 6px;
+  letter-spacing: 0.05em;
+}
+.kwt-sentence { margin-bottom: 6px; }
+.kwt-blank { margin-top: 4px; font-size: 13px; }
+
+/* Two-column dialogue layout */
+.dialogue-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
+  background: var(--yellow-bg);
+  border: 1px solid var(--yellow-border);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.dialogue-col { }
+.dialogue-col h4 { font-size: 12px; font-weight: 700; color: var(--accent-dark); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+.dialogue-line { margin-bottom: 2px; }
+.dialogue-line b { color: var(--accent-dark); }
+
+/* H exercise - two-column fill */
+.h-item {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13px;
+}
+.h-item:last-child { border-bottom: none; }
+.h-small-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 13px;
+  font-family: inherit;
+  width: 90px;
+  outline: none;
+  text-align: center;
+}
+.h-small-input:focus { border-bottom-color: var(--accent-dark); }
+.h-small-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.h-small-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+.h-tick {
+  padding: 3px 8px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 11px;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.h-tick.selected { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.h-tick.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); font-weight: 700; }
+.h-tick.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  #sidebar { display: none; }
+  #main { padding: 20px 16px 40px; }
+  .mc-options { grid-template-columns: 1fr 1fr; }
+  .dialogue-grid { grid-template-columns: 1fr; }
+}
+
+/* Progress toast */
+#toast {
+  position: fixed;
+  bottom: 20px; right: 20px;
+  background: var(--accent-dark);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  display: none;
+  z-index: 9999;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div id="sidebar-header">
+    <h2>Unit 25</h2>
+    <p>Reporting</p>
+  </div>
+
+  <div id="score-panel">
+    <div class="score-label">Progress</div>
+    <div id="score-bar-bg"><div id="score-bar-fill"></div></div>
+    <div id="score-text">0 / 0 answered</div>
+  </div>
+
+  <nav>
+    <div class="nav-group">Grammar</div>
+    <a href="#exA">A — Direct → Reported speech</a>
+    <a href="#exB">B — Circle: has/had etc.</a>
+    <a href="#exC">C — Correct bold modals</a>
+    <a href="#exD">D — One word (pronouns)</a>
+    <a href="#exE">E — Dialogue → reported</a>
+    <a href="#exF">F — Reported speech sentences</a>
+    <a href="#exG">G — Key word transform</a>
+    <a href="#exH">H — Circle correct form</a>
+    <a href="#exI">I — Verb from box (infinitive)</a>
+    <a href="#exJ">J — Multiple choice (verb patterns)</a>
+    <a href="#exK">K — Hobbies passage</a>
+  </nav>
+</aside>
+
+<!-- MAIN -->
+<main id="main">
+  <div class="page-title">Unit 25 — Grammar</div>
+  <div class="page-subtitle">Reporting &nbsp;·&nbsp; Destination C1 &amp; C2</div>
+
+  <!-- ════════ GRAMMAR ════════ -->
+  <div class="section" id="sec-grammar">
+    <div class="section-title">Reported speech</div>
+
+    <!-- Exercise A -->
+    <div class="exercise" id="exA">
+      <div class="exercise-label">
+        <div class="ex-letter">A</div>
+        <div class="ex-instruction">Complete each second sentence so that it has a similar meaning to the first sentence.</div>
+      </div>
+      <ol class="fill-list" id="A-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">Jimmy said that he definitely wasn't going to the match on Saturday.<br>
+        '<input class="fill-input" data-answer="I definitely am not going to the match on Saturday|I'm definitely not going to the match on Saturday" placeholder="..." style="min-width:340px;">,' said Jimmy.</span></li>
+
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">Alison told Ben that he'd forgotten to do the washing-up.<br>
+        '<input class="fill-input" data-answer="You've forgotten to do the washing-up|You have forgotten to do the washing-up" placeholder="..." style="min-width:280px;">, Ben!' said Alison.</span></li>
+
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">Jason admitted that he had been lying when he'd said he had nothing to do with the breakages.<br>
+        'Actually, I <input class="fill-input" data-answer="was lying when I said I had nothing to do with the breakages|have been lying when I said I had nothing to do with the breakages" placeholder="..." style="min-width:360px;">,' admitted Jason.</span></li>
+
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">Paul told me that Dawn hadn't been particularly hard-working when she was at university.<br>
+        '<input class="fill-input" data-answer="Dawn wasn't particularly hard-working when she was at university" placeholder="..." style="min-width:340px;">,' said Paul.</span></li>
+
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">Sharon shouted that she hadn't finished yet.<br>
+        '<input class="fill-input" data-answer="I haven't finished yet|I have not finished yet" placeholder="..." style="min-width:200px;">!' shouted Sharon.</span></li>
+
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">Rudy said he'd meet us all at the café in half an hour.<br>
+        '<input class="fill-input" data-answer="I'll meet you all at the café in half an hour|I will meet you all at the café in half an hour" placeholder="..." style="min-width:320px;">,' said Rudy.</span></li>
+
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">Belinda's mum told her that she didn't have to eat her sprouts if she didn't want to.<br>
+        '<input class="fill-input" data-answer="You don't have to eat your sprouts if you don't want to" placeholder="..." style="min-width:340px;">, Belinda,' said her mum.</span></li>
+
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">Sebastian announced that he and Tristan were going to set up a website.<br>
+        'Tristan <input class="fill-input" data-answer="and I are going to set up a website" placeholder="..." style="min-width:260px;">,' announced Sebastian.</span></li>
+
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">Karen asked Diana when she had got married.<br>
+        '<input class="fill-input" data-answer="When did you get married" placeholder="..." style="min-width:220px;">, Diana?' asked Karen.</span></li>
+
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">Freda asked Bjorn if she could borrow his bike for a couple of hours.<br>
+        'Bjorn, <input class="fill-input" data-answer="could I borrow your bike for a couple of hours" placeholder="..." style="min-width:300px;">?' asked Freda.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('A-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('A-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise B -->
+    <div class="exercise" id="exB">
+      <div class="exercise-label">
+        <div class="ex-letter">B</div>
+        <div class="ex-instruction">Circle the correct word or phrase. If both are correct, circle both.</div>
+      </div>
+      <div id="B-list">
+        <div class="choose-item"><span class="item-num">1</span> &nbsp;When I told Mr Peters that the dog <span class="choose-pair"><button class="choose-btn" data-q="B1" data-opt="A" data-answer="B" onclick="chooseOption(this)">has</button><button class="choose-btn" data-q="B1" data-opt="B" data-answer="B" onclick="chooseOption(this)">had</button></span> eaten my homework, he didn't believe me.</div>
+        <div class="choose-item"><span class="item-num">2</span> &nbsp;Adam told me that his girlfriend <span class="choose-pair"><button class="choose-btn" data-q="B2" data-opt="A" data-answer="B" onclick="chooseOption(this)">doesn't</button><button class="choose-btn" data-q="B2" data-opt="B" data-answer="B" onclick="chooseOption(this)">didn't</button></span> eat meat at all.</div>
+        <div class="choose-item"><span class="item-num">3</span> &nbsp;When I saw Ed yesterday morning, he told me that he <span class="choose-pair"><button class="choose-btn" data-q="B3" data-opt="A" data-answer="B" onclick="chooseOption(this)">is</button><button class="choose-btn" data-q="B3" data-opt="B" data-answer="B" onclick="chooseOption(this)">was</button></span> going to look at a flat in the afternoon.</div>
+        <div class="choose-item"><span class="item-num">4</span> &nbsp;Roger told me about the pop quiz. He said his team <span class="choose-pair"><button class="choose-btn" data-q="B4a" data-opt="A" data-answer="AB" onclick="chooseOption(this)">were</button><button class="choose-btn" data-q="B4a" data-opt="B" data-answer="AB" onclick="chooseOption(this)">had been</button></span> doing well in the first few rounds, but that it <span class="choose-pair"><button class="choose-btn" data-q="B4b" data-opt="A" data-answer="AB" onclick="chooseOption(this)">all went</button><button class="choose-btn" data-q="B4b" data-opt="B" data-answer="AB" onclick="chooseOption(this)">had all gone</button></span> wrong with the round about dance music.</div>
+        <div class="choose-item"><span class="item-num">5</span> &nbsp;When we watched <em>Death Watch III</em>, Paul said he <span class="choose-pair"><button class="choose-btn" data-q="B5" data-opt="A" data-answer="AB" onclick="chooseOption(this)">has</button><button class="choose-btn" data-q="B5" data-opt="B" data-answer="AB" onclick="chooseOption(this)">had</button></span> never seen a worse movie in his life!</div>
+        <div class="choose-item"><span class="item-num">6</span> &nbsp;Did Galileo say that the Earth <span class="choose-pair"><button class="choose-btn" data-q="B6" data-opt="A" data-answer="AB" onclick="chooseOption(this)">goes</button><button class="choose-btn" data-q="B6" data-opt="B" data-answer="AB" onclick="chooseOption(this)">went</button></span> round the sun?</div>
+        <div class="choose-item"><span class="item-num">7</span> &nbsp;Phil told me on Friday that he <span class="choose-pair"><button class="choose-btn" data-q="B7" data-opt="A" data-answer="AB" onclick="chooseOption(this)">has</button><button class="choose-btn" data-q="B7" data-opt="B" data-answer="AB" onclick="chooseOption(this)">had</button></span> just bumped into Wally Deacon!</div>
+        <div class="choose-item"><span class="item-num">8</span> &nbsp;Babs announced to us all last night that she <span class="choose-pair"><button class="choose-btn" data-q="B8" data-opt="A" data-answer="B" onclick="chooseOption(this)">is</button><button class="choose-btn" data-q="B8" data-opt="B" data-answer="B" onclick="chooseOption(this)">was</button></span> finally giving up smoking.</div>
+        <div class="choose-item"><span class="item-num">9</span> &nbsp;Did you say that you <span class="choose-pair"><button class="choose-btn" data-q="B9" data-opt="A" data-answer="AB" onclick="chooseOption(this)">do</button><button class="choose-btn" data-q="B9" data-opt="B" data-answer="AB" onclick="chooseOption(this)">did</button></span> want sugar in your coffee or not?</div>
+        <div class="choose-item"><span class="item-num">10</span> &nbsp;I told Brian last week that the office <span class="choose-pair"><button class="choose-btn" data-q="B10" data-opt="A" data-answer="B" onclick="chooseOption(this)">isn't</button><button class="choose-btn" data-q="B10" data-opt="B" data-answer="B" onclick="chooseOption(this)">wasn't</button></span> opening on Tuesday so I don't know why he showed up yesterday morning.</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkChoose('B-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetChoose('B-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise C -->
+    <div class="exercise" id="exC">
+      <div class="exercise-label">
+        <div class="ex-letter">C</div>
+        <div class="ex-instruction">If the word or phrase in bold is correct, put a tick. If it is incorrect, rewrite it correctly.</div>
+      </div>
+      <div id="C-list">
+        <div class="tick-item">
+          <span class="tick-num">1</span>
+          <span class="tick-text">Bob did tell me that he probably <b>wouldn't</b> be coming in today.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C1" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="C1" data-answer="✓" placeholder="rewrite if wrong...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">2</span>
+          <span class="tick-text">Last week he told us that we <b>don't have to</b> do that exercise and then yesterday he said <b>he'd made</b> a mistake.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C2a" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="C2a" data-answer="didn't have to" placeholder="1st bold...">
+            <input class="tick-input" data-q="C2b" data-answer="✓" placeholder="2nd bold...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">3</span>
+          <span class="tick-text">Did you say these bills <b>had to</b> be paid before tomorrow?</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C3" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="C3" data-answer="have to" placeholder="rewrite if wrong...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">4</span>
+          <span class="tick-text">Steve said he <b>could</b> play guitar when he was two years old. Do you believe that?</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C4" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="C4" data-answer="✓" placeholder="rewrite if wrong...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">5</span>
+          <span class="tick-text">Pauline told my mum that <b>she'd had better</b> get a lawyer. I think she's right.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C5" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="C5" data-answer="she'd better" placeholder="rewrite if wrong...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">6</span>
+          <span class="tick-text">When we went to the party, Claudia told me that I <b>must</b> be on my best behaviour all evening. It was very rude of her, I thought.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C6" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="C6" data-answer="had to" placeholder="rewrite if wrong...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">7</span>
+          <span class="tick-text">Darren said that Mr Taylor <b>was to</b> have forgotten about the meeting, but I'm not so sure. I think he just didn't want to come.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C7" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="C7" data-answer="must have" placeholder="rewrite if wrong...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">8</span>
+          <span class="tick-text">When I was a teenager, my dad always told me that <b>I'm not to</b> stay out later than ten o'clock.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C8" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="C8" data-answer="I was not to|I wasn't to" placeholder="rewrite if wrong...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">9</span>
+          <span class="tick-text">I was pleased when Jilly told us that she <b>can</b> help us paint the flat. If only I'd known then what that meant!</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C9" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="C9" data-answer="could" placeholder="rewrite if wrong...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">10</span>
+          <span class="tick-text">When I was at school, my English teacher always told us that we <b>don't have to</b> pay attention but we <b>do have to</b> be quiet.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C10a" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="C10a" data-answer="didn't have to" placeholder="1st bold...">
+            <input class="tick-input" data-q="C10b" data-answer="did have to" placeholder="2nd bold...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">11</span>
+          <span class="tick-text">The letter they sent six months ago said that they <b>shall</b> be in touch again soon. Well, I haven't heard anything since!</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C11" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="C11" data-answer="would" placeholder="rewrite if wrong...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">12</span>
+          <span class="tick-text">Seven years ago, the Prime Minister stated that his government <b>will</b> be corruption-free. It doesn't look that way now, does it?</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C12" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="C12" data-answer="would" placeholder="rewrite if wrong...">
+          </span>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkC()">Check answers</button>
+        <button class="btn-reset" onclick="resetC()">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise D -->
+    <div class="exercise" id="exD">
+      <div class="exercise-label">
+        <div class="ex-letter">D</div>
+        <div class="ex-instruction">Write one word in each gap.</div>
+      </div>
+      <ol class="fill-list" id="D-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">'Oh no! These shoes don't go with that suit at all!' I actually really liked the shoes but Maureen told me <input class="fill-input" data-answer="they" placeholder="..."> didn't go with the suit I was planning to wear.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">'This play is rubbish!' Susan told us in no uncertain terms that <input class="fill-input" data-answer="the" placeholder="..."> play was rubbish.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">'My sister Chloe's coming to stay for a few days.' Why did Derek say that <input class="fill-input" data-answer="his" placeholder="..."> sister's called Chloe? She's called Clarissa, isn't she?</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">'This is not what I ordered!' Mike told the waiter – quite rudely in my opinion – that <input class="fill-input" data-answer="it|that" placeholder="..."> wasn't what he'd ordered.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">'These trainers are far too expensive!' My mum said that <input class="fill-input" data-answer="those|the" placeholder="..."> trainers were too expensive so I didn't get them in the end.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">'My number's easy. It's 123456.' You don't know Sindy's phone number, do you? She did actually tell me <input class="fill-input" data-answer="her" placeholder="..."> number but I stupidly forgot to write it down.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">'Could you put these on the table?' Mum asked me to put <input class="fill-input" data-answer="them" placeholder="..."> on the table.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">'You won't believe what happened to us last night.' Angus and James told me that <input class="fill-input" data-answer="their" placeholder="..."> house was broken into last night.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('D-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('D-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise E -->
+    <div class="exercise" id="exE">
+      <div class="exercise-label">
+        <div class="ex-letter">E</div>
+        <div class="ex-instruction">Write one word in each gap. (Dialogue → reported speech)</div>
+      </div>
+      <div class="dialogue-grid">
+        <div class="dialogue-col">
+          <h4>Then …</h4>
+          <div class="dialogue-line"><b>Seamus:</b> Hi Marios! It's Seamus. Listen, what are you doing at the moment?</div>
+          <div class="dialogue-line"><b>Marios:</b> Right now? Nothing much. Why?</div>
+          <div class="dialogue-line"><b>Seamus:</b> Well, do you remember last week I told you about that new gym? I'm just about to check it out and I wondered if you'd like to come too.</div>
+          <div class="dialogue-line"><b>Marios:</b> Yeah, great! Umm… to tell you the truth, Seamus, I actually went a couple of days ago. It's really good!</div>
+          <div class="dialogue-line"><b>Seamus:</b> Did you?</div>
+          <div class="dialogue-line"><b>Marios:</b> Yeah, well, I'm taking part in the London Marathon next month so I'm trying to get fit.</div>
+          <div class="dialogue-line"><b>Seamus:</b> Oh, of course you are. Well, you can show me round, then.</div>
+          <div class="dialogue-line"><b>Marios:</b> Absolutely! Look, I was going to call you yesterday to ask you if you wanted to come with me next time, but something came up.</div>
+          <div class="dialogue-line"><b>Seamus:</b> No, no problem. Don't worry about it.</div>
+          <div class="dialogue-line"><b>Marios:</b> Thanks. So, where shall we meet?</div>
+          <div class="dialogue-line"><b>Seamus:</b> Well, I'm at the office right now and the gym's only a few minutes walk from here. Do you want to come here and we'll go together?</div>
+          <div class="dialogue-line"><b>Marios:</b> Sure. See you in about half an hour.</div>
+          <div class="dialogue-line"><b>Seamus:</b> Okay. Bye!</div>
+          <div class="dialogue-line"><b>Marios:</b> Bye!</div>
+        </div>
+        <div class="dialogue-col">
+          <h4>Now …</h4>
+          <ol class="fill-list" id="E-list" style="list-style:none;">
+            <li class="fill-item"><span class="item-num">1</span><span class="item-text">Seamus asked Marios what he was doing at <input class="fill-input" data-answer="that" placeholder="..."> moment.</span></li>
+            <li class="fill-item"><span class="item-num">2</span><span class="item-text">Marios replied that right <input class="fill-input" data-answer="then" placeholder="..."> he was not doing anything much.</span></li>
+            <li class="fill-item"><span class="item-num">3</span><span class="item-text">Seamus mentioned a conversation they'd had the <input class="fill-input" data-answer="previous" placeholder="..."> week.</span></li>
+            <li class="fill-item"><span class="item-num">4</span><span class="item-text">Marios admitted that he'd been to the gym two days <input class="fill-input" data-answer="before|earlier|previously" placeholder="...">.</span></li>
+            <li class="fill-item"><span class="item-num">5</span><span class="item-text">Marios reminded Seamus that he was taking part in the London Marathon <input class="fill-input" data-answer="the following|the next" placeholder="..."> month.</span></li>
+            <li class="fill-item"><span class="item-num">6</span><span class="item-text">Marios told Seamus that he had been planning to call him the day <input class="fill-input" data-answer="before|previously" placeholder="...">.</span></li>
+            <li class="fill-item"><span class="item-num">7</span><span class="item-text">Seamus said he was at the office and suggested they meet <input class="fill-input" data-answer="there" placeholder="...">.</span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('E-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('E-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise F -->
+    <div class="exercise" id="exF">
+      <div class="exercise-label">
+        <div class="ex-letter">F</div>
+        <div class="ex-instruction">Complete each second sentence so that it has a similar meaning to the first sentence.</div>
+      </div>
+      <ol class="fill-list" id="F-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">'Carol and I went to a great museum when we were in Italy last month,' said Shirley.<br>
+        Shirley told her friends that <input class="fill-input" data-answer="she and Carol had gone to a great museum when they were in Italy the previous month|she and Carol had been to a great museum when they had been in Italy the month before" placeholder="..." style="min-width:380px;">.</span></li>
+
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">'I only washed these trousers yesterday, Tony!' said his mum.<br>
+        Tony's mum told <input class="fill-input" data-answer="him that she had only washed those trousers the day before" placeholder="..." style="min-width:340px;">.</span></li>
+
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">'You have to get all the letters sent off by tomorrow,' said Jake to his secretary as he was leaving.<br>
+        As he was leaving, Jake told <input class="fill-input" data-answer="his secretary that she had to get all the letters sent off by the following day" placeholder="..." style="min-width:360px;">.</span></li>
+
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">'We shall meet you all back here in exactly half an hour from now.'<br>
+        Mum told me that <input class="fill-input" data-answer="they would meet us all back there in exactly half an hour from then" placeholder="..." style="min-width:360px;">.</span></li>
+
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">'Luckily I don't have to go into the office this Saturday,' said Olivia.<br>
+        Olivia said happily that <input class="fill-input" data-answer="luckily she didn't have to go into the office that Saturday" placeholder="..." style="min-width:340px;">.</span></li>
+
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">'It can't be very nice having all these cars going by all the time.'<br>
+        Alan commented to Ros that <input class="fill-input" data-answer="it couldn't be very nice having all those cars going by all the time" placeholder="..." style="min-width:360px;">.</span></li>
+
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">'I'll put these in water right now.'<br>
+        Daniel's mum said that <input class="fill-input" data-answer="she would put them in water right then|she would put those in water right away" placeholder="..." style="min-width:340px;">.</span></li>
+
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">'I told Dan two days ago that this report would have to be rewritten,' said Greg.<br>
+        Greg told Jeanne that <input class="fill-input" data-answer="he had told Dan two days before that the report would have to be rewritten" placeholder="..." style="min-width:380px;">.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('F-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('F-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise G -->
+    <div class="exercise" id="exG">
+      <div class="exercise-label">
+        <div class="ex-letter">G</div>
+        <div class="ex-instruction">Complete the second sentence so that it has a similar meaning to the first sentence, using the word given. Do not change the word given. You must use between three and eight words, including the word given.</div>
+      </div>
+      <ol class="fill-list" id="G-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">'Will you come with me to the concert next Thursday?' Andrea asked Gareth. <span style="background:var(--accent-dark);color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;">go</span><br>
+        Andrea asked Gareth if <input class="fill-input" data-answer="he would go with her" placeholder="..." style="min-width:200px;"> to the concert the following Thursday.</span></li>
+
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">'Does the train get in at four o'clock?' asked Pete. <span style="background:var(--accent-dark);color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;">whether</span><br>
+        Pete asked <input class="fill-input" data-answer="whether the train got in" placeholder="..." style="min-width:220px;"> at four o'clock.</span></li>
+
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">'Have you been talking on the phone all evening, Tim?' asked his dad. <span style="background:var(--accent-dark);color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;">if</span><br>
+        Tim's dad asked <input class="fill-input" data-answer="if he had been talking" placeholder="..." style="min-width:220px;"> on the phone all evening.</span></li>
+
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">'Are you all coming tomorrow?' Fiona asked us. <span style="background:var(--accent-dark);color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;">whether</span><br>
+        Fiona asked <input class="fill-input" data-answer="whether we were all coming the following|whether we were all coming the next" placeholder="..." style="min-width:280px;"> day.</span></li>
+
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">'Doesn't Jerry live near you anymore?' asked Dominic. <span style="background:var(--accent-dark);color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;">me</span><br>
+        Dominic asked whether <input class="fill-input" data-answer="Jerry still lived near me" placeholder="..." style="min-width:220px;"> any more.</span></li>
+
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">'Shall I send you an e-mail about it, Trevor?' asked Kevin. <span style="background:var(--accent-dark);color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;">him</span><br>
+        Kevin asked <input class="fill-input" data-answer="Trevor if he should send him" placeholder="..." style="min-width:240px;"> an e-mail about it.</span></li>
+
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">'Shall I help you do the dishes, Carlo?' said Robert. <span style="background:var(--accent-dark);color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;">offered</span><br>
+        Robert <input class="fill-input" data-answer="offered to help Carlo do|offered to help Carlo with" placeholder="..." style="min-width:240px;"> the dishes.</span></li>
+
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">'Do we really have to go to bed right now?' Toby asked his parents. <span style="background:var(--accent-dark);color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;">did</span><br>
+        Toby asked his parents <input class="fill-input" data-answer="if they really did have to|whether they really did have to" placeholder="..." style="min-width:260px;"> go to bed right then.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('G-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('G-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise H -->
+    <div class="exercise" id="exH">
+      <div class="exercise-label">
+        <div class="ex-letter">H</div>
+        <div class="ex-instruction">Circle the correct word or phrase.</div>
+      </div>
+      <div id="H-list">
+        <div class="choose-item"><span class="item-num">1</span> &nbsp;Kostas didn't dare ask Eleni where <span class="choose-pair"><button class="choose-btn" data-q="H1" data-opt="A" data-answer="B" onclick="chooseOption(this)">had she</button><button class="choose-btn" data-q="H1" data-opt="B" data-answer="B" onclick="chooseOption(this)">she had</button></span> been the previous evening.</div>
+        <div class="choose-item"><span class="item-num">2</span> &nbsp;I was tempted to ask why <span class="choose-pair"><button class="choose-btn" data-q="H2" data-opt="A" data-answer="B" onclick="chooseOption(this)">did Ranji want</button><button class="choose-btn" data-q="H2" data-opt="B" data-answer="B" onclick="chooseOption(this)">Ranji wanted</button></span> to sit next to Li Han so badly.</div>
+        <div class="choose-item"><span class="item-num">3</span> &nbsp;We did ask Carol who <span class="choose-pair"><button class="choose-btn" data-q="H3" data-opt="A" data-answer="A" onclick="chooseOption(this)">she had</button><button class="choose-btn" data-q="H3" data-opt="B" data-answer="A" onclick="chooseOption(this)">had she</button></span> invited but for some reason she wouldn't tell us.</div>
+        <div class="choose-item"><span class="item-num">4</span> &nbsp;Can you believe it? Fred actually asked me how <span class="choose-pair"><button class="choose-btn" data-q="H4" data-opt="A" data-answer="A" onclick="chooseOption(this)">to</button><button class="choose-btn" data-q="H4" data-opt="B" data-answer="A" onclick="chooseOption(this)">could he</button></span> send an e-mail!</div>
+        <div class="choose-item"><span class="item-num">5</span> &nbsp;No one has asked me why <span class="choose-pair"><button class="choose-btn" data-q="H5" data-opt="A" data-answer="B" onclick="chooseOption(this)">didn't I</button><button class="choose-btn" data-q="H5" data-opt="B" data-answer="B" onclick="chooseOption(this)">I didn't</button></span> come to work yesterday.</div>
+        <div class="choose-item"><span class="item-num">6</span> &nbsp;I'm going to ask them what on earth <span class="choose-pair"><button class="choose-btn" data-q="H6" data-opt="A" data-answer="B" onclick="chooseOption(this)">did they think</button><button class="choose-btn" data-q="H6" data-opt="B" data-answer="B" onclick="chooseOption(this)">they thought</button></span> they were doing.</div>
+        <div class="choose-item"><span class="item-num">7</span> &nbsp;Ask that man over there who <span class="choose-pair"><button class="choose-btn" data-q="H7" data-opt="A" data-answer="B" onclick="chooseOption(this)">should we</button><button class="choose-btn" data-q="H7" data-opt="B" data-answer="B" onclick="chooseOption(this)">to</button></span> complain to.</div>
+        <div class="choose-item"><span class="item-num">8</span> &nbsp;Doug and Sally didn't even ask me how <span class="choose-pair"><button class="choose-btn" data-q="H8" data-opt="A" data-answer="A" onclick="chooseOption(this)">the website was</button><button class="choose-btn" data-q="H8" data-opt="B" data-answer="A" onclick="chooseOption(this)">was the website</button></span> going.</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkChoose('H-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetChoose('H-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise I -->
+    <div class="exercise" id="exI">
+      <div class="exercise-label">
+        <div class="ex-letter">I</div>
+        <div class="ex-instruction">Write a verb from the box in the correct form in each gap.</div>
+      </div>
+      <div class="word-box">
+        attack &nbsp;•&nbsp; do &nbsp;•&nbsp; get &nbsp;•&nbsp; like &nbsp;•&nbsp; make &nbsp;•&nbsp; pass &nbsp;•&nbsp; take &nbsp;•&nbsp; talk &nbsp;•&nbsp; turn &nbsp;•&nbsp; use &nbsp;•&nbsp; want &nbsp;•&nbsp; work
+      </div>
+      <ol class="fill-list" id="I-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">You'd better ask the security guard how <input class="fill-input" data-answer="to get" placeholder="..."> into the building at the weekend.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">That was so nice of them to ask whether I <input class="fill-input" data-answer="wanted" placeholder="..."> to stay the night.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">I know you asked me <input class="fill-input" data-answer="to do" placeholder="..."> the washing-up now but it'll only take a minute, I promise.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">Why did the officer order his men <input class="fill-input" data-answer="to attack" placeholder="..."> when he knew they were outnumbered?</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">I would ask you <input class="fill-input" data-answer="to make" placeholder="..."> judgement until you know all the facts.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">I couldn't believe it when Sandy came out and asked me if I <input class="fill-input" data-answer="had used|used" placeholder="..."> drugs before.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">I don't like asking you <input class="fill-input" data-answer="to work" placeholder="..."> on a Saturday, but I'm afraid there's no alternative.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">You should have asked your mother which cloth <input class="fill-input" data-answer="to take" placeholder="...">. She'd know.</span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">It was funny when you were asked by the technician how <input class="fill-input" data-answer="to turn" placeholder="..."> the computer on.</span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">She very kindly asked me if I <input class="fill-input" data-answer="liked" placeholder="..."> fruit cake and said there was a fruit salad if I preferred.</span></li>
+        <li class="fill-item"><span class="item-num">11</span><span class="item-text">Go and ask your dad <input class="fill-input" data-answer="to make|to pass" placeholder="..."> us a coffee, would you?</span></li>
+        <li class="fill-item"><span class="item-num">12</span><span class="item-text">I'm sorry, but we've been instructed <input class="fill-input" data-answer="not to talk" placeholder="..."> to reporters under any circumstances.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('I-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('I-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise J -->
+    <div class="exercise" id="exJ">
+      <div class="exercise-label">
+        <div class="ex-letter">J</div>
+        <div class="ex-instruction">Choose the correct answer.</div>
+      </div>
+      <div id="J-list">
+
+        <div class="mc-item">
+          <div class="mc-question"><b>1</b> &nbsp;Do you deny <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> this with the defendant on the day in question?</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="J1" data-opt="A" data-answer="B" onclick="mcClick(this)">A to discuss</button>
+            <button class="mc-btn" data-q="J1" data-opt="B" data-answer="B" onclick="mcClick(this)">B discussing</button>
+            <button class="mc-btn" data-q="J1" data-opt="C" data-answer="B" onclick="mcClick(this)">C of having discussed</button>
+            <button class="mc-btn" data-q="J1" data-opt="D" data-answer="B" onclick="mcClick(this)">D to have discussed</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-question"><b>2</b> &nbsp;Why did you refuse <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> the police officer's questions? It only makes you look guilty!</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="J2" data-opt="A" data-answer="B" onclick="mcClick(this)">A to answer</button>
+            <button class="mc-btn" data-q="J2" data-opt="B" data-answer="B" onclick="mcClick(this)">B answering</button>
+            <button class="mc-btn" data-q="J2" data-opt="C" data-answer="B" onclick="mcClick(this)">C that you answer</button>
+            <button class="mc-btn" data-q="J2" data-opt="D" data-answer="B" onclick="mcClick(this)">D for answering</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-question"><b>3</b> &nbsp;It's about time Mrs Richards apologised to me <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> me a gossip in front of everybody.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="J3" data-opt="A" data-answer="D" onclick="mcClick(this)">A to have called</button>
+            <button class="mc-btn" data-q="J3" data-opt="B" data-answer="D" onclick="mcClick(this)">B from calling</button>
+            <button class="mc-btn" data-q="J3" data-opt="C" data-answer="D" onclick="mcClick(this)">C that she called</button>
+            <button class="mc-btn" data-q="J3" data-opt="D" data-answer="D" onclick="mcClick(this)">D for having called</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-question"><b>4</b> &nbsp;She may claim <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> a PhD but nobody's ever actually seen the certificate.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="J4" data-opt="A" data-answer="C" onclick="mcClick(this)">A having</button>
+            <button class="mc-btn" data-q="J4" data-opt="B" data-answer="C" onclick="mcClick(this)">B for having</button>
+            <button class="mc-btn" data-q="J4" data-opt="C" data-answer="C" onclick="mcClick(this)">C to have</button>
+            <button class="mc-btn" data-q="J4" data-opt="D" data-answer="C" onclick="mcClick(this)">D if she has</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-question"><b>5</b> &nbsp;The kids suggested <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> a pizza tonight. What do you think?</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="J5" data-opt="A" data-answer="C" onclick="mcClick(this)">A to get</button>
+            <button class="mc-btn" data-q="J5" data-opt="B" data-answer="C" onclick="mcClick(this)">B we'll get</button>
+            <button class="mc-btn" data-q="J5" data-opt="C" data-answer="C" onclick="mcClick(this)">C getting</button>
+            <button class="mc-btn" data-q="J5" data-opt="D" data-answer="C" onclick="mcClick(this)">D for getting</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-question"><b>6</b> &nbsp;I do agree there <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> simple solution to this problem.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="J6" data-opt="A" data-answer="C" onclick="mcClick(this)">A is no</button>
+            <button class="mc-btn" data-q="J6" data-opt="B" data-answer="C" onclick="mcClick(this)">B be not</button>
+            <button class="mc-btn" data-q="J6" data-opt="C" data-answer="C" onclick="mcClick(this)">C not to be</button>
+            <button class="mc-btn" data-q="J6" data-opt="D" data-answer="C" onclick="mcClick(this)">D not being</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-question"><b>7</b> &nbsp;Tammy responded <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> that at least she'd never lied to her parents.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="J7" data-opt="A" data-answer="B" onclick="mcClick(this)">A to say</button>
+            <button class="mc-btn" data-q="J7" data-opt="B" data-answer="B" onclick="mcClick(this)">B that she said</button>
+            <button class="mc-btn" data-q="J7" data-opt="C" data-answer="B" onclick="mcClick(this)">C by saying</button>
+            <button class="mc-btn" data-q="J7" data-opt="D" data-answer="B" onclick="mcClick(this)">D with having said</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-question"><b>8</b> &nbsp;I'm begging <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="J8" data-opt="A" data-answer="A" onclick="mcClick(this)">A you to stay</button>
+            <button class="mc-btn" data-q="J8" data-opt="B" data-answer="A" onclick="mcClick(this)">B that you stay</button>
+            <button class="mc-btn" data-q="J8" data-opt="C" data-answer="A" onclick="mcClick(this)">C your staying</button>
+            <button class="mc-btn" data-q="J8" data-opt="D" data-answer="A" onclick="mcClick(this)">D you for staying</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkMC('J-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetMC('J-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise K -->
+    <div class="exercise" id="exK">
+      <div class="exercise-label">
+        <div class="ex-letter">K</div>
+        <div class="ex-instruction">Write one word in each gap.</div>
+      </div>
+      <div class="passage-box" style="background:#f0f7f3; border-color:#52b788;">
+        <h3 style="font-family:'Georgia',serif; font-size:17px; color:#1b4332; margin-bottom:10px;">Hobbies</h3>
+        The next time someone asks me <span class="gap-num">(1)</span> <input class="fill-input" data-answer="what" placeholder="..."> my hobbies are, or, indeed, <span class="gap-num">(2)</span> <input class="fill-input" data-answer="whether" placeholder="..."> I have any hobbies, I'm tempted to refuse <span class="gap-num">(3)</span> <input class="fill-input" data-answer="to" placeholder="..."> answer. Better still, I'll turn the question round and ask them to <span class="gap-num">(4)</span> <input class="fill-input" data-answer="tell" placeholder="..."> me what <em>their</em> hobbies are. Doubtless they'll claim to <span class="gap-num">(5)</span> <input class="fill-input" data-answer="be" placeholder="..."> an avid collector of rare postage stamps, or an expert builder-of-cathedrals-out-of-matchsticks, but I shan't believe it. I don't think we should deny <span class="gap-num">(6)</span> <input class="fill-input" data-answer="it" placeholder="..."> any longer: the hobby is dead. I would like to suggest <span class="gap-num">(7)</span> <input class="fill-input" data-answer="that" placeholder="...">, from now on, the word 'hobby' is erased from our vocabulary. You may accuse me <span class="gap-num">(8)</span> <input class="fill-input" data-answer="of" placeholder="..."> being naive, but I strongly believe the facts support my case. Ask any teenager – or adult, for that matter – how they <span class="gap-num">(9)</span> <input class="fill-input" data-answer="spend" placeholder="..."> their spare time. They'll respond <span class="gap-num">(10)</span> <input class="fill-input" data-answer="with" placeholder="..."> a list of activities – going to the gym, playing computer games, watching TV, downloading music, hanging out with friends, surfing the Internet, going to the pub, playing football – none of which can sensibly be called a hobby.
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exK')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exK')">Reset</button>
+      </div>
+    </div>
+
+  </div><!-- end section -->
+</main>
+
+<div id="toast"></div>
+
+<script>
+// ── UTILITY ──────────────────────────────────────────────
+function normalize(s) {
+  return s.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+function isCorrect(input, answer) {
+  const val = normalize(input.value);
+  const alts = answer.split('|').map(a => normalize(a));
+  return alts.includes(val);
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2000);
+}
+
+// ── SCORE TRACKING ───────────────────────────────────────
+function updateScore() {
+  const all = document.querySelectorAll('.fill-input, .h-small-input');
+  const answered = [...all].filter(i => i.value.trim() !== '').length;
+  const total = all.length;
+  const pct = total ? (answered / total * 100).toFixed(0) : 0;
+  document.getElementById('score-bar-fill').style.width = pct + '%';
+  document.getElementById('score-text').textContent = answered + ' / ' + total + ' answered';
+}
+document.addEventListener('input', updateScore);
+
+// ── FILL IN THE BLANK ────────────────────────────────────
+function checkFill(listId) {
+  const list = document.getElementById(listId);
+  let correct = 0, total = 0;
+  list.querySelectorAll('.fill-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetFill(listId) {
+  document.getElementById(listId).querySelectorAll('.fill-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+function checkAllFillInSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  let correct = 0, total = 0;
+  section.querySelectorAll('.fill-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetAllFillInSection(sectionId) {
+  document.getElementById(sectionId).querySelectorAll('.fill-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+// ── CHOOSE OPTION ─────────────────────────────────────────
+function chooseOption(btn) {
+  btn.closest('.choose-pair').querySelectorAll('.choose-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function checkChoose(listId) {
+  const list = document.getElementById(listId);
+  let correct = 0, total = 0;
+  const questions = {};
+  list.querySelectorAll('.choose-btn').forEach(btn => {
+    if (!questions[btn.dataset.q]) questions[btn.dataset.q] = [];
+    questions[btn.dataset.q].push(btn);
+  });
+  total = Object.keys(questions).length;
+  Object.values(questions).forEach(btns => {
+    const answer = btns[0].dataset.answer;
+    btns.forEach(b => {
+      b.classList.remove('correct', 'wrong');
+      if (b.classList.contains('selected')) {
+        if (answer === 'AB' || b.dataset.opt === answer) { b.classList.add('correct'); }
+        else b.classList.add('wrong');
+      } else if (answer === 'AB' || b.dataset.opt === answer) {
+        b.classList.add('correct');
+      }
+    });
+    // count as correct if both selected when both correct, or correct one selected
+    if (answer === 'AB') {
+      const allSelected = btns.every(b => b.classList.contains('selected'));
+      if (allSelected) correct++;
+    } else {
+      if (btns.some(b => b.classList.contains('selected') && b.dataset.opt === answer)) correct++;
+    }
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetChoose(listId) {
+  document.getElementById(listId).querySelectorAll('.choose-btn').forEach(b => {
+    b.classList.remove('selected', 'correct', 'wrong');
+  });
+}
+
+// ── EXERCISE C (Tick/rewrite modals) ─────────────────────
+function toggleTick(btn) {
+  btn.classList.toggle('selected');
+}
+function checkC() {
+  // Correct answers: 1=tick, 2a=didn't have to, 2b=tick, 3=have to, 4=tick, 5=she'd better, 6=had to, 7=must have, 8=wasn't to, 9=could, 10a=didn't have to, 10b=did have to, 11=would, 12=would
+  const tickCorrect = ['C1','C2b','C4'];
+  const inputAnswers = {
+    'C2a': "didn't have to",
+    'C3': 'have to',
+    'C5': "she'd better",
+    'C6': 'had to',
+    'C7': 'must have',
+    'C8': "i was not to|i wasn't to",
+    'C9': 'could',
+    'C10a': "didn't have to",
+    'C10b': 'did have to',
+    'C11': 'would',
+    'C12': 'would'
+  };
+  let correct = 0, total = 0;
+  document.querySelectorAll('#C-list .tick-item').forEach(item => {
+    item.querySelectorAll('.tick-btn').forEach(btn => {
+      const q = btn.dataset.q;
+      btn.classList.remove('correct','wrong');
+      total++;
+      const shouldTick = tickCorrect.includes(q);
+      const isSelected = btn.classList.contains('selected');
+      if (shouldTick === isSelected) { btn.classList.add('correct'); correct++; }
+      else btn.classList.add('wrong');
+    });
+    item.querySelectorAll('.tick-input').forEach(inp => {
+      const q = inp.dataset.q;
+      if (!inputAnswers[q]) return;
+      inp.classList.remove('correct','wrong');
+      total++;
+      const val = normalize(inp.value);
+      const alts = inputAnswers[q].split('|');
+      if (alts.includes(val)) { inp.classList.add('correct'); correct++; }
+      else if (inp.value.trim()) inp.classList.add('wrong');
+    });
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetC() {
+  document.querySelectorAll('#C-list .tick-btn').forEach(b => b.classList.remove('selected','correct','wrong'));
+  document.querySelectorAll('#C-list .tick-input').forEach(i => { i.value=''; i.classList.remove('correct','wrong'); });
+}
+
+// ── MULTIPLE CHOICE ──────────────────────────────────────
+function mcClick(btn) {
+  const q = btn.dataset.q;
+  document.querySelectorAll(`.mc-btn[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function checkMC(listId) {
+  const list = document.getElementById(listId);
+  const questions = {};
+  list.querySelectorAll('.mc-btn').forEach(btn => {
+    if (!questions[btn.dataset.q]) questions[btn.dataset.q] = [];
+    questions[btn.dataset.q].push(btn);
+  });
+  let correct = 0, total = Object.keys(questions).length;
+  Object.values(questions).forEach(btns => {
+    const answer = btns[0].dataset.answer;
+    btns.forEach(b => {
+      b.classList.remove('correct','wrong');
+      if (b.classList.contains('selected')) {
+        if (b.dataset.opt === answer) { b.classList.add('correct'); correct++; }
+        else b.classList.add('wrong');
+      } else if (b.dataset.opt === answer) {
+        b.classList.add('correct');
+      }
+    });
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetMC(listId) {
+  document.getElementById(listId).querySelectorAll('.mc-btn').forEach(b => {
+    b.classList.remove('selected','correct','wrong');
+  });
+}
+
+// ── SIDEBAR ACTIVE ────────────────────────────────────────
+const sections = document.querySelectorAll('.exercise[id]');
+const navLinks = document.querySelectorAll('#sidebar nav a');
+function onScroll() {
+  let current = '';
+  sections.forEach(s => {
+    if (s.getBoundingClientRect().top <= 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', onScroll);
+onScroll();
+
+// ── INIT ──────────────────────────────────────────────────
+updateScore();
+</script>
+</body>
+</html>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review 7 – Units 13 &amp; 14</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #333; min-height: 100vh; }
+  .header { background: #1565C0; color: white; padding: 16px 20px; text-align: center; }
+  .header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+  .header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+  .tab-bar { display: flex; background: #1976D2; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn { flex: 1; min-width: 48px; padding: 12px 8px; border: none; background: transparent; color: rgba(255,255,255,0.7); font-size: 0.95rem; font-weight: 600; cursor: pointer; border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap; }
+  .tab-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+  .tab-btn.active { color: white; border-bottom-color: #FFD600; }
+  .content { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+  .exercise { display: none; } .exercise.active { display: block; }
+  .ex-header { margin-bottom: 16px; }
+  .ex-title { font-size: 1.1rem; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+  .ex-instruction { font-size: 0.9rem; color: #555; background: #E3F2FD; border-left: 4px solid #2196F3; padding: 8px 12px; border-radius: 0 6px 6px 0; }
+  .question-list { list-style: none; }
+  .question-item { background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s; }
+  .question-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .question-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+  .q-num { font-weight: 700; color: #1976D2; margin-right: 6px; }
+  input[type="text"] { border: 2px solid #BBDEFB; border-radius: 6px; padding: 5px 10px; font-size: 0.95rem; outline: none; background: #FAFAFA; transition: border .2s; min-width: 100px; }
+  input[type="text"]:focus { border-color: #2196F3; background: white; }
+  input[type="text"].correct { border-color: #4CAF50; background: #F1F8E9; color: #2E7D32; }
+  input[type="text"].wrong { border-color: #F44336; background: #FFF5F5; color: #C62828; }
+  .passage-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .passage-title { font-weight: 700; text-align: center; font-style: italic; margin-bottom: 12px; font-size: 1rem; }
+  .passage-line { margin-bottom: 10px; line-height: 2.2; }
+  .word-cap { font-weight: 700; font-style: italic; color: #555; margin-left: 6px; font-size: 0.85rem; }
+  .passage-input { min-width: 130px; width: 155px; }
+  .kw-first { font-size: 0.93rem; color: #333; margin-bottom: 6px; line-height: 1.6; }
+  .kw-keyword { font-weight: 700; color: #E65100; background: #FFF3E0; padding: 2px 8px; border-radius: 4px; margin-left: 6px; }
+  .kw-second { font-size: 0.93rem; line-height: 2; }
+  .kw-input { min-width: 200px; width: 260px; }
+  /* Phrasal verb exercise */
+  .pv-bold { font-weight: 700; color: #1565C0; font-style: italic; }
+  .pv-input { min-width: 160px; width: 180px; }
+  .mc4-options { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+  .mc4-btn { border: 2px solid #BBDEFB; background: white; border-radius: 6px; padding: 6px 14px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #333; text-align: left; }
+  .mc4-btn:hover { background: #E3F2FD; }
+  .mc4-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .mc4-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .mc4-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+  .mc4-label { font-weight: 700; margin-right: 8px; }
+  .answer-reveal { font-size: 0.82rem; color: #388E3C; margin-top: 6px; display: none; font-style: italic; }
+  .show-answers .answer-reveal { display: block; }
+  .action-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+  .btn { padding: 10px 22px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-check { background: #2196F3; color: white; } .btn-check:hover { background: #1976D2; }
+  .btn-reset { background: #FF9800; color: white; } .btn-reset:hover { background: #F57C00; }
+  .btn-show { background: #9C27B0; color: white; } .btn-show:hover { background: #7B1FA2; }
+  .score-display { font-size: 1rem; font-weight: 700; padding: 8px 16px; border-radius: 8px; background: #E8F5E9; color: #2E7D32; display: none; }
+  .score-display.visible { display: inline-block; }
+  .score-display.perfect { background: #4CAF50; color: white; }
+  @media (max-width: 500px) { .tab-btn { font-size: 0.8rem; padding: 10px 4px; } .content { padding: 12px 10px 50px; } .kw-input { width: 180px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Review 7 – Units 13 &amp; 14</h1>
+  <p>5 exercises · 50 marks · Click a tab to start</p>
+</div>
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('a')">A</button>
+  <button class="tab-btn" onclick="switchTab('b')">B</button>
+  <button class="tab-btn" onclick="switchTab('c')">C</button>
+  <button class="tab-btn" onclick="switchTab('d')">D</button>
+  <button class="tab-btn" onclick="switchTab('e')">E</button>
+</div>
+<div class="content">
+
+  <!-- EXERCISE A: Word Formation -->
+  <div class="exercise active" id="ex-a">
+    <div class="ex-header">
+      <div class="ex-title">Exercise A – Word Formation <span style="font-size:0.8rem;color:#888">(1 mark each)</span></div>
+      <div class="ex-instruction">Use the word given in capitals at the end of each line to form a word that fits in the gap in the same line.</div>
+    </div>
+    <div class="passage-container" id="ql-a">
+      <div class="passage-title">Scorpion Fish</div>
+      <div class="passage-line">
+        Have you ever heard of scorpion fish? I was completely (1) <input type="text" class="passage-input ex-a-input" data-answer="unaware" placeholder="…">
+        <span class="word-cap">AWARE</span><div class="answer-reveal">✓ unaware</div>
+      </div>
+      <div class="passage-line">
+        they existed until I trod on one in the sea. I can't (2) <input type="text" class="passage-input ex-a-input" data-answer="emphasise" placeholder="…"> enough
+        <span class="word-cap">EMPHASIS</span><div class="answer-reveal">✓ emphasise</div>
+      </div>
+      <div class="passage-line">
+        how painful it was! The fish has a spike which gives you an (3) <input type="text" class="passage-input ex-a-input" data-answer="injection" placeholder="…">
+        <span class="word-cap">INJECT</span><div class="answer-reveal">✓ injection</div>
+      </div>
+      <div class="passage-line">
+        of a (4) <input type="text" class="passage-input ex-a-input" data-answer="poisonous" placeholder="…"> substance. It's not dangerous, but you begin to feel
+        <span class="word-cap">POISON</span><div class="answer-reveal">✓ poisonous</div>
+      </div>
+      <div class="passage-line">
+        extremely (5) <input type="text" class="passage-input ex-a-input" data-answer="uncomfortable" placeholder="…">, and the pain just gets worse and worse. Luckily,
+        <span class="word-cap">COMFORT</span><div class="answer-reveal">✓ uncomfortable</div>
+      </div>
+      <div class="passage-line">
+        there was a doctor on the beach – she was a (6) <input type="text" class="passage-input ex-a-input" data-answer="surgeon" placeholder="…"> at the local
+        <span class="word-cap">SURGERY</span><div class="answer-reveal">✓ surgeon</div>
+      </div>
+      <div class="passage-line">
+        hospital – and she told me what the best (7) <input type="text" class="passage-input ex-a-input" data-answer="treatment" placeholder="…"> was. I had to bathe my foot in warm, salty water and then apply an ammonia-based solution.
+        <span class="word-cap">TREAT</span><div class="answer-reveal">✓ treatment</div>
+      </div>
+      <div class="passage-line">
+        After my holiday, my foot still seemed to be a little infected, so my local GP gave me a (8) <input type="text" class="passage-input ex-a-input" data-answer="prescription" placeholder="…"> for antibiotics. Unfortunately, it turned out
+        <span class="word-cap">PRESCRIBE</span><div class="answer-reveal">✓ prescription</div>
+      </div>
+      <div class="passage-line">
+        I was (9) <input type="text" class="passage-input ex-a-input" data-answer="allergic" placeholder="…"> to them, so I came out in a red rash all over my body.
+        <span class="word-cap">ALLERGY</span><div class="answer-reveal">✓ allergic</div>
+      </div>
+      <div class="passage-line">
+        It was over a week before I had made a complete (10) <input type="text" class="passage-input ex-a-input" data-answer="recovery" placeholder="…">.
+        <span class="word-cap">RECOVER</span><div class="answer-reveal">✓ recovery</div>
+      </div>
+    </div>
+    <div class="action-bar">
+      <button class="btn btn-check" onclick="checkEx('a')">Check Answers</button>
+      <button class="btn btn-show" onclick="showAnswers('a')">Show Answers</button>
+      <button class="btn btn-reset" onclick="resetEx('a')">Reset</button>
+      <span class="score-display" id="score-a"></span>
+    </div>
+  </div>
+
+  <!-- EXERCISE B: KWT (1 mark each) -->
+  <div class="exercise" id="ex-b">
+    <div class="ex-header">
+      <div class="ex-title">Exercise B – Key Word Transformation <span style="font-size:0.8rem;color:#888">(1 mark each)</span></div>
+      <div class="ex-instruction">Complete the second sentence using the word given. Write between two and five words in each gap.</div>
+    </div>
+    <ul class="question-list" id="ql-b">
+      <li class="question-item" data-answer="is no need for adrian|is no need for him">
+        <span class="q-num">11.</span>
+        <div class="kw-first">Thankfully, Adrian doesn't need to have an operation. <span class="kw-keyword">no</span></div>
+        <div class="kw-second">Thankfully, there <input type="text" class="ex-b-input kw-input" placeholder="…"> to have an operation.</div>
+        <div class="answer-reveal">✓ is no need for Adrian</div>
+      </li>
+      <li class="question-item" data-answer="led to the minister's resignation|led to his resignation">
+        <span class="q-num">12.</span>
+        <div class="kw-first">The minister had to resign because of ill health. <span class="kw-keyword">led</span></div>
+        <div class="kw-second">Ill health <input type="text" class="ex-b-input kw-input" placeholder="…"> resignation.</div>
+        <div class="answer-reveal">✓ led to the minister's</div>
+      </li>
+      <li class="question-item" data-answer="isn't worth seeing|is not worth seeing">
+        <span class="q-num">13.</span>
+        <div class="kw-first">You won't benefit from seeing the doctor if you've just got a cold. <span class="kw-keyword">worth</span></div>
+        <div class="kw-second">It <input type="text" class="ex-b-input kw-input" placeholder="…"> the doctor if you've just got a cold.</div>
+        <div class="answer-reveal">✓ isn't worth seeing</div>
+      </li>
+      <li class="question-item" data-answer="got an appointment with">
+        <span class="q-num">14.</span>
+        <div class="kw-first">I'm seeing the nutritionist at three tomorrow. <span class="kw-keyword">appointment</span></div>
+        <div class="kw-second">I've <input type="text" class="ex-b-input kw-input" placeholder="…"> the nutritionist at three tomorrow.</div>
+        <div class="answer-reveal">✓ got an appointment with</div>
+      </li>
+      <li class="question-item" data-answer="am tired of being|'m tired of being">
+        <span class="q-num">15.</span>
+        <div class="kw-first">I don't want to be a vegan any more! <span class="kw-keyword">tired</span></div>
+        <div class="kw-second">I <input type="text" class="ex-b-input kw-input" placeholder="…"> a vegan!</div>
+        <div class="answer-reveal">✓ am tired of being</div>
+      </li>
+      <li class="question-item" data-answer="is unlikely to heal">
+        <span class="q-num">16.</span>
+        <div class="kw-first">Your arm probably won't heal before the match on Saturday. <span class="kw-keyword">unlikely</span></div>
+        <div class="kw-second">Your arm <input type="text" class="ex-b-input kw-input" placeholder="…"> before the match on Saturday.</div>
+        <div class="answer-reveal">✓ is unlikely to heal</div>
+      </li>
+      <li class="question-item" data-answer="to be able to do">
+        <span class="q-num">17.</span>
+        <div class="kw-first">I wish I could do a hundred press-ups in one go. <span class="kw-keyword">able</span></div>
+        <div class="kw-second">I'd love <input type="text" class="ex-b-input kw-input" placeholder="…"> a hundred press-ups in one go.</div>
+        <div class="answer-reveal">✓ to be able to do</div>
+      </li>
+      <li class="question-item" data-answer="cut down on">
+        <span class="q-num">18.</span>
+        <div class="kw-first">Do you think I should reduce the amount of chocolate I eat? <span class="kw-keyword">on</span></div>
+        <div class="kw-second">Do you think I should <input type="text" class="ex-b-input kw-input" placeholder="…"> chocolate?</div>
+        <div class="answer-reveal">✓ cut down on</div>
+      </li>
+    </ul>
+    <div class="action-bar">
+      <button class="btn btn-check" onclick="checkEx('b')">Check Answers</button>
+      <button class="btn btn-show" onclick="showAnswers('b')">Show Answers</button>
+      <button class="btn btn-reset" onclick="resetEx('b')">Reset</button>
+      <span class="score-display" id="score-b"></span>
+    </div>
+  </div>
+
+  <!-- EXERCISE C: Phrasal Verbs (2 marks each) -->
+  <div class="exercise" id="ex-c">
+    <div class="ex-header">
+      <div class="ex-title">Exercise C – Phrasal Verbs <span style="font-size:0.8rem;color:#888">(2 marks each)</span></div>
+      <div class="ex-instruction">Write a phrasal verb in the correct form to replace the words in bold.</div>
+    </div>
+    <ul class="question-list" id="ql-c">
+      <li class="question-item" data-answer="come down with">
+        <span class="q-num">19.</span>
+        <span class="q-sentence">Dan's <input type="text" class="ex-c-input pv-input" placeholder="…"> flu, so he can't come to work today. <span class="pv-bold">(started to suffer from)</span></span>
+        <div class="answer-reveal">✓ come down with</div>
+      </li>
+      <li class="question-item" data-answer="get over">
+        <span class="q-num">20.</span>
+        <span class="q-sentence">It took Shirley a long time to <input type="text" class="ex-c-input pv-input" placeholder="…"> the death of her hamster. <span class="pv-bold">(recover from)</span></span>
+        <div class="answer-reveal">✓ get over</div>
+      </li>
+      <li class="question-item" data-answer="come round|come around">
+        <span class="q-num">21.</span>
+        <span class="q-sentence">Many people feel sick when they <input type="text" class="ex-c-input pv-input" placeholder="…"> after a general anaesthetic. <span class="pv-bold">(regain consciousness)</span></span>
+        <div class="answer-reveal">✓ come round / come around</div>
+      </li>
+      <li class="question-item" data-answer="passed out">
+        <span class="q-num">22.</span>
+        <span class="q-sentence">It was so hot and stuffy, I nearly <input type="text" class="ex-c-input pv-input" placeholder="…">. <span class="pv-bold">(suddenly lost consciousness)</span></span>
+        <div class="answer-reveal">✓ passed out</div>
+      </li>
+      <li class="question-item" data-answer="put on">
+        <span class="q-num">23.</span>
+        <span class="q-sentence">Fern's <input type="text" class="ex-c-input pv-input" placeholder="…"> a lot of weight recently. <span class="pv-bold">(gained)</span></span>
+        <div class="answer-reveal">✓ put on</div>
+      </li>
+      <li class="question-item" data-answer="break out">
+        <span class="q-num">24.</span>
+        <span class="q-sentence">Disease is more likely to <input type="text" class="ex-c-input pv-input" placeholder="…"> in areas of extreme poverty. <span class="pv-bold">(suddenly start)</span></span>
+        <div class="answer-reveal">✓ break out</div>
+      </li>
+      <li class="question-item" data-answer="bringing on|setting off|triggering">
+        <span class="q-num">25.</span>
+        <span class="q-sentence">I don't know what's been <input type="text" class="ex-c-input pv-input" placeholder="…"> my terrible headaches. <span class="pv-bold">(causing)</span></span>
+        <div class="answer-reveal">✓ bringing on / setting off</div>
+      </li>
+      <li class="question-item" data-answer="give up">
+        <span class="q-num">26.</span>
+        <span class="q-sentence">My grandfather's decided to <input type="text" class="ex-c-input pv-input" placeholder="…"> red meat completely. <span class="pv-bold">(stop eating)</span></span>
+        <div class="answer-reveal">✓ give up</div>
+      </li>
+    </ul>
+    <div class="action-bar">
+      <button class="btn btn-check" onclick="checkEx('c')">Check Answers</button>
+      <button class="btn btn-show" onclick="showAnswers('c')">Show Answers</button>
+      <button class="btn btn-reset" onclick="resetEx('c')">Reset</button>
+      <span class="score-display" id="score-c"></span>
+    </div>
+  </div>
+
+  <!-- EXERCISE D: MC Grammar -->
+  <div class="exercise" id="ex-d">
+    <div class="ex-header">
+      <div class="ex-title">Exercise D – Choose the Correct Answer <span style="font-size:0.8rem;color:#888">(1 mark each)</span></div>
+      <div class="ex-instruction">Choose the correct answer.</div>
+    </div>
+    <ul class="question-list" id="ql-d">
+      <li class="question-item" data-answer="B">
+        <span class="q-num">27.</span>
+        <span class="q-sentence">I ………… have joined a gym but in the end I decided to exercise at home.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>must</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>could</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>will</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>may</button>
+        </div>
+        <div class="answer-reveal">✓ B – could (could have joined = missed option)</div>
+      </li>
+      <li class="question-item" data-answer="A">
+        <span class="q-num">28.</span>
+        <span class="q-sentence">'I've been feeling under the weather recently.' 'You ………… more exercise.'</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>should get</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>should have got</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>would get</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>would have got</button>
+        </div>
+        <div class="answer-reveal">✓ A – should get (present advice)</div>
+      </li>
+      <li class="question-item" data-answer="C">
+        <span class="q-num">29.</span>
+        <span class="q-sentence">'It was hard work getting back from the hospital with my leg in plaster.' 'You should ………… me. I'd have picked you up.'</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>call</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>be calling</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>have called</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>have been calling</button>
+        </div>
+        <div class="answer-reveal">✓ C – have called (should have + past participle = past criticism)</div>
+      </li>
+      <li class="question-item" data-answer="B">
+        <span class="q-num">30.</span>
+        <span class="q-sentence">………… write with your left hand when you broke your arm?</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>Did you had to</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>Did you have to</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>Needed you to</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>Must you</button>
+        </div>
+        <div class="answer-reveal">✓ B – Did you have to (past obligation question)</div>
+      </li>
+      <li class="question-item" data-answer="A">
+        <span class="q-num">31.</span>
+        <span class="q-sentence">You ………… have huge muscles to look good, you know!</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>don't have to</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>mustn't</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>can't</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>shouldn't</button>
+        </div>
+        <div class="answer-reveal">✓ A – don't have to (no obligation = không cần phải)</div>
+      </li>
+      <li class="question-item" data-answer="D">
+        <span class="q-num">32.</span>
+        <span class="q-sentence">That ………… be Ted at the door. He's in bed with chicken pox.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>hasn't to</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>oughtn't to</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>mustn't</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>can't</button>
+        </div>
+        <div class="answer-reveal">✓ D – can't (can't be = impossibility deduction)</div>
+      </li>
+      <li class="question-item" data-answer="B">
+        <span class="q-num">33.</span>
+        <span class="q-sentence">You must ………… thrilled when the doctor said it wasn't serious.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>be</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>have been</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>be being</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>have been being</button>
+        </div>
+        <div class="answer-reveal">✓ B – have been (must have been = past deduction)</div>
+      </li>
+      <li class="question-item" data-answer="C">
+        <span class="q-num">34.</span>
+        <span class="q-sentence">'Colin's got to stay in bed for eight weeks.' 'I'd hate to ………… do that.'</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>will have to</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>must</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>have to</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>will</button>
+        </div>
+        <div class="answer-reveal">✓ C – have to (I'd hate to have to do that)</div>
+      </li>
+    </ul>
+    <div class="action-bar">
+      <button class="btn btn-check" onclick="checkEx('d')">Check Answers</button>
+      <button class="btn btn-show" onclick="showAnswers('d')">Show Answers</button>
+      <button class="btn btn-reset" onclick="resetEx('d')">Reset</button>
+      <span class="score-display" id="score-d"></span>
+    </div>
+  </div>
+
+  <!-- EXERCISE E: MC Vocabulary -->
+  <div class="exercise" id="ex-e">
+    <div class="ex-header">
+      <div class="ex-title">Exercise E – Choose the Correct Answer <span style="font-size:0.8rem;color:#888">(1 mark each)</span></div>
+      <div class="ex-instruction">Choose the correct answer.</div>
+    </div>
+    <ul class="question-list" id="ql-e">
+      <li class="question-item" data-answer="C">
+        <span class="q-num">35.</span>
+        <span class="q-sentence">The doctor ………… the cut on my knee and said it had completely healed up.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>investigated</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>researched</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>examined</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>looked into</button>
+        </div>
+        <div class="answer-reveal">✓ C – examined (khám, kiểm tra)</div>
+      </li>
+      <li class="question-item" data-answer="A">
+        <span class="q-num">36.</span>
+        <span class="q-sentence">Dr Parker gave my mum a lovely ………… for spaghetti carbonara.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>recipe</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>prescription</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>receipt</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>paper</button>
+        </div>
+        <div class="answer-reveal">✓ A – recipe (công thức nấu ăn)</div>
+      </li>
+      <li class="question-item" data-answer="D">
+        <span class="q-num">37.</span>
+        <span class="q-sentence">My feet are ………… . I guess my new shoes are a bit tight.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>hurt</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>pain</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>ache</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>sore</button>
+        </div>
+        <div class="answer-reveal">✓ D – sore (feet are sore = đau nhức, dùng làm tính từ)</div>
+      </li>
+      <li class="question-item" data-answer="A">
+        <span class="q-num">38.</span>
+        <span class="q-sentence">I was shocked when I crashed the car, but at least I wasn't ………… .</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>injured</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>damaged</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>broken</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>spoilt</button>
+        </div>
+        <div class="answer-reveal">✓ A – injured (bị thương – dùng cho người)</div>
+      </li>
+      <li class="question-item" data-answer="D">
+        <span class="q-num">39.</span>
+        <span class="q-sentence">Diana looks terribly ………… . You don't think she's ill, do you?</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>slim</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>thin</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>slender</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>slight</button>
+        </div>
+        <div class="answer-reveal">✓ D – slight (looks slight = trông mong manh/xanh xao, lo ngại)</div>
+      </li>
+      <li class="question-item" data-answer="D">
+        <span class="q-num">40.</span>
+        <span class="q-sentence">Some drugs produce bad side ………… .</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>consequences</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>products</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>results</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>effects</button>
+        </div>
+        <div class="answer-reveal">✓ D – effects (side effects = tác dụng phụ)</div>
+      </li>
+      <li class="question-item" data-answer="A">
+        <span class="q-num">41.</span>
+        <span class="q-sentence">I was very sad when the vet said he'd have to ………… Gertie, our labrador.</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>put down</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>pull through</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>feel up to</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>wear off</button>
+        </div>
+        <div class="answer-reveal">✓ A – put down (tiêm thuốc cho ngủ = an tử vật)</div>
+      </li>
+      <li class="question-item" data-answer="C">
+        <span class="q-num">42.</span>
+        <span class="q-sentence">Going on this diet has really ………… me good. I've lost weight and I feel fantastic!</span>
+        <div class="mc4-options">
+          <button class="mc4-btn" data-val="A" onclick="chooseMC4(this)"><span class="mc4-label">A</span>made</button>
+          <button class="mc4-btn" data-val="B" onclick="chooseMC4(this)"><span class="mc4-label">B</span>taken</button>
+          <button class="mc4-btn" data-val="C" onclick="chooseMC4(this)"><span class="mc4-label">C</span>done</button>
+          <button class="mc4-btn" data-val="D" onclick="chooseMC4(this)"><span class="mc4-label">D</span>had</button>
+        </div>
+        <div class="answer-reveal">✓ C – done (done me good = tốt cho tôi)</div>
+      </li>
+    </ul>
+    <div class="action-bar">
+      <button class="btn btn-check" onclick="checkEx('e')">Check Answers</button>
+      <button class="btn btn-show" onclick="showAnswers('e')">Show Answers</button>
+      <button class="btn btn-reset" onclick="resetEx('e')">Reset</button>
+      <span class="score-display" id="score-e"></span>
+    </div>
+  </div>
+
+</div>
+<script>
+const tabs = ['a','b','c','d','e'];
+function switchTab(id) {
+  document.querySelector('.exercise.active').classList.remove('active');
+  document.getElementById('ex-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => btn.classList.toggle('active', tabs[i] === id));
+}
+function chooseMC4(btn) {
+  btn.closest('.mc4-options').querySelectorAll('.mc4-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function normalize(s) { return s.trim().toLowerCase().replace(/\s+/g,' '); }
+function checkEx(id) {
+  let correct = 0, total = 0;
+  if (id === 'a') {
+    document.querySelectorAll('#ql-a input[type="text"]').forEach(inp => {
+      total++;
+      const ok = normalize(inp.value) === normalize(inp.dataset.answer);
+      if (ok) correct++;
+      inp.classList.toggle('correct', ok); inp.classList.toggle('wrong', !ok);
+      const line = inp.closest('.passage-line');
+      if (line) { line.classList.toggle('correct', ok); line.classList.toggle('wrong', !ok); }
+    });
+  } else if (id === 'b') {
+    document.querySelectorAll('#ql-b .question-item').forEach(item => {
+      total++;
+      const inp = item.querySelector('input[type="text"]');
+      const ok = item.dataset.answer.split('|').some(a => normalize(inp.value) === normalize(a));
+      if (ok) correct++;
+      item.classList.toggle('correct', ok); item.classList.toggle('wrong', !ok);
+      inp.classList.toggle('correct', ok); inp.classList.toggle('wrong', !ok);
+    });
+  } else if (id === 'c') {
+    document.querySelectorAll('#ql-c .question-item').forEach(item => {
+      total++;
+      const inp = item.querySelector('input[type="text"]');
+      const ok = item.dataset.answer.split('|').some(a => normalize(inp.value) === normalize(a));
+      if (ok) correct++;
+      item.classList.toggle('correct', ok); item.classList.toggle('wrong', !ok);
+      inp.classList.toggle('correct', ok); inp.classList.toggle('wrong', !ok);
+    });
+    showScore('c', correct, total, 2); return;
+  } else if (id === 'd' || id === 'e') {
+    document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+      total++;
+      const sel = item.querySelector('.mc4-btn.selected');
+      const ok = sel && sel.dataset.val === item.dataset.answer;
+      if (ok) correct++;
+      item.classList.toggle('correct', ok); item.classList.toggle('wrong', !ok);
+      item.querySelectorAll('.mc4-btn').forEach(btn => {
+        btn.classList.remove('correct','wrong');
+        if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+        else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+      });
+    });
+  }
+  showScore(id, correct, total, 1);
+}
+function showScore(id, correct, total, m) {
+  const el = document.getElementById('score-' + id);
+  el.textContent = (correct*m) + ' / ' + (total*m);
+  el.classList.add('visible');
+  el.classList.toggle('perfect', correct === total);
+}
+function resetEx(id) {
+  const ex = document.getElementById('ex-' + id);
+  ex.querySelectorAll('input[type="text"]').forEach(inp => { inp.value=''; inp.classList.remove('correct','wrong'); });
+  ex.querySelectorAll('.question-item,.passage-line').forEach(el => el.classList.remove('correct','wrong'));
+  ex.querySelectorAll('.mc4-btn').forEach(btn => btn.classList.remove('selected','correct','wrong'));
+  document.getElementById('score-' + id).classList.remove('visible','perfect');
+  ex.classList.remove('show-answers');
+}
+function showAnswers(id) {
+  document.getElementById('ex-' + id).classList.add('show-answers');
+  if (id === 'a') document.querySelectorAll('#ql-a input[type="text"]').forEach(inp => { if (!inp.value) inp.value = inp.dataset.answer; });
+}
+</script>
+</body>
+</html>

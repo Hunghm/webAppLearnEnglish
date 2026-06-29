@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 4 – Change and Technology | Destination C1</title>
+<style>
+:root {
+  --accent: #2d6a4f;
+  --accent-dark: #1b4332;
+  --accent-light: #d8f3e3;
+  --accent2: #52b788;
+  --bg: #f8faf9;
+  --surface: #ffffff;
+  --border: #d8e8df;
+  --text: #1a2e23;
+  --muted: #5a7a68;
+  --sidebar-w: 260px;
+  --correct: #2d6a4f;
+  --wrong: #c1121f;
+  --correct-bg: #d8f3e3;
+  --wrong-bg: #ffe5e5;
+  --yellow-bg: #fff9e6;
+  --yellow-border: #f9c74f;
+  --blue-bg: #e8f4fd;
+  --blue-border: #4ea8de;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: #b7d5c4; border-radius: 4px; }
+
+#sidebar-header {
+  padding: 16px 14px 12px;
+  background: var(--accent-dark);
+  color: #fff;
+  flex-shrink: 0;
+}
+#sidebar-header h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+#sidebar-header p { font-size: 11px; opacity: 0.7; margin-top: 3px; }
+
+#sidebar nav a {
+  display: block;
+  padding: 9px 14px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 12.5px;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+#sidebar nav a:hover { color: var(--accent); background: var(--accent-light); }
+#sidebar nav a.active {
+  color: var(--accent);
+  background: var(--accent-light);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+.nav-group {
+  padding: 8px 14px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  background: #f0f7f3;
+  border-top: 1px solid var(--border);
+}
+
+/* Score panel */
+#score-panel {
+  margin: 0 12px 12px;
+  padding: 12px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  border: 1px solid var(--accent2);
+  flex-shrink: 0;
+}
+#score-panel .score-label { font-size: 11px; font-weight: 600; color: var(--accent-dark); margin-bottom: 6px; }
+#score-bar-bg { background: #b7d5c4; border-radius: 100px; height: 6px; overflow: hidden; margin-bottom: 6px; }
+#score-bar-fill { height: 100%; background: var(--accent); border-radius: 100px; transition: width 0.5s ease; width: 0%; }
+#score-text { font-size: 12px; color: var(--accent-dark); font-weight: 600; }
+
+/* ── MAIN ── */
+#main {
+  flex: 1;
+  padding: 32px 40px 60px;
+  max-width: 900px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-bottom: 4px;
+}
+.page-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+/* ── SECTIONS ── */
+.section {
+  margin-bottom: 48px;
+  scroll-margin-top: 20px;
+}
+.section-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+}
+
+/* Exercise label */
+.exercise {
+  margin-bottom: 32px;
+}
+.exercise-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.ex-letter {
+  width: 28px;
+  height: 28px;
+  background: var(--accent-dark);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ex-instruction {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Word box */
+.word-box {
+  background: #f0f7f3;
+  border: 1px solid var(--accent2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--accent-dark);
+  text-align: center;
+  line-height: 2;
+}
+.word-box span { margin: 0 6px; }
+
+/* Fill-in items */
+.fill-list { list-style: none; }
+.fill-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 0;
+  border-bottom: 1px solid #edf2ef;
+  flex-wrap: wrap;
+}
+.fill-item:last-child { border-bottom: none; }
+.item-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  min-width: 22px;
+  flex-shrink: 0;
+}
+.item-text { flex: 1; }
+.fill-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  min-width: 120px;
+  outline: none;
+  transition: border-color 0.2s;
+  text-align: center;
+}
+.fill-input:focus { border-bottom-color: var(--accent-dark); }
+.fill-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.fill-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Multiple choice */
+.mc-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+.mc-item:last-child { border-bottom: none; }
+.mc-question { margin-bottom: 8px; font-size: 13.5px; }
+.mc-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 6px;
+}
+.mc-btn {
+  padding: 6px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 12.5px;
+  font-family: inherit;
+  text-align: left;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.mc-btn:hover { border-color: var(--accent2); background: var(--accent-light); }
+.mc-btn.selected { border-color: var(--accent); background: var(--accent-light); }
+.mc-btn.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); font-weight: 600; }
+.mc-btn.wrong { border-color: var(--wrong); background: var(--wrong-bg); color: var(--wrong); }
+
+/* Choose between two */
+.choose-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13.5px;
+}
+.choose-item:last-child { border-bottom: none; }
+.choose-pair { display: inline-flex; gap: 0; border-radius: 6px; overflow: hidden; border: 1.5px solid var(--border); }
+.choose-btn {
+  padding: 3px 10px;
+  border: none;
+  background: var(--surface);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.15s;
+  color: var(--muted);
+}
+.choose-btn + .choose-btn { border-left: 1.5px solid var(--border); }
+.choose-btn:hover { background: var(--accent-light); color: var(--accent); }
+.choose-btn.selected { background: var(--accent); color: #fff; }
+.choose-btn.correct { background: var(--correct); color: #fff; }
+.choose-btn.wrong { background: var(--wrong); color: #fff; }
+
+/* Tick exercise */
+.tick-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+.tick-item:last-child { border-bottom: none; }
+.tick-num { font-size: 12px; font-weight: 700; color: var(--muted); min-width: 22px; }
+.tick-text { flex: 1; font-size: 13.5px; }
+.tick-text b { color: var(--accent-dark); }
+.tick-actions { display: flex; gap: 6px; align-items: center; }
+.tick-btn {
+  padding: 3px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.tick-btn.tick-yes { color: var(--correct); }
+.tick-btn.tick-yes:hover, .tick-btn.tick-yes.selected { background: var(--correct-bg); border-color: var(--correct); }
+.tick-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  min-width: 100px;
+  outline: none;
+}
+.tick-input:focus { border-bottom-color: var(--accent-dark); }
+.tick-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.tick-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Passage / text exercise */
+.passage-box {
+  background: var(--yellow-bg);
+  border: 1px solid var(--yellow-border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  font-size: 13.5px;
+  line-height: 2;
+}
+.passage-box h3 {
+  font-family: 'Georgia', serif;
+  font-size: 16px;
+  color: var(--accent-dark);
+  margin-bottom: 10px;
+}
+.passage-box.blue-box {
+  background: var(--blue-bg);
+  border-color: var(--blue-border);
+}
+.gap-num {
+  font-weight: 700;
+  color: var(--accent-dark);
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+/* Check / Reset buttons */
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.btn-check {
+  padding: 8px 20px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-check:hover { background: var(--accent-dark); }
+.btn-reset {
+  padding: 8px 16px;
+  background: var(--surface);
+  color: var(--muted);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-reset:hover { border-color: var(--wrong); color: var(--wrong); }
+
+/* Answer reveal */
+.answer-reveal {
+  display: none;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--accent-dark);
+  background: var(--accent-light);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border-left: 3px solid var(--accent);
+}
+.answer-reveal.visible { display: block; }
+
+/* H exercise - two-column fill */
+.h-item {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13px;
+}
+.h-item:last-child { border-bottom: none; }
+.h-small-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 13px;
+  font-family: inherit;
+  width: 90px;
+  outline: none;
+  text-align: center;
+}
+.h-small-input:focus { border-bottom-color: var(--accent-dark); }
+.h-small-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.h-small-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+.h-tick {
+  padding: 3px 8px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 11px;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.h-tick.selected { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.h-tick.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); font-weight: 700; }
+.h-tick.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* P exercise - word grid */
+.word-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.word-chip {
+  padding: 6px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.word-chip:hover { border-color: var(--accent2); background: var(--accent-light); }
+.word-chip.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 600; }
+.word-chip.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); font-weight: 600; }
+.word-chip.wrong { border-color: var(--wrong); background: var(--wrong-bg); color: var(--wrong); }
+.word-chip.missed { border-color: var(--yellow-border); background: var(--yellow-bg); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  #sidebar { display: none; }
+  #main { padding: 20px 16px 40px; }
+  .mc-options { grid-template-columns: 1fr 1fr; }
+}
+
+/* Progress toast */
+#toast {
+  position: fixed;
+  bottom: 20px; right: 20px;
+  background: var(--accent-dark);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  display: none;
+  z-index: 9999;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div id="sidebar-header">
+    <h2>Unit 4</h2>
+    <p>Change and Technology</p>
+  </div>
+
+  <div id="score-panel">
+    <div class="score-label">Progress</div>
+    <div id="score-bar-bg"><div id="score-bar-fill"></div></div>
+    <div id="score-text">0 / 0 answered</div>
+  </div>
+
+  <nav>
+    <div class="nav-group">Topic Vocab: Change</div>
+    <a href="#exA">A — Fill in (word form)</a>
+    <a href="#exB">B — Multiple choice passage</a>
+    <a href="#exC">C — Fill in (word pairs)</a>
+
+    <div class="nav-group">Topic Vocab: Technology</div>
+    <a href="#exD">D — Correct bold words</a>
+    <a href="#exE">E — Fill in passage</a>
+
+    <div class="nav-group">Phrasal Verbs</div>
+    <a href="#exF">F — Replace with phrasal verb</a>
+    <a href="#exG">G — Phrasal verbs from box</a>
+    <a href="#exH">H — "Up" phrasal verbs + tick</a>
+
+    <div class="nav-group">Phrases &amp; Collocations</div>
+    <a href="#exI">I — One word per gap</a>
+    <a href="#exJ">J — Changing ambitions passage</a>
+    <a href="#exK">K — One word for 3 sentences</a>
+
+    <div class="nav-group">Idioms</div>
+    <a href="#exL">L — Idioms in dialogues</a>
+
+    <div class="nav-group">Word Formation</div>
+    <a href="#exM">M — Passage (capitals)</a>
+    <a href="#exN">N — Word forms from capitals</a>
+  </nav>
+</aside>
+
+<!-- MAIN -->
+<main id="main">
+  <div class="page-title">Unit 4 — Vocabulary</div>
+  <div class="page-subtitle">Change and Technology &nbsp;·&nbsp; Destination C1 &amp; C2</div>
+
+  <!-- ════════ TOPIC VOCABULARY: CHANGE ════════ -->
+  <div class="section" id="sec-change">
+    <div class="section-title">Topic vocabulary: Change</div>
+
+    <!-- Exercise A -->
+    <div class="exercise" id="exA">
+      <div class="exercise-label">
+        <div class="ex-letter">A</div>
+        <div class="ex-instruction">Complete using the correct form of the words in the box.</div>
+      </div>
+      <div class="word-box">
+        decay &nbsp;•&nbsp; endure &nbsp;•&nbsp; innovation &nbsp;•&nbsp; mature &nbsp;•&nbsp; modify &nbsp;•&nbsp; potential &nbsp;•&nbsp; progress &nbsp;•&nbsp; shift &nbsp;•&nbsp; substitute &nbsp;•&nbsp; switch
+      </div>
+      <ol class="fill-list" id="A-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">Sometimes I wonder how many of the changes we see around us will really <input class="fill-input" data-answer="endure" placeholder="...">.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">There has been a real <input class="fill-input" data-answer="shift" placeholder="..."> in attitudes towards this lately.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">Mobile phones that receive TV programmes are a real <input class="fill-input" data-answer="innovation" placeholder="...">.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">Iris has a lot of <input class="fill-input" data-answer="potential" placeholder="..."> and should do well in her future career.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">You have to try to be <input class="fill-input" data-answer="mature" placeholder="..."> about the situation and use your experience to find a solution.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">This isn't my laptop! Someone must have <input class="fill-input" data-answer="switched" placeholder="..."> my bag and theirs.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">We've made a lot of <input class="fill-input" data-answer="progress" placeholder="..."> with the plans, but we still have a long way to go.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">You might have learnt the theory, but there's no <input class="fill-input" data-answer="substitute" placeholder="..."> for practical experience.</span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">When trees fall and start to <input class="fill-input" data-answer="decay" placeholder="...">, they provide a home for many insects.</span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">I've <input class="fill-input" data-answer="modified" placeholder="..."> the design by giving the car six wheels instead of four.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('A-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('A-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise B -->
+    <div class="exercise" id="exB">
+      <div class="exercise-label">
+        <div class="ex-letter">B</div>
+        <div class="ex-instruction">Choose the correct word.</div>
+      </div>
+      <div class="passage-box blue-box">
+        <h3 style="text-align:center; font-family:'Georgia',serif; color:#1a3d6e;">The changing face of Britain</h3>
+        It seemed to the generation of Britons alive before the Second World War that their way of life would
+        <span class="gap-num">(1)</span> <input class="fill-input" data-answer="D" placeholder="..."> for many years to come. However, the war caused a
+        <span class="gap-num">(2)</span> <input class="fill-input" data-answer="A" placeholder="..."> in British life that completely changed the
+        <span class="gap-num">(3)</span> <input class="fill-input" data-answer="B" placeholder="...">. What had been a fairly
+        <span class="gap-num">(4)</span> <input class="fill-input" data-answer="A" placeholder="..."> society up to that point, with people sharing many basic beliefs and values, underwent
+        <span class="gap-num">(5)</span> <input class="fill-input" data-answer="D" placeholder="..."> changes after the war. The
+        <span class="gap-num">(6)</span> <input class="fill-input" data-answer="B" placeholder="..."> was away from fixed social roles and towards a more
+        <span class="gap-num">(7)</span> <input class="fill-input" data-answer="C" placeholder="..."> society. Britain began to
+        <span class="gap-num">(8)</span> <input class="fill-input" data-answer="D" placeholder="..."> into its present form and many ideas that are accepted today, such as a large amount of freedom for teenagers, were at the time
+        <span class="gap-num">(9)</span> <input class="fill-input" data-answer="D" placeholder="..."> and exciting. New and
+        <span class="gap-num">(10)</span> <input class="fill-input" data-answer="D" placeholder="..."> music and fashion had a great
+        <span class="gap-num">(11)</span> <input class="fill-input" data-answer="C" placeholder="..."> on young people and the whole of Britain became less
+        <span class="gap-num">(12)</span> <input class="fill-input" data-answer="A" placeholder="...">.
+      </div>
+      <div style="font-size:12px; color:var(--muted); margin-bottom:8px;">Enter the letter of the correct answer (A/B/C/D) for each gap:</div>
+      <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:4px 20px; font-size:12.5px; margin-bottom:12px;">
+        <div>1: A sustain &nbsp; B maintain &nbsp; C last &nbsp; <b>D be</b></div>
+        <div>2: <b>A revolution</b> &nbsp; B revision &nbsp; C rotation &nbsp; D rejection</div>
+        <div>3: A social status &nbsp; <b>B status quo</b> &nbsp; C status symbol &nbsp; D high status</div>
+        <div>4: <b>A uniform</b> &nbsp; B same &nbsp; C similar &nbsp; D identical</div>
+        <div>5: A refined &nbsp; B potential &nbsp; C alternative &nbsp; <b>D radical</b></div>
+        <div>6: A reform &nbsp; <b>B trend</b> &nbsp; C fashion &nbsp; D decay</div>
+        <div>7: A revised &nbsp; B amended &nbsp; <b>C dynamic</b> &nbsp; D different</div>
+        <div>8: A refine &nbsp; B progress &nbsp; C substitute &nbsp; <b>D evolve</b></div>
+        <div>9: A novel &nbsp; B mature &nbsp; C alternate &nbsp; <b>D steady</b></div>
+        <div>10: A internal &nbsp; B incoherent &nbsp; C innate &nbsp; <b>D innovative</b></div>
+        <div>11: A substitute &nbsp; B progress &nbsp; <b>C influence</b> &nbsp; D innovation</div>
+        <div>12: <b>A conservative</b> &nbsp; B concerned &nbsp; C convinced &nbsp; D contained</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exB')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exB')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise C -->
+    <div class="exercise" id="exC">
+      <div class="exercise-label">
+        <div class="ex-letter">C</div>
+        <div class="ex-instruction">Complete using the correct form of the words in the boxes.</div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 160px; gap:16px; align-items:start; margin-bottom:12px;">
+        <div>
+          <div class="fill-item"><span class="item-num">1</span><span class="item-text">It's time we completely <input class="fill-input" data-answer="reformed" placeholder="..."> the whole prison system.</span></div>
+          <div class="fill-item"><span class="item-num">2</span><span class="item-text">I'd like you to <input class="fill-input" data-answer="revise" placeholder="..."> your report to include more information about costs.</span></div>
+        </div>
+        <div class="word-box" style="text-align:left; font-size:12px; padding:8px 12px;">reform &nbsp;•&nbsp; revise</div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 160px; gap:16px; align-items:start; margin-bottom:12px;">
+        <div>
+          <div class="fill-item"><span class="item-num">3</span><span class="item-text">I thought the report in the paper completely <input class="fill-input" data-answer="distorted" placeholder="..."> the truth.</span></div>
+          <div class="fill-item"><span class="item-num">4</span><span class="item-text">I've <input class="fill-input" data-answer="amended" placeholder="..."> the contract and it now says that you will receive 15%.</span></div>
+        </div>
+        <div class="word-box" style="text-align:left; font-size:12px; padding:8px 12px;">amend &nbsp;•&nbsp; distort</div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 160px; gap:16px; align-items:start; margin-bottom:12px;">
+        <div>
+          <div class="fill-item"><span class="item-num">5</span><span class="item-text">I sometimes find it hard to <input class="fill-input" data-answer="maintain" placeholder="..."> a balance between work and my home life.</span></div>
+          <div class="fill-item"><span class="item-num">6</span><span class="item-text">The important thing is to <input class="fill-input" data-answer="remain" placeholder="..."> calm and try to think logically.</span></div>
+        </div>
+        <div class="word-box" style="text-align:left; font-size:12px; padding:8px 12px;">maintain &nbsp;•&nbsp; remain</div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 160px; gap:16px; align-items:start; margin-bottom:12px;">
+        <div>
+          <div class="fill-item"><span class="item-num">7</span><span class="item-text">You can <input class="fill-input" data-answer="adjust" placeholder="..."> the chair to make it comfortable by pressing this button.</span></div>
+          <div class="fill-item"><span class="item-num">8</span><span class="item-text">This company needs to <input class="fill-input" data-answer="adapt" placeholder="..."> or we're not going to survive.</span></div>
+        </div>
+        <div class="word-box" style="text-align:left; font-size:12px; padding:8px 12px;">adapt &nbsp;•&nbsp; adjust</div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 160px; gap:16px; align-items:start; margin-bottom:12px;">
+        <div>
+          <div class="fill-item"><span class="item-num">9</span><span class="item-text">Mike and I meet for coffee on <input class="fill-input" data-answer="alternate" placeholder="..."> Saturdays.</span></div>
+          <div class="fill-item"><span class="item-num">10</span><span class="item-text">There's a lot of traffic, so I'm trying to find an <input class="fill-input" data-answer="alternative" placeholder="..."> route.</span></div>
+        </div>
+        <div class="word-box" style="text-align:left; font-size:12px; padding:8px 12px;">alternate &nbsp;•&nbsp; alternative</div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 160px; gap:16px; align-items:start; margin-bottom:12px;">
+        <div>
+          <div class="fill-item"><span class="item-num">11</span><span class="item-text">You'll regret it if you <input class="fill-input" data-answer="persist" placeholder="..."> in annoying people like that.</span></div>
+          <div class="fill-item"><span class="item-num">12</span><span class="item-text">Can the company <input class="fill-input" data-answer="sustain" placeholder="..."> the kind of growth we've had recently?</span></div>
+        </div>
+        <div class="word-box" style="text-align:left; font-size:12px; padding:8px 12px;">persist &nbsp;•&nbsp; sustain</div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 160px; gap:16px; align-items:start; margin-bottom:12px;">
+        <div>
+          <div class="fill-item"><span class="item-num">13</span><span class="item-text">Many people in Britain <input class="fill-input" data-answer="converted" placeholder="..."> to Christianity during the Roman period.</span></div>
+          <div class="fill-item"><span class="item-num">14</span><span class="item-text">Learning to use the Internet has really <input class="fill-input" data-answer="transformed" placeholder="..."> my life.</span></div>
+        </div>
+        <div class="word-box" style="text-align:left; font-size:12px; padding:8px 12px;">convert &nbsp;•&nbsp; transform</div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 160px; gap:16px; align-items:start; margin-bottom:12px;">
+        <div>
+          <div class="fill-item"><span class="item-num">15</span><span class="item-text">I hope the bad weather didn't <input class="fill-input" data-answer="spoil" placeholder="..."> your holiday.</span></div>
+        </div>
+        <div class="word-box" style="text-align:left; font-size:12px; padding:8px 12px;">deteriorate &nbsp;•&nbsp; spoil</div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exC')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exC')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ TOPIC VOCABULARY: TECHNOLOGY ════════ -->
+  <div class="section" id="sec-tech">
+    <div class="section-title">Topic vocabulary: Technology</div>
+
+    <!-- Exercise D -->
+    <div class="exercise" id="exD">
+      <div class="exercise-label">
+        <div class="ex-letter">D</div>
+        <div class="ex-instruction">If the word in bold is correct, put a tick. If it is incorrect, replace it with one of the words in bold from the other sentences.</div>
+      </div>
+      <div id="D-list">
+        <div class="tick-item">
+          <span class="tick-num">1</span>
+          <span class="tick-text">The internet is really a vast <b>console</b> of computers, all connected together.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="D1" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="D1" data-answer="network" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">2</span>
+          <span class="tick-text">Since we got <b>resource</b>, we've been watching music videos online.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="D2" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="D2" data-answer="broadband" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">3</span>
+          <span class="tick-text">Early computer games seem quite <b>nuclear</b> compared to today's games.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="D3" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="D3" data-answer="primitive" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">4</span>
+          <span class="tick-text">It seems to me that <b>primitive</b> power is far cleaner than oil.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="D4" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="D4" data-answer="nuclear" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">5</span>
+          <span class="tick-text">These ancient tools have been <b>crafted</b> with an enormous amount of skill.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="D5" data-correct="tick" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="D5" data-answer="✓" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">6</span>
+          <span class="tick-text">The next generation of games <b>technique</b> will have better graphics.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="D6" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="D6" data-answer="technology" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">7</span>
+          <span class="tick-text">There's a <b>network</b> in computing called 'beta testing', which means you test something to see if it works properly before it becomes official.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="D7" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="D7" data-answer="technique" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">8</span>
+          <span class="tick-text">This latest <b>breakthrough</b> will mean cheaper, faster internet access for all.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="D8" data-correct="tick" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="D8" data-answer="✓" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">9</span>
+          <span class="tick-text">The computer has finished analysing all the <b>broadband</b>.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="D9" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="D9" data-answer="data" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">10</span>
+          <span class="tick-text">The sea is a great natural <b>data</b> but we need the right technology to use it.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="D10" onclick="toggleTick(this)">✓</button>
+            <input class="tick-input" data-q="D10" data-answer="resource" placeholder="correct word...">
+          </span>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkDExercise()">Check answers</button>
+        <button class="btn-reset" onclick="resetDExercise()">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise E -->
+    <div class="exercise" id="exE">
+      <div class="exercise-label">
+        <div class="ex-letter">E</div>
+        <div class="ex-instruction">Complete using the correct form of the words in the box.</div>
+      </div>
+      <div class="word-box">
+        click &nbsp;•&nbsp; complex &nbsp;•&nbsp; download &nbsp;•&nbsp; electronics &nbsp;•&nbsp; file &nbsp;•&nbsp; manual &nbsp;•&nbsp; offline &nbsp;•&nbsp; online &nbsp;•&nbsp; programmer &nbsp;•&nbsp; upload
+      </div>
+      <div class="passage-box">
+        <h3 style="text-align:center; letter-spacing:2px;">WANTED: COMPUTER GEEK</h3>
+        Some people think 'geek' is a negative term for someone who spends all their time on computers. Well, we at Compulearn think it's a positive thing! If you're interested in becoming a computer
+        <span class="gap-num">(1)</span> <input class="fill-input" data-answer="programmer" placeholder="...">, if you enjoy reading the
+        <span class="gap-num">(2)</span> <input class="fill-input" data-answer="manual" placeholder="..."> to find out what's really going on inside consumer
+        <span class="gap-num">(3)</span> <input class="fill-input" data-answer="electronics" placeholder="..."> like the latest plasma TV, then we want to hear from you.<br>
+        Our six-week course covers everything from
+        <span class="gap-num">(4)</span> <input class="fill-input" data-answer="downloading" placeholder="..."> music
+        <span class="gap-num">(5)</span> <input class="fill-input" data-answer="files" placeholder="..."> from the Internet to writing your own games. You'll learn how to
+        <span class="gap-num">(6)</span> <input class="fill-input" data-answer="upload" placeholder="..."> your own website to the Internet and how to solve
+        <span class="gap-num">(7)</span> <input class="fill-input" data-answer="complex" placeholder="..."> problems in the latest programming languages. Go
+        <span class="gap-num">(8)</span> <input class="fill-input" data-answer="online" placeholder="..."> now and visit us on the net.
+        <span class="gap-num">(9)</span> <input class="fill-input" data-answer="Click" placeholder="..."> on 'Opportunities' and start your future now.<br>
+        (If for any reason our website is
+        <span class="gap-num">(10)</span> <input class="fill-input" data-answer="offline" placeholder="...">, or you are unable to connect to the Internet, call us on 0800-COMPULEARN.)
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exE')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exE')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ PHRASAL VERBS ════════ -->
+  <div class="section" id="sec-phrasal">
+    <div class="section-title">Phrasal verbs</div>
+
+    <!-- Exercise F -->
+    <div class="exercise" id="exF">
+      <div class="exercise-label">
+        <div class="ex-letter">F</div>
+        <div class="ex-instruction">Write a phrasal verb in the correct form to replace the words in italics. Use the word given in brackets.</div>
+      </div>
+      <ol class="fill-list" id="F-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">Why don't you <em>remove</em> <input class="fill-input" data-answer="take off" placeholder="..."> those wet things and put something dry on? (OUT)</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">The image on the screen <em>slowly disappeared</em> <input class="fill-input" data-answer="faded away" placeholder="..."> and I knew it was a computer virus. (AWAY)</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">Let's <em>try</em> <input class="fill-input" data-answer="try out" placeholder="..."> your new game and see if it works. (OUT)</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">You'll regret it if you don't <em>make a copy of</em> <input class="fill-input" data-answer="back up" placeholder="..."> your important data. (UP)</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">Have you <em>recorded on all of</em> <input class="fill-input" data-answer="used up" placeholder="..."> the blank CDs I gave you, or have you got some left? (UP)</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">Did you hear they're thinking of <em>getting rid of</em> <input class="fill-input" data-answer="doing away with" placeholder="..."> identity cards? (AWAY)</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">You need to <em>put in using the keyboard</em> <input class="fill-input" data-answer="key in" placeholder="..."> your details and then press 'enter'. (IN)</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">We should <em>redecorate</em> <input class="fill-input" data-answer="do up" placeholder="..."> Jake's bedroom now he's left home. (UP)</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('F-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('F-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise G -->
+    <div class="exercise" id="exG">
+      <div class="exercise-label">
+        <div class="ex-letter">G</div>
+        <div class="ex-instruction">Complete using the correct form of the phrasal verbs in the box.</div>
+      </div>
+      <div class="word-box">
+        change around &nbsp;•&nbsp; change into &nbsp;•&nbsp; make into &nbsp;•&nbsp; mix up &nbsp;•&nbsp; switch on &nbsp;•&nbsp; take apart &nbsp;•&nbsp; turn into &nbsp;•&nbsp; wear out
+      </div>
+      <ol class="fill-list" id="G-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">Could you send someone to have a look at my computer, because nothing happens when I <input class="fill-input" data-answer="switch on|switch it on" placeholder="..."> it?</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">I <input class="fill-input" data-answer="took apart" placeholder="..."> my watch to see what was wrong with it, but I couldn't put it back together again!</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">Your essay would make more sense if you <input class="fill-input" data-answer="changed around" placeholder="..."> the second and third paragraphs.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">One of the miracles of nature is the way a caterpillar <input class="fill-input" data-answer="turns into|changes into" placeholder="..."> a butterfly.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">I played so much football last season that I <input class="fill-input" data-answer="wore out" placeholder="..."> two pairs of boots!</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">In the story, Cinderella's coach <input class="fill-input" data-answer="changed into|turned into" placeholder="..."> a pumpkin at midnight.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">My CDs were all in order and now someone's <input class="fill-input" data-answer="mixed up" placeholder="..."> them.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">I think they've <input class="fill-input" data-answer="made into" placeholder="..."> the old library a really nice space for children to read in.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('G-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('G-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise H -->
+    <div class="exercise" id="exH">
+      <div class="exercise-label">
+        <div class="ex-letter">H</div>
+        <div class="ex-instruction">The phrasal verb <em>do up</em> means something like 'improve'. Put the following phrasal verbs into the sentences and tick the sentences where the phrasal verb means something like 'improve'.</div>
+      </div>
+      <div class="word-box">
+        bring up &nbsp;•&nbsp; brush up &nbsp;•&nbsp; cheer up &nbsp;•&nbsp; dress up &nbsp;•&nbsp; make up &nbsp;•&nbsp; take up &nbsp;•&nbsp; tidy up &nbsp;•&nbsp; turn up
+      </div>
+      <div id="H-list">
+        <div class="h-item">
+          <span><b>1</b> &nbsp;Why don't you</span>
+          <span><input class="h-small-input" data-answer="take up" placeholder="phrasal verb..."> yoga?</span>
+          <button class="h-tick" data-q="H1" data-answer="no" onclick="toggleHTick(this)">✓ Improve?</button>
+          <span></span>
+        </div>
+        <div class="h-item">
+          <span><b>2</b> &nbsp;I was depressed all day, but I started to</span>
+          <span><input class="h-small-input" data-answer="cheer up" placeholder="phrasal verb..."> when I saw Alec.</span>
+          <button class="h-tick" data-q="H2" data-answer="yes" onclick="toggleHTick(this)">✓ Improve?</button>
+          <span></span>
+        </div>
+        <div class="h-item">
+          <span><b>3</b> &nbsp;I'm going to</span>
+          <span><input class="h-small-input" data-answer="brush up" placeholder="phrasal verb..."> my French before we go on holiday.</span>
+          <button class="h-tick" data-q="H3" data-answer="yes" onclick="toggleHTick(this)">✓ Improve?</button>
+          <span></span>
+        </div>
+        <div class="h-item">
+          <span><b>4</b> &nbsp;How could you</span>
+          <span><input class="h-small-input" data-answer="make up" placeholder="phrasal verb..."> such a ridiculous excuse?</span>
+          <button class="h-tick" data-q="H4" data-answer="no" onclick="toggleHTick(this)">✓ Improve?</button>
+          <span></span>
+        </div>
+        <div class="h-item">
+          <span><b>5</b> &nbsp;If you</span>
+          <span><input class="h-small-input" data-answer="tidy up" placeholder="phrasal verb..."> your room, then you'll be able to find things more easily.</span>
+          <button class="h-tick" data-q="H5" data-answer="yes" onclick="toggleHTick(this)">✓ Improve?</button>
+          <span></span>
+        </div>
+        <div class="h-item">
+          <span><b>6</b> &nbsp;Why did you have to</span>
+          <span><input class="h-small-input" data-answer="bring up" placeholder="phrasal verb..."> the fact that Dennis has lost his job?</span>
+          <button class="h-tick" data-q="H6" data-answer="no" onclick="toggleHTick(this)">✓ Improve?</button>
+          <span></span>
+        </div>
+        <div class="h-item">
+          <span><b>7</b> &nbsp;Let's</span>
+          <span><input class="h-small-input" data-answer="dress up" placeholder="phrasal verb..."> and go out to that new Italian restaurant tonight.</span>
+          <button class="h-tick" data-q="H7" data-answer="no" onclick="toggleHTick(this)">✓ Improve?</button>
+          <span></span>
+        </div>
+        <div class="h-item">
+          <span><b>8</b> &nbsp;What time did Nigel finally</span>
+          <span><input class="h-small-input" data-answer="turn up" placeholder="phrasal verb..."> at the party, then?</span>
+          <button class="h-tick" data-q="H8" data-answer="no" onclick="toggleHTick(this)">✓ Improve?</button>
+          <span></span>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkH()">Check answers</button>
+        <button class="btn-reset" onclick="resetH()">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ PHRASES, PATTERNS AND COLLOCATIONS ════════ -->
+  <div class="section" id="sec-phrases">
+    <div class="section-title">Phrases, patterns and collocations</div>
+
+    <!-- Exercise I -->
+    <div class="exercise" id="exI">
+      <div class="exercise-label">
+        <div class="ex-letter">I</div>
+        <div class="ex-instruction">Write one word in each gap.</div>
+      </div>
+      <ol class="fill-list" id="I-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">The government's decision not to publish this report represents a real <input class="fill-input" data-answer="break" placeholder="..."> with tradition.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">Bill Gates made his money by satisfying the <input class="fill-input" data-answer="demand" placeholder="..."> for computer operating systems that were easy to use.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">You should <input class="fill-input" data-answer="know" placeholder="..."> better than to spend all your time playing computer games when you've got exams next week.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">I was <input class="fill-input" data-answer="surfing" placeholder="..."> the Web when I came across a site that had lots of information about my favourite band.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">Click on the <input class="fill-input" data-answer="link" placeholder="..."> below to become a member and enjoy everything that Musiconline has to offer.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">We've lived in this area for over 20 years, and I can tell you that things have definitely <input class="fill-input" data-answer="changed" placeholder="..."> for the worse.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">When you're <input class="fill-input" data-answer="at" placeholder="..."> the wheel of the new T4 sports car, it's obvious that there's a lot of computing power under the bonnet, as well as engine power.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">People's attitudes to disability are changing and more and more places have wheelchair <input class="fill-input" data-answer="access" placeholder="..."> these days.</span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">Now, don't complain about having to spend the holidays away from your computer – it's for your own <input class="fill-input" data-answer="good" placeholder="..."> and you'll thank me later.</span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">Since she changed jobs, Anne has really thrown her <input class="fill-input" data-answer="energy" placeholder="..."> into her career.</span></li>
+        <li class="fill-item"><span class="item-num">11</span><span class="item-text">You should keep your computer system up to <input class="fill-input" data-answer="date" placeholder="...">, or you might find that some programs won't run.</span></li>
+        <li class="fill-item"><span class="item-num">12</span><span class="item-text">The workman said that he needed a spanner and asked me to pass him one from his <input class="fill-input" data-answer="tool" placeholder="..."> kit.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('I-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('I-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise J -->
+    <div class="exercise" id="exJ">
+      <div class="exercise-label">
+        <div class="ex-letter">J</div>
+        <div class="ex-instruction">Write one word in each gap.</div>
+      </div>
+      <div class="passage-box blue-box">
+        <h3 style="font-family:'Georgia',serif; text-align:center; color:#1a3d6e; font-style:italic; margin-bottom:10px;">Changing ambitions</h3>
+        It used to be accepted wisdom that higher education provides access
+        <span class="gap-num">(1)</span> <input class="fill-input" data-answer="to" placeholder="..."> better-paid careers. However, the world of work has changed in recent decades,
+        <span class="gap-num">(2)</span> <input class="fill-input" data-answer="from" placeholder="..."> one where few people had university degrees to one where they are very common. A
+        <span class="gap-num">(3)</span> <input class="fill-input" data-answer="good" placeholder="..."> many underpaid teachers, managers and other professionals are considering a career change. Swapping the desk for the
+        <span class="gap-num">(4)</span> <input class="fill-input" data-answer="tool" placeholder="..."> box, many are retraining to become skilled manual workers, who are very much
+        <span class="gap-num">(5)</span> <input class="fill-input" data-answer="in" placeholder="..."> demand.<br>
+        Those who
+        <span class="gap-num">(6)</span> <input class="fill-input" data-answer="make" placeholder="..."> the change are finding that as plumbers, gas fitters and electricians they can earn a good
+        <span class="gap-num">(7)</span> <input class="fill-input" data-answer="deal" placeholder="..."> more than they used to. Workers who
+        <span class="gap-num">(8)</span> <input class="fill-input" data-answer="know" placeholder="..."> something about these vital services can demand high fees
+        <span class="gap-num">(9)</span> <input class="fill-input" data-answer="from" placeholder="..."> customers and often enjoy considerable independence, in
+        <span class="gap-num">(10)</span> <input class="fill-input" data-answer="place" placeholder="..."> of the controlled working environment in a school or office. Of course, those who
+        <span class="gap-num">(11)</span> <input class="fill-input" data-answer="take" placeholder="..."> the break know that if it doesn't work out they can usually go back to their profession
+        <span class="gap-num">(12)</span> <input class="fill-input" data-answer="at" placeholder="..."> a later date.
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exJ')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exJ')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise K -->
+    <div class="exercise" id="exK">
+      <div class="exercise-label">
+        <div class="ex-letter">K</div>
+        <div class="ex-instruction">For each question, write one word which can be used in all three sentences.</div>
+      </div>
+      <div id="K-list">
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>1</b></div>
+          <div style="font-size:13px; line-height:2; margin-bottom:6px;">
+            There will be a help and support line when the new computer system is in <input class="fill-input" data-answer="use" placeholder="...">.<br>
+            I'm giving my laptop away because it's of no <input class="fill-input" data-answer="use" placeholder="..."> to me any more.<br>
+            What's the <input class="fill-input" data-answer="use" placeholder="..."> of trying to keep up with fashions that change too quickly?
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>2</b></div>
+          <div style="font-size:13px; line-height:2; margin-bottom:6px;">
+            I think it's time Megan faced up to <input class="fill-input" data-answer="reality" placeholder="..."> and realised that she's going to have to change her lifestyle.<br>
+            There's a lot of talk about the effects of technology, but I don't think people have really changed that much in <input class="fill-input" data-answer="reality" placeholder="...">.<br>
+            It's amazing how popular <input class="fill-input" data-answer="reality" placeholder="..."> TV has become in such a short time.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>3</b></div>
+          <div style="font-size:13px; line-height:2; margin-bottom:6px;">
+            Many of today's mobile phones wouldn't look out of <input class="fill-input" data-answer="place" placeholder="..."> in science fiction films.<br>
+            Vikram's been offered a <input class="fill-input" data-answer="place" placeholder="..."> at Oxford to study computer science.<br>
+            Nothing will ever take the <input class="fill-input" data-answer="place" placeholder="..."> of my old, reliable transistor radio.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>4</b></div>
+          <div style="font-size:13px; line-height:2; margin-bottom:6px;">
+            Do all these lights on the stereo serve a <input class="fill-input" data-answer="purpose" placeholder="...">, or are they just for decoration?<br>
+            Jerry seems to lack a sense of <input class="fill-input" data-answer="purpose" placeholder="..."> since he retired.<br>
+            I can't believe that Alfie would've sent you a computer virus on <input class="fill-input" data-answer="purpose" placeholder="...">.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>5</b></div>
+          <div style="font-size:13px; line-height:2; margin-bottom:6px;">
+            In this game, you compete against the <input class="fill-input" data-answer="clock" placeholder="..."> to collect as many gold rings as you can.<br>
+            People in my office waste time surfing the Net and watching the <input class="fill-input" data-answer="clock" placeholder="..."> until it's time to leave.<br>
+            We provide full technical support for all our products around the <input class="fill-input" data-answer="clock" placeholder="...">.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>6</b></div>
+          <div style="font-size:13px; line-height:2; margin-bottom:6px;">
+            During the 1970s, computer chips began to appear in people's homes in the <input class="fill-input" data-answer="form" placeholder="..."> of the first games consoles.<br>
+            You need to fill out the <input class="fill-input" data-answer="form" placeholder="..."> online to become a member of the website.<br>
+            All the players have been in good <input class="fill-input" data-answer="form" placeholder="..."> lately, so it should be a good match.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>7</b></div>
+          <div style="font-size:13px; line-height:2; margin-bottom:6px;">
+            I was in the <input class="fill-input" data-answer="process" placeholder="..."> of texting Debbie when my phone rang and it was her!<br>
+            Recent developments mean that there is a good chance the Middle East peace <input class="fill-input" data-answer="process" placeholder="..."> could be restarted.<br>
+            If the monster isn't behind that door or that door, then it must be behind the third one – it's just a <input class="fill-input" data-answer="process" placeholder="..."> of elimination.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>8</b></div>
+          <div style="font-size:13px; line-height:2; margin-bottom:6px;">
+            The path <input class="fill-input" data-answer="leads" placeholder="..."> around the side of the building.<br>
+            What <input class="fill-input" data-answer="led" placeholder="..."> you to come up with the idea of a clockwork radio?<br>
+            The scientist <input class="fill-input" data-answer="led" placeholder="..."> me into the laboratory, where an experiment was going on.
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exK')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exK')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ IDIOMS ════════ -->
+  <div class="section" id="sec-idioms">
+    <div class="section-title">Idioms</div>
+
+    <!-- Exercise L -->
+    <div class="exercise" id="exL">
+      <div class="exercise-label">
+        <div class="ex-letter">L</div>
+        <div class="ex-instruction">Complete each dialogue using the appropriate form of an idiom in the box.</div>
+      </div>
+      <div class="word-box">
+        a leopard can't change its spots &nbsp;•&nbsp; all mod cons &nbsp;•&nbsp; break the mould &nbsp;•&nbsp; change your tune<br>
+        have a change of heart &nbsp;•&nbsp; know sth inside out &nbsp;•&nbsp; reinvent the wheel &nbsp;•&nbsp; stick to your guns<br>
+        the tools of the trade &nbsp;•&nbsp; turn over a new leaf
+      </div>
+      <ol class="fill-list" id="L-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">'Do you think they might pick Lisa on Thursday?' 'It would really <input class="fill-input" data-answer="break the mould" placeholder="..."> for them to choose a woman to run the club, but I hope so.'</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">'I thought you were going to tell Nigel you were angry with him.' 'Well, I <input class="fill-input" data-answer="had a change of heart" placeholder="..."> and decided to just ignore it after all.'</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">'Your son's behaviour in class has improved this term, Mrs Harris.' 'Oh, good. Let's hope he's <input class="fill-input" data-answer="turned over a new leaf" placeholder="...">.'</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">'Is your research based on other people's work?' 'Some of it. Well, there's no point <input class="fill-input" data-answer="reinventing the wheel" placeholder="...">, is there?'</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">'I'm not sure whether to change my mind and let Jenny go to the party.' 'I think you should <input class="fill-input" data-answer="stick to your guns" placeholder="..."> and show her you're serious.'</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">'I wish Terry wouldn't be so thoughtless all the time.' 'I know, but <input class="fill-input" data-answer="a leopard can't change its spots" placeholder="...">, you know.'</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">'I'm thinking of asking Felicity out on a date.' 'You've <input class="fill-input" data-answer="changed your tune" placeholder="...">, haven't you? You said she annoyed you.'</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">'You've got lots of books on computing languages.' 'It's what I do for a living, so they're just <input class="fill-input" data-answer="the tools of the trade" placeholder="...">, really.'</span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">'You moved recently, didn't you? What's your new place like?' 'Oh, fantastic. It's got <input class="fill-input" data-answer="all mod cons" placeholder="..."> and it's handy for the train.'</span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">'Maria came round and fixed my computer yesterday.' 'Oh, she <input class="fill-input" data-answer="knows" placeholder="..."> computers <input class="fill-input" data-answer="inside out" placeholder="...">, doesn't she?'</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('L-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('L-list')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ WORD FORMATION ════════ -->
+  <div class="section" id="sec-wordform">
+    <div class="section-title">Word formation</div>
+
+    <!-- Exercise M -->
+    <div class="exercise" id="exM">
+      <div class="exercise-label">
+        <div class="ex-letter">M</div>
+        <div class="ex-instruction">Use the word given in capitals to form a word that fits in the space.</div>
+      </div>
+      <div class="passage-box" style="background:#f0f7f3; border-color:#52b788;">
+        We often think of ourselves as living in a time of
+        <span class="gap-num">(1)</span> <input class="fill-input" data-answer="continual|continuous|continuing" placeholder="..."> <b>(CONTINUE)</b> technological change and development. We tend to believe that we are unique in history in dealing with a constantly
+        <span class="gap-num">(2)</span> <input class="fill-input" data-answer="evolving" placeholder="..."> <b>(EVOLVE)</b> world of gadgets, devices and innovations. However, the end of the nineteenth century and the start of the twentieth was also a time that saw many
+        <span class="gap-num">(3)</span> <input class="fill-input" data-answer="revolutionary" placeholder="..."> <b>(REVOLT)</b> changes.<br>
+        People had needed to show
+        <span class="gap-num">(4)</span> <input class="fill-input" data-answer="flexibility" placeholder="..."> <b>(FLEXIBLE)</b> throughout the nineteenth century, as the effects of the Industrial Revolution meant constantly making
+        <span class="gap-num">(5)</span> <input class="fill-input" data-answer="adjustments" placeholder="..."> <b>(ADJUST)</b> to deal with changing working conditions. Towards the end of the century, though, people had to become more
+        <span class="gap-num">(6)</span> <input class="fill-input" data-answer="adaptable" placeholder="..."> <b>(ADAPT)</b> than ever before. The typewriter (1873), the telephone (1876), the electric light bulb (1879) and other
+        <span class="gap-num">(7)</span> <input class="fill-input" data-answer="influential" placeholder="..."> <b>(INFLUENCE)</b> developments gave people the
+        <span class="gap-num">(8)</span> <input class="fill-input" data-answer="capability|ability" placeholder="..."> <b>(CAPABLE)</b> to live and work in ways their grandparents could not have imagined. Over the next 30 years, little remained
+        <span class="gap-num">(9)</span> <input class="fill-input" data-answer="unaltered" placeholder="..."> <b>(ALTER)</b> as the camera, the cinema, the phonograph, the plane and radio all had an
+        <span class="gap-num">(10)</span> <input class="fill-input" data-answer="electrifying" placeholder="..."> <b>(ELECTRIC)</b> effect on people and society.
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exM')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exM')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise N -->
+    <div class="exercise" id="exN">
+      <div class="exercise-label">
+        <div class="ex-letter">N</div>
+        <div class="ex-instruction">Complete the sentences by changing the form of the word in capitals.</div>
+      </div>
+      <ol class="fill-list" id="N-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">The weather's been so <input class="fill-input" data-answer="changeable" placeholder="..."> today that I don't know what to wear. <b>(CHANGE)</b></span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">Bonnie showed a lot of <input class="fill-input" data-answer="maturity" placeholder="..."> in the way she handled the problem with Olivia. <b>(MATURE)</b></span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">The flats were built in the 1960s, but they were all <input class="fill-input" data-answer="modernised" placeholder="..."> in the 90s. <b>(MODERN)</b></span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">Jack got in a lot of trouble for <input class="fill-input" data-answer="persistently" placeholder="..."> breaking school rules. <b>(PERSIST)</b></span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">I really don't think I'd have the <input class="fill-input" data-answer="endurance" placeholder="..."> to finish a marathon! <b>(ENDURE)</b></span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">I feel a lot better since I decided to stop eating <input class="fill-input" data-answer="processed" placeholder="..."> food. <b>(PROCESS)</b></span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">Can we <input class="fill-input" data-answer="rearrange" placeholder="..."> the lesson for next Wednesday? <b>(ARRANGE)</b></span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">We need to rely more on wave power, wind power and other <input class="fill-input" data-answer="renewable" placeholder="..."> sources of energy. <b>(NEW)</b></span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">I gradually lost touch with Ricardo after his <input class="fill-input" data-answer="conversion" placeholder="..."> to Islam. <b>(CONVERT)</b></span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">I'm scanning my gran's photos onto my computer because they'd be <input class="fill-input" data-answer="irreplaceable" placeholder="..."> if anything happened to them. <b>(PLACE)</b></span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('N-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('N-list')">Reset</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="toast"></div>
+
+<script>
+// ── UTILITY ──────────────────────────────────────────────
+function normalize(s) {
+  return s.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+function isCorrect(input, answer) {
+  const val = normalize(input.value);
+  const alts = answer.split('|').map(a => normalize(a));
+  return alts.includes(val);
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2000);
+}
+
+// ── SCORE TRACKING ───────────────────────────────────────
+function updateScore() {
+  const all = document.querySelectorAll('.fill-input, .h-small-input');
+  const answered = [...all].filter(i => i.value.trim() !== '').length;
+  const total = all.length;
+  const pct = total ? (answered / total * 100).toFixed(0) : 0;
+  document.getElementById('score-bar-fill').style.width = pct + '%';
+  document.getElementById('score-text').textContent = answered + ' / ' + total + ' answered';
+}
+document.addEventListener('input', updateScore);
+
+// ── FILL IN THE BLANK ────────────────────────────────────
+function checkFill(listId) {
+  const list = document.getElementById(listId);
+  let correct = 0, total = 0;
+  list.querySelectorAll('.fill-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetFill(listId) {
+  document.getElementById(listId).querySelectorAll('.fill-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+function checkAllFillInSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  let correct = 0, total = 0;
+  section.querySelectorAll('.fill-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetAllFillInSection(sectionId) {
+  document.getElementById(sectionId).querySelectorAll('.fill-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+// ── EXERCISE D (Tick/replace) ─────────────────────────────
+function toggleTick(btn) {
+  btn.classList.toggle('selected');
+}
+const D_CORRECT_TICK = ['D5', 'D8'];
+function checkDExercise() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#D-list .tick-item').forEach(item => {
+    const tickBtn = item.querySelector('.tick-btn');
+    const textInput = item.querySelector('.tick-input');
+    const q = tickBtn.dataset.q;
+    const shouldTick = D_CORRECT_TICK.includes(q);
+    tickBtn.classList.remove('correct', 'wrong');
+    textInput.classList.remove('correct', 'wrong');
+    total++;
+    if (shouldTick) {
+      if (tickBtn.classList.contains('selected')) { tickBtn.classList.add('correct'); correct++; }
+      else tickBtn.classList.add('wrong');
+    } else {
+      if (textInput.value.trim()) {
+        if (normalize(textInput.value) === normalize(textInput.dataset.answer)) {
+          textInput.classList.add('correct'); correct++;
+        } else {
+          textInput.classList.add('wrong');
+        }
+      }
+    }
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetDExercise() {
+  document.querySelectorAll('#D-list .tick-btn').forEach(b => b.classList.remove('selected', 'correct', 'wrong'));
+  document.querySelectorAll('#D-list .tick-input').forEach(i => { i.value = ''; i.classList.remove('correct', 'wrong'); });
+}
+
+// ── EXERCISE H ────────────────────────────────────────────
+function toggleHTick(btn) {
+  btn.classList.toggle('selected');
+}
+const H_IMPROVE = { H1: false, H2: true, H3: true, H4: false, H5: true, H6: false, H7: false, H8: false };
+function checkH() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#H-list .h-small-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  document.querySelectorAll('#H-list .h-tick').forEach(btn => {
+    const q = btn.dataset.q;
+    const shouldTick = H_IMPROVE[q];
+    const isSelected = btn.classList.contains('selected');
+    total++;
+    btn.classList.remove('correct', 'wrong');
+    if (shouldTick === isSelected) { btn.classList.add('correct'); correct++; }
+    else btn.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetH() {
+  document.querySelectorAll('#H-list .h-small-input').forEach(i => { i.value = ''; i.classList.remove('correct', 'wrong'); });
+  document.querySelectorAll('#H-list .h-tick').forEach(b => b.classList.remove('selected', 'correct', 'wrong'));
+}
+
+// ── SIDEBAR ACTIVE ────────────────────────────────────────
+const sections = document.querySelectorAll('.exercise[id]');
+const navLinks = document.querySelectorAll('#sidebar nav a');
+function onScroll() {
+  let current = '';
+  sections.forEach(s => {
+    if (s.getBoundingClientRect().top <= 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', onScroll);
+onScroll();
+
+// ── INIT ──────────────────────────────────────────────────
+updateScore();
+</script>
+</body>
+</html>

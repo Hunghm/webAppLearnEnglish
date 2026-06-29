@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 15 – Grammar Exercises</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #333; min-height: 100vh; }
+
+  .header { background: #1565C0; color: white; padding: 16px 20px; text-align: center; }
+  .header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+  .header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+
+  .tab-bar { display: flex; background: #1976D2; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 1; min-width: 44px; padding: 12px 6px; border: none; background: transparent;
+    color: rgba(255,255,255,0.7); font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap;
+  }
+  .tab-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+  .tab-btn.active { color: white; border-bottom-color: #FFD600; }
+  .tab-badge {
+    display: inline-block; font-size: 0.65rem; background: rgba(255,255,255,0.25);
+    border-radius: 10px; padding: 1px 5px; margin-left: 4px; vertical-align: middle;
+  }
+  .tab-badge.perfect { background: #4CAF50; }
+
+  .content { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+  .exercise { display: none; }
+  .exercise.active { display: block; }
+
+  .ex-header { margin-bottom: 16px; }
+  .ex-title { font-size: 1.1rem; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+  .ex-instruction {
+    font-size: 0.9rem; color: #555; background: #E3F2FD; border-left: 4px solid #2196F3;
+    padding: 8px 12px; border-radius: 0 6px 6px 0;
+  }
+
+  .question-list { list-style: none; }
+  .question-item {
+    background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s;
+  }
+  .question-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .question-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+
+  .q-num { font-weight: 700; color: #1976D2; margin-right: 6px; }
+  .q-sentence { line-height: 1.8; }
+
+  input[type="text"] {
+    border: 2px solid #BBDEFB; border-radius: 6px; padding: 5px 10px;
+    font-size: 0.95rem; outline: none; background: #FAFAFA; transition: border .2s;
+    min-width: 100px;
+  }
+  input[type="text"]:focus { border-color: #2196F3; background: white; }
+  input[type="text"].correct { border-color: #4CAF50; background: #F1F8E9; color: #2E7D32; }
+  input[type="text"].wrong { border-color: #F44336; background: #FFF5F5; color: #C62828; }
+
+  /* Two Choice */
+  .two-choice-btns { display: inline-flex; gap: 8px; margin-left: 6px; }
+  .choice-btn {
+    border: 2px solid #90CAF9; background: white; border-radius: 6px;
+    padding: 4px 14px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #1565C0;
+  }
+  .choice-btn:hover { background: #E3F2FD; }
+  .choice-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .choice-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .choice-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+
+  /* Multiple choice */
+  .mc-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .mc-btn {
+    border: 2px solid #90CAF9; background: white; border-radius: 6px;
+    padding: 5px 16px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #1565C0;
+  }
+  .mc-btn:hover { background: #E3F2FD; }
+  .mc-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .mc-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .mc-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+
+  /* Passage */
+  .passage-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .passage-line { margin-bottom: 12px; line-height: 2.1; }
+  .passage-title { font-style: italic; font-weight: 700; font-size: 1.05rem; text-align: center; color: #1565C0; margin-bottom: 12px; }
+  .passage-input { min-width: 80px; width: 100px; }
+
+  /* Extra word */
+  .extra-word-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .extra-word-title { font-weight: 700; font-size: 1.05rem; text-align: center; color: #1565C0; margin-bottom: 14px; }
+  .extra-line { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; padding: 8px; background: #f9f9f9; border-radius: 6px; }
+  .extra-line-num { font-weight: 700; color: #1976D2; min-width: 20px; }
+  .extra-line-input { min-width: 80px; width: 90px; }
+  .extra-line-text { flex: 1; line-height: 1.6; font-size: 0.9rem; }
+  .extra-line.correct { background: #F1F8E9; border-left: 3px solid #4CAF50; }
+  .extra-line.wrong { background: #FFF5F5; border-left: 3px solid #F44336; }
+
+  /* Sentence transform */
+  .transform-item { margin-bottom: 16px; }
+  .transform-original { margin-bottom: 6px; color: #555; font-size: 0.92rem; }
+  .transform-key { display: inline-block; background: #FFF9C4; border: 1px solid #F9A825; border-radius: 4px; padding: 1px 8px; font-weight: 700; color: #5D4037; font-size: 0.88rem; margin: 0 6px; }
+  .transform-blank { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .transform-input { min-width: 200px; flex: 1; }
+
+  /* Answer reveal */
+  .answer-reveal { font-size: 0.82rem; color: #388E3C; margin-top: 4px; display: none; }
+  .show-answers .answer-reveal { display: block; }
+
+  /* Action buttons */
+  .action-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+  .btn { padding: 10px 22px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-check { background: #2196F3; color: white; }
+  .btn-check:hover { background: #1976D2; }
+  .btn-reset { background: #FF9800; color: white; }
+  .btn-reset:hover { background: #F57C00; }
+  .btn-show { background: #9C27B0; color: white; }
+  .btn-show:hover { background: #7B1FA2; }
+
+  .score-display {
+    font-size: 1rem; font-weight: 700; padding: 8px 16px; border-radius: 8px;
+    background: #E8F5E9; color: #2E7D32; display: none;
+  }
+  .score-display.visible { display: inline-block; }
+  .score-display.perfect { background: #4CAF50; color: white; }
+
+  @media (max-width: 600px) {
+    .tab-btn { font-size: 0.8rem; padding: 10px 4px; }
+    .content { padding: 12px 10px 50px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Unit 15 – Grammar</h1>
+  <p>The passive · the causative · direct and indirect objects · 10 exercises</p>
+</div>
+
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" onclick="switchTab('a')">A</button>
+  <button class="tab-btn" onclick="switchTab('b')">B</button>
+  <button class="tab-btn" onclick="switchTab('c')">C</button>
+  <button class="tab-btn" onclick="switchTab('d')">D</button>
+  <button class="tab-btn" onclick="switchTab('e')">E</button>
+  <button class="tab-btn" onclick="switchTab('f')">F</button>
+  <button class="tab-btn" onclick="switchTab('g')">G</button>
+  <button class="tab-btn" onclick="switchTab('h')">H</button>
+  <button class="tab-btn" onclick="switchTab('i')">I</button>
+  <button class="tab-btn" onclick="switchTab('j')">J</button>
+</div>
+
+<div class="content">
+
+<!-- ===== EXERCISE A: Two Choice (was/has) ===== -->
+<div class="exercise active" id="ex-a">
+  <div class="ex-header">
+    <div class="ex-title">Exercise A – Choose the correct word or phrase</div>
+    <div class="ex-instruction">Choose the correct word in bold: <strong>was</strong> or <strong>has</strong> (passive forms).</div>
+  </div>
+  <ul class="question-list" id="ql-a">
+    <li class="question-item" data-answer="a">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">The prime minister <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">was</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">has</button>
+      </span> criticised for his recent actions.</span>
+      <div class="answer-reveal">✓ was (past simple passive – specific past event)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">When I walked past the Wilsons' house, their new sofa <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">was</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">has</button>
+      </span> being delivered.</span>
+      <div class="answer-reveal">✓ was (past continuous passive – happening at that time)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Our teacher <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">was</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">has</button>
+      </span> told us to take our favourite book to school tomorrow.</span>
+      <div class="answer-reveal">✓ has (present perfect passive – relevance to present/future)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">I think my mobile <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">was</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">has</button>
+      </span> been stolen!</span>
+      <div class="answer-reveal">✓ has (present perfect passive – recent event with present relevance)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Jonathan <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">was</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">has</button>
+      </span> chosen to play the lead role in the school play.</span>
+      <div class="answer-reveal">✓ has (present perfect passive – result affecting now)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">I'm sleeping downstairs because my bedroom <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">is being painted</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">has been painting</button>
+      </span>.</span>
+      <div class="answer-reveal">✓ is being painted (present continuous passive – happening now)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">This picture <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">was</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">has</button>
+      </span> probably taken during the war.</span>
+      <div class="answer-reveal">✓ was (past simple passive – past time)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Your essays must <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">be</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">have</button>
+      </span> handed in on Friday morning.</span>
+      <div class="answer-reveal">✓ be (modal passive: must be handed in)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">Someone <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">was</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">has</button>
+      </span> left their wallet on the floor.</span>
+      <div class="answer-reveal">✓ has (present perfect – unspecified past with present result)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">Did you hear about the bank <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">being</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">having</button>
+      </span> robbed?</span>
+      <div class="answer-reveal">✓ being (passive gerund after about)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">11.</span>
+      <span class="q-sentence">Treasure Island <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">was</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">has</button>
+      </span> written by Robert Louis Stevenson.</span>
+      <div class="answer-reveal">✓ was (historical past fact)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">12.</span>
+      <span class="q-sentence">It was a real shock when my dad <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">was</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">has</button>
+      </span> fired from his job.</span>
+      <div class="answer-reveal">✓ was (past simple passive in when-clause)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">13.</span>
+      <span class="q-sentence">The Vikings had visited America before it <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">was</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">has</button>
+      </span> discovered by Columbus.</span>
+      <div class="answer-reveal">✓ was (past simple passive in before-clause)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">14.</span>
+      <span class="q-sentence">When we got to the airport, we learned that our flight <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">was</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">had</button>
+      </span> been delayed.</span>
+      <div class="answer-reveal">✓ had (past perfect passive – before arrival)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">15.</span>
+      <span class="q-sentence"><span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">Was</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">Has</button>
+      </span> your ticket for the concert tomorrow paid for by you or your parents?</span>
+      <div class="answer-reveal">✓ Was (past simple passive question)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExA()">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('a')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('a')">Reset</button>
+    <span class="score-display" id="score-a"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE B: Complete passive verb forms ===== -->
+<div class="exercise" id="ex-b">
+  <div class="ex-header">
+    <div class="ex-title">Exercise B – Complete using the correct passive form of the verb in brackets</div>
+    <div class="ex-instruction">Write the correct passive form of the verb in brackets.</div>
+  </div>
+  <ul class="question-list" id="ql-b">
+    <li class="question-item" data-answer="is held">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">The Earth <input type="text" class="ex-b-input" placeholder="…" style="min-width:140px"> (hold) by the gravity of the Sun and orbits around it.</span>
+      <div class="answer-reveal">✓ is held</div>
+    </li>
+    <li class="question-item" data-answer="was created">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">The first feature-length comedy film <input type="text" class="ex-b-input" placeholder="…" style="min-width:150px"> (create) by Charlie Chaplin.</span>
+      <div class="answer-reveal">✓ was created</div>
+    </li>
+    <li class="question-item" data-answer="will be presented">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">The award for best video <input type="text" class="ex-b-input" placeholder="…" style="min-width:170px"> (present) later this evening.</span>
+      <div class="answer-reveal">✓ will be presented</div>
+    </li>
+    <li class="question-item" data-answer="will have been arrested">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">By the time you read this, I <input type="text" class="ex-b-input" placeholder="…" style="min-width:200px"> (arrest) for murder.</span>
+      <div class="answer-reveal">✓ will have been arrested</div>
+    </li>
+    <li class="question-item" data-answer="have been marked">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">I don't know whether our tests <input type="text" class="ex-b-input" placeholder="…" style="min-width:180px"> (mark) yet or not.</span>
+      <div class="answer-reveal">✓ have been marked</div>
+    </li>
+    <li class="question-item" data-answer="was discovered">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Radio waves <input type="text" class="ex-b-input" placeholder="…" style="min-width:150px"> (discover) by Marconi.</span>
+      <div class="answer-reveal">✓ was discovered</div>
+    </li>
+    <li class="question-item" data-answer="was bullied">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">You wouldn't think it to look at him now, but Jack <input type="text" class="ex-b-input" placeholder="…" style="min-width:150px"> (bully) when he was at school.</span>
+      <div class="answer-reveal">✓ was bullied</div>
+    </li>
+    <li class="question-item" data-answer="is being considered">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Your application <input type="text" class="ex-b-input" placeholder="…" style="min-width:190px"> (consider) and we will let you know as soon as we've made a decision.</span>
+      <div class="answer-reveal">✓ is being considered</div>
+    </li>
+    <li class="question-item" data-answer="can be lowered">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">The roof of the car <input type="text" class="ex-b-input" placeholder="…" style="min-width:160px"> (lower) by pressing this button here.</span>
+      <div class="answer-reveal">✓ can be lowered</div>
+    </li>
+    <li class="question-item" data-answer="was blown">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">Our tent <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> (blow) over in the night by the wind.</span>
+      <div class="answer-reveal">✓ was blown</div>
+    </li>
+    <li class="question-item" data-answer="has been played">
+      <span class="q-num">11.</span>
+      <span class="q-sentence">Chess <input type="text" class="ex-b-input" placeholder="…" style="min-width:160px"> (play) for around two thousand years now.</span>
+      <div class="answer-reveal">✓ has been played</div>
+    </li>
+    <li class="question-item" data-answer="are being questioned">
+      <span class="q-num">12.</span>
+      <span class="q-sentence">Two men <input type="text" class="ex-b-input" placeholder="…" style="min-width:200px"> (question) at this moment by police in connection with the burglary.</span>
+      <div class="answer-reveal">✓ are being questioned</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('b')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('b')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('b')">Reset</button>
+    <span class="score-display" id="score-b"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE C: Write sentences in the passive ===== -->
+<div class="exercise" id="ex-c">
+  <div class="ex-header">
+    <div class="ex-title">Exercise C – Write sentences in the passive</div>
+    <div class="ex-instruction">Rewrite each set of prompts as a passive sentence. Write your answer in the box.</div>
+  </div>
+  <ul class="question-list" id="ql-c">
+    <li class="question-item" data-answer="our car is being serviced by a mechanic at the moment">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Our car / service / a mechanic / at the moment.</span>
+      <div style="margin-top:8px"><input type="text" class="ex-c-input" placeholder="Write the passive sentence…" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ Our car is being serviced by a mechanic at the moment.</div>
+    </li>
+    <li class="question-item" data-answer="a man was shot by an air gun outside the petrol station last night">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">A man / shoot / an air gun / outside the petrol station last night.</span>
+      <div style="margin-top:8px"><input type="text" class="ex-c-input" placeholder="Write the passive sentence…" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ A man was shot by an air gun outside the petrol station last night.</div>
+    </li>
+    <li class="question-item" data-answer="gunpowder was invented by the chinese">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Gunpowder / invent / the Chinese.</span>
+      <div style="margin-top:8px"><input type="text" class="ex-c-input" placeholder="Write the passive sentence…" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ Gunpowder was invented by the Chinese.</div>
+    </li>
+    <li class="question-item" data-answer="at the surgery yesterday i was examined by dr peterson and given a prescription">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">At the surgery yesterday, I / examine / Dr Peterson / and I / give / a prescription.</span>
+      <div style="margin-top:8px"><input type="text" class="ex-c-input" placeholder="Write the passive sentence…" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ At the surgery yesterday, I was examined by Dr Peterson and given a prescription.</div>
+    </li>
+    <li class="question-item" data-answer="i went to see it because i was told it was a good film by all my friends">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">I went to see it because I / tell / it was a good film / all my friends.</span>
+      <div style="margin-top:8px"><input type="text" class="ex-c-input" placeholder="Write the passive sentence…" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ I went to see it because I was told it was a good film by all my friends.</div>
+    </li>
+    <li class="question-item" data-answer="this photograph was taken by my grandfather">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">This photograph / take / my grandfather.</span>
+      <div style="margin-top:8px"><input type="text" class="ex-c-input" placeholder="Write the passive sentence…" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ This photograph was taken by my grandfather.</div>
+    </li>
+    <li class="question-item" data-answer="it looked like the window had been broken by a hammer some time before">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">It looked like the window / break / a hammer / some time before.</span>
+      <div style="margin-top:8px"><input type="text" class="ex-c-input" placeholder="Write the passive sentence…" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ It looked like the window had been broken by a hammer some time before.</div>
+    </li>
+    <li class="question-item" data-answer="our dog was given an injection with a special syringe by the vet">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Our dog / give / an injection / a special syringe / the vet.</span>
+      <div style="margin-top:8px"><input type="text" class="ex-c-input" placeholder="Write the passive sentence…" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ Our dog was given an injection with a special syringe by the vet.</div>
+    </li>
+    <li class="question-item" data-answer="the winning goal in last night's match was scored by donatello with a brilliant free kick">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">The winning goal in last night's match / score / Donatello / a brilliant free kick.</span>
+      <div style="margin-top:8px"><input type="text" class="ex-c-input" placeholder="Write the passive sentence…" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ The winning goal in last night's match was scored by Donatello with a brilliant free kick.</div>
+    </li>
+    <li class="question-item" data-answer="your cheque was sent last friday and should be delivered to you tomorrow">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">Your cheque / send / last Friday and / should / deliver / to you tomorrow.</span>
+      <div style="margin-top:8px"><input type="text" class="ex-c-input" placeholder="Write the passive sentence…" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ Your cheque was sent last Friday and should be delivered to you tomorrow.</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('c')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('c')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('c')">Reset</button>
+    <span class="score-display" id="score-c"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE D: Rewrite using the phrase given ===== -->
+<div class="exercise" id="ex-d">
+  <div class="ex-header">
+    <div class="ex-title">Exercise D – Rewrite using the phrase given</div>
+    <div class="ex-instruction">Rewrite each sentence using the phrase given in brackets.</div>
+  </div>
+  <ul class="question-list" id="ql-d">
+    <li class="question-item" data-answer="the new road has been under construction for a long time now">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">They have been building the new road for a long time now. <strong>(under construction)</strong></span>
+      <div style="margin-top:8px"><input type="text" class="ex-d-input" placeholder="The new road …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ The new road has been under construction for a long time now.</div>
+    </li>
+    <li class="question-item" data-answer="the horse had been in training for the race for over a year">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">They had been training the horse for the race for over a year. <strong>(in training)</strong></span>
+      <div style="margin-top:8px"><input type="text" class="ex-d-input" placeholder="The horse …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ The horse had been in training for the race for over a year.</div>
+    </li>
+    <li class="question-item" data-answer="the issue has been under discussion in parliament">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">They have been discussing the issue in Parliament. <strong>(under discussion)</strong></span>
+      <div style="margin-top:8px"><input type="text" class="ex-d-input" placeholder="The issue …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ The issue has been under discussion in Parliament.</div>
+    </li>
+    <li class="question-item" data-answer="the criminal had been under observation for the past two weeks">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">They had been observing the criminal for the past two weeks. <strong>(under observation)</strong></span>
+      <div style="margin-top:8px"><input type="text" class="ex-d-input" placeholder="The criminal …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ The criminal had been under observation for the past two weeks.</div>
+    </li>
+    <li class="question-item" data-answer="this plane has been in use for over 25 years now">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">They have been using this plane for over 25 years now. <strong>(in use)</strong></span>
+      <div style="margin-top:8px"><input type="text" class="ex-d-input" placeholder="This plane …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ This plane has been in use for over 25 years now.</div>
+    </li>
+    <li class="question-item" data-answer="the cyborg d423 robot has been in development for over ten years">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">They have been developing the Cyborg D423 robot for over ten years. <strong>(in development)</strong></span>
+      <div style="margin-top:8px"><input type="text" class="ex-d-input" placeholder="The Cyborg D423 robot …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ The Cyborg D423 robot has been in development for over ten years.</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('d')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('d')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('d')">Reset</button>
+    <span class="score-display" id="score-d"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE E: Rewrite in the passive ===== -->
+<div class="exercise" id="ex-e">
+  <div class="ex-header">
+    <div class="ex-title">Exercise E – Rewrite in the passive starting with the words given</div>
+    <div class="ex-instruction">Rewrite each sentence in the passive, starting with the words provided.</div>
+  </div>
+  <ul class="question-list" id="ql-e">
+    <li class="question-item" data-answer="it is said that bali is a beautiful island">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">People say that Bali is a beautiful island. → <em>It …</em></span>
+      <div style="margin-top:8px"><input type="text" class="ex-e-input" placeholder="It …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ It is said that Bali is a beautiful island.</div>
+    </li>
+    <li class="question-item" data-answer="it is generally thought that life won't be found on mars">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">People generally think that life won't be found on Mars. → <em>It …</em></span>
+      <div style="margin-top:8px"><input type="text" class="ex-e-input" placeholder="It …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ It is generally thought that life won't be found on Mars.</div>
+    </li>
+    <li class="question-item" data-answer="christmas is generally said to be too commercialised">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">It is generally said that Christmas is too commercialised. → <em>Christmas …</em></span>
+      <div style="margin-top:8px"><input type="text" class="ex-e-input" placeholder="Christmas …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ Christmas is generally said to be too commercialised.</div>
+    </li>
+    <li class="question-item" data-answer="it is often argued that prison doesn't work">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">People often argue that prison doesn't work. → <em>It …</em></span>
+      <div style="margin-top:8px"><input type="text" class="ex-e-input" placeholder="It …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ It is often argued that prison doesn't work.</div>
+    </li>
+    <li class="question-item" data-answer="it has been suggested that the school should start to produce a magazine">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">People have suggested that the school should start to produce a magazine. → <em>It …</em></span>
+      <div style="margin-top:8px"><input type="text" class="ex-e-input" placeholder="It …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ It has been suggested that the school should start to produce a magazine.</div>
+    </li>
+    <li class="question-item" data-answer="crocodile is said to taste like squid">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">People say that crocodile tastes like squid. → <em>Crocodile …</em></span>
+      <div style="margin-top:8px"><input type="text" class="ex-e-input" placeholder="Crocodile …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ Crocodile is said to taste like squid.</div>
+    </li>
+    <li class="question-item" data-answer="the vikings are said to have discovered america before columbus">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">It is said that the Vikings discovered America before Columbus. → <em>The Vikings …</em></span>
+      <div style="margin-top:8px"><input type="text" class="ex-e-input" placeholder="The Vikings …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ The Vikings are said to have discovered America before Columbus.</div>
+    </li>
+    <li class="question-item" data-answer="heart disease is thought to be caused by eating the wrong things">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">People think that heart disease is caused by eating the wrong things. → <em>Heart disease …</em></span>
+      <div style="margin-top:8px"><input type="text" class="ex-e-input" placeholder="Heart disease …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ Heart disease is thought to be caused by eating the wrong things.</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('e')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('e')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('e')">Reset</button>
+    <span class="score-display" id="score-e"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE F: Causative MCQ ===== -->
+<div class="exercise" id="ex-f">
+  <div class="ex-header">
+    <div class="ex-title">Exercise F – Choose the correct answer</div>
+    <div class="ex-instruction">Choose the best option A, B, C or D for the causative (have/get something done).</div>
+  </div>
+  <ul class="question-list" id="ql-f">
+    <li class="question-item" data-answer="B">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">We ………… a swimming pool put in this week.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A get</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B are having</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C have</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D have got</button>
+      </div>
+      <div class="answer-reveal">✓ B are having (causative: are having [something] put in)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Why don't you get a doctor ………… at your arm?</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A to look</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B looked</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C look</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D be looking</button>
+      </div>
+      <div class="answer-reveal">✓ A to look (get + person + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">My teeth were a little yellow so I ………… by the dentist.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A had cleaned them</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B have them cleaned</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C was cleaned them</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D had them cleaned</button>
+      </div>
+      <div class="answer-reveal">✓ D had them cleaned (causative past: had + object + past participle)</div>
+    </li>
+    <li class="question-item" data-answer="C">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Stuart's thinking of having ………… !</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A shaved his head</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B his head shaving</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C his head shaved</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D shaved to his head</button>
+      </div>
+      <div class="answer-reveal">✓ C his head shaved (have + object + past participle)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">My sister ………… her ear pierced last weekend.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A made</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B got</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C did</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D took</button>
+      </div>
+      <div class="answer-reveal">✓ B got (got her ear pierced – causative with get)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Mum and Dad didn't fancy cooking, so we got a pizza ………… .</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A be delivered</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B to be delivered</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C delivered</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D deliver</button>
+      </div>
+      <div class="answer-reveal">✓ C delivered (get + object + past participle – causative)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">You should ………… a professional to check your house for earthquake damage.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A have</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B make</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C take</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D get</button>
+      </div>
+      <div class="answer-reveal">✓ A have (have + person + infinitive without to)</div>
+    </li>
+    <li class="question-item" data-answer="C">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Kelly wanted to have a live band ………… at her wedding.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A to be played</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B play</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C played</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D been playing</button>
+      </div>
+      <div class="answer-reveal">✓ C played (have + object + past participle)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">Can we ………… this summer?</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A get installed air-conditioning</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B get air-conditioning to install</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C have installed air-conditioning</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D have air-conditioning installed</button>
+      </div>
+      <div class="answer-reveal">✓ D have air-conditioning installed (have + object + past participle)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">We ………… while we were on holiday.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A were burgled our house</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B had our house burgled</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C had burgled our house</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D got burgled our house</button>
+      </div>
+      <div class="answer-reveal">✓ B had our house burgled (causative of misfortune: had + object + past participle)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExMC('f')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('f')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('f')">Reset</button>
+    <span class="score-display" id="score-f"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE G: Sentence transformation (passive/causative) ===== -->
+<div class="exercise" id="ex-g">
+  <div class="ex-header">
+    <div class="ex-title">Exercise G – Sentence transformation</div>
+    <div class="ex-instruction">Complete each second sentence using the word given so that it has a similar meaning. Write between two and five words.</div>
+  </div>
+  <ul class="question-list" id="ql-g">
+    <li class="question-item" data-answer="has been scratched">
+      <span class="q-num">1.</span>
+      <div class="transform-original">Someone has scratched my car on the door! <span class="transform-key">been</span></div>
+      <div class="transform-blank">My car <input type="text" class="ex-g-input transform-input" placeholder="… (2–5 words) …"> on the door!</div>
+      <div class="answer-reveal">✓ has been scratched</div>
+    </li>
+    <li class="question-item" data-answer="is being operated on">
+      <span class="q-num">2.</span>
+      <div class="transform-original">Tommy is having an operation right now. <span class="transform-key">being</span></div>
+      <div class="transform-blank">Tommy <input type="text" class="ex-g-input transform-input" placeholder="… (2–5 words) …"> right now.</div>
+      <div class="answer-reveal">✓ is being operated on</div>
+    </li>
+    <li class="question-item" data-answer="you been invited to fiona's">
+      <span class="q-num">3.</span>
+      <div class="transform-original">Has Fiona invited you to her party? <span class="transform-key">been</span></div>
+      <div class="transform-blank">Have <input type="text" class="ex-g-input transform-input" placeholder="… (2–5 words) …"> party?</div>
+      <div class="answer-reveal">✓ you been invited to Fiona's</div>
+    </li>
+    <li class="question-item" data-answer="was probably written by">
+      <span class="q-num">4.</span>
+      <div class="transform-original">Shakespeare probably wrote this play in 1587. <span class="transform-key">written</span></div>
+      <div class="transform-blank">This play <input type="text" class="ex-g-input transform-input" placeholder="… (2–5 words) …"> Shakespeare in 1587.</div>
+      <div class="answer-reveal">✓ was probably written by</div>
+    </li>
+    <li class="question-item" data-answer="is being considered following">
+      <span class="q-num">5.</span>
+      <div class="transform-original">The government is considering a new law to ban smoking following new research. <span class="transform-key">considered</span></div>
+      <div class="transform-blank">A new law to ban smoking <input type="text" class="ex-g-input transform-input" placeholder="… (2–5 words) …"> new research.</div>
+      <div class="answer-reveal">✓ is being considered following</div>
+    </li>
+    <li class="question-item" data-answer="was sent to megagrocers by">
+      <span class="q-num">6.</span>
+      <div class="transform-original">My mum told me to go to Megagrocers. <span class="transform-key">sent</span></div>
+      <div class="transform-blank">I <input type="text" class="ex-g-input transform-input" placeholder="… (2–5 words) …"> my mum.</div>
+      <div class="answer-reveal">✓ was sent to Megagrocers by</div>
+    </li>
+    <li class="question-item" data-answer="got my teacher to explain">
+      <span class="q-num">7.</span>
+      <div class="transform-original">I didn't understand a word so I asked my teacher and she explained it to me. <span class="transform-key">got</span></div>
+      <div class="transform-blank">I didn't understand a word so I <input type="text" class="ex-g-input transform-input" placeholder="… (2–5 words) …"> it to me.</div>
+      <div class="answer-reveal">✓ got my teacher to explain</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('g')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('g')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('g')">Reset</button>
+    <span class="score-display" id="score-g"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE H: Extra word (Wedding disaster) ===== -->
+<div class="exercise" id="ex-h">
+  <div class="ex-header">
+    <div class="ex-title">Exercise H – Find the extra word in each line</div>
+    <div class="ex-instruction">One word in each line is extra and should not be there. Write the extra word in the box. If the line is correct, write a tick (✓).</div>
+  </div>
+  <div class="extra-word-container" id="ql-h">
+    <div class="extra-word-title">Wedding disaster</div>
+    <div class="extra-line" data-answer="being">
+      <span class="extra-line-num">1</span>
+      <input type="text" class="extra-line-input ex-h-input" placeholder="extra word…">
+      <span class="extra-line-text">My wedding had been being arranged for months. I knew exactly what I</span>
+    </div>
+    <div class="extra-line" data-answer="✓">
+      <span class="extra-line-num">2</span>
+      <input type="text" class="extra-line-input ex-h-input" placeholder="extra word…">
+      <span class="extra-line-text">wanted for that special day. I had the caterers to give me a menu and</span>
+    </div>
+    <div class="extra-line" data-answer="✓">
+      <span class="extra-line-num">3</span>
+      <input type="text" class="extra-line-input ex-h-input" placeholder="extra word…">
+      <span class="extra-line-text">have got them to provide me with samples so that I could be sure we</span>
+    </div>
+    <div class="extra-line" data-answer="us">
+      <span class="extra-line-num">4</span>
+      <input type="text" class="extra-line-input ex-h-input" placeholder="extra word…">
+      <span class="extra-line-text">would have the best food. I also wanted to have us a string quartet play</span>
+    </div>
+    <div class="extra-line" data-answer="been">
+      <span class="extra-line-num">5</span>
+      <input type="text" class="extra-line-input ex-h-input" placeholder="extra word…">
+      <span class="extra-line-text">classical music and I arranged that, too. My dress was been being made</span>
+    </div>
+    <div class="extra-line" data-answer="✓">
+      <span class="extra-line-num">6</span>
+      <input type="text" class="extra-line-input ex-h-input" placeholder="extra word…">
+      <span class="extra-line-text">specially and I had told the dressmaker put silver thread in it. Finally, the</span>
+    </div>
+    <div class="extra-line" data-answer="got">
+      <span class="extra-line-num">7</span>
+      <input type="text" class="extra-line-input ex-h-input" placeholder="extra word…">
+      <span class="extra-line-text">big day got arrived. My dress was being delivered in the morning, but by</span>
+    </div>
+    <div class="extra-line" data-answer="✓">
+      <span class="extra-line-num">8</span>
+      <input type="text" class="extra-line-input ex-h-input" placeholder="extra word…">
+      <span class="extra-line-text">ten it still hadn't arrived. They called me and said it had been being</span>
+    </div>
+    <div class="extra-line" data-answer="quickly">
+      <span class="extra-line-num">9</span>
+      <input type="text" class="extra-line-input ex-h-input" placeholder="extra word…">
+      <span class="extra-line-text">damaged! I was furious! I had my best friend quickly to pop out and get</span>
+    </div>
+    <div class="extra-line" data-answer="got">
+      <span class="extra-line-num">10</span>
+      <input type="text" class="extra-line-input ex-h-input" placeholder="extra word…">
+      <span class="extra-line-text">a new dress. I had got my lawyer to call to get my money back.</span>
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExH()">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('h')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('h')">Reset</button>
+    <span class="score-display" id="score-h"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE I: Rewrite with indirect object at end ===== -->
+<div class="exercise" id="ex-i">
+  <div class="ex-header">
+    <div class="ex-title">Exercise I – Rewrite with the indirect object at the end</div>
+    <div class="ex-instruction">Rewrite each sentence so that the indirect object comes at the end.</div>
+  </div>
+  <ul class="question-list" id="ql-i">
+    <li class="question-item" data-answer="my dad got a great computer game for me">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">My dad got me a great computer game!</span>
+      <div style="margin-top:8px"><input type="text" class="ex-i-input" placeholder="My dad got …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ My dad got a great computer game for me.</div>
+    </li>
+    <li class="question-item" data-answer="dave sent a really nice letter to jill">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Dave sent Jill a really nice letter.</span>
+      <div style="margin-top:8px"><input type="text" class="ex-i-input" placeholder="Dave sent …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ Dave sent a really nice letter to Jill.</div>
+    </li>
+    <li class="question-item" data-answer="i threw the ball to colin">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">I threw Colin the ball.</span>
+      <div style="margin-top:8px"><input type="text" class="ex-i-input" placeholder="I threw …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ I threw the ball to Colin.</div>
+    </li>
+    <li class="question-item" data-answer="the waiter offered a menu to us">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">The waiter offered us a menu.</span>
+      <div style="margin-top:8px"><input type="text" class="ex-i-input" placeholder="The waiter offered …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ The waiter offered a menu to us.</div>
+    </li>
+    <li class="question-item" data-answer="the hotel provides satellite television for its guests">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">The hotel provides its guests with satellite television.</span>
+      <div style="margin-top:8px"><input type="text" class="ex-i-input" placeholder="The hotel provides …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ The hotel provides satellite television for its guests.</div>
+    </li>
+    <li class="question-item" data-answer="my grandma taught this song to me">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">My grandma taught me this song.</span>
+      <div style="margin-top:8px"><input type="text" class="ex-i-input" placeholder="My grandma taught …" style="min-width:98%;width:98%"></div>
+      <div class="answer-reveal">✓ My grandma taught this song to me.</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('i')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('i')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('i')">Reset</button>
+    <span class="score-display" id="score-i"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE J: One word gap (The European Diet) ===== -->
+<div class="exercise" id="ex-j">
+  <div class="ex-header">
+    <div class="ex-title">Exercise J – Write one word in each gap</div>
+    <div class="ex-instruction">Write exactly one word in each numbered gap.</div>
+  </div>
+  <div class="passage-container" id="ql-j">
+    <div class="passage-title">The European Diet</div>
+    <p class="passage-line" style="line-height:2.2">
+      It's hard for us to imagine what (1) <input type="text" class="passage-input ex-j-input" data-answer="was" placeholder="…">
+      included in the European diet before America
+      (2) <input type="text" class="passage-input ex-j-input" data-answer="was" placeholder="…">
+      discovered (3) <input type="text" class="passage-input ex-j-input" data-answer="by" placeholder="…">
+      Columbus in 1492. So many ingredients which today
+      (4) <input type="text" class="passage-input ex-j-input" data-answer="are" placeholder="…">
+      grown all over the world (5) <input type="text" class="passage-input ex-j-input" data-answer="were" placeholder="…">
+      unknown to medieval Europeans.
+    </p>
+    <p class="passage-line" style="line-height:2.2">
+      Potatoes, tomatoes, maize and chocolate (6) <input type="text" class="passage-input ex-j-input" data-answer="were" placeholder="…">
+      all originally imported from the New World. Until then, meals had (7) <input type="text" class="passage-input ex-j-input" data-answer="been" placeholder="…">
+      prepared using ingredients native to Europe, such as root vegetables. Of course, spices such as pepper (8) <input type="text" class="passage-input ex-j-input" data-answer="had" placeholder="…">
+      been traded and added to food for centuries.
+    </p>
+    <p class="passage-line" style="line-height:2.2">
+      When the potato (9) <input type="text" class="passage-input ex-j-input" data-answer="was" placeholder="…">
+      first introduced, it was surprisingly unpopular. It
+      (10) <input type="text" class="passage-input ex-j-input" data-answer="was" placeholder="…">
+      considered to be poisonous and it took a long time to become common. There is a story of Parmentier, a French army officer, who (11) <input type="text" class="passage-input ex-j-input" data-answer="had" placeholder="…">
+      potatoes planted in the royal garden and (12) <input type="text" class="passage-input ex-j-input" data-answer="persuaded" placeholder="…">
+      Marie Antoinette to wear a potato flower to make them fashionable. The poor peasants were curious about the new plants and many of them (13) <input type="text" class="passage-input ex-j-input" data-answer="were" placeholder="…">
+      stolen to be planted in their own gardens. It was the start of French fries!
+    </p>
+    <div class="answer-reveal" style="margin-top:10px">✓ (1) was &nbsp;(2) was &nbsp;(3) by &nbsp;(4) are &nbsp;(5) were &nbsp;(6) were &nbsp;(7) been &nbsp;(8) had &nbsp;(9) was &nbsp;(10) was &nbsp;(11) had &nbsp;(12) persuaded &nbsp;(13) were</div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExJ()">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('j')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('j')">Reset</button>
+    <span class="score-display" id="score-j"></span>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+const tabs = ['a','b','c','d','e','f','g','h','i','j'];
+
+function switchTab(id) {
+  document.querySelector('.exercise.active').classList.remove('active');
+  document.getElementById('ex-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', tabs[i] === id);
+  });
+}
+
+// Two Choice
+function chooseBtn(btn) {
+  const btns = btn.closest('.two-choice-btns').querySelectorAll('.choice-btn');
+  btns.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+// Multiple Choice
+function chooseMC(btn) {
+  const opts = btn.closest('.mc-options').querySelectorAll('.mc-btn');
+  opts.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function normalize(s) { return s.trim().toLowerCase().replace(/\s+/g,' '); }
+
+function updateScore(id, correct, total) {
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = correct + ' / ' + total + ' correct';
+  scoreEl.classList.add('visible');
+  scoreEl.classList.toggle('perfect', correct === total);
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabIdx = tabs.indexOf(id);
+  let badge = tabBtns[tabIdx].querySelector('.tab-badge');
+  if (!badge) { badge = document.createElement('span'); badge.className = 'tab-badge'; tabBtns[tabIdx].appendChild(badge); }
+  badge.textContent = correct + '/' + total;
+  badge.classList.toggle('perfect', correct === total);
+}
+
+function checkExA() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-a .question-item').forEach(item => {
+    total++;
+    const expected = item.dataset.answer;
+    const sel = item.querySelector('.choice-btn.selected');
+    const ok = sel && sel.dataset.val === expected;
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    item.querySelectorAll('.choice-btn').forEach(btn => {
+      btn.classList.remove('correct','wrong');
+      if (btn.dataset.val === expected) btn.classList.add('correct');
+      else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+    });
+  });
+  updateScore('a', correct, total);
+}
+
+function checkExText(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    const inp = item.querySelector('input[type="text"]');
+    if (!inp) return;
+    total++;
+    const answers = item.dataset.answer.split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+function checkExMC(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    total++;
+    const sel = item.querySelector('.mc-btn.selected');
+    const ok = sel && sel.dataset.val === item.dataset.answer;
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    item.querySelectorAll('.mc-btn').forEach(btn => {
+      btn.classList.remove('correct','wrong');
+      if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+      else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+    });
+  });
+  updateScore(id, correct, total);
+}
+
+function checkExH() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-h .extra-line').forEach(line => {
+    total++;
+    const inp = line.querySelector('input[type="text"]');
+    const ok = normalize(inp.value) === normalize(line.dataset.answer);
+    if (ok) correct++;
+    line.classList.toggle('correct', ok);
+    line.classList.toggle('wrong', !ok);
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore('h', correct, total);
+}
+
+function checkExJ() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-j .ex-j-input').forEach(inp => {
+    total++;
+    const answers = (inp.dataset.answer || '').split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore('j', correct, total);
+}
+
+function showAnswers(id) {
+  if (id === 'a') checkExA();
+  else if (id === 'f') checkExMC(id);
+  else if (id === 'h') checkExH();
+  else if (id === 'j') checkExJ();
+  else checkExText(id);
+  document.getElementById('ex-' + id).classList.add('show-answers');
+  if (id === 'j') {
+    const reveal = document.querySelector('#ql-j .answer-reveal');
+    if (reveal) reveal.style.display = 'block';
+  }
+}
+
+function resetEx(id) {
+  const exEl = document.getElementById('ex-' + id);
+  exEl.classList.remove('show-answers');
+  exEl.querySelectorAll('input[type="text"]').forEach(inp => {
+    inp.value = ''; inp.classList.remove('correct','wrong');
+  });
+  exEl.querySelectorAll('.question-item, .extra-line').forEach(item => {
+    item.classList.remove('correct','wrong');
+  });
+  exEl.querySelectorAll('.choice-btn, .mc-btn').forEach(btn => {
+    btn.classList.remove('selected','correct','wrong');
+  });
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = ''; scoreEl.classList.remove('visible','perfect');
+  const badge = document.querySelector('.tab-btn:nth-child(' + (tabs.indexOf(id)+1) + ') .tab-badge');
+  if (badge) badge.textContent = '';
+}
+
+function resetExPassage(id) {
+  resetEx(id);
+  if (id === 'j') {
+    const reveal = document.querySelector('#ql-j .answer-reveal');
+    if (reveal) reveal.style.display = '';
+  }
+}
+</script>
+</body>
+</html>

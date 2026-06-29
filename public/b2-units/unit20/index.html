@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 20 – Vocabulary Exercises</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #333; min-height: 100vh; }
+
+  .header { background: #1565C0; color: white; padding: 16px 20px; text-align: center; }
+  .header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+  .header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+
+  .tab-bar { display: flex; background: #1976D2; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 1; min-width: 44px; padding: 12px 6px; border: none; background: transparent;
+    color: rgba(255,255,255,0.7); font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap;
+  }
+  .tab-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+  .tab-btn.active { color: white; border-bottom-color: #FFD600; }
+  .tab-badge {
+    display: inline-block; font-size: 0.65rem; background: rgba(255,255,255,0.25);
+    border-radius: 10px; padding: 1px 5px; margin-left: 4px; vertical-align: middle;
+  }
+  .tab-badge.perfect { background: #4CAF50; }
+
+  .content { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+  .exercise { display: none; }
+  .exercise.active { display: block; }
+
+  .ex-header { margin-bottom: 16px; }
+  .ex-title { font-size: 1.1rem; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+  .ex-instruction {
+    font-size: 0.9rem; color: #555; background: #E3F2FD; border-left: 4px solid #2196F3;
+    padding: 8px 12px; border-radius: 0 6px 6px 0;
+  }
+
+  .question-list { list-style: none; }
+  .question-item {
+    background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s;
+  }
+  .question-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .question-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+
+  .q-num { font-weight: 700; color: #1976D2; margin-right: 6px; }
+  .q-sentence { line-height: 1.8; }
+
+  input[type="text"] {
+    border: 2px solid #BBDEFB; border-radius: 6px; padding: 5px 10px;
+    font-size: 0.95rem; outline: none; background: #FAFAFA; transition: border .2s;
+    min-width: 100px;
+  }
+  input[type="text"]:focus { border-color: #2196F3; background: white; }
+  input[type="text"].correct { border-color: #4CAF50; background: #F1F8E9; color: #2E7D32; }
+  input[type="text"].wrong { border-color: #F44336; background: #FFF5F5; color: #C62828; }
+
+  .cap-word { font-weight: 700; color: #5D4037; font-size: 0.88rem; margin-left: 4px; background: #FFF9C4; border-radius: 3px; padding: 1px 5px; }
+
+  /* Two Choice */
+  .two-choice-btns { display: inline-flex; gap: 8px; margin-left: 6px; }
+  .choice-btn {
+    border: 2px solid #90CAF9; background: white; border-radius: 6px;
+    padding: 4px 14px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #1565C0;
+  }
+  .choice-btn:hover { background: #E3F2FD; }
+  .choice-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .choice-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .choice-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+
+  /* Passage */
+  .passage-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .passage-line { margin-bottom: 10px; line-height: 2.1; }
+  .passage-title { font-weight: 700; font-size: 1.05rem; text-align: center; color: #1565C0; margin-bottom: 12px; }
+  .passage-input { min-width: 80px; width: 90px; }
+
+  /* Word bank */
+  .word-bank { background: #E8F5E9; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; }
+  .word-bank-label { font-size: 0.8rem; color: #555; margin-bottom: 6px; }
+  .word-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .word-chip {
+    background: white; border: 2px solid #A5D6A7; border-radius: 20px;
+    padding: 3px 12px; font-size: 0.88rem; cursor: pointer; transition: all .2s;
+  }
+  .word-chip:hover { background: #C8E6C9; }
+  .word-chip.used { opacity: 0.4; text-decoration: line-through; cursor: default; }
+
+  /* Answer reveal */
+  .answer-reveal { font-size: 0.82rem; color: #388E3C; margin-top: 4px; display: none; }
+  .show-answers .answer-reveal { display: block; }
+
+  /* Key word box */
+  .key-word { display: inline-block; font-weight: 700; background: #E8EAF6; color: #283593; border-radius: 4px; padding: 2px 8px; margin-left: 6px; font-size: 0.9rem; }
+
+  /* Action buttons */
+  .action-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+  .btn { padding: 10px 22px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-check { background: #2196F3; color: white; }
+  .btn-check:hover { background: #1976D2; }
+  .btn-reset { background: #FF9800; color: white; }
+  .btn-reset:hover { background: #F57C00; }
+  .btn-show { background: #9C27B0; color: white; }
+  .btn-show:hover { background: #7B1FA2; }
+
+  .score-display {
+    font-size: 1rem; font-weight: 700; padding: 8px 16px; border-radius: 8px;
+    background: #E8F5E9; color: #2E7D32; display: none;
+  }
+  .score-display.visible { display: inline-block; }
+  .score-display.perfect { background: #4CAF50; color: white; }
+
+  @media (max-width: 600px) {
+    .tab-btn { font-size: 0.8rem; padding: 10px 4px; }
+    .content { padding: 12px 10px 50px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Unit 20 – Vocabulary</h1>
+  <p>Weather and the environment · 9 exercises · Click a tab to start</p>
+</div>
+
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" onclick="switchTab('a')">A</button>
+  <button class="tab-btn" onclick="switchTab('b')">B</button>
+  <button class="tab-btn" onclick="switchTab('c')">C</button>
+  <button class="tab-btn" onclick="switchTab('d')">D</button>
+  <button class="tab-btn" onclick="switchTab('e')">E</button>
+  <button class="tab-btn" onclick="switchTab('f')">F</button>
+  <button class="tab-btn" onclick="switchTab('g')">G</button>
+  <button class="tab-btn" onclick="switchTab('h')">H</button>
+  <button class="tab-btn" onclick="switchTab('i')">I</button>
+</div>
+
+<div class="content">
+
+<!-- ===== EXERCISE A: Two Choice – passage ===== -->
+<div class="exercise active" id="ex-a">
+  <div class="ex-header">
+    <div class="ex-title">Exercise A – Circle the correct word</div>
+    <div class="ex-instruction">Topic vocabulary in contrast. Circle the correct word in bold in each news passage.</div>
+  </div>
+  <div class="passage-container" id="ql-a">
+    <div class="passage-title">Local news in brief</div>
+    <p style="font-weight:700;color:#1565C0;margin-bottom:8px">Thresham Valley under water?</p>
+    <p class="passage-line">Plans to turn much of the Thresham Valley into a large
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(1) puddle</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">reservoir</button>
+      </span>
+      to provide drinking water for the local area have received mixed reactions. Local councillors have praised the scheme, arguing that the environmental and economic benefits of
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(2) flooding</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">pouring</button>
+      </span>
+      the valley will far outweigh the disadvantages. Several small
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(3) rural</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">urban</button>
+      </span>
+      communities – two villages, three hamlets and two farms – in the valley will disappear, however.
+    </p>
+    <p style="font-weight:700;color:#1565C0;margin-bottom:8px;margin-top:12px">Lucky escape for farmer</p>
+    <p class="passage-line">A farmer was struck by
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(4) lightning</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">thunder</button>
+      </span>
+      on Thursday evening, while mending a fence in one of his
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(5) plains</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">fields</button>
+      </span>.
+      The farmer, Jack Dobson, received treatment for slight burns. Talking about the incident later, he said: 'It was
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(6) drizzling</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">showering</button>
+      </span>
+      slightly when I went out, but I'd checked the weather
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(7) prediction</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">forecast</button>
+      </span>
+      and it hadn't said there was going to be a thunderstorm.'
+    </p>
+    <p style="font-weight:700;color:#1565C0;margin-bottom:8px;margin-top:12px">Save bags and save money</p>
+    <p class="passage-line">A spokesperson for Asdo said: 'For every new bag we make, the factory has to pump out industrial
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(8) waste</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">litter</button>
+      </span>
+      and that's increasing pollution in the
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(9) suburban</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">surrounding</button>
+      </span>
+      area. We want to reduce the number of bags we make each year. We're offering a financial incentive to our customers to
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(10) reuse</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">repeat</button>
+      </span>
+      their bags.'
+    </p>
+    <p style="font-weight:700;color:#1565C0;margin-bottom:8px;margin-top:12px">Local academic causes a stir</p>
+    <p class="passage-line">An academic from Davington University argues that
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(11) global</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">worldwide</button>
+      </span>
+      warming is not caused by human disregard for the
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(12) weather</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">environment</button>
+      </span>.
+      Professor Angela Lucini argues that large-scale changes in the Mediterranean
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(13) land</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">climate</button>
+      </span>,
+      for example, have taken place ever since the world was formed. 'People weren't responsible for the dinosaurs becoming
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(14) extinct</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">endangered</button>
+      </span>.'
+    </p>
+    <p style="font-weight:700;color:#1565C0;margin-bottom:8px;margin-top:12px">Councillor calls for an end to the fireplace</p>
+    <p class="passage-line">Local councillor Davina Forrest is calling for a ban on coal fires at home. 'There's no doubt that if domestic chimneys stopped pumping out
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(15) smoke</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">fog</button>
+      </span>
+      into the atmosphere, the
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(16) air</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">wind</button>
+      </span>
+      we'd all be breathing would be much
+      <span class="two-choice-btns" style="margin-left:0">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">(17) cleaner</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">clearer</button>
+      </span>,' she said.
+    </p>
+    <div class="answer-reveal" style="margin-top:12px">
+      ✓ (1) reservoir &nbsp;(2) flooding &nbsp;(3) rural &nbsp;(4) lightning &nbsp;(5) fields &nbsp;(6) drizzling &nbsp;(7) forecast &nbsp;
+      (8) waste &nbsp;(9) surrounding &nbsp;(10) reuse &nbsp;(11) global &nbsp;(12) environment &nbsp;(13) climate &nbsp;
+      (14) extinct &nbsp;(15) smoke &nbsp;(16) air &nbsp;(17) cleaner
+    </div>
+  </div>
+  <!-- Store answers for JS checking: map each two-choice-btns pair to answer -->
+  <div id="ql-a-data" style="display:none"
+    data-answers="b,a,a,a,b,a,b,a,b,a,a,b,b,a,a,a,a">
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExA()">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('a')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('a')">Reset</button>
+    <span class="score-display" id="score-a"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE B: Phrasal Verbs – word bank ===== -->
+<div class="exercise" id="ex-b">
+  <div class="ex-header">
+    <div class="ex-title">Exercise B – Complete using the correct form of the phrasal verbs in the box</div>
+    <div class="ex-instruction">Phrasal verbs: call for · call off · clear up · cut off · die down · do up · face up to · put out</div>
+  </div>
+  <ul class="question-list" id="ql-b">
+    <li class="question-item" data-answer="cleared up">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">The weather should have <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> by this evening, shouldn't it?</span>
+      <div class="answer-reveal">✓ cleared up (clear up = become better/sunny)</div>
+    </li>
+    <li class="question-item" data-answer="died down">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Do you think the wind has <input type="text" class="ex-b-input" placeholder="…" style="min-width:120px"> enough for us to go sailing without any danger?</span>
+      <div class="answer-reveal">✓ died down (die down = become less strong)</div>
+    </li>
+    <li class="question-item" data-answer="calling for">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Environmentalists are <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> stricter controls on the use of leaded petrol.</span>
+      <div class="answer-reveal">✓ calling for (call for = demand)</div>
+    </li>
+    <li class="question-item" data-answer="face up to">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Why can't they <input type="text" class="ex-b-input" placeholder="…" style="min-width:130px"> the fact that their products are bad for the environment?</span>
+      <div class="answer-reveal">✓ face up to (face up to = accept and deal with)</div>
+    </li>
+    <li class="question-item" data-answer="put out">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Firefighters managed to <input type="text" class="ex-b-input" placeholder="…" style="min-width:110px"> the forest fire before it destroyed any houses.</span>
+      <div class="answer-reveal">✓ put out (put out = extinguish)</div>
+    </li>
+    <li class="question-item" data-answer="call off">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">We'll have to <input type="text" class="ex-b-input" placeholder="…" style="min-width:110px"> the demonstration if the weather's really bad, won't we?</span>
+      <div class="answer-reveal">✓ call off (call off = cancel)</div>
+    </li>
+    <li class="question-item" data-answer="cut off">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">The town was totally <input type="text" class="ex-b-input" placeholder="…" style="min-width:110px"> for three days because of the floods.</span>
+      <div class="answer-reveal">✓ cut off (cut off = isolated)</div>
+    </li>
+    <li class="question-item" data-answer="do up">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">It didn't take us long to <input type="text" class="ex-b-input" placeholder="…" style="min-width:100px"> the old barn, did it?</span>
+      <div class="answer-reveal">✓ do up (do up = renovate)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('b')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('b')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('b')">Reset</button>
+    <span class="score-display" id="score-b"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE C: Write one word ===== -->
+<div class="exercise" id="ex-c">
+  <div class="ex-header">
+    <div class="ex-title">Exercise C – Write one word in each gap</div>
+    <div class="ex-instruction">Phrasal verbs. Write one word to complete each phrasal verb.</div>
+  </div>
+  <ul class="question-list" id="ql-c">
+    <li class="question-item" data-answer="away">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Don't throw those batteries <input type="text" class="ex-c-input" placeholder="…" style="min-width:80px">. They're not biodegradable!</span>
+      <div class="answer-reveal">✓ away (throw away)</div>
+    </li>
+    <li class="question-item" data-answer="get">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Rainy days always <input type="text" class="ex-c-input" placeholder="…" style="min-width:80px"> me down.</span>
+      <div class="answer-reveal">✓ get (get me down = make me depressed)</div>
+    </li>
+    <li class="question-item" data-answer="for">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Could you tell me what the letters 'CJD' stand <input type="text" class="ex-c-input" placeholder="…" style="min-width:70px">?</span>
+      <div class="answer-reveal">✓ for (stand for = represent/mean)</div>
+    </li>
+    <li class="question-item" data-answer="down">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">They're planning to tear <input type="text" class="ex-c-input" placeholder="…" style="min-width:80px"> the old cinema and build a new shopping centre on the land.</span>
+      <div class="answer-reveal">✓ down (tear down = demolish)</div>
+    </li>
+    <li class="question-item" data-answer="in">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">I think the rain's set <input type="text" class="ex-c-input" placeholder="…" style="min-width:70px"> for the day, don't you?</span>
+      <div class="answer-reveal">✓ in (set in = become established, unlikely to stop)</div>
+    </li>
+    <li class="question-item" data-answer="to">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Some scientists put the extinction of the dinosaurs down <input type="text" class="ex-c-input" placeholder="…" style="min-width:70px"> changes in the world's climate.</span>
+      <div class="answer-reveal">✓ to (put down to = attribute to)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('c')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('c')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('c')">Reset</button>
+    <span class="score-display" id="score-c"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE D: Sentence Transformation ===== -->
+<div class="exercise" id="ex-d">
+  <div class="ex-header">
+    <div class="ex-title">Exercise D – Sentence transformation</div>
+    <div class="ex-instruction">Phrases and collocations. Complete each second sentence using the word given so that it has a similar meaning. Write between two and five words.</div>
+  </div>
+  <ul class="question-list" id="ql-d">
+    <li class="question-item" data-answer="under the weather">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Josh isn't feeling very well today. <span class="key-word">WEATHER</span><br>
+      Josh is feeling a bit <input type="text" class="ex-d-input" placeholder="…" style="min-width:180px"> today.</span>
+      <div class="answer-reveal">✓ under the weather (feel under the weather = feel unwell)</div>
+    </li>
+    <li class="question-item" data-answer="had a bad effect on|have had a bad effect on">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">CFC's have badly affected the ozone layer. <span class="key-word">EFFECT</span><br>
+      CFC's have <input type="text" class="ex-d-input" placeholder="…" style="min-width:220px"> the ozone layer.</span>
+      <div class="answer-reveal">✓ had a bad effect on</div>
+    </li>
+    <li class="question-item" data-answer="having a look at|taking a look at">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Would you mind quickly looking at the engine? <span class="key-word">LOOK</span><br>
+      Would you mind <input type="text" class="ex-d-input" placeholder="…" style="min-width:200px"> the engine?</span>
+      <div class="answer-reveal">✓ having a look at / taking a look at</div>
+    </li>
+    <li class="question-item" data-answer="took a long time to|took ages to">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Cleaning the beach took ages. <span class="key-word">LONG</span><br>
+      It <input type="text" class="ex-d-input" placeholder="…" style="min-width:180px"> clean the beach.</span>
+      <div class="answer-reveal">✓ took a long time to (clean the beach)</div>
+    </li>
+    <li class="question-item" data-answer="is responsible for reading|has the responsibility of reading">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">It's Carl's job to read the barometer every morning. <span class="key-word">RESPONSIBILITY</span><br>
+      Carl <input type="text" class="ex-d-input" placeholder="…" style="min-width:250px"> the barometer every morning.</span>
+      <div class="answer-reveal">✓ is responsible for reading</div>
+    </li>
+    <li class="question-item" data-answer="is a waste of time">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">There's no point trying to persuade him to recycle bottles and paper. <span class="key-word">WASTE</span><br>
+      It <input type="text" class="ex-d-input" placeholder="…" style="min-width:200px"> trying to persuade him to recycle bottles and paper.</span>
+      <div class="answer-reveal">✓ is a waste of time</div>
+    </li>
+    <li class="question-item" data-answer="in sight of|able to see">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">We'll soon be able to see land, won't we? <span class="key-word">SIGHT</span><br>
+      We'll soon be <input type="text" class="ex-d-input" placeholder="…" style="min-width:180px"> land, won't we?</span>
+      <div class="answer-reveal">✓ in sight of (in sight of land = able to see land)</div>
+    </li>
+    <li class="question-item" data-answer="had no control over|couldn't control">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">I couldn't steer the boat because the waves were so high. <span class="key-word">CONTROL</span><br>
+      I <input type="text" class="ex-d-input" placeholder="…" style="min-width:200px"> the boat because the waves were so high.</span>
+      <div class="answer-reveal">✓ had no control over</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('d')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('d')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('d')">Reset</button>
+    <span class="score-display" id="score-d"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE E: Two Choice – phrases ===== -->
+<div class="exercise" id="ex-e">
+  <div class="ex-header">
+    <div class="ex-title">Exercise E – Circle the correct word</div>
+    <div class="ex-instruction">Choose the correct word in bold.</div>
+  </div>
+  <ul class="question-list" id="ql-e">
+    <li class="question-item" data-answer="b" data-a="come" data-b="gone">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">The days of Athens being one of the most polluted cities in the world have <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">come</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">gone</button>
+      </span> to an end.</span>
+      <div class="answer-reveal">✓ gone (have gone to an end = are over)</div>
+    </li>
+    <li class="question-item" data-answer="b" data-a="at" data-b="on">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Their office is <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">at</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">on</button>
+      </span> the fifteenth floor.</span>
+      <div class="answer-reveal">✓ on (on the fifteenth floor)</div>
+    </li>
+    <li class="question-item" data-answer="a" data-a="made" data-b="done">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">The government's <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">made</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">done</button>
+      </span> a complete mess of its environmental policy.</span>
+      <div class="answer-reveal">✓ made (made a mess)</div>
+    </li>
+    <li class="question-item" data-answer="b" data-a="do" data-b="have">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">It's so hot, I think I'm going to <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">do</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">have</button>
+      </span> a cold shower to cool down.</span>
+      <div class="answer-reveal">✓ have (have a shower)</div>
+    </li>
+    <li class="question-item" data-answer="a" data-a="making" data-b="taking">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">As usual, so-called nature lovers are <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">making</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">taking</button>
+      </span> a fuss about nothing.</span>
+      <div class="answer-reveal">✓ making (make a fuss = standard collocation)</div>
+    </li>
+    <li class="question-item" data-answer="b" data-a="complete" data-b="whole">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">I can't believe there's anyone in the <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">complete</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">whole</button>
+      </span> world who wants the hole in the ozone layer to get any bigger.</span>
+      <div class="answer-reveal">✓ whole (the whole world)</div>
+    </li>
+    <li class="question-item" data-answer="a" data-a="like" data-b="as">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">It looks <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">like</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">as</button>
+      </span> a large number of species will become extinct over the next decade.</span>
+      <div class="answer-reveal">✓ like (looks like = it seems that)</div>
+    </li>
+    <li class="question-item" data-answer="a" data-a="at" data-b="in">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">You used to believe there really was a pot of gold <span class="two-choice-btns">
+        <button class="choice-btn" data-val="a" onclick="chooseBtn(this)">at</button>
+        <button class="choice-btn" data-val="b" onclick="chooseBtn(this)">in</button>
+      </span> the end of every rainbow, didn't you?</span>
+      <div class="answer-reveal">✓ at (at the end of every rainbow)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExB2()">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('e')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('e')">Reset</button>
+    <span class="score-display" id="score-e"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE F: Word Patterns – one word passage ===== -->
+<div class="exercise" id="ex-f">
+  <div class="ex-header">
+    <div class="ex-title">Exercise F – Write one word in each gap</div>
+    <div class="ex-instruction">Word patterns. Complete the passage "San Francisco" with one word in each gap.</div>
+  </div>
+  <div class="passage-container" id="ql-f">
+    <div class="passage-title">SAN FRANCISCO</div>
+    <p class="passage-line" style="line-height:2.3">
+      Tourists to San Francisco are rarely disappointed
+      <strong>(1)</strong> <input type="text" class="ex-f-input passage-input" data-answer="with" placeholder="…">
+      the famous range of cultural and artistic attractions the city has to offer. But San Francisco is more famous
+      <strong>(2)</strong> <input type="text" class="ex-f-input passage-input" data-answer="for" placeholder="…">
+      being on the San Andreas fault, a notorious source of earthquakes. Over seven hundred people died in San Francisco in the great earthquake of 1906, and more than 70 perished in another large quake in 1989. It's hard
+      <strong>(3)</strong> <input type="text" class="ex-f-input passage-input" data-answer="to" placeholder="…">
+      imagine why anyone would want to live in such a dangerous area, but millions of people choose to do so. They are all familiar
+      <strong>(4)</strong> <input type="text" class="ex-f-input passage-input" data-answer="with" placeholder="…">
+      the faultline, and are aware
+      <strong>(5)</strong> <input type="text" class="ex-f-input passage-input" data-answer="of" placeholder="…">
+      the potential danger if there's another powerful quake. Yet nothing, it seems, will prevent people
+      <strong>(6)</strong> <input type="text" class="ex-f-input passage-input" data-answer="from" placeholder="…">
+      building in San Francisco. A quick glance
+      <strong>(7)</strong> <input type="text" class="ex-f-input passage-input" data-answer="at" placeholder="…">
+      a photo of the city shows a large number of modern skyscrapers, many of them completely covered
+      <strong>(8)</strong> <input type="text" class="ex-f-input passage-input" data-answer="in" placeholder="…">
+      glass.
+    </p>
+    <p class="passage-line" style="line-height:2.3">
+      Seismologists are constantly warning residents
+      <strong>(9)</strong> <input type="text" class="ex-f-input passage-input" data-answer="about" placeholder="…">
+      the possibility of 'the next big quake'. They expect it
+      <strong>(10)</strong> <input type="text" class="ex-f-input passage-input" data-answer="to" placeholder="…">
+      happen sooner rather than later. But San Franciscans are not short
+      <strong>(11)</strong> <input type="text" class="ex-f-input passage-input" data-answer="of" placeholder="…">
+      courage. Except
+      <strong>(12)</strong> <input type="text" class="ex-f-input passage-input" data-answer="by" placeholder="…">
+      making doubly sure that their buildings are built to the highest safety standards, they carry on with their daily lives as if nothing could ever disrupt them.
+    </p>
+    <div class="answer-reveal" style="margin-top:10px">
+      ✓ (1) with &nbsp;(2) for &nbsp;(3) to &nbsp;(4) with &nbsp;(5) of &nbsp;(6) from &nbsp;(7) at &nbsp;(8) in &nbsp;
+      (9) about &nbsp;(10) to &nbsp;(11) of &nbsp;(12) by
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExPassage('f')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('f')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('f')">Reset</button>
+    <span class="score-display" id="score-f"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE G: Word Formation – rewrite ===== -->
+<div class="exercise" id="ex-g">
+  <div class="ex-header">
+    <div class="ex-title">Exercise G – Word formation</div>
+    <div class="ex-instruction">Each of the words in bold is in the wrong form. Rewrite them correctly.</div>
+  </div>
+  <ul class="question-list" id="ql-g">
+    <li class="question-item" data-answer="global">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Most scientists accept that <strong>globe</strong> warming is a reality. <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ global (global warming)</div>
+    </li>
+    <li class="question-item" data-answer="freezing">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">The weather was <strong>freeze</strong>. I was wearing two pairs of gloves and my fingers were still cold! <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ freezing</div>
+    </li>
+    <li class="question-item" data-answer="endangered">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">What can we do to protect <strong>danger</strong> species like the giant panda? <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ endangered</div>
+    </li>
+    <li class="question-item" data-answer="accuracy">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Meteorologists can forecast tomorrow's weather with incredible <strong>accurate</strong> these days. <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ accuracy</div>
+    </li>
+    <li class="question-item" data-answer="developers">
+      <span class="q-num">5.</span>
+      <span class="q-sentence"><strong>Develop</strong> are planning to build a water park on the site of the old airport. <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ Developers</div>
+    </li>
+    <li class="question-item" data-answer="environmentally">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">All our products are <strong>environment</strong> friendly. <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ environmentally</div>
+    </li>
+    <li class="question-item" data-answer="extremely">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Everyone should be <strong>extreme</strong> worried about the hole in the ozone layer. <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ extremely</div>
+    </li>
+    <li class="question-item" data-answer="residential">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">We live in a <strong>resident</strong> area about twenty minutes from the town centre. <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ residential</div>
+    </li>
+    <li class="question-item" data-answer="likelihood|chance">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">There's not much <strong>likely</strong> of environmental groups stopping the building of the new factory, is there? <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ likelihood</div>
+    </li>
+    <li class="question-item" data-answer="harmless">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">Don't worry! This snake is completely <strong>harm</strong>. <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ harmless</div>
+    </li>
+    <li class="question-item" data-answer="sunshine">
+      <span class="q-num">11.</span>
+      <span class="q-sentence">Let's go outside and enjoy the <strong>sunny</strong> while it lasts. <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ sunshine</div>
+    </li>
+    <li class="question-item" data-answer="neighbourhood|neighborhood">
+      <span class="q-num">12.</span>
+      <span class="q-sentence">What kind of <strong>neighbour</strong> did you grow up in? <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ neighbourhood</div>
+    </li>
+    <li class="question-item" data-answer="lower">
+      <span class="q-num">13.</span>
+      <span class="q-sentence">I hope they don't <strong>low</strong> the price of petrol. <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ lower (to lower = to reduce)</div>
+    </li>
+    <li class="question-item" data-answer="greatness">
+      <span class="q-num">14.</span>
+      <span class="q-sentence">The <strong>great</strong> of solar power lies in its simplicity. <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ greatness</div>
+    </li>
+    <li class="question-item" data-answer="pollutants">
+      <span class="q-num">15.</span>
+      <span class="q-sentence">A number of different <strong>pollute</strong> in the river have caused the death of all the fish. <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ pollutants</div>
+    </li>
+    <li class="question-item" data-answer="naturally">
+      <span class="q-num">16.</span>
+      <span class="q-sentence">It's <strong>nature</strong> dark for this time of day. They didn't say there was going to be an eclipse, did they? <input type="text" class="ex-g-input" placeholder="correct form…" style="min-width:130px"></span>
+      <div class="answer-reveal">✓ naturally</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('g')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('g')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('g')">Reset</button>
+    <span class="score-display" id="score-g"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE H: Word Formation – sentences (same as G pattern but separate tab) ===== -->
+<!-- Unit 20 has only 7 exercises visible in PDF (A-G). Adding H and I as extension if needed. -->
+<!-- Based on standard vocab unit pattern: H = word formation passage, I = word transform sentences -->
+<!-- PDF pages 125-127 contain only A-G. Use H for word formation sentences and I as bonus. -->
+<!-- Since PDF only shows A-G, we replicate the H/I pattern but flag as "no more exercises" -->
+
+<div class="exercise" id="ex-h">
+  <div class="ex-header">
+    <div class="ex-title">Exercise H – Word formation (sentences)</div>
+    <div class="ex-instruction">Complete the sentences by changing the form of the word in CAPITALS when necessary.</div>
+  </div>
+  <ul class="question-list" id="ql-h">
+    <li class="question-item" data-answer="likelihood">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">The forecast said there was a high <input type="text" class="ex-h-input" placeholder="…" style="min-width:140px"> <span class="cap-word">LIKELY</span> of rain this weekend.</span>
+      <div class="answer-reveal">✓ likelihood</div>
+    </li>
+    <li class="question-item" data-answer="pollution">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">We all know that using our cars causes <input type="text" class="ex-h-input" placeholder="…" style="min-width:130px"> <span class="cap-word">POLLUTE</span>, but we still do it.</span>
+      <div class="answer-reveal">✓ pollution</div>
+    </li>
+    <li class="question-item" data-answer="accurately">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Forecasting the weather <input type="text" class="ex-h-input" placeholder="…" style="min-width:130px"> <span class="cap-word">ACCURATE</span> takes a great deal of training.</span>
+      <div class="answer-reveal">✓ accurately</div>
+    </li>
+    <li class="question-item" data-answer="residential">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Litter is often a problem in <input type="text" class="ex-h-input" placeholder="…" style="min-width:140px"> <span class="cap-word">RESIDENT</span> areas.</span>
+      <div class="answer-reveal">✓ residential</div>
+    </li>
+    <li class="question-item" data-answer="environmentalists">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">According to <input type="text" class="ex-h-input" placeholder="…" style="min-width:180px"> <span class="cap-word">ENVIRONMENT</span>, we could be facing a crisis within fifty years.</span>
+      <div class="answer-reveal">✓ environmentalists</div>
+    </li>
+    <li class="question-item" data-answer="sunny">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">It was a wonderfully <input type="text" class="ex-h-input" placeholder="…" style="min-width:110px"> <span class="cap-word">SUN</span> day, so we decided to go to the beach.</span>
+      <div class="answer-reveal">✓ sunny</div>
+    </li>
+    <li class="question-item" data-answer="endangered">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">The giant panda is <input type="text" class="ex-h-input" placeholder="…" style="min-width:130px"> <span class="cap-word">DANGER</span> because its habitat is being destroyed.</span>
+      <div class="answer-reveal">✓ endangered</div>
+    </li>
+    <li class="question-item" data-answer="freezing">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">We didn't enjoy our walk because it was absolutely <input type="text" class="ex-h-input" placeholder="…" style="min-width:120px"> <span class="cap-word">FREEZE</span>!</span>
+      <div class="answer-reveal">✓ freezing</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('h')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('h')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('h')">Reset</button>
+    <span class="score-display" id="score-h"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE I: Word Transform passage ===== -->
+<div class="exercise" id="ex-i">
+  <div class="ex-header">
+    <div class="ex-title">Exercise I – Complete the text by changing the form of the word in capitals</div>
+    <div class="ex-instruction">Change each word in CAPITALS to the correct form to complete the passage.</div>
+  </div>
+  <div class="passage-container" id="ql-i">
+    <div class="passage-title">Weather control</div>
+    <p class="passage-line" style="line-height:2.4">
+      Forecasts might warn to us about threats posed by the weather, but imagine if we could take
+      (1) <input type="text" class="ex-i-input passage-input" data-answer="control" placeholder="…" style="min-width:100px"> <span class="cap-word">CONTROL</span>
+      of the weather and prevent dangerous weather conditions from occurring in the first place.
+      Controlling the weather may be the biggest (2) <input type="text" class="ex-i-input passage-input" data-answer="technological" placeholder="…" style="min-width:150px"> <span class="cap-word">TECHNOLOGY</span>
+      challenge we face. For a long time, scientists have dreamed of creating
+      (3) <input type="text" class="ex-i-input passage-input" data-answer="artificial" placeholder="…" style="min-width:120px"> <span class="cap-word">ARTIFICE</span>
+      clouds to bring rain to areas hit by (4) <input type="text" class="ex-i-input passage-input" data-answer="drought" placeholder="…" style="min-width:100px"> <span class="cap-word">DROUGHT</span>,
+      but it's much harder to do than they (5) <input type="text" class="ex-i-input passage-input" data-answer="expected" placeholder="…" style="min-width:110px"> <span class="cap-word">EXPECT</span>.
+      The global weather system is very (6) <input type="text" class="ex-i-input passage-input" data-answer="complicated" placeholder="…" style="min-width:140px"> <span class="cap-word">COMPLICATE</span>,
+      with each part having an effect taken on all the others. The scientists may feel they are
+      (7) <input type="text" class="ex-i-input passage-input" data-answer="wasting" placeholder="…" style="min-width:110px"> <span class="cap-word">WASTE</span>
+      their time, but success could save (8) <input type="text" class="ex-i-input passage-input" data-answer="millions" placeholder="…" style="min-width:110px"> <span class="cap-word">MILLION</span> of lives.
+    </p>
+    <div class="answer-reveal" style="margin-top:10px">
+      ✓ (1) control &nbsp;(2) technological &nbsp;(3) artificial &nbsp;(4) drought &nbsp;(5) expected &nbsp;
+      (6) complicated &nbsp;(7) wasting &nbsp;(8) millions
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExPassageI()">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('i')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('i')">Reset</button>
+    <span class="score-display" id="score-i"></span>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+// ─── Tab switching ───────────────────────────────────────────────
+const tabs = ['a','b','c','d','e','f','g','h','i'];
+
+function switchTab(id) {
+  document.querySelector('.exercise.active').classList.remove('active');
+  document.getElementById('ex-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', tabs[i] === id);
+  });
+}
+
+// ─── Two Choice ─────────────────────────────────────────────────
+function chooseBtn(btn) {
+  const btns = btn.closest('.two-choice-btns').querySelectorAll('.choice-btn');
+  btns.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+// ─── Normalize ──────────────────────────────────────────────────
+function normalize(s) { return s.trim().toLowerCase().replace(/\s+/g,' '); }
+
+// ─── Update score + badge ───────────────────────────────────────
+function updateScore(id, correct, total) {
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = correct + ' / ' + total + ' correct';
+  scoreEl.classList.add('visible');
+  scoreEl.classList.toggle('perfect', correct === total);
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabIdx = tabs.indexOf(id);
+  let badge = tabBtns[tabIdx].querySelector('.tab-badge');
+  if (!badge) { badge = document.createElement('span'); badge.className = 'tab-badge'; tabBtns[tabIdx].appendChild(badge); }
+  badge.textContent = correct + '/' + total;
+  badge.classList.toggle('perfect', correct === total);
+}
+
+// ─── Exercise A (passage two-choice) ────────────────────────────
+function checkExA() {
+  const answers = document.getElementById('ql-a-data').dataset.answers.split(',');
+  const pairs = document.querySelectorAll('#ql-a .two-choice-btns');
+  let correct = 0, total = pairs.length;
+  pairs.forEach((pair, i) => {
+    const sel = pair.querySelector('.choice-btn.selected');
+    const ok = sel && sel.dataset.val === answers[i];
+    if (ok) correct++;
+    pair.querySelectorAll('.choice-btn').forEach(btn => {
+      btn.classList.remove('correct','wrong');
+      if (btn.dataset.val === answers[i]) btn.classList.add('correct');
+      else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+    });
+  });
+  updateScore('a', correct, total);
+}
+
+// ─── Exercise E two-choice ───────────────────────────────────────
+function checkExB2() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-e .question-item').forEach(item => {
+    total++;
+    const sel = item.querySelector('.choice-btn.selected');
+    const ok = sel && sel.dataset.val === item.dataset.answer;
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    item.querySelectorAll('.choice-btn').forEach(btn => {
+      btn.classList.remove('correct','wrong');
+      if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+      else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+    });
+  });
+  updateScore('e', correct, total);
+}
+
+// ─── Text input check ───────────────────────────────────────────
+function checkExText(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    const inp = item.querySelector('input[type="text"]');
+    if (!inp) return;
+    total++;
+    const answers = item.dataset.answer.split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+// ─── Passage fill check (F) ─────────────────────────────────────
+function checkExPassage(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .ex-' + id + '-input').forEach(inp => {
+    total++;
+    const answers = (inp.dataset.answer || '').split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+// ─── Passage I check ────────────────────────────────────────────
+function checkExPassageI() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-i .ex-i-input').forEach(inp => {
+    total++;
+    const answers = (inp.dataset.answer || '').split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore('i', correct, total);
+}
+
+// ─── Show answers ────────────────────────────────────────────────
+function showAnswers(id) {
+  if (id === 'a') {
+    checkExA();
+    const reveal = document.querySelector('#ql-a .answer-reveal');
+    if (reveal) reveal.style.display = 'block';
+  } else if (id === 'e') {
+    checkExB2();
+  } else if (id === 'f') {
+    checkExPassage('f');
+    const reveal = document.querySelector('#ql-f .answer-reveal');
+    if (reveal) reveal.style.display = 'block';
+  } else if (id === 'i') {
+    checkExPassageI();
+    const reveal = document.querySelector('#ql-i .answer-reveal');
+    if (reveal) reveal.style.display = 'block';
+  } else {
+    checkExText(id);
+  }
+  document.getElementById('ex-' + id).classList.add('show-answers');
+}
+
+// ─── Reset ──────────────────────────────────────────────────────
+function resetEx(id) {
+  const exEl = document.getElementById('ex-' + id);
+  exEl.classList.remove('show-answers');
+  exEl.querySelectorAll('input[type="text"]').forEach(inp => {
+    inp.value = ''; inp.classList.remove('correct','wrong');
+  });
+  exEl.querySelectorAll('.question-item').forEach(item => {
+    item.classList.remove('correct','wrong');
+  });
+  exEl.querySelectorAll('.choice-btn').forEach(btn => {
+    btn.classList.remove('selected','correct','wrong');
+  });
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = ''; scoreEl.classList.remove('visible','perfect');
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const idx = tabs.indexOf(id);
+  const badge = tabBtns[idx]?.querySelector('.tab-badge');
+  if (badge) badge.textContent = '';
+}
+
+function resetExPassage(id) {
+  resetEx(id);
+  if (id === 'a') {
+    const reveal = document.querySelector('#ql-a .answer-reveal');
+    if (reveal) reveal.style.display = '';
+  }
+  if (id === 'f') {
+    const reveal = document.querySelector('#ql-f .answer-reveal');
+    if (reveal) reveal.style.display = '';
+  }
+  if (id === 'i') {
+    const reveal = document.querySelector('#ql-i .answer-reveal');
+    if (reveal) reveal.style.display = '';
+  }
+}
+</script>
+</body>
+</html>

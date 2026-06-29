@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review 10 – Units 19 and 20 | Destination C1</title>
+<style>
+:root {
+  --accent: #2d6a4f;
+  --accent-dark: #1b4332;
+  --accent-light: #d8f3e3;
+  --accent2: #52b788;
+  --bg: #f8faf9;
+  --surface: #ffffff;
+  --border: #d8e8df;
+  --text: #1a2e23;
+  --muted: #5a7a68;
+  --sidebar-w: 260px;
+  --correct: #2d6a4f;
+  --wrong: #c1121f;
+  --correct-bg: #d8f3e3;
+  --wrong-bg: #ffe5e5;
+  --yellow-bg: #fff9e6;
+  --yellow-border: #f9c74f;
+  --blue-bg: #e8f4fd;
+  --blue-border: #4ea8de;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: #b7d5c4; border-radius: 4px; }
+
+#sidebar-header {
+  padding: 16px 14px 12px;
+  background: var(--accent-dark);
+  color: #fff;
+  flex-shrink: 0;
+}
+#sidebar-header h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+#sidebar-header p { font-size: 11px; opacity: 0.7; margin-top: 3px; }
+
+#sidebar nav a {
+  display: block;
+  padding: 9px 14px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 12.5px;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+#sidebar nav a:hover { color: var(--accent); background: var(--accent-light); }
+#sidebar nav a.active {
+  color: var(--accent);
+  background: var(--accent-light);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+.nav-group {
+  padding: 8px 14px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  background: #f0f7f3;
+  border-top: 1px solid var(--border);
+}
+
+/* Score panel */
+#score-panel {
+  margin: 0 12px 12px;
+  padding: 12px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  border: 1px solid var(--accent2);
+  flex-shrink: 0;
+}
+#score-panel .score-label { font-size: 11px; font-weight: 600; color: var(--accent-dark); margin-bottom: 6px; }
+#score-bar-bg { background: #b7d5c4; border-radius: 100px; height: 6px; overflow: hidden; margin-bottom: 6px; }
+#score-bar-fill { height: 100%; background: var(--accent); border-radius: 100px; transition: width 0.5s ease; width: 0%; }
+#score-text { font-size: 12px; color: var(--accent-dark); font-weight: 600; }
+
+/* ── MAIN ── */
+#main {
+  flex: 1;
+  padding: 32px 40px 60px;
+  max-width: 900px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-bottom: 4px;
+}
+.page-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+/* ── SECTIONS ── */
+.section {
+  margin-bottom: 48px;
+  scroll-margin-top: 20px;
+}
+.section-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+}
+
+/* Exercise label */
+.exercise {
+  margin-bottom: 32px;
+}
+.exercise-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.ex-letter {
+  width: 28px;
+  height: 28px;
+  background: var(--accent-dark);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ex-instruction {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Word box */
+.word-box {
+  background: #f0f7f3;
+  border: 1px solid var(--accent2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--accent-dark);
+  text-align: center;
+  line-height: 2;
+}
+.word-box span { margin: 0 6px; }
+
+/* Fill-in items */
+.fill-list { list-style: none; }
+.fill-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 0;
+  border-bottom: 1px solid #edf2ef;
+  flex-wrap: wrap;
+}
+.fill-item:last-child { border-bottom: none; }
+.item-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  min-width: 22px;
+  flex-shrink: 0;
+}
+.item-text { flex: 1; }
+.fill-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  min-width: 120px;
+  outline: none;
+  transition: border-color 0.2s;
+  text-align: center;
+}
+.fill-input:focus { border-bottom-color: var(--accent-dark); }
+.fill-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.fill-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Multiple choice */
+.mc-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+.mc-item:last-child { border-bottom: none; }
+.mc-question { margin-bottom: 8px; font-size: 13.5px; }
+.mc-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 6px;
+}
+.mc-btn {
+  padding: 6px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 12.5px;
+  font-family: inherit;
+  text-align: left;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.mc-btn:hover { border-color: var(--accent2); background: var(--accent-light); }
+.mc-btn.selected { border-color: var(--accent); background: var(--accent-light); }
+.mc-btn.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); font-weight: 600; }
+.mc-btn.wrong { border-color: var(--wrong); background: var(--wrong-bg); color: var(--wrong); }
+
+/* Choose between two */
+.choose-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13.5px;
+}
+.choose-item:last-child { border-bottom: none; }
+.choose-pair { display: inline-flex; gap: 0; border-radius: 6px; overflow: hidden; border: 1.5px solid var(--border); }
+.choose-btn {
+  padding: 3px 10px;
+  border: none;
+  background: var(--surface);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.15s;
+  color: var(--muted);
+}
+.choose-btn + .choose-btn { border-left: 1.5px solid var(--border); }
+.choose-btn:hover { background: var(--accent-light); color: var(--accent); }
+.choose-btn.selected { background: var(--accent); color: #fff; }
+.choose-btn.correct { background: var(--correct); color: #fff; }
+.choose-btn.wrong { background: var(--wrong); color: #fff; }
+
+/* Tick exercise (D) */
+.tick-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+.tick-item:last-child { border-bottom: none; }
+.tick-num { font-size: 12px; font-weight: 700; color: var(--muted); min-width: 22px; }
+.tick-text { flex: 1; font-size: 13.5px; }
+.tick-text b { color: var(--accent-dark); }
+.tick-actions { display: flex; gap: 6px; align-items: center; }
+.tick-btn {
+  padding: 3px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.tick-btn.tick-yes { color: var(--correct); }
+.tick-btn.tick-yes:hover, .tick-btn.tick-yes.selected { background: var(--correct-bg); border-color: var(--correct); }
+.tick-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  min-width: 100px;
+  outline: none;
+}
+.tick-input:focus { border-bottom-color: var(--accent-dark); }
+.tick-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.tick-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Passage / text exercise */
+.passage-box {
+  background: var(--yellow-bg);
+  border: 1px solid var(--yellow-border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  font-size: 13.5px;
+  line-height: 2;
+}
+.passage-box h3 {
+  font-family: 'Georgia', serif;
+  font-size: 16px;
+  color: var(--accent-dark);
+  margin-bottom: 10px;
+}
+.passage-box.blue-box {
+  background: var(--blue-bg);
+  border-color: var(--blue-border);
+}
+.gap-num {
+  font-weight: 700;
+  color: var(--accent-dark);
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+/* Check / Reset buttons */
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.btn-check {
+  padding: 8px 20px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-check:hover { background: var(--accent-dark); }
+.btn-reset {
+  padding: 8px 16px;
+  background: var(--surface);
+  color: var(--muted);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-reset:hover { border-color: var(--wrong); color: var(--wrong); }
+
+/* Answer reveal */
+.answer-reveal {
+  display: none;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--accent-dark);
+  background: var(--accent-light);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border-left: 3px solid var(--accent);
+}
+.answer-reveal.visible { display: block; }
+
+/* H exercise - two-column fill */
+.h-item {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13px;
+}
+.h-item:last-child { border-bottom: none; }
+.h-small-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 13px;
+  font-family: inherit;
+  width: 90px;
+  outline: none;
+  text-align: center;
+}
+.h-small-input:focus { border-bottom-color: var(--accent-dark); }
+.h-small-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.h-small-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+.h-tick {
+  padding: 3px 8px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 11px;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.h-tick.selected { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.h-tick.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); font-weight: 700; }
+.h-tick.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* P exercise - word grid */
+.word-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.word-chip {
+  padding: 6px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.word-chip:hover { border-color: var(--accent2); background: var(--accent-light); }
+.word-chip.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 600; }
+.word-chip.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); font-weight: 600; }
+.word-chip.wrong { border-color: var(--wrong); background: var(--wrong-bg); color: var(--wrong); }
+.word-chip.missed { border-color: var(--yellow-border); background: var(--yellow-bg); }
+
+/* Key-word transform */
+.kw-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13px;
+}
+.kw-item:last-child { border-bottom: none; }
+.kw-key {
+  display: inline-block;
+  background: var(--accent-dark);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  margin: 4px 0 6px;
+}
+.kw-first { font-size: 13px; margin-bottom: 4px; }
+.kw-second { font-size: 13px; line-height: 2; }
+.kw-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 6px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  min-width: 200px;
+  outline: none;
+  text-align: center;
+}
+.kw-input:focus { border-bottom-color: var(--accent-dark); }
+.kw-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.kw-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Marks note */
+.marks-note {
+  font-size: 11px;
+  color: var(--muted);
+  font-style: italic;
+  text-align: right;
+  margin-top: 6px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #sidebar { display: none; }
+  #main { padding: 20px 16px 40px; }
+  .mc-options { grid-template-columns: 1fr 1fr; }
+}
+
+/* Progress toast */
+#toast {
+  position: fixed;
+  bottom: 20px; right: 20px;
+  background: var(--accent-dark);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  display: none;
+  z-index: 9999;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div id="sidebar-header">
+    <h2>Review 10</h2>
+    <p>Units 19 and 20</p>
+  </div>
+
+  <div id="score-panel">
+    <div class="score-label">Progress</div>
+    <div id="score-bar-bg"><div id="score-bar-fill"></div></div>
+    <div id="score-text">0 / 0 answered</div>
+  </div>
+
+  <nav>
+    <div class="nav-group">Exercises</div>
+    <a href="#exA">A — Book review (one word)</a>
+    <a href="#exB">B — Word formation</a>
+    <a href="#exC">C — One word per gap</a>
+    <a href="#exD">D — Key-word transform</a>
+    <a href="#exE">E — Multiple choice</a>
+  </nav>
+</aside>
+
+<!-- MAIN -->
+<main id="main">
+  <div class="page-title">Review 10 — Vocabulary</div>
+  <div class="page-subtitle">Units 19 and 20 &nbsp;·&nbsp; Destination C1 &amp; C2</div>
+
+  <!-- Exercise A -->
+  <div class="exercise" id="exA">
+    <div class="exercise-label">
+      <div class="ex-letter">A</div>
+      <div class="ex-instruction">Write one word in each gap.</div>
+    </div>
+    <div class="passage-box">
+      <h3 style="font-family:'Georgia',serif; font-size:17px; color:#c1121f; text-align:center; margin-bottom:10px;">Book review</h3>
+      Rarely <span class="gap-num">(1)</span> <input class="fill-input" data-answer="can" placeholder="..."> one find as clear an account of social change as Olivia Harris's <em>Changing Britain</em>. Those who prefer to bury their heads in the <span class="gap-num">(2)</span> <input class="fill-input" data-answer="sand" placeholder="..."> and imagine that Britain is the same as it was even 20 years ago are in for a shock. Harris convincingly argues that <span class="gap-num">(3)</span> <input class="fill-input" data-answer="not" placeholder="..."> only have those <span class="gap-num">(4)</span> <input class="fill-input" data-answer="in" placeholder="..."> authority increased their power, but ordinary people are also less likely to stand <span class="gap-num">(5)</span> <input class="fill-input" data-answer="up" placeholder="..."> to those in office. At <span class="gap-num">(6)</span> <input class="fill-input" data-answer="no" placeholder="..."> point in the book <span class="gap-num">(7)</span> <input class="fill-input" data-answer="are" placeholder="..."> any of Harris's claims presented without evidence, and neither does she talk <span class="gap-num">(8)</span> <input class="fill-input" data-answer="down" placeholder="..."> to the non-expert. Her main conclusion, that <span class="gap-num">(9)</span> <input class="fill-input" data-answer="only|unless" placeholder="..."> until we all realise that there is a problem and decide to confront the powers that <span class="gap-num">(10)</span> <input class="fill-input" data-answer="be" placeholder="..."> will the situation improve, is powerful and irresistible.
+    </div>
+    <div class="marks-note">(1 mark per answer)</div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkAllFillInSection('exA')">Check answers</button>
+      <button class="btn-reset" onclick="resetAllFillInSection('exA')">Reset</button>
+    </div>
+  </div>
+
+  <!-- Exercise B -->
+  <div class="exercise" id="exB">
+    <div class="exercise-label">
+      <div class="ex-letter">B</div>
+      <div class="ex-instruction">Complete the sentences by changing the form of the word in capitals.</div>
+    </div>
+    <ol class="fill-list" id="B-list">
+      <li class="fill-item"><span class="item-num">11</span><span class="item-text">The local people then leave the clay to <input class="fill-input" data-answer="harden" placeholder="..."> in the sun, creating simple bricks. <b>HARD</b></span></li>
+      <li class="fill-item"><span class="item-num">12</span><span class="item-text">The attack in the city centre last night <input class="fill-input" data-answer="exemplifies" placeholder="..."> the kind of behaviour amongst young people that many object to. <b>EXAMPLE</b></span></li>
+      <li class="fill-item"><span class="item-num">13</span><span class="item-text">I was a bit <input class="fill-input" data-answer="demoralised|demoralized" placeholder="..."> by my performance in the first exam, but I decided to make an extra effort in the ones left. <b>MORAL</b></span></li>
+      <li class="fill-item"><span class="item-num">14</span><span class="item-text">When confronted with a mass of red tape, many people feel a sense of <input class="fill-input" data-answer="powerlessness" placeholder="...">. <b>POWER</b></span></li>
+      <li class="fill-item"><span class="item-num">15</span><span class="item-text">I really believe that it would be a major mistake to <input class="fill-input" data-answer="criminalise|criminalize" placeholder="..."> any drugs that are currently illegal. <b>CRIME</b></span></li>
+      <li class="fill-item"><span class="item-num">16</span><span class="item-text">Local elections can often seem <input class="fill-input" data-answer="insignificant" placeholder="...">, but in fact they send an important signal to the government. <b>SIGNIFY</b></span></li>
+      <li class="fill-item"><span class="item-num">17</span><span class="item-text">Suddenly, without <input class="fill-input" data-answer="provocation" placeholder="...">, the dog sank its teeth into my leg. <b>PROVOKE</b></span></li>
+      <li class="fill-item"><span class="item-num">18</span><span class="item-text">There's so much fighting between rival groups that the country has become practically <input class="fill-input" data-answer="ungovernable" placeholder="...">. <b>GOVERN</b></span></li>
+    </ol>
+    <div class="marks-note">(1 mark per answer)</div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkFill('B-list')">Check answers</button>
+      <button class="btn-reset" onclick="resetFill('B-list')">Reset</button>
+    </div>
+  </div>
+
+  <!-- Exercise C -->
+  <div class="exercise" id="exC">
+    <div class="exercise-label">
+      <div class="ex-letter">C</div>
+      <div class="ex-instruction">Write one word in each gap.</div>
+    </div>
+    <ol class="fill-list" id="C-list">
+      <li class="fill-item"><span class="item-num">19</span><span class="item-text">I'm in bed by eleven when I've got lectures the next day <input class="fill-input" data-answer="as" placeholder="..."> a rule.</span></li>
+      <li class="fill-item"><span class="item-num">20</span><span class="item-text">Am I right <input class="fill-input" data-answer="in" placeholder="..."> saying that you used to live in Saudi Arabia?</span></li>
+      <li class="fill-item"><span class="item-num">21</span><span class="item-text">Of course, this decision is subject <input class="fill-input" data-answer="to" placeholder="..."> confirmation by the whole company board.</span></li>
+      <li class="fill-item"><span class="item-num">22</span><span class="item-text">I've <input class="fill-input" data-answer="served" placeholder="..."> my sentence, but it's not easy fitting back into society.</span></li>
+      <li class="fill-item"><span class="item-num">23</span><span class="item-text">The hotel manager promised to keep my valuables <input class="fill-input" data-answer="under" placeholder="..."> lock and key.</span></li>
+      <li class="fill-item"><span class="item-num">24</span><span class="item-text">Politicians should remember that no one is <input class="fill-input" data-answer="above" placeholder="..."> the law.</span></li>
+      <li class="fill-item"><span class="item-num">25</span><span class="item-text">The rebel group in the north of the country have laid <input class="fill-input" data-answer="down" placeholder="..."> their arms and agreed to discuss the situation.</span></li>
+      <li class="fill-item"><span class="item-num">26</span><span class="item-text">The headteacher decided to <input class="fill-input" data-answer="make" placeholder="..."> an example of Richard and exclude him from the school.</span></li>
+    </ol>
+    <div class="marks-note">(1 mark per answer)</div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkFill('C-list')">Check answers</button>
+      <button class="btn-reset" onclick="resetFill('C-list')">Reset</button>
+    </div>
+  </div>
+
+  <!-- Exercise D -->
+  <div class="exercise" id="exD">
+    <div class="exercise-label">
+      <div class="ex-letter">D</div>
+      <div class="ex-instruction">Complete the second sentence so that it has a similar meaning to the first sentence, using the word given. Do not change the word given. You must use between three and eight words, including the word given.</div>
+    </div>
+    <div id="D-list">
+
+      <div class="kw-item">
+        <div class="kw-first"><b>27</b> &nbsp;I'd like to remind you that there are no circumstances in which employees are allowed to leave early.</div>
+        <div class="kw-key">UNDER</div>
+        <div class="kw-second">I'd like to remind you that <input class="kw-input" data-answer="under no circumstances are" placeholder="..."> employees allowed to leave early.</div>
+      </div>
+
+      <div class="kw-item">
+        <div class="kw-first"><b>28</b> &nbsp;I wouldn't confront the manager if I were you.</div>
+        <div class="kw-key">HORNS</div>
+        <div class="kw-second">I wouldn't <input class="kw-input" data-answer="lock horns with" placeholder="..."> the manager if I were you.</div>
+      </div>
+
+      <div class="kw-item">
+        <div class="kw-first"><b>29</b> &nbsp;Passengers can only board the plane when all bags have been checked.</div>
+        <div class="kw-key">AFTER</div>
+        <div class="kw-second">Only <input class="kw-input" data-answer="after all bags have been checked can passengers" placeholder="..."> board the plane.</div>
+      </div>
+
+      <div class="kw-item">
+        <div class="kw-first"><b>30</b> &nbsp;The website wouldn't allow me to access certain pages.</div>
+        <div class="kw-key">DENIED</div>
+        <div class="kw-second">The website <input class="kw-input" data-answer="denied me access to" placeholder="..."> certain pages.</div>
+      </div>
+
+      <div class="kw-item">
+        <div class="kw-first"><b>31</b> &nbsp;The kids dived straight into the pool when we arrived.</div>
+        <div class="kw-key">HAD</div>
+        <div class="kw-second">No <input class="kw-input" data-answer="sooner had we arrived than" placeholder="..."> the kids dived into the pool.</div>
+      </div>
+
+      <div class="kw-item">
+        <div class="kw-first"><b>32</b> &nbsp;A reliable source told me that the local newspaper is going to shut down.</div>
+        <div class="kw-key">AUTHORITY</div>
+        <div class="kw-second">I <input class="kw-input" data-answer="have it on good authority" placeholder="..."> that the local newspaper is going to shut down.</div>
+      </div>
+
+      <div class="kw-item">
+        <div class="kw-first"><b>33</b> &nbsp;There was so much concern about the situation that the police were called.</div>
+        <div class="kw-key">SO</div>
+        <div class="kw-second">The police were called, <input class="kw-input" data-answer="so great was the concern about the situation" placeholder="..."> there.</div>
+      </div>
+
+      <div class="kw-item">
+        <div class="kw-first"><b>34</b> &nbsp;Why do you think you are allowed to criticise me like that?</div>
+        <div class="kw-key">GIVES</div>
+        <div class="kw-second">What do you think <input class="kw-input" data-answer="gives you the right" placeholder="..."> to criticise me like that?</div>
+      </div>
+
+    </div>
+    <div class="marks-note">(2 marks per answer)</div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkKW('D-list')">Check answers</button>
+      <button class="btn-reset" onclick="resetKW('D-list')">Reset</button>
+    </div>
+  </div>
+
+  <!-- Exercise E -->
+  <div class="exercise" id="exE">
+    <div class="exercise-label">
+      <div class="ex-letter">E</div>
+      <div class="ex-instruction">Choose the correct answer.</div>
+    </div>
+    <div id="E-list">
+
+      <div class="mc-item">
+        <div class="mc-question"><b>35</b> &nbsp;There has been a lot of <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> surrounding the government's proposed scheme.</div>
+        <div class="mc-options">
+          <button class="mc-btn" data-q="E35" data-opt="A" data-answer="A">A controversy</button>
+          <button class="mc-btn" data-q="E35" data-opt="B" data-answer="A">B consent</button>
+          <button class="mc-btn" data-q="E35" data-opt="C" data-answer="A">C conformity</button>
+          <button class="mc-btn" data-q="E35" data-opt="D" data-answer="A">D consequence</button>
+        </div>
+      </div>
+
+      <div class="mc-item">
+        <div class="mc-question"><b>36</b> &nbsp;Our town has a real problem with youth crime, <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> do many other British towns.</div>
+        <div class="mc-options">
+          <button class="mc-btn" data-q="E36" data-opt="A" data-answer="D">A so</button>
+          <button class="mc-btn" data-q="E36" data-opt="B" data-answer="D">B nor</button>
+          <button class="mc-btn" data-q="E36" data-opt="C" data-answer="D">C as</button>
+          <button class="mc-btn" data-q="E36" data-opt="D" data-answer="D">D like</button>
+        </div>
+      </div>
+
+      <div class="mc-item">
+        <div class="mc-question"><b>37</b> &nbsp;Warning: anyone caught stealing from these premises will be <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>.</div>
+        <div class="mc-options">
+          <button class="mc-btn" data-q="E37" data-opt="A" data-answer="C">A advocated</button>
+          <button class="mc-btn" data-q="E37" data-opt="B" data-answer="C">B undermined</button>
+          <button class="mc-btn" data-q="E37" data-opt="C" data-answer="C">C prosecuted</button>
+          <button class="mc-btn" data-q="E37" data-opt="D" data-answer="C">D enforced</button>
+        </div>
+      </div>
+
+      <div class="mc-item">
+        <div class="mc-question"><b>38</b> &nbsp;The local authorities need to <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> down on illegal parking, in my opinion.</div>
+        <div class="mc-options">
+          <button class="mc-btn" data-q="E38" data-opt="A" data-answer="D">A hit</button>
+          <button class="mc-btn" data-q="E38" data-opt="B" data-answer="D">B force</button>
+          <button class="mc-btn" data-q="E38" data-opt="C" data-answer="D">C move</button>
+          <button class="mc-btn" data-q="E38" data-opt="D" data-answer="D">D crack</button>
+        </div>
+      </div>
+
+      <div class="mc-item">
+        <div class="mc-question"><b>39</b> &nbsp;If the service isn't up to standard, I think you have <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> right to complain.</div>
+        <div class="mc-options">
+          <button class="mc-btn" data-q="E39" data-opt="A" data-answer="D">A all</button>
+          <button class="mc-btn" data-q="E39" data-opt="B" data-answer="D">B each</button>
+          <button class="mc-btn" data-q="E39" data-opt="C" data-answer="D">C much</button>
+          <button class="mc-btn" data-q="E39" data-opt="D" data-answer="D">D every</button>
+        </div>
+      </div>
+
+      <div class="mc-item">
+        <div class="mc-question"><b>40</b> &nbsp;Jim's a tough character and certainly won't let anyone push him <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>.</div>
+        <div class="mc-options">
+          <button class="mc-btn" data-q="E40" data-opt="A" data-answer="C">A up</button>
+          <button class="mc-btn" data-q="E40" data-opt="B" data-answer="C">B off</button>
+          <button class="mc-btn" data-q="E40" data-opt="C" data-answer="C">C around</button>
+          <button class="mc-btn" data-q="E40" data-opt="D" data-answer="C">D through</button>
+        </div>
+      </div>
+
+      <div class="mc-item">
+        <div class="mc-question"><b>41</b> &nbsp;The <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> I don't understand is why Emily lets her boyfriend get away with it.</div>
+        <div class="mc-options">
+          <button class="mc-btn" data-q="E41" data-opt="A" data-answer="D">A reason</button>
+          <button class="mc-btn" data-q="E41" data-opt="B" data-answer="D">B object</button>
+          <button class="mc-btn" data-q="E41" data-opt="C" data-answer="D">C item</button>
+          <button class="mc-btn" data-q="E41" data-opt="D" data-answer="D">D thing</button>
+        </div>
+      </div>
+
+      <div class="mc-item">
+        <div class="mc-question"><b>42</b> &nbsp;My uncle pulled a few <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> and got me a job in the company where he works.</div>
+        <div class="mc-options">
+          <button class="mc-btn" data-q="E42" data-opt="A" data-answer="B">A ropes</button>
+          <button class="mc-btn" data-q="E42" data-opt="B" data-answer="B">B strings</button>
+          <button class="mc-btn" data-q="E42" data-opt="C" data-answer="B">C threads</button>
+          <button class="mc-btn" data-q="E42" data-opt="D" data-answer="B">D chords</button>
+        </div>
+      </div>
+
+    </div>
+    <div class="marks-note">(1 mark per answer) &nbsp;&nbsp; Total mark: ......../50</div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkMC('E-list')">Check answers</button>
+      <button class="btn-reset" onclick="resetMC('E-list')">Reset</button>
+    </div>
+  </div>
+
+</main>
+
+<div id="toast"></div>
+
+<script>
+// ── UTILITY ──────────────────────────────────────────────
+function normalize(s) {
+  return s.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+function isCorrect(input, answer) {
+  const val = normalize(input.value);
+  const alts = answer.split('|').map(a => normalize(a));
+  return alts.includes(val);
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2000);
+}
+
+// ── SCORE TRACKING ───────────────────────────────────────
+function updateScore() {
+  const all = document.querySelectorAll('.fill-input, .kw-input');
+  const answered = [...all].filter(i => i.value.trim() !== '').length;
+  const total = all.length;
+  const pct = total ? (answered / total * 100).toFixed(0) : 0;
+  document.getElementById('score-bar-fill').style.width = pct + '%';
+  document.getElementById('score-text').textContent = answered + ' / ' + total + ' answered';
+}
+document.addEventListener('input', updateScore);
+
+// ── FILL IN THE BLANK ────────────────────────────────────
+function checkFill(listId) {
+  const list = document.getElementById(listId);
+  let correct = 0, total = 0;
+  list.querySelectorAll('.fill-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetFill(listId) {
+  document.getElementById(listId).querySelectorAll('.fill-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+function checkAllFillInSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  let correct = 0, total = 0;
+  section.querySelectorAll('.fill-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetAllFillInSection(sectionId) {
+  document.getElementById(sectionId).querySelectorAll('.fill-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+// ── MULTIPLE CHOICE ──────────────────────────────────────
+document.addEventListener('click', e => {
+  if (!e.target.matches('.mc-btn')) return;
+  const btn = e.target;
+  const q = btn.dataset.q;
+  document.querySelectorAll(`.mc-btn[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+});
+function checkMC(listId) {
+  const list = document.getElementById(listId);
+  const questions = {};
+  list.querySelectorAll('.mc-btn').forEach(btn => {
+    if (!questions[btn.dataset.q]) questions[btn.dataset.q] = [];
+    questions[btn.dataset.q].push(btn);
+  });
+  let correct = 0, total = Object.keys(questions).length;
+  Object.values(questions).forEach(btns => {
+    const answer = btns[0].dataset.answer;
+    btns.forEach(b => {
+      b.classList.remove('correct', 'wrong');
+      if (b.classList.contains('selected')) {
+        if (b.dataset.opt === answer) { b.classList.add('correct'); correct++; }
+        else b.classList.add('wrong');
+      } else if (b.dataset.opt === answer) {
+        b.classList.add('correct');
+      }
+    });
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetMC(listId) {
+  document.getElementById(listId).querySelectorAll('.mc-btn').forEach(b => {
+    b.classList.remove('selected', 'correct', 'wrong');
+  });
+}
+
+// ── KEY-WORD TRANSFORM ────────────────────────────────────
+function checkKW(listId) {
+  const list = document.getElementById(listId);
+  let correct = 0, total = 0;
+  list.querySelectorAll('.kw-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetKW(listId) {
+  document.getElementById(listId).querySelectorAll('.kw-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+// ── SIDEBAR ACTIVE ────────────────────────────────────────
+const sections = document.querySelectorAll('.exercise[id]');
+const navLinks = document.querySelectorAll('#sidebar nav a');
+function onScroll() {
+  let current = '';
+  sections.forEach(s => {
+    if (s.getBoundingClientRect().top <= 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', onScroll);
+onScroll();
+
+// ── INIT ──────────────────────────────────────────────────
+updateScore();
+</script>
+</body>
+</html>

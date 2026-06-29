@@ -1,0 +1,55 @@
+{
+  "title": "Error correction",
+  "type": "wrong_word_correction",
+  "instruction": "Each of the words in bold is in the wrong sentence. Write the correct word.",
+  "questions": [
+    {
+      "id": 1,
+      "sentence": "I was first respected to Jake at a party.",
+      "wrong_word": "respected",
+      "answer": "introduced"
+    },
+    {
+      "id": 2,
+      "sentence": "I shouldn’t have rented you. Now I know you can’t keep a secret!",
+      "wrong_word": "rented",
+      "answer": "trusted"
+    },
+    {
+      "id": 3,
+      "sentence": "Our house is being recognised so we’re staying with my grandparents at the moment.",
+      "wrong_word": "recognised",
+      "answer": "decorated"
+    },
+    {
+      "id": 4,
+      "sentence": "Everyone apologised Mr Turner because he was strict but fair.",
+      "wrong_word": "apologised",
+      "answer": "respected"
+    },
+    {
+      "id": 5,
+      "sentence": "Have you introduced to Kelly for losing her CD?",
+      "wrong_word": "introduced",
+      "answer": "apologised"
+    },
+    {
+      "id": 6,
+      "sentence": "Sarah said I was a liar but Carol trusted me and said I wasn’t.",
+      "wrong_word": "trusted",
+      "answer": "defended"
+    },
+    {
+      "id": 7,
+      "sentence": "We decorated a small house in the countryside for the summer.",
+      "wrong_word": "decorated",
+      "answer": "rented"
+    },
+    {
+      "id": 8,
+      "sentence": "No one defended Phil when he came to the party dressed as an old man.",
+      "wrong_word": "defended",
+      "answer": "recognised"
+    }
+  ]
+}

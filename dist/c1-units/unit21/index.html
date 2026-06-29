@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 21 – Noun Phrases | Destination C1</title>
+<style>
+:root {
+  --accent: #2d6a4f;
+  --accent-dark: #1b4332;
+  --accent-light: #d8f3e3;
+  --accent2: #52b788;
+  --bg: #f8faf9;
+  --surface: #ffffff;
+  --border: #d8e8df;
+  --text: #1a2e23;
+  --muted: #5a7a68;
+  --sidebar-w: 260px;
+  --correct: #2d6a4f;
+  --wrong: #c1121f;
+  --correct-bg: #d8f3e3;
+  --wrong-bg: #ffe5e5;
+  --yellow-bg: #fff9e6;
+  --yellow-border: #f9c74f;
+  --blue-bg: #e8f4fd;
+  --blue-border: #4ea8de;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: #b7d5c4; border-radius: 4px; }
+
+#sidebar-header {
+  padding: 16px 14px 12px;
+  background: var(--accent-dark);
+  color: #fff;
+  flex-shrink: 0;
+}
+#sidebar-header h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+#sidebar-header p { font-size: 11px; opacity: 0.7; margin-top: 3px; }
+
+#sidebar nav a {
+  display: block;
+  padding: 9px 14px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 12.5px;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+#sidebar nav a:hover { color: var(--accent); background: var(--accent-light); }
+#sidebar nav a.active {
+  color: var(--accent);
+  background: var(--accent-light);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+.nav-group {
+  padding: 8px 14px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  background: #f0f7f3;
+  border-top: 1px solid var(--border);
+}
+
+/* Score panel */
+#score-panel {
+  margin: 0 12px 12px;
+  padding: 12px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  border: 1px solid var(--accent2);
+  flex-shrink: 0;
+}
+#score-panel .score-label { font-size: 11px; font-weight: 600; color: var(--accent-dark); margin-bottom: 6px; }
+#score-bar-bg { background: #b7d5c4; border-radius: 100px; height: 6px; overflow: hidden; margin-bottom: 6px; }
+#score-bar-fill { height: 100%; background: var(--accent); border-radius: 100px; transition: width 0.5s ease; width: 0%; }
+#score-text { font-size: 12px; color: var(--accent-dark); font-weight: 600; }
+
+/* ── MAIN ── */
+#main {
+  flex: 1;
+  padding: 32px 40px 60px;
+  max-width: 900px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-bottom: 4px;
+}
+.page-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+/* ── SECTIONS ── */
+.section {
+  margin-bottom: 48px;
+  scroll-margin-top: 20px;
+}
+.section-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+}
+
+/* Exercise label */
+.exercise {
+  margin-bottom: 32px;
+}
+.exercise-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.ex-letter {
+  width: 28px;
+  height: 28px;
+  background: var(--accent-dark);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ex-instruction {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Word box */
+.word-box {
+  background: #f0f7f3;
+  border: 1px solid var(--accent2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--accent-dark);
+  text-align: center;
+  line-height: 2;
+}
+.word-box span { margin: 0 6px; }
+
+/* Fill-in items */
+.fill-list { list-style: none; }
+.fill-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 0;
+  border-bottom: 1px solid #edf2ef;
+  flex-wrap: wrap;
+}
+.fill-item:last-child { border-bottom: none; }
+.item-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  min-width: 22px;
+  flex-shrink: 0;
+}
+.item-text { flex: 1; }
+.fill-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  min-width: 120px;
+  outline: none;
+  transition: border-color 0.2s;
+  text-align: center;
+}
+.fill-input:focus { border-bottom-color: var(--accent-dark); }
+.fill-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.fill-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Multiple choice */
+.mc-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+.mc-item:last-child { border-bottom: none; }
+.mc-question { margin-bottom: 8px; font-size: 13.5px; }
+.mc-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 6px;
+}
+.mc-btn {
+  padding: 6px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 12.5px;
+  font-family: inherit;
+  text-align: left;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.mc-btn:hover { border-color: var(--accent2); background: var(--accent-light); }
+.mc-btn.selected { border-color: var(--accent); background: var(--accent-light); }
+.mc-btn.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); font-weight: 600; }
+.mc-btn.wrong { border-color: var(--wrong); background: var(--wrong-bg); color: var(--wrong); }
+
+/* Choose between two */
+.choose-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13.5px;
+}
+.choose-item:last-child { border-bottom: none; }
+.choose-pair { display: inline-flex; gap: 0; border-radius: 6px; overflow: hidden; border: 1.5px solid var(--border); }
+.choose-btn {
+  padding: 3px 10px;
+  border: none;
+  background: var(--surface);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.15s;
+  color: var(--muted);
+}
+.choose-btn + .choose-btn { border-left: 1.5px solid var(--border); }
+.choose-btn:hover { background: var(--accent-light); color: var(--accent); }
+.choose-btn.selected { background: var(--accent); color: #fff; }
+.choose-btn.correct { background: var(--correct); color: #fff; }
+.choose-btn.wrong { background: var(--wrong); color: #fff; }
+
+/* Tick exercise */
+.tick-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+.tick-item:last-child { border-bottom: none; }
+.tick-num { font-size: 12px; font-weight: 700; color: var(--muted); min-width: 22px; }
+.tick-text { flex: 1; font-size: 13.5px; }
+.tick-text b { color: var(--accent-dark); }
+.tick-actions { display: flex; gap: 6px; align-items: center; }
+.tick-btn {
+  padding: 3px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.tick-btn.tick-yes { color: var(--correct); }
+.tick-btn.tick-yes:hover, .tick-btn.tick-yes.selected { background: var(--correct-bg); border-color: var(--correct); }
+.tick-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  min-width: 120px;
+  outline: none;
+}
+.tick-input:focus { border-bottom-color: var(--accent-dark); }
+.tick-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.tick-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Passage / text exercise */
+.passage-box {
+  background: var(--yellow-bg);
+  border: 1px solid var(--yellow-border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  font-size: 13.5px;
+  line-height: 2;
+}
+.passage-box h3 {
+  font-family: 'Georgia', serif;
+  font-size: 16px;
+  color: var(--accent-dark);
+  margin-bottom: 10px;
+}
+.passage-box.blue-box {
+  background: var(--blue-bg);
+  border-color: var(--blue-border);
+}
+.gap-num {
+  font-weight: 700;
+  color: var(--accent-dark);
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+/* Check / Reset buttons */
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.btn-check {
+  padding: 8px 20px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-check:hover { background: var(--accent-dark); }
+.btn-reset {
+  padding: 8px 16px;
+  background: var(--surface);
+  color: var(--muted);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-reset:hover { border-color: var(--wrong); color: var(--wrong); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  #sidebar { display: none; }
+  #main { padding: 20px 16px 40px; }
+  .mc-options { grid-template-columns: 1fr 1fr; }
+}
+
+/* Progress toast */
+#toast {
+  position: fixed;
+  bottom: 20px; right: 20px;
+  background: var(--accent-dark);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  display: none;
+  z-index: 9999;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div id="sidebar-header">
+    <h2>Unit 21</h2>
+    <p>Noun Phrases</p>
+  </div>
+
+  <div id="score-panel">
+    <div class="score-label">Progress</div>
+    <div id="score-bar-bg"><div id="score-bar-fill"></div></div>
+    <div id="score-text">0 / 0 answered</div>
+  </div>
+
+  <nav>
+    <div class="nav-group">Grammar</div>
+    <a href="#exA">A — Circle correct word</a>
+    <a href="#exB">B — Correct verb form</a>
+    <a href="#exC">C — Tick or correct bold word</a>
+    <a href="#exD">D — Pairs: one word, two uses</a>
+    <a href="#exE">E — Rewrite using bold word</a>
+    <a href="#exF">F — Circle correct option</a>
+    <a href="#exG">G — Articles: a, an, the or –</a>
+    <a href="#exH">H — Multiple choice</a>
+    <a href="#exI">I — Artists and money (passage)</a>
+  </nav>
+</aside>
+
+<!-- MAIN -->
+<main id="main">
+  <div class="page-title">Unit 21 — Grammar</div>
+  <div class="page-subtitle">Noun Phrases &nbsp;·&nbsp; Destination C1 &amp; C2</div>
+
+  <!-- ════════ EXERCISE A ════════ -->
+  <div class="section" id="sec-grammar">
+    <div class="section-title">Grammar exercises</div>
+
+    <div class="exercise" id="exA">
+      <div class="exercise-label">
+        <div class="ex-letter">A</div>
+        <div class="ex-instruction">Circle the correct word. If both are correct, circle both.</div>
+      </div>
+      <div id="A-list">
+        <div class="choose-item"><span class="item-num">1</span>&nbsp;Are those <span class="choose-pair"><button class="choose-btn" data-q="A1" data-opt="A" data-answer="A" onclick="chooseOption(this)">sheep</button><button class="choose-btn" data-q="A1" data-opt="B" data-answer="A" onclick="chooseOption(this)">sheeps</button></span> or goats in that field over there?</div>
+        <div class="choose-item"><span class="item-num">2</span>&nbsp;How many <span class="choose-pair"><button class="choose-btn" data-q="A2" data-opt="A" data-answer="B" onclick="chooseOption(this)">sister-in-laws</button><button class="choose-btn" data-q="A2" data-opt="B" data-answer="B" onclick="chooseOption(this)">sisters-in-law</button></span> have you got?</div>
+        <div class="choose-item"><span class="item-num">3</span>&nbsp;Look at those lovely little <span class="choose-pair"><button class="choose-btn" data-q="A3" data-opt="A" data-answer="A|B" onclick="chooseOption(this)">fish</button><button class="choose-btn" data-q="A3" data-opt="B" data-answer="A|B" onclick="chooseOption(this)">fishes</button></span>!</div>
+        <div class="choose-item"><span class="item-num">4</span>&nbsp;I've only got one important piece of <span class="choose-pair"><button class="choose-btn" data-q="A4" data-opt="A" data-answer="B" onclick="chooseOption(this)">new</button><button class="choose-btn" data-q="A4" data-opt="B" data-answer="B" onclick="chooseOption(this)">news</button></span> to tell you, I think.</div>
+        <div class="choose-item"><span class="item-num">5</span>&nbsp;The hairdresser quickly swept up the <span class="choose-pair"><button class="choose-btn" data-q="A5" data-opt="A" data-answer="A" onclick="chooseOption(this)">hair</button><button class="choose-btn" data-q="A5" data-opt="B" data-answer="A" onclick="chooseOption(this)">hairs</button></span> on the floor.</div>
+        <div class="choose-item"><span class="item-num">6</span>&nbsp;I'll be giving you a lot of <span class="choose-pair"><button class="choose-btn" data-q="A6" data-opt="A" data-answer="A" onclick="chooseOption(this)">information</button><button class="choose-btn" data-q="A6" data-opt="B" data-answer="A" onclick="chooseOption(this)">informations</button></span>, so do please take notes.</div>
+        <div class="choose-item"><span class="item-num">7</span>&nbsp;We've bought quite a lot of <span class="choose-pair"><button class="choose-btn" data-q="A7" data-opt="A" data-answer="A" onclick="chooseOption(this)">furniture</button><button class="choose-btn" data-q="A7" data-opt="B" data-answer="A" onclick="chooseOption(this)">furnitures</button></span> in the last few days.</div>
+        <div class="choose-item"><span class="item-num">8</span>&nbsp;Could you give us both <span class="choose-pair"><button class="choose-btn" data-q="A8" data-opt="A" data-answer="A|B" onclick="chooseOption(this)">permission</button><button class="choose-btn" data-q="A8" data-opt="B" data-answer="A|B" onclick="chooseOption(this)">permissions</button></span> to miss PE tomorrow?</div>
+        <div class="choose-item"><span class="item-num">9</span>&nbsp;<span class="choose-pair"><button class="choose-btn" data-q="A9" data-opt="A" data-answer="B" onclick="chooseOption(this)">Physic</button><button class="choose-btn" data-q="A9" data-opt="B" data-answer="B" onclick="chooseOption(this)">Physics</button></span> is my favourite subject by far.</div>
+        <div class="choose-item"><span class="item-num">10</span>&nbsp;I think I've got some <span class="choose-pair"><button class="choose-btn" data-q="A10" data-opt="A" data-answer="A" onclick="chooseOption(this)">money</button><button class="choose-btn" data-q="A10" data-opt="B" data-answer="A" onclick="chooseOption(this)">monies</button></span> on me.</div>
+        <div class="choose-item"><span class="item-num">11</span>&nbsp;I'm going to give them all the <span class="choose-pair"><button class="choose-btn" data-q="A11" data-opt="A" data-answer="A" onclick="chooseOption(this)">advice</button><button class="choose-btn" data-q="A11" data-opt="B" data-answer="A" onclick="chooseOption(this)">advices</button></span> I can.</div>
+        <div class="choose-item"><span class="item-num">12</span>&nbsp;What kind of <span class="choose-pair"><button class="choose-btn" data-q="A12" data-opt="A" data-answer="A" onclick="chooseOption(this)">jewellery</button><button class="choose-btn" data-q="A12" data-opt="B" data-answer="A" onclick="chooseOption(this)">jewelleries</button></span> are you interested in getting?</div>
+        <div class="choose-item"><span class="item-num">13</span>&nbsp;Would you like some <span class="choose-pair"><button class="choose-btn" data-q="A13" data-opt="A" data-answer="A|B" onclick="chooseOption(this)">chocolate</button><button class="choose-btn" data-q="A13" data-opt="B" data-answer="A|B" onclick="chooseOption(this)">chocolates</button></span>?</div>
+        <div class="choose-item"><span class="item-num">14</span>&nbsp;You've got to have very good general <span class="choose-pair"><button class="choose-btn" data-q="A14" data-opt="A" data-answer="A" onclick="chooseOption(this)">knowledge</button><button class="choose-btn" data-q="A14" data-opt="B" data-answer="A" onclick="chooseOption(this)">knowledges</button></span> to go on <em>Who Wants To Be A Millionaire</em>.</div>
+        <div class="choose-item"><span class="item-num">15</span>&nbsp;I've always been interested in <span class="choose-pair"><button class="choose-btn" data-q="A15" data-opt="A" data-answer="B" onclick="chooseOption(this)">politic</button><button class="choose-btn" data-q="A15" data-opt="B" data-answer="B" onclick="chooseOption(this)">politics</button></span>.</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkChoose('A-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetChoose('A-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise B -->
+    <div class="exercise" id="exB">
+      <div class="exercise-label">
+        <div class="ex-letter">B</div>
+        <div class="ex-instruction">Complete using the correct form of the verb in brackets.</div>
+      </div>
+      <ol class="fill-list" id="B-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text"><input class="fill-input" data-answer="Was|Were" placeholder="..."> all the furniture very expensive when you got it?</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">My earnings <input class="fill-input" data-answer="have increased" placeholder="..."> considerably over the last two years. <b>(increase)</b></span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text"><input class="fill-input" data-answer="Was|Is" placeholder="..."> all the luggage yours? <b>(be)</b></span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">Your pyjamas <input class="fill-input" data-answer="are" placeholder="..."> on your bed, I think. <b>(be)</b></span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">Politics <input class="fill-input" data-answer="is" placeholder="..."> a love of mine, as well as my profession. <b>(be)</b></span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text"><input class="fill-input" data-answer="Is|Are" placeholder="..."> your team doing well in the league right now? <b>(be)</b></span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">The people over there <input class="fill-input" data-answer="need" placeholder="..."> serving. <b>(need)</b></span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text"><input class="fill-input" data-answer="Is|Was" placeholder="..."> the news good or bad? <b>(be)</b></span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">There <input class="fill-input" data-answer="is|was" placeholder="..."> blood all over the floor! <b>(be)</b></span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">The cattle <input class="fill-input" data-answer="are eating" placeholder="..."> at the moment. <b>(eat)</b></span></li>
+        <li class="fill-item"><span class="item-num">11</span><span class="item-text">Diabetes <input class="fill-input" data-answer="is" placeholder="..."> very common these days. <b>(be)</b></span></li>
+        <li class="fill-item"><span class="item-num">12</span><span class="item-text">Where <input class="fill-input" data-answer="are" placeholder="..."> the scissors? <b>(be)</b></span></li>
+        <li class="fill-item"><span class="item-num">13</span><span class="item-text">My work <input class="fill-input" data-answer="is" placeholder="..."> the most important thing in my life. <b>(be)</b></span></li>
+        <li class="fill-item"><span class="item-num">14</span><span class="item-text">I think the milk <input class="fill-input" data-answer="has gone off|is going off" placeholder="...">. Shall I pour it away? <b>(go off)</b></span></li>
+        <li class="fill-item"><span class="item-num">15</span><span class="item-text">The jeans I tried on in the shop yesterday <input class="fill-input" data-answer="were" placeholder="..."> far too small. <b>(be)</b></span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('B-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('B-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise C -->
+    <div class="exercise" id="exC">
+      <div class="exercise-label">
+        <div class="ex-letter">C</div>
+        <div class="ex-instruction">If a word in bold is correct, put a tick. If it is in the wrong sentence, write the correct word on the line.</div>
+      </div>
+      <div id="C-list">
+        <div class="tick-item">
+          <span class="tick-num">1</span>
+          <span class="tick-text">I'm off to the newsagent's to get a <b>pair</b> of chocolate. Do you want anything?</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C1" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C1" data-answer="bar" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">2</span>
+          <span class="tick-text">Could you get me a <b>flock</b> of chewing gum when you go to the shops?</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C2" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C2" data-answer="pack" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">3</span>
+          <span class="tick-text">I think I'll have a <b>herd</b> of toast.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C3" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C3" data-answer="slice" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">4</span>
+          <span class="tick-text">Just add a <b>breath</b> of milk if the mixture starts to get a bit dry.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C4" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C4" data-answer="drop" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">5</span>
+          <span class="tick-text">I'm popping out for a <b>pack</b> of fresh air. Do you want to come?</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C5" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C5" data-answer="breath" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">6</span>
+          <span class="tick-text">There was a <b>block</b> of cows being taken down the lane for milking, and it took us ages to get by.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C6" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C6" data-answer="herd" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">7</span>
+          <span class="tick-text">You said you wanted to get a new <b>bar</b> of trousers, didn't you?</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C7" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C7" data-answer="pair" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">8</span>
+          <span class="tick-text">Get us a <b>bunch</b> of bread when you go to the shops, won't you?</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C8" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C8" data-answer="loaf" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">9</span>
+          <span class="tick-text">I was thinking of getting Jill a <b>blade</b> of flowers for our anniversary. Do you think that's romantic?</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C9" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C9" data-answer="bunch" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">10</span>
+          <span class="tick-text">There was a really strong <b>drop</b> of wind and it blew a man's wig off!</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C10" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C10" data-answer="gust" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">11</span>
+          <span class="tick-text">My mum's so houseproud; there's never a <b>gust</b> of dust anywhere in the house.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C11" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C11" data-answer="speck" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">12</span>
+          <span class="tick-text">Could you cut me off a small <b>slice</b> of that cheese?</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C12" onclick="toggleTick(this, true)">&#10003;</button>
+            <input class="tick-input" data-q="C12" data-answer="✓" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">13</span>
+          <span class="tick-text">That <b>speck</b> of birds will be migrating south for the winter, I'd imagine.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C13" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C13" data-answer="flock" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">14</span>
+          <span class="tick-text">Since we got the goat, there's not a <b>loaf</b> of grass longer than about two centimetres!</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C14" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C14" data-answer="blade" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">15</span>
+          <span class="tick-text">We do like a nice <b>bit</b> of steak every now and again, don't we, Francis?</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C15" onclick="toggleTick(this, true)">&#10003;</button>
+            <input class="tick-input" data-q="C15" data-answer="✓" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">16</span>
+          <span class="tick-text">How heavy's that <b>sheet</b> of concrete, would you say?</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C16" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C16" data-answer="block" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">17</span>
+          <span class="tick-text">We'll give you a <b>set</b> of keys and a security pass.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C17" onclick="toggleTick(this, true)">&#10003;</button>
+            <input class="tick-input" data-q="C17" data-answer="✓" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">18</span>
+          <span class="tick-text">There's not a <b>grain</b> of truth in what she said.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C18" onclick="toggleTick(this, true)">&#10003;</button>
+            <input class="tick-input" data-q="C18" data-answer="✓" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">19</span>
+          <span class="tick-text">Is one <b>piece</b> of sugar enough?</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C19" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C19" data-answer="lump" placeholder="correct word...">
+          </span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">20</span>
+          <span class="tick-text">I'll tear you off a <b>lump</b> of paper if you're going to take notes.</span>
+          <span class="tick-actions">
+            <button class="tick-btn tick-yes" data-q="C20" onclick="toggleTick(this)">&#10003;</button>
+            <input class="tick-input" data-q="C20" data-answer="sheet|piece" placeholder="correct word...">
+          </span>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkTickExercise('C-list', ['C12','C15','C17','C18'])">Check answers</button>
+        <button class="btn-reset" onclick="resetTickExercise('C-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise D -->
+    <div class="exercise" id="exD">
+      <div class="exercise-label">
+        <div class="ex-letter">D</div>
+        <div class="ex-instruction">Complete the pairs of sentences using the correct form of a word in the box.</div>
+      </div>
+      <div class="word-box">
+        arm &nbsp;•&nbsp; cake &nbsp;•&nbsp; chicken &nbsp;•&nbsp; chocolate &nbsp;•&nbsp; damage &nbsp;•&nbsp; glass &nbsp;•&nbsp; hair<br>
+        help &nbsp;•&nbsp; knowledge &nbsp;•&nbsp; paper &nbsp;•&nbsp; space &nbsp;•&nbsp; time &nbsp;•&nbsp; wood &nbsp;•&nbsp; work
+      </div>
+      <ol class="fill-list" id="D-list">
+        <li class="fill-item"><span class="item-num">1a</span><span class="item-text">Right! I'm off to <input class="fill-input" data-answer="work" placeholder="...">.</span></li>
+        <li class="fill-item"><span class="item-num">1b</span><span class="item-text">How many <input class="fill-input" data-answer="works" placeholder="..."> of art by Picasso can you actually name?</span></li>
+        <li class="fill-item"><span class="item-num">2a</span><span class="item-text">The storm did quite a lot of <input class="fill-input" data-answer="damage" placeholder="...">, so I hear.</span></li>
+        <li class="fill-item"><span class="item-num">2b</span><span class="item-text">The jury awarded them <input class="fill-input" data-answer="damages" placeholder="..."> of over €500,000.</span></li>
+        <li class="fill-item"><span class="item-num">3a</span><span class="item-text">I don't think I've ever baked three <input class="fill-input" data-answer="cakes" placeholder="..."> from scratch in one day.</span></li>
+        <li class="fill-item"><span class="item-num">3b</span><span class="item-text">Would you like another piece of <input class="fill-input" data-answer="cake" placeholder="...">?</span></li>
+        <li class="fill-item"><span class="item-num">4a</span><span class="item-text">Thanks, you've been a great <input class="fill-input" data-answer="help" placeholder="...">.</span></li>
+        <li class="fill-item"><span class="item-num">4b</span><span class="item-text">Without your <input class="fill-input" data-answer="help|helps" placeholder="...">, we don't know what we'd have done.</span></li>
+        <li class="fill-item"><span class="item-num">5a</span><span class="item-text">Ed was looking in the mirror and noticed one of his <input class="fill-input" data-answer="hairs" placeholder="..."> had gone grey.</span></li>
+        <li class="fill-item"><span class="item-num">5b</span><span class="item-text">I gather that long <input class="fill-input" data-answer="hair" placeholder="..."> is back in fashion amongst the young.</span></li>
+        <li class="fill-item"><span class="item-num">6a</span><span class="item-text">Did you know that <input class="fill-input" data-answer="glass" placeholder="..."> is actually a kind of liquid?</span></li>
+        <li class="fill-item"><span class="item-num">6b</span><span class="item-text">I can't find my <input class="fill-input" data-answer="glasses" placeholder="...">. Have you seen them anywhere?</span></li>
+        <li class="fill-item"><span class="item-num">7a</span><span class="item-text">Is your left <input class="fill-input" data-answer="arm" placeholder="..."> really longer than your right?</span></li>
+        <li class="fill-item"><span class="item-num">7b</span><span class="item-text">The <input class="fill-input" data-answer="arms" placeholder="..."> trade is an industry I'd rather have nothing to do with.</span></li>
+        <li class="fill-item"><span class="item-num">8a</span><span class="item-text">Let's have a picnic in the <input class="fill-input" data-answer="wood|woods" placeholder="...">.</span></li>
+        <li class="fill-item"><span class="item-num">8b</span><span class="item-text">That table's not made of <input class="fill-input" data-answer="wood" placeholder="...">. It's plastic!</span></li>
+        <li class="fill-item"><span class="item-num">9a</span><span class="item-text">Phil's <input class="fill-input" data-answer="knowledge" placeholder="..."> of eighteenth century pottery is astounding.</span></li>
+        <li class="fill-item"><span class="item-num">9b</span><span class="item-text">Phil's got a great <input class="fill-input" data-answer="knowledge" placeholder="..."> of eighteenth century pottery.</span></li>
+        <li class="fill-item"><span class="item-num">10a</span><span class="item-text">No one can hear you scream in <input class="fill-input" data-answer="space" placeholder="..."> because there's no sound.</span></li>
+        <li class="fill-item"><span class="item-num">10b</span><span class="item-text">Why are there no parking <input class="fill-input" data-answer="spaces" placeholder="..."> round here at all?</span></li>
+        <li class="fill-item"><span class="item-num">11a</span><span class="item-text">How did people write things down before <input class="fill-input" data-answer="paper" placeholder="..."> was invented?</span></li>
+        <li class="fill-item"><span class="item-num">11b</span><span class="item-text">The story appeared in most of the Sunday <input class="fill-input" data-answer="papers" placeholder="...">.</span></li>
+        <li class="fill-item"><span class="item-num">12a</span><span class="item-text">One of our <input class="fill-input" data-answer="chickens" placeholder="..."> is ill so we've had to call the vet out.</span></li>
+        <li class="fill-item"><span class="item-num">12b</span><span class="item-text">This <input class="fill-input" data-answer="chicken" placeholder="..."> tastes delicious!</span></li>
+        <li class="fill-item"><span class="item-num">13a</span><span class="item-text">How many <input class="fill-input" data-answer="times" placeholder="..."> have I told you not to do that?</span></li>
+        <li class="fill-item"><span class="item-num">13b</span><span class="item-text">What <input class="fill-input" data-answer="time" placeholder="..."> did you get home last night?</span></li>
+        <li class="fill-item"><span class="item-num">14a</span><span class="item-text">Let's get a big bar of milk <input class="fill-input" data-answer="chocolate" placeholder="...">.</span></li>
+        <li class="fill-item"><span class="item-num">14b</span><span class="item-text">Oh no! There are only two <input class="fill-input" data-answer="chocolates" placeholder="..."> left in the box!</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('D-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('D-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise E -->
+    <div class="exercise" id="exE">
+      <div class="exercise-label">
+        <div class="ex-letter">E</div>
+        <div class="ex-instruction">Complete each second sentence using one of the two words in bold and any other words you need so that it has a similar meaning to the first sentence.</div>
+      </div>
+      <ol class="fill-list" id="E-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">Only two boys volunteered to hand out programmes. <b>double / couple</b><br>Only <input class="fill-input" data-answer="a couple of" placeholder="..."> boys volunteered to hand out programmes.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">There were quite a few people at the party who I knew. <b>number / amount</b><br>There were <input class="fill-input" data-answer="a number of" placeholder="..."> people at the party who I knew.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">When I was small, I'd never heard of computers. <b>little / few</b><br>When I was <input class="fill-input" data-answer="a little" placeholder="..."> girl, I'd never heard of computers.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">There's not much ketchup left in the bottle. <b>little / few</b><br>There's only <input class="fill-input" data-answer="a little" placeholder="..."> ketchup left in the bottle.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">Some kids have put their names down already. <b>little / few</b><br><input class="fill-input" data-answer="A few" placeholder="..."> kids have put their names down already.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">I haven't got much money on me, I'm afraid. <b>number / amount</b><br>I've only got <input class="fill-input" data-answer="a small amount of" placeholder="..."> money on me, I'm afraid.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">I didn't understand a lot of what she said, to be honest. <b>much / many</b><br>I didn't understand <input class="fill-input" data-answer="much of" placeholder="..."> what she said, to be honest.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">Not enough British people can speak a foreign language. <b>little / few</b><br><input class="fill-input" data-answer="Too few" placeholder="..."> British people can speak a foreign language.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('E-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('E-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise F -->
+    <div class="exercise" id="exF">
+      <div class="exercise-label">
+        <div class="ex-letter">F</div>
+        <div class="ex-instruction">Circle the correct word or phrase. More than one option may be correct in each sentence.</div>
+      </div>
+      <div id="F-list">
+        <div class="choose-item"><span class="item-num">1</span>&nbsp;Would you like <span class="choose-pair"><button class="choose-btn" data-q="F1" data-opt="A" data-answer="B" onclick="chooseOption(this)">any</button><button class="choose-btn" data-q="F1" data-opt="B" data-answer="B" onclick="chooseOption(this)">some</button></span> coffee?</div>
+        <div class="choose-item"><span class="item-num">2</span>&nbsp;I've hardly got <span class="choose-pair"><button class="choose-btn" data-q="F2" data-opt="A" data-answer="A" onclick="chooseOption(this)">any</button><button class="choose-btn" data-q="F2" data-opt="B" data-answer="A" onclick="chooseOption(this)">some</button></span> money left!</div>
+        <div class="choose-item"><span class="item-num">3</span>&nbsp;<span class="choose-pair"><button class="choose-btn" data-q="F3" data-opt="A" data-answer="A|B" onclick="chooseOption(this)">Only a few</button><button class="choose-btn" data-q="F3" data-opt="B" data-answer="A|B" onclick="chooseOption(this)">Few</button></span> of the ducks have names. (<em>A few</em> is also possible but not listed)</div>
+        <div class="choose-item"><span class="item-num">4</span>&nbsp;I've only got <span class="choose-pair"><button class="choose-btn" data-q="F4" data-opt="A" data-answer="A|B" onclick="chooseOption(this)">a little</button><button class="choose-btn" data-q="F4" data-opt="B" data-answer="A|B" onclick="chooseOption(this)">little</button></span> time, so make it quick!</div>
+        <div class="choose-item"><span class="item-num">5</span>&nbsp;<span class="choose-pair"><button class="choose-btn" data-q="F5" data-opt="A" data-answer="A" onclick="chooseOption(this)">Neither</button><button class="choose-btn" data-q="F5" data-opt="B" data-answer="A" onclick="chooseOption(this)">Both</button></span> guards was injured in the attack.</div>
+        <div class="choose-item"><span class="item-num">6</span>&nbsp;<span class="choose-pair"><button class="choose-btn" data-q="F6" data-opt="A" data-answer="A|B" onclick="chooseOption(this)">All</button><button class="choose-btn" data-q="F6" data-opt="B" data-answer="A|B" onclick="chooseOption(this)">Most</button></span> of the clothes were filthy. (<em>Many / Much</em> also possible)</div>
+        <div class="choose-item"><span class="item-num">7</span>&nbsp;<span class="choose-pair"><button class="choose-btn" data-q="F7" data-opt="A" data-answer="A|B" onclick="chooseOption(this)">None</button><button class="choose-btn" data-q="F7" data-opt="B" data-answer="A|B" onclick="chooseOption(this)">Half</button></span> of the glasses had been smashed.</div>
+        <div class="choose-item"><span class="item-num">8</span>&nbsp;<span class="choose-pair"><button class="choose-btn" data-q="F8" data-opt="A" data-answer="A|B" onclick="chooseOption(this)">Each</button><button class="choose-btn" data-q="F8" data-opt="B" data-answer="A|B" onclick="chooseOption(this)">Every</button></span> student in the class whose surname begins with a vowel, please stand up.</div>
+        <div class="choose-item"><span class="item-num">9</span>&nbsp;There's <span class="choose-pair"><button class="choose-btn" data-q="F9" data-opt="A" data-answer="A|B" onclick="chooseOption(this)">a little</button><button class="choose-btn" data-q="F9" data-opt="B" data-answer="A|B" onclick="chooseOption(this)">little</button></span> we can do about the situation, I'm afraid. (<em>not much</em> also correct)</div>
+        <div class="choose-item"><span class="item-num">10</span>&nbsp;We've got <span class="choose-pair"><button class="choose-btn" data-q="F10" data-opt="A" data-answer="A|B" onclick="chooseOption(this)">most</button><button class="choose-btn" data-q="F10" data-opt="B" data-answer="A|B" onclick="chooseOption(this)">plenty</button></span> of time, don't worry. (<em>a lot / lots / lot</em> also correct)</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkChoose('F-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetChoose('F-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise G -->
+    <div class="exercise" id="exG">
+      <div class="exercise-label">
+        <div class="ex-letter">G</div>
+        <div class="ex-instruction">Complete the sentences with <em>a</em>, <em>an</em> or <em>the</em>. If no article is required, put a dash (-).</div>
+      </div>
+      <ol class="fill-list" id="G-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">I think there's <input class="fill-input" data-answer="a" placeholder="..."> chemist open in <input class="fill-input" data-answer="the" placeholder="..."> main road somewhere.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">One of <input class="fill-input" data-answer="the" placeholder="..."> people who I met at <input class="fill-input" data-answer="a" placeholder="..."> lecture <input class="fill-input" data-answer="-" placeholder="..."> last night is <input class="fill-input" data-answer="an" placeholder="..."> architect for quite <input class="fill-input" data-answer="a" placeholder="..."> well-known firm.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text"><input class="fill-input" data-answer="A" placeholder="..."> quality screwdriver is <input class="fill-input" data-answer="an" placeholder="..."> essential part of any tool box.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">Who designed <input class="fill-input" data-answer="the" placeholder="..."> invitations for <input class="fill-input" data-answer="-" placeholder="..."> wedding?</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text"><input class="fill-input" data-answer="The" placeholder="..."> poor and <input class="fill-input" data-answer="the" placeholder="..."> elderly are often left behind when it comes to <input class="fill-input" data-answer="-" placeholder="..."> modern technology.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">When I was at <input class="fill-input" data-answer="-" placeholder="..."> school, we had to wear <input class="fill-input" data-answer="-" placeholder="..."> shorts until we were <input class="fill-input" data-answer="-" placeholder="..."> 11 and then we were allowed to wear <input class="fill-input" data-answer="a" placeholder="..."> pair of long trousers.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">I met <input class="fill-input" data-answer="a" placeholder="..."> writer – Catherine Hawkins – <input class="fill-input" data-answer="the" placeholder="..."> other day. She signed <input class="fill-input" data-answer="a" placeholder="..."> copy of her <input class="fill-input" data-answer="-" placeholder="..."> latest book for me.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">I honestly believe that <input class="fill-input" data-answer="the" placeholder="..."> car is one of <input class="fill-input" data-answer="the" placeholder="..."> worst inventions in <input class="fill-input" data-answer="the" placeholder="..."> history of <input class="fill-input" data-answer="the" placeholder="..."> world.</span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">Is that <input class="fill-input" data-answer="a" placeholder="..."> ewe or <input class="fill-input" data-answer="an" placeholder="..."> elk?</span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">What's <input class="fill-input" data-answer="the" placeholder="..."> difference between <input class="fill-input" data-answer="a" placeholder="..."> unicorn and <input class="fill-input" data-answer="a" placeholder="..."> postbox? You don't know? Then, I'm not going to ask you to post <input class="fill-input" data-answer="a" placeholder="..."> letter for me!</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('G-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('G-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise H -->
+    <div class="exercise" id="exH">
+      <div class="exercise-label">
+        <div class="ex-letter">H</div>
+        <div class="ex-instruction">Circle the correct answer.</div>
+      </div>
+      <div id="H-list">
+        <div class="mc-item">
+          <div class="mc-question"><b>1</b>&nbsp;Are these windows really not made of ___?</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H1" data-opt="A" data-answer="C" onclick="selectMC(this)">A the glass</button>
+            <button class="mc-btn" data-q="H1" data-opt="B" data-answer="C" onclick="selectMC(this)">B a glass</button>
+            <button class="mc-btn" data-q="H1" data-opt="C" data-answer="C" onclick="selectMC(this)">C glass</button>
+            <button class="mc-btn" data-q="H1" data-opt="D" data-answer="C" onclick="selectMC(this)">D glasses</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>2</b>&nbsp;I fancy playing poker. Have we got a ___ of cards anywhere?</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H2" data-opt="A" data-answer="D" onclick="selectMC(this)">A pack</button>
+            <button class="mc-btn" data-q="H2" data-opt="B" data-answer="D" onclick="selectMC(this)">B pair</button>
+            <button class="mc-btn" data-q="H2" data-opt="C" data-answer="D" onclick="selectMC(this)">C bunch</button>
+            <button class="mc-btn" data-q="H2" data-opt="D" data-answer="D" onclick="selectMC(this)">D set</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>3</b>&nbsp;Luckily, only ___ of the medicine got spilt.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H3" data-opt="A" data-answer="B" onclick="selectMC(this)">A A little</button>
+            <button class="mc-btn" data-q="H3" data-opt="B" data-answer="B" onclick="selectMC(this)">B a little</button>
+            <button class="mc-btn" data-q="H3" data-opt="C" data-answer="B" onclick="selectMC(this)">C few</button>
+            <button class="mc-btn" data-q="H3" data-opt="D" data-answer="B" onclick="selectMC(this)">D a few</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>4</b>&nbsp;The ___ on the kitchen table.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H4" data-opt="A" data-answer="D" onclick="selectMC(this)">A grocery is</button>
+            <button class="mc-btn" data-q="H4" data-opt="B" data-answer="D" onclick="selectMC(this)">B grocery are</button>
+            <button class="mc-btn" data-q="H4" data-opt="C" data-answer="D" onclick="selectMC(this)">C groceries is</button>
+            <button class="mc-btn" data-q="H4" data-opt="D" data-answer="D" onclick="selectMC(this)">D groceries are</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>5</b>&nbsp;Hardly ___ of the paintings at the gallery were for sale.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H5" data-opt="A" data-answer="A" onclick="selectMC(this)">A none</button>
+            <button class="mc-btn" data-q="H5" data-opt="B" data-answer="A" onclick="selectMC(this)">B few</button>
+            <button class="mc-btn" data-q="H5" data-opt="C" data-answer="A" onclick="selectMC(this)">C some</button>
+            <button class="mc-btn" data-q="H5" data-opt="D" data-answer="A" onclick="selectMC(this)">D any</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>6</b>&nbsp;It's ___ opportunity to see African wildlife in its natural environment.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H6" data-opt="A" data-answer="B" onclick="selectMC(this)">A an unique</button>
+            <button class="mc-btn" data-q="H6" data-opt="B" data-answer="B" onclick="selectMC(this)">B a unique</button>
+            <button class="mc-btn" data-q="H6" data-opt="C" data-answer="B" onclick="selectMC(this)">C the unique</button>
+            <button class="mc-btn" data-q="H6" data-opt="D" data-answer="B" onclick="selectMC(this)">D unique</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>7</b>&nbsp;You can't just demand ___; you have to earn it.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H7" data-opt="A" data-answer="D" onclick="selectMC(this)">A a respect</button>
+            <button class="mc-btn" data-q="H7" data-opt="B" data-answer="D" onclick="selectMC(this)">B the respect</button>
+            <button class="mc-btn" data-q="H7" data-opt="C" data-answer="D" onclick="selectMC(this)">C any respect</button>
+            <button class="mc-btn" data-q="H7" data-opt="D" data-answer="D" onclick="selectMC(this)">D respect</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>8</b>&nbsp;Almost ___ person I've asked says they're going on the anti-war demonstration next Saturday.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H8" data-opt="A" data-answer="B" onclick="selectMC(this)">A every</button>
+            <button class="mc-btn" data-q="H8" data-opt="B" data-answer="B" onclick="selectMC(this)">B each</button>
+            <button class="mc-btn" data-q="H8" data-opt="C" data-answer="B" onclick="selectMC(this)">C all the</button>
+            <button class="mc-btn" data-q="H8" data-opt="D" data-answer="B" onclick="selectMC(this)">D the entire</button>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkMC('H-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetMC('H-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise I -->
+    <div class="exercise" id="exI">
+      <div class="exercise-label">
+        <div class="ex-letter">I</div>
+        <div class="ex-instruction">Write one word in each gap.</div>
+      </div>
+      <div class="passage-box blue-box">
+        <h3 style="text-align:center; font-family:'Georgia',serif; color:#1a3d6e;">Artists and money</h3>
+        In publishing, <span class="gap-num">(1)</span> <input class="fill-input" data-answer="an|a" placeholder="..."> author will usually earn royalties on sales. For
+        <span class="gap-num">(2)</span> <input class="fill-input" data-answer="every|each" placeholder="..."> book sold, the author gets a percentage. The more successful the author, the
+        more they are able to negotiate with their publisher, and <span class="gap-num">(3)</span> <input class="fill-input" data-answer="the" placeholder="..."> bigger the percentage
+        they can get. Although the 'struggling author' is still common, it is quite possible for a successful
+        novelist to earn a <span class="gap-num">(4)</span> <input class="fill-input" data-answer="great" placeholder="..."> deal of money. You only have to look at <span class="gap-num">(5)</span> <input class="fill-input" data-answer="the" placeholder="...">
+        children's author J. K. Rowling to see that.<br><br>
+        For a painter or sculptor, however, the situation is more difficult. A painter sells his or her work for
+        <span class="gap-num">(6)</span> <input class="fill-input" data-answer="a" placeholder="..."> fee. As the painter becomes more successful, the painting becomes valuable.
+        <span class="gap-num">(7)</span> <input class="fill-input" data-answer="Each|Every" placeholder="..."> time it is sold, its value increases. The painter doesn't receive
+        <span class="gap-num">(8)</span> <input class="fill-input" data-answer="any" placeholder="..."> benefit from this, though. To make money, the artist has to be continually
+        producing new pieces. More than a <span class="gap-num">(9)</span> <input class="fill-input" data-answer="few" placeholder="..."> artists today, however, are very aware of
+        this, and so practise what is sometimes called 'holding back'. They produce, say, ten paintings for an
+        exhibition, but only allow a certain <span class="gap-num">(10)</span> <input class="fill-input" data-answer="number" placeholder="..."> of them, say eight, to be sold. The other two
+        they keep, in <span class="gap-num">(11)</span> <input class="fill-input" data-answer="the" placeholder="..."> hope that when they sell them in later years they will have greatly
+        increased in value.<br><br>
+        For musicians, there are royalties for performance (eg on CD) and for writing. However, since
+        <span class="gap-num">(12)</span> <input class="fill-input" data-answer="the" placeholder="..."> illegal transfer of digital music via the Internet has become widespread,
+        <span class="gap-num">(13)</span> <input class="fill-input" data-answer="many|most" placeholder="..."> songwriters and performers have become worried that their main source of
+        income will dry up. Certainly, the <span class="gap-num">(14)</span> <input class="fill-input" data-answer="whole" placeholder="..."> music industry – be it pop, rock or classical
+        – is in turmoil at the moment, but its future is not bleak. There is still a huge <span class="gap-num">(15)</span> <input class="fill-input" data-answer="amount" placeholder="..."> of
+        money to be made from live performances.
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exI')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exI')">Reset</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<div id="toast"></div>
+
+<script>
+// ── UTILITY ──────────────────────────────────────────────
+function normalize(s) {
+  return s.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+function isCorrect(input, answer) {
+  const val = normalize(input.value);
+  const alts = answer.split('|').map(a => normalize(a));
+  return alts.includes(val);
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2000);
+}
+
+// ── SCORE TRACKING ───────────────────────────────────────
+function updateScore() {
+  const all = document.querySelectorAll('.fill-input');
+  const answered = [...all].filter(i => i.value.trim() !== '').length;
+  const total = all.length;
+  const pct = total ? (answered / total * 100).toFixed(0) : 0;
+  document.getElementById('score-bar-fill').style.width = pct + '%';
+  document.getElementById('score-text').textContent = answered + ' / ' + total + ' answered';
+}
+document.addEventListener('input', updateScore);
+
+// ── FILL IN THE BLANK ────────────────────────────────────
+function checkFill(listId) {
+  const list = document.getElementById(listId);
+  let correct = 0, total = 0;
+  list.querySelectorAll('.fill-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetFill(listId) {
+  document.getElementById(listId).querySelectorAll('.fill-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+function checkAllFillInSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  let correct = 0, total = 0;
+  section.querySelectorAll('.fill-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetAllFillInSection(sectionId) {
+  document.getElementById(sectionId).querySelectorAll('.fill-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+// ── MULTIPLE CHOICE ──────────────────────────────────────
+function selectMC(btn) {
+  const q = btn.dataset.q;
+  document.querySelectorAll(`.mc-btn[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+document.addEventListener('click', e => {
+  if (!e.target.matches('.mc-btn')) return;
+  selectMC(e.target);
+});
+function checkMC(listId) {
+  const list = document.getElementById(listId);
+  const questions = {};
+  list.querySelectorAll('.mc-btn').forEach(btn => {
+    if (!questions[btn.dataset.q]) questions[btn.dataset.q] = [];
+    questions[btn.dataset.q].push(btn);
+  });
+  let correct = 0, total = Object.keys(questions).length;
+  Object.values(questions).forEach(btns => {
+    const answer = btns[0].dataset.answer;
+    btns.forEach(b => {
+      b.classList.remove('correct', 'wrong');
+      if (b.classList.contains('selected')) {
+        if (b.dataset.opt === answer) { b.classList.add('correct'); correct++; }
+        else b.classList.add('wrong');
+      } else if (b.dataset.opt === answer) {
+        b.classList.add('correct');
+      }
+    });
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetMC(listId) {
+  document.getElementById(listId).querySelectorAll('.mc-btn').forEach(b => {
+    b.classList.remove('selected', 'correct', 'wrong');
+  });
+}
+
+// ── CHOOSE OPTION ─────────────────────────────────────────
+function chooseOption(btn) {
+  btn.closest('.choose-pair').querySelectorAll('.choose-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function checkChoose(listId) {
+  const list = document.getElementById(listId);
+  let correct = 0, total = 0;
+  const questions = {};
+  list.querySelectorAll('.choose-btn').forEach(btn => {
+    if (!questions[btn.dataset.q]) questions[btn.dataset.q] = [];
+    questions[btn.dataset.q].push(btn);
+  });
+  total = Object.keys(questions).length;
+  Object.values(questions).forEach(btns => {
+    const answer = btns[0].dataset.answer;
+    btns.forEach(b => {
+      b.classList.remove('correct', 'wrong');
+      if (b.classList.contains('selected')) {
+        const acceptedOpts = answer.split('|');
+        if (acceptedOpts.includes(b.dataset.opt)) { b.classList.add('correct'); correct++; }
+        else b.classList.add('wrong');
+      } else {
+        const acceptedOpts = answer.split('|');
+        if (acceptedOpts.includes(b.dataset.opt)) b.classList.add('correct');
+      }
+    });
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetChoose(listId) {
+  document.getElementById(listId).querySelectorAll('.choose-btn').forEach(b => {
+    b.classList.remove('selected', 'correct', 'wrong');
+  });
+}
+
+// ── TICK EXERCISE (C) ─────────────────────────────────────
+function toggleTick(btn, isTick) {
+  btn.classList.toggle('selected');
+}
+function checkTickExercise(listId, correctTickIds) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#' + listId + ' .tick-item').forEach(item => {
+    const btn = item.querySelector('.tick-btn');
+    const inp = item.querySelector('.tick-input');
+    const q = btn.dataset.q;
+    total++;
+    btn.classList.remove('correct', 'wrong');
+    inp.classList.remove('correct', 'wrong');
+    if (correctTickIds.includes(q)) {
+      if (btn.classList.contains('selected')) { btn.classList.add('correct'); correct++; }
+      else btn.classList.add('wrong');
+    } else {
+      if (inp.value.trim()) {
+        if (normalize(inp.value) === normalize(inp.dataset.answer) ||
+            inp.dataset.answer.split('|').map(normalize).includes(normalize(inp.value))) {
+          inp.classList.add('correct'); correct++;
+        } else inp.classList.add('wrong');
+      }
+    }
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetTickExercise(listId) {
+  document.querySelectorAll('#' + listId + ' .tick-btn').forEach(b => b.classList.remove('selected','correct','wrong'));
+  document.querySelectorAll('#' + listId + ' .tick-input').forEach(i => { i.value=''; i.classList.remove('correct','wrong'); });
+}
+
+// ── SIDEBAR ACTIVE ────────────────────────────────────────
+const sections = document.querySelectorAll('.exercise[id]');
+const navLinks = document.querySelectorAll('#sidebar nav a');
+function onScroll() {
+  let current = '';
+  sections.forEach(s => {
+    if (s.getBoundingClientRect().top <= 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', onScroll);
+onScroll();
+
+// ── INIT ──────────────────────────────────────────────────
+updateScore();
+</script>
+</body>
+</html>

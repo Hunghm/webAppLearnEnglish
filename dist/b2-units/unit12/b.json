@@ -1,0 +1,61 @@
+{
+  "title": "Complete using a word formed from the letters given",
+  "type": "word_scramble",
+  "instruction": "Complete using a word formed from the letters given.",
+  "questions": [
+    {
+      "id": 1,
+      "sentence": "Don’t you think Ben and Angie make a lovely ______?",
+      "letters": "LEOPUC",
+      "answer": "couple"
+    },
+    {
+      "id": 2,
+      "sentence": "How many ______ are staying at the hotel at the moment?",
+      "letters": "SEGUTS",
+      "answer": "guests"
+    },
+    {
+      "id": 3,
+      "sentence": "All our ______ are coming to the wedding.",
+      "letters": "SNOREALIT",
+      "answer": "relations"
+    },
+    {
+      "id": 4,
+      "sentence": "A ______ is just a friend you haven’t met yet!",
+      "letters": "GRANTERS",
+      "answer": "stranger"
+    },
+    {
+      "id": 5,
+      "sentence": "How long have you been going out with your ______?",
+      "letters": "DRINFEYOB",
+      "answer": "boyfriend"
+    },
+    {
+      "id": 6,
+      "sentence": "Why are you in such a bad ______?",
+      "letters": "ODOM",
+      "answer": "mood"
+    },
+    {
+      "id": 7,
+      "sentence": "My grandparents live in a really quiet ______.",
+      "letters": "OHIDROUGHBONE",
+      "answer": "neighbourhood"
+    },
+    {
+      "id": 8,
+      "sentence": "My cousin has just moved into a ______ in the city centre.",
+      "letters": "ATLF",
+      "answer": "flat"
+    },
+    {
+      "id": 9,
+      "sentence": "I’m going to the cinema with my ______ tonight.",
+      "letters": "REDGINFLIR",
+      "answer": "girlfriend"
+    }
+  ]
+}

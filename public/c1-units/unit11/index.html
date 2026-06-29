@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 11 – Conditionals | Destination C1</title>
+<style>
+:root {
+  --accent: #2d6a4f;
+  --accent-dark: #1b4332;
+  --accent-light: #d8f3e3;
+  --accent2: #52b788;
+  --bg: #f8faf9;
+  --surface: #ffffff;
+  --border: #d8e8df;
+  --text: #1a2e23;
+  --muted: #5a7a68;
+  --sidebar-w: 260px;
+  --correct: #2d6a4f;
+  --wrong: #c1121f;
+  --correct-bg: #d8f3e3;
+  --wrong-bg: #ffe5e5;
+  --yellow-bg: #fff9e6;
+  --yellow-border: #f9c74f;
+  --blue-bg: #e8f4fd;
+  --blue-border: #4ea8de;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: #b7d5c4; border-radius: 4px; }
+
+#sidebar-header {
+  padding: 16px 14px 12px;
+  background: var(--accent-dark);
+  color: #fff;
+  flex-shrink: 0;
+}
+#sidebar-header h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+#sidebar-header p { font-size: 11px; opacity: 0.7; margin-top: 3px; }
+
+#sidebar nav a {
+  display: block;
+  padding: 9px 14px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 12.5px;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+#sidebar nav a:hover { color: var(--accent); background: var(--accent-light); }
+#sidebar nav a.active {
+  color: var(--accent);
+  background: var(--accent-light);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+.nav-group {
+  padding: 8px 14px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  background: #f0f7f3;
+  border-top: 1px solid var(--border);
+}
+
+/* Score panel */
+#score-panel {
+  margin: 0 12px 12px;
+  padding: 12px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  border: 1px solid var(--accent2);
+  flex-shrink: 0;
+}
+#score-panel .score-label { font-size: 11px; font-weight: 600; color: var(--accent-dark); margin-bottom: 6px; }
+#score-bar-bg { background: #b7d5c4; border-radius: 100px; height: 6px; overflow: hidden; margin-bottom: 6px; }
+#score-bar-fill { height: 100%; background: var(--accent); border-radius: 100px; transition: width 0.5s ease; width: 0%; }
+#score-text { font-size: 12px; color: var(--accent-dark); font-weight: 600; }
+
+/* ── MAIN ── */
+#main {
+  flex: 1;
+  padding: 32px 40px 60px;
+  max-width: 900px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-bottom: 4px;
+}
+.page-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+/* ── SECTIONS ── */
+.section {
+  margin-bottom: 48px;
+  scroll-margin-top: 20px;
+}
+.section-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+}
+
+/* Exercise label */
+.exercise {
+  margin-bottom: 32px;
+}
+.exercise-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.ex-letter {
+  width: 28px;
+  height: 28px;
+  background: var(--accent-dark);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ex-instruction {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Word box */
+.word-box {
+  background: #f0f7f3;
+  border: 1px solid var(--accent2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--accent-dark);
+  text-align: center;
+  line-height: 2;
+}
+.word-box span { margin: 0 6px; }
+
+/* Fill-in items */
+.fill-list { list-style: none; }
+.fill-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 0;
+  border-bottom: 1px solid #edf2ef;
+  flex-wrap: wrap;
+}
+.fill-item:last-child { border-bottom: none; }
+.item-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  min-width: 22px;
+  flex-shrink: 0;
+}
+.item-text { flex: 1; }
+.fill-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  min-width: 120px;
+  outline: none;
+  transition: border-color 0.2s;
+  text-align: center;
+}
+.fill-input:focus { border-bottom-color: var(--accent-dark); }
+.fill-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.fill-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Wide fill input for full-sentence rewrites */
+.fill-input-wide {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  width: 100%;
+  max-width: 620px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.fill-input-wide:focus { border-bottom-color: var(--accent-dark); }
+.fill-input-wide.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.fill-input-wide.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Rewrite items */
+.rewrite-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13px;
+}
+.rewrite-item:last-child { border-bottom: none; }
+.rewrite-prompt { color: var(--muted); font-size: 12px; margin-bottom: 2px; }
+.rewrite-starter { font-weight: 600; color: var(--accent-dark); }
+
+/* Multiple choice */
+.mc-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+.mc-item:last-child { border-bottom: none; }
+.mc-question { margin-bottom: 8px; font-size: 13.5px; }
+.mc-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 6px;
+}
+.mc-btn {
+  padding: 6px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 12.5px;
+  font-family: inherit;
+  text-align: left;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.mc-btn:hover { border-color: var(--accent2); background: var(--accent-light); }
+.mc-btn.selected { border-color: var(--accent); background: var(--accent-light); }
+.mc-btn.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); font-weight: 600; }
+.mc-btn.wrong { border-color: var(--wrong); background: var(--wrong-bg); color: var(--wrong); }
+
+/* Choose between two */
+.choose-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13.5px;
+}
+.choose-item:last-child { border-bottom: none; }
+.choose-pair { display: inline-flex; gap: 0; border-radius: 6px; overflow: hidden; border: 1.5px solid var(--border); }
+.choose-btn {
+  padding: 3px 10px;
+  border: none;
+  background: var(--surface);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.15s;
+  color: var(--muted);
+}
+.choose-btn + .choose-btn { border-left: 1.5px solid var(--border); }
+.choose-btn:hover { background: var(--accent-light); color: var(--accent); }
+.choose-btn.selected { background: var(--accent); color: #fff; }
+.choose-btn.correct { background: var(--correct); color: #fff; }
+.choose-btn.wrong { background: var(--wrong); color: #fff; }
+
+/* Passage / text exercise */
+.passage-box {
+  background: var(--yellow-bg);
+  border: 1px solid var(--yellow-border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  font-size: 13.5px;
+  line-height: 2;
+}
+.passage-box h3 {
+  font-family: 'Georgia', serif;
+  font-size: 16px;
+  color: var(--accent-dark);
+  margin-bottom: 10px;
+}
+.passage-box.blue-box {
+  background: var(--blue-bg);
+  border-color: var(--blue-border);
+}
+.gap-num {
+  font-weight: 700;
+  color: var(--accent-dark);
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+/* Match exercise */
+.match-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0;
+}
+.match-row {
+  display: contents;
+}
+.match-left {
+  padding: 7px 10px 7px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13px;
+}
+.match-right-cell {
+  padding: 7px 0 7px 10px;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.match-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  width: 40px;
+  outline: none;
+  text-align: center;
+}
+.match-input:focus { border-bottom-color: var(--accent-dark); }
+.match-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.match-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Match answer options panel */
+.match-options {
+  background: #f0f7f3;
+  border: 1px solid var(--accent2);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--accent-dark);
+  line-height: 2;
+}
+
+/* Check / Reset buttons */
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.btn-check {
+  padding: 8px 20px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-check:hover { background: var(--accent-dark); }
+.btn-reset {
+  padding: 8px 16px;
+  background: var(--surface);
+  color: var(--muted);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-reset:hover { border-color: var(--wrong); color: var(--wrong); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  #sidebar { display: none; }
+  #main { padding: 20px 16px 40px; }
+  .mc-options { grid-template-columns: 1fr 1fr; }
+}
+
+/* Progress toast */
+#toast {
+  position: fixed;
+  bottom: 20px; right: 20px;
+  background: var(--accent-dark);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  display: none;
+  z-index: 9999;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div id="sidebar-header">
+    <h2>Unit 11</h2>
+    <p>Conditionals</p>
+  </div>
+
+  <div id="score-panel">
+    <div class="score-label">Progress</div>
+    <div id="score-bar-bg"><div id="score-bar-fill"></div></div>
+    <div id="score-text">0 / 0 answered</div>
+  </div>
+
+  <nav>
+    <div class="nav-group">Grammar Exercises</div>
+    <a href="#exA">A — Match to make sentences</a>
+    <a href="#exB">B — Rewrite (conditional forms)</a>
+    <a href="#exC">C — 17th March passage</a>
+    <a href="#exD">D — Circle correct word/phrase</a>
+    <a href="#exE">E — Complete from box</a>
+    <a href="#exF">F — One word per gap</a>
+    <a href="#exG">G — Rewrite with words given</a>
+    <a href="#exH">H — Choose correct answer</a>
+    <a href="#exI">I — CFCs passage</a>
+    <a href="#exJ">J — Key word transformation</a>
+  </nav>
+</aside>
+
+<!-- MAIN -->
+<main id="main">
+  <div class="page-title">Unit 11 — Vocabulary</div>
+  <div class="page-subtitle">Conditionals &nbsp;·&nbsp; Destination C1 &amp; C2</div>
+
+  <!-- ════════ GRAMMAR EXERCISES ════════ -->
+  <div class="section" id="sec-grammar">
+    <div class="section-title">Grammar: Conditionals</div>
+
+    <!-- Exercise A -->
+    <div class="exercise" id="exA">
+      <div class="exercise-label">
+        <div class="ex-letter">A</div>
+        <div class="ex-instruction">Match to make sentences. Write the letter (A–J) in the box.</div>
+      </div>
+      <div class="match-options">
+        <b>A</b> we might get served a bit more quickly. &nbsp;|&nbsp;
+        <b>B</b> give us a call and we'll come to pick you up. &nbsp;|&nbsp;
+        <b>C</b> very few people would obey the law. &nbsp;|&nbsp;
+        <b>D</b> you wouldn't get hiccups, would you? &nbsp;|&nbsp;
+        <b>E</b> they have to go through a complicated procedure. &nbsp;|&nbsp;
+        <b>F</b> we'd be happy to give you a good reference. &nbsp;|&nbsp;
+        <b>G</b> I'm pretty sure they won't let you check in. &nbsp;|&nbsp;
+        <b>H</b> more areas of natural beauty will be destroyed. &nbsp;|&nbsp;
+        <b>I</b> we'll have enough time to see a few sights. &nbsp;|&nbsp;
+        <b>J</b> you can't really complain about the government.
+      </div>
+      <ol class="fill-list" id="A-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">If you stay with us for three days, <input class="fill-input" data-answer="I" placeholder="letter"></span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">If you decide not to vote in the election, <input class="fill-input" data-answer="J" placeholder="letter"></span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">If you didn't eat your lunch so fast, <input class="fill-input" data-answer="D" placeholder="letter"></span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">If there were a few more people working, <input class="fill-input" data-answer="A" placeholder="letter"></span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">If you forget to take your passport, <input class="fill-input" data-answer="G" placeholder="letter"></span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">If the hire car isn't there when you arrive, <input class="fill-input" data-answer="B" placeholder="letter"></span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">If the city continues to expand, <input class="fill-input" data-answer="H" placeholder="letter"></span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">If the police didn't fine people, <input class="fill-input" data-answer="C" placeholder="letter"></span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">If you did decide to leave the company, <input class="fill-input" data-answer="F" placeholder="letter"></span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">If MPs wish to resign, <input class="fill-input" data-answer="E" placeholder="letter"></span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('A-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('A-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise B -->
+    <div class="exercise" id="exB">
+      <div class="exercise-label">
+        <div class="ex-letter">B</div>
+        <div class="ex-instruction">Rewrite using an appropriate conditional form, starting with the words given.</div>
+      </div>
+      <div id="B-list">
+        <div class="rewrite-item">
+          <div><b>1</b> &nbsp;Sue didn't get me a birthday present, which is why I didn't get her one.</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">If Sue </span><input class="fill-input-wide" data-answer="had got me a birthday present, I would have got her one" placeholder="..."> .</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>2</b> &nbsp;We didn't pay them on time because they made a mistake with our order.</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">If they </span><input class="fill-input-wide" data-answer="hadn't made a mistake with our order, we would have paid them on time" placeholder="..."> .</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>3</b> &nbsp;The climate is undergoing such radical changes that scientists are worried.</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">If </span><input class="fill-input-wide" data-answer="the climate weren't undergoing such radical changes, scientists wouldn't be worried" placeholder="..."> .</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>4</b> &nbsp;Did California become an important area because they found gold there?</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">Would </span><input class="fill-input-wide" data-answer="California have become an important area if they hadn't found gold there" placeholder="..."> ?</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>5</b> &nbsp;It's the sunset that attracts tourists to that place.</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">If it </span><input class="fill-input-wide" data-answer="weren't for the sunset, tourists wouldn't be attracted to that place" placeholder="..."> .</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>6</b> &nbsp;There was a traffic jam on the motorway so I was late for my interview.</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">If there </span><input class="fill-input-wide" data-answer="hadn't been a traffic jam on the motorway, I wouldn't have been late for my interview" placeholder="..."> .</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>7</b> &nbsp;I suggest you use a sunblock, and then you won't go red.</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">If I were </span><input class="fill-input-wide" data-answer="you, I would use a sunblock so you don't go red" placeholder="..."> .</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>8</b> &nbsp;The accident happened as a result of the driver's not paying attention to the road.</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">If the driver </span><input class="fill-input-wide" data-answer="had been paying attention to the road, the accident wouldn't have happened" placeholder="..."> .</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exB')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exB')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise C -->
+    <div class="exercise" id="exC">
+      <div class="exercise-label">
+        <div class="ex-letter">C</div>
+        <div class="ex-instruction">Complete using the correct form of the verbs in bold. Add any other words you need.</div>
+      </div>
+      <div class="passage-box">
+        <h3 style="text-align:center; font-family:'Georgia',serif;">17<sup>th</sup> March</h3>
+        So, today marks one year since I became a Park Ranger. If I <span class="gap-num">(1)</span> <input class="fill-input" data-answer="hadn't done" placeholder="..."> <b>(do)</b> that then, I never <span class="gap-num">(2)</span> <input class="fill-input" data-answer="would have had" placeholder="..."> <b>(have)</b> so many fantastic experiences. If you <span class="gap-num">(3)</span> <input class="fill-input" data-answer="asked" placeholder="..."> <b>(ask)</b> me now, I would say that I knew nothing when I started, but I've learnt a huge amount. In a typical day, I'll deal with complaints, check on the running of the park and lead guided tours, if any <span class="gap-num">(4)</span> <input class="fill-input" data-answer="are booked" placeholder="..."> <b>(book)</b>. If it's low season, I <span class="gap-num">(5)</span> <input class="fill-input" data-answer="have" placeholder="..."> <b>(have)</b> time to check on forest management and fire control measures. It can get stressful at times, especially if visitors to the park <span class="gap-num">(6)</span> <input class="fill-input" data-answer="get" placeholder="..."> <b>(get)</b> lost or injured. We had a case last week, which wouldn't <span class="gap-num">(7)</span> <input class="fill-input" data-answer="have happened" placeholder="..."> <b>(happen)</b> if the woman involved <span class="gap-num">(8)</span> <input class="fill-input" data-answer="had been" placeholder="..."> <b>(be)</b> a bit more careful. You see, if you <span class="gap-num">(9)</span> <input class="fill-input" data-answer="wander" placeholder="..."> <b>(wander)</b> around a large National Park like this without a map, you're bound to get lost. This particular case might <span class="gap-num">(10)</span> <input class="fill-input" data-answer="have been" placeholder="..."> <b>(be)</b> so bad if it <span class="gap-num">(11)</span> <input class="fill-input" data-answer="hadn't started" placeholder="..."> <b>(start)</b> raining. She was only wearing light clothes, so she was wet through and freezing when we found her. I dread to think what might <span class="gap-num">(12)</span> <input class="fill-input" data-answer="have happened" placeholder="..."> <b>(happen)</b> if we hadn't!
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exC')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exC')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise D -->
+    <div class="exercise" id="exD">
+      <div class="exercise-label">
+        <div class="ex-letter">D</div>
+        <div class="ex-instruction">Circle the correct word or phrase.</div>
+      </div>
+      <div id="D-list">
+        <div class="choose-item"><span class="item-num">1</span> &nbsp;If we hadn't taken a wrong turning back there, we wouldn't <span class="choose-pair"><button class="choose-btn" data-q="D1" data-opt="A" data-answer="B" onclick="chooseOption(this)">be</button><button class="choose-btn" data-q="D1" data-opt="B" data-answer="B" onclick="chooseOption(this)">have been</button></span> in this mess now.</div>
+        <div class="choose-item"><span class="item-num">2</span> &nbsp;<span class="choose-pair"><button class="choose-btn" data-q="D2" data-opt="A" data-answer="A" onclick="chooseOption(this)">Should</button><button class="choose-btn" data-q="D2" data-opt="B" data-answer="A" onclick="chooseOption(this)">Would</button></span> you need any further assistance, please don't hesitate to ask.</div>
+        <div class="choose-item"><span class="item-num">3</span> &nbsp;<span class="choose-pair"><button class="choose-btn" data-q="D3" data-opt="A" data-answer="B" onclick="chooseOption(this)">Had they not</button><button class="choose-btn" data-q="D3" data-opt="B" data-answer="B" onclick="chooseOption(this)">Hadn't they</button></span> warned people in time, a lot more lives could have been lost.</div>
+        <div class="choose-item"><span class="item-num">4</span> &nbsp;If you <span class="choose-pair"><button class="choose-btn" data-q="D4" data-opt="A" data-answer="A" onclick="chooseOption(this)">worked</button><button class="choose-btn" data-q="D4" data-opt="B" data-answer="A" onclick="chooseOption(this)">had worked</button></span> last weekend when the boss asked you, then you wouldn't have to work this weekend.</div>
+        <div class="choose-item"><span class="item-num">5</span> &nbsp;Were all the members of staff to attend the conference, would the hotel <span class="choose-pair"><button class="choose-btn" data-q="D5" data-opt="A" data-answer="B" onclick="chooseOption(this)">have</button><button class="choose-btn" data-q="D5" data-opt="B" data-answer="B" onclick="chooseOption(this)">have had</button></span> enough rooms for everyone?</div>
+        <div class="choose-item"><span class="item-num">6</span> &nbsp;Had the government acted sooner, the general public wouldn't <span class="choose-pair"><button class="choose-btn" data-q="D6" data-opt="A" data-answer="B" onclick="chooseOption(this)">be worrying</button><button class="choose-btn" data-q="D6" data-opt="B" data-answer="B" onclick="chooseOption(this)">have worried</button></span> so much about the current situation.</div>
+        <div class="choose-item"><span class="item-num">7</span> &nbsp;Tom Cruise wouldn't be the star he is today <span class="choose-pair"><button class="choose-btn" data-q="D7" data-opt="A" data-answer="A" onclick="chooseOption(this)">had he not</button><button class="choose-btn" data-q="D7" data-opt="B" data-answer="A" onclick="chooseOption(this)">should he not have</button></span> made a good impression in his early films.</div>
+        <div class="choose-item"><span class="item-num">8</span> &nbsp;<span class="choose-pair"><button class="choose-btn" data-q="D8" data-opt="A" data-answer="A" onclick="chooseOption(this)">Weren't we</button><button class="choose-btn" data-q="D8" data-opt="B" data-answer="A" onclick="chooseOption(this)">Were we not</button></span> to build more roads, the traffic system would collapse by 2020.</div>
+        <div class="choose-item"><span class="item-num">9</span> &nbsp;It would be hard enough to pass the exam tomorrow even if you <span class="choose-pair"><button class="choose-btn" data-q="D9" data-opt="A" data-answer="B" onclick="chooseOption(this)">went</button><button class="choose-btn" data-q="D9" data-opt="B" data-answer="B" onclick="chooseOption(this)">had gone</button></span> to all the lectures this year.</div>
+        <div class="choose-item"><span class="item-num">10</span> &nbsp;You can contact the hotel manager on extension 142 <span class="choose-pair"><button class="choose-btn" data-q="D10" data-opt="A" data-answer="A" onclick="chooseOption(this)">should</button><button class="choose-btn" data-q="D10" data-opt="B" data-answer="A" onclick="chooseOption(this)">could</button></span> you need to.</div>
+        <div class="choose-item"><span class="item-num">11</span> &nbsp;<span class="choose-pair"><button class="choose-btn" data-q="D11" data-opt="A" data-answer="B" onclick="chooseOption(this)">Shouldn't you</button><button class="choose-btn" data-q="D11" data-opt="B" data-answer="B" onclick="chooseOption(this)">Should you not</button></span> receive confirmation of your flight by e-mail, please click the link below.</div>
+        <div class="choose-item"><span class="item-num">12</span> &nbsp;I would have asked the person for ID before I let him in, if I <span class="choose-pair"><button class="choose-btn" data-q="D12" data-opt="A" data-answer="A" onclick="chooseOption(this)">were</button><button class="choose-btn" data-q="D12" data-opt="B" data-answer="A" onclick="chooseOption(this)">have been</button></span> you.</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkChoose('D-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetChoose('D-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise E -->
+    <div class="exercise" id="exE">
+      <div class="exercise-label">
+        <div class="ex-letter">E</div>
+        <div class="ex-instruction">Complete using the words in the box.</div>
+      </div>
+      <div class="word-box">
+        case &nbsp;•&nbsp; condition &nbsp;•&nbsp; long &nbsp;•&nbsp; otherwise &nbsp;•&nbsp; provided &nbsp;•&nbsp; so &nbsp;•&nbsp; suppose &nbsp;•&nbsp; unless
+      </div>
+      <ol class="fill-list" id="E-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">Do you want a highly-paid career, and, if <input class="fill-input" data-answer="so" placeholder="...">, are you prepared to retrain? Contact us.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">I'm quite happy to lend you money, as <input class="fill-input" data-answer="long" placeholder="..."> as you make sure I get it back.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">The village fair should be a great success, <input class="fill-input" data-answer="provided|unless" placeholder="..."> we don't have the same problems with the weather as last year.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">It'd be great to see you on Saturday evening, <input class="fill-input" data-answer="unless|otherwise" placeholder="..."> you've already got other plans.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">Could you go to the shop for me? I have to stay in in <input class="fill-input" data-answer="case" placeholder="..."> the courier comes.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">Your idea sounds fine in theory, but just <input class="fill-input" data-answer="suppose" placeholder="..."> something goes wrong. What then?</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">Write your name at the top of your essay, <input class="fill-input" data-answer="otherwise" placeholder="..."> I won't know which one's yours.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">The judge allowed the accused to stay at home on <input class="fill-input" data-answer="condition" placeholder="..."> she reported to the police every morning.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('E-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('E-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise F -->
+    <div class="exercise" id="exF">
+      <div class="exercise-label">
+        <div class="ex-letter">F</div>
+        <div class="ex-instruction">Write one word in each gap.</div>
+      </div>
+      <ol class="fill-list" id="F-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">I would never be able to afford a new house if <input class="fill-input" data-answer="it" placeholder="..."> wasn't for all the overtime I've been doing.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">If it hadn't <input class="fill-input" data-answer="been" placeholder="..."> for the fact that his uncle was a partner in the business, Angus would never have got the job.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">How do you think you'd feel if someone happened <input class="fill-input" data-answer="to" placeholder="..."> damage your car like that?</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text"><input class="fill-input" data-answer="But" placeholder="..."> for the kindness of a complete stranger, I would never have found the hotel.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">I don't think I'd be surprised in the slightest <input class="fill-input" data-answer="if" placeholder="..."> Paul were to suddenly announce that he was moving abroad.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">Don't forget to mention the new schedule to Veronica if you <input class="fill-input" data-answer="should" placeholder="..."> happen to see her this evening.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">Football matches would be ideal family outings <input class="fill-input" data-answer="were" placeholder="..."> it not for the danger of violence.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">If it hadn't been <input class="fill-input" data-answer="for" placeholder="..."> the children, I'm sure Trisha would have left Tom a long time ago.</span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">I would have lost the game <input class="fill-input" data-answer="had" placeholder="..."> it not been for some quick thinking.</span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">If you <input class="fill-input" data-answer="should" placeholder="..."> find the book I was asking you about, give me a call.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('F-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('F-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise G -->
+    <div class="exercise" id="exG">
+      <div class="exercise-label">
+        <div class="ex-letter">G</div>
+        <div class="ex-instruction">Rewrite the sentences, starting with the words given.</div>
+      </div>
+      <div id="G-list">
+        <div class="rewrite-item">
+          <div><b>1</b> &nbsp;The only reason we won the contract was Debbie's fantastic presentation.</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">We wouldn't have </span><input class="fill-input-wide" data-answer="won the contract but for Debbie's fantastic presentation|won the contract if it hadn't been for Debbie's fantastic presentation" placeholder="..."> .</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>2</b> &nbsp;The eventual arrival of the ferry prevented a fight from breaking out amongst the passengers.</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">If it hadn't been for </span><input class="fill-input-wide" data-answer="the eventual arrival of the ferry, a fight would have broken out amongst the passengers" placeholder="..."> .</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>3</b> &nbsp;None of the passengers was injured because of the driver's quick reaction.</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">But </span><input class="fill-input-wide" data-answer="for the driver's quick reaction, some of the passengers would have been injured" placeholder="..."> .</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>4</b> &nbsp;We'll have to cancel the meeting if Wendy doesn't turn up soon.</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">Unless </span><input class="fill-input-wide" data-answer="Wendy turns up soon, we'll have to cancel the meeting" placeholder="..."> .</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>5</b> &nbsp;Mr Jones would be quite lonely if he didn't have his daughter's visits.</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">Were it </span><input class="fill-input-wide" data-answer="not for his daughter's visits, Mr Jones would be quite lonely" placeholder="..."> .</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>6</b> &nbsp;Here's my phone number, because you might need it.</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">In case </span><input class="fill-input-wide" data-answer="you need it, here's my phone number" placeholder="..."> .</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>7</b> &nbsp;Agree to be back by midnight and you can go.</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">Providing </span><input class="fill-input-wide" data-answer="you agree to be back by midnight, you can go" placeholder="..."> .</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>8</b> &nbsp;Officer Hughes prevented the robbers from escaping.</div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">Had it </span><input class="fill-input-wide" data-answer="not been for Officer Hughes, the robbers would have escaped" placeholder="..."> .</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exG')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exG')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise H -->
+    <div class="exercise" id="exH">
+      <div class="exercise-label">
+        <div class="ex-letter">H</div>
+        <div class="ex-instruction">Choose the correct answer.</div>
+      </div>
+      <div id="H-list">
+        <div class="mc-item">
+          <div class="mc-question"><b>1</b> &nbsp;If you saw another student cheating in an exam, <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> somebody?</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H1" data-opt="A" data-answer="C">A did you tell</button>
+            <button class="mc-btn" data-q="H1" data-opt="B" data-answer="C">B do you tell</button>
+            <button class="mc-btn" data-q="H1" data-opt="C" data-answer="C">C would you tell</button>
+            <button class="mc-btn" data-q="H1" data-opt="D" data-answer="C">D have you told</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>2</b> &nbsp;Make sure you mix the ingredients well, <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> you might get lumps in your cake.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H2" data-opt="A" data-answer="B">A unless</button>
+            <button class="mc-btn" data-q="H2" data-opt="B" data-answer="B">B otherwise</button>
+            <button class="mc-btn" data-q="H2" data-opt="C" data-answer="B">C provided</button>
+            <button class="mc-btn" data-q="H2" data-opt="D" data-answer="B">D supposing</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>3</b> &nbsp;Were <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> my dad, I would never have started playing tennis in the first place.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H3" data-opt="A" data-answer="D">A it for</button>
+            <button class="mc-btn" data-q="H3" data-opt="B" data-answer="D">B it hadn't been for</button>
+            <button class="mc-btn" data-q="H3" data-opt="C" data-answer="D">C it to be for</button>
+            <button class="mc-btn" data-q="H3" data-opt="D" data-answer="D">D it not for</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>4</b> &nbsp;If I <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> hear from Nigel, I'll tell him you were asking after him.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H4" data-opt="A" data-answer="B">A happened</button>
+            <button class="mc-btn" data-q="H4" data-opt="B" data-answer="B">B should happen to</button>
+            <button class="mc-btn" data-q="H4" data-opt="C" data-answer="B">C should to</button>
+            <button class="mc-btn" data-q="H4" data-opt="D" data-answer="B">D will happen to</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>5</b> &nbsp;The book would have been perfect <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> the ending.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H5" data-opt="A" data-answer="C">A had it not been for</button>
+            <button class="mc-btn" data-q="H5" data-opt="B" data-answer="C">B it had not been for</button>
+            <button class="mc-btn" data-q="H5" data-opt="C" data-answer="C">C it hadn't been for</button>
+            <button class="mc-btn" data-q="H5" data-opt="D" data-answer="C">D hadn't it been for</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>6</b> &nbsp;If you hadn't taken the money, you <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> in prison now.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H6" data-opt="A" data-answer="D">A wouldn't have been</button>
+            <button class="mc-btn" data-q="H6" data-opt="B" data-answer="D">B hadn't been</button>
+            <button class="mc-btn" data-q="H6" data-opt="C" data-answer="D">C haven't been</button>
+            <button class="mc-btn" data-q="H6" data-opt="D" data-answer="D">D wouldn't be</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>7</b> &nbsp;Do you think that if we <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> earlier we might not have missed the coach?</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H7" data-opt="A" data-answer="D">A have been leaving</button>
+            <button class="mc-btn" data-q="H7" data-opt="B" data-answer="D">B left</button>
+            <button class="mc-btn" data-q="H7" data-opt="C" data-answer="D">C had left</button>
+            <button class="mc-btn" data-q="H7" data-opt="D" data-answer="D">D have left</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>8</b> &nbsp;Unless Ray <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> here soon, I'm going to leave because I'm getting bored.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H8" data-opt="A" data-answer="D">A doesn't get</button>
+            <button class="mc-btn" data-q="H8" data-opt="B" data-answer="D">B gets</button>
+            <button class="mc-btn" data-q="H8" data-opt="C" data-answer="D">C won't get</button>
+            <button class="mc-btn" data-q="H8" data-opt="D" data-answer="D">D will get</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>9</b> &nbsp;What if I <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> you that there's a good chance I can get tickets for the concert?</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H9" data-opt="A" data-answer="A">A were to tell</button>
+            <button class="mc-btn" data-q="H9" data-opt="B" data-answer="A">B were telling</button>
+            <button class="mc-btn" data-q="H9" data-opt="C" data-answer="A">C have told</button>
+            <button class="mc-btn" data-q="H9" data-opt="D" data-answer="A">D would to tell</button>
+          </div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-question"><b>10</b> &nbsp;If there <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> happen to be any reason for late delivery, please inform our Accounts Department.</div>
+          <div class="mc-options">
+            <button class="mc-btn" data-q="H10" data-opt="A" data-answer="D">A might</button>
+            <button class="mc-btn" data-q="H10" data-opt="B" data-answer="D">B could</button>
+            <button class="mc-btn" data-q="H10" data-opt="C" data-answer="D">C would</button>
+            <button class="mc-btn" data-q="H10" data-opt="D" data-answer="D">D should</button>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkMC('H-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetMC('H-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise I -->
+    <div class="exercise" id="exI">
+      <div class="exercise-label">
+        <div class="ex-letter">I</div>
+        <div class="ex-instruction">Write one word in each gap.</div>
+      </div>
+      <div class="passage-box blue-box">
+        <h3 style="text-align:center; font-family:'Georgia',serif; color:#1a3d6e;">CFCs</h3>
+        Had <span class="gap-num">(1)</span> <input class="fill-input" data-answer="it" placeholder="..."> not been for the invention of CFCs (chlorofluorocarbons) in the 1920s, at least one environmental problem might have been avoided. In fact, <span class="gap-num">(2)</span> <input class="fill-input" data-answer="were" placeholder="..."> they to be invented today, they <span class="gap-num">(3)</span> <input class="fill-input" data-answer="would" placeholder="..."> no doubt be immediately banned. For fifty years, though, if you bought an air conditioner or a spray, there <span class="gap-num">(4)</span> <input class="fill-input" data-answer="was" placeholder="..."> a good chance that it contained CFCs – and those CFCs are still around in the atmosphere.
+        If you <span class="gap-num">(5)</span> <input class="fill-input" data-answer="were" placeholder="..."> able to travel into the upper layers of the atmosphere, you <span class="gap-num">(6)</span> <input class="fill-input" data-answer="would" placeholder="..."> see the chlorine and fluorine from CFCs breaking down the ozone (a form of oxygen). Ozone could damage your lungs <span class="gap-num">(7)</span> <input class="fill-input" data-answer="if" placeholder="..."> you were to breathe it, but high in the atmosphere it performs the function of blocking ultraviolet rays from the sun, rays which can cause skin cancer if you <span class="gap-num">(8)</span> <input class="fill-input" data-answer="are" placeholder="..."> exposed to them. We might <span class="gap-num">(9)</span> <input class="fill-input" data-answer="never" placeholder="..."> have known about the process <span class="gap-num">(10)</span> <input class="fill-input" data-answer="had" placeholder="..."> it not been for the work of two American scientists, Frank Rowland and Mario Molina. A number of industries fought against their conclusions, and might have won <span class="gap-num">(11)</span> <input class="fill-input" data-answer="had" placeholder="..."> the evidence not been so clear. Rowland and Molina received the Nobel Prize for Chemistry in 1995 for their work on the ozone layer, but <span class="gap-num">(12)</span> <input class="fill-input" data-answer="otherwise" placeholder="..."> we might today be facing an even greater problem.
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exI')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exI')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise J -->
+    <div class="exercise" id="exJ">
+      <div class="exercise-label">
+        <div class="ex-letter">J</div>
+        <div class="ex-instruction">Complete the second sentence so that it has a similar meaning to the first sentence, using the word given. Do not change the word given. You must use between three and eight words, including the word given.</div>
+      </div>
+      <div id="J-list">
+        <div class="rewrite-item">
+          <div><b>1</b> &nbsp;Without this new diet, Henry would never have lost so much weight. &nbsp;<b>it</b></div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">Had </span><input class="fill-input-wide" data-answer="it not been for this new diet" placeholder="..."> , Henry would never have lost so much weight.</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>2</b> &nbsp;Unless the plans change, we'll see you on the 19th. &nbsp;<b>no</b></div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">Provided </span><input class="fill-input-wide" data-answer="there are no changes to the plans|the plans undergo no changes" placeholder="..."> , we'll see you on the 19th.</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>3</b> &nbsp;If you applied now, there's a good chance you would get the job. &nbsp;<b>apply</b></div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">Were </span><input class="fill-input-wide" data-answer="you to apply now" placeholder="..."> , there's a good chance you would get the job.</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>4</b> &nbsp;I didn't know about your problem so I didn't offer to help. &nbsp;<b>have</b></div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">If I'd known about your problem, </span><input class="fill-input-wide" data-answer="I would have offered to help" placeholder="..."> .</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>5</b> &nbsp;It could get cold at night, so take some warm clothes. &nbsp;<b>in</b></div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">Take some warm clothes </span><input class="fill-input-wide" data-answer="in case it gets cold at night" placeholder="..."> .</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>6</b> &nbsp;I'd love to travel the world if I didn't have to pay off my mortgage. &nbsp;<b>having</b></div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">Were </span><input class="fill-input-wide" data-answer="it not for having to pay off my mortgage" placeholder="..."> , I'd love to travel the world.</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>7</b> &nbsp;Ten years ago, people would have complained at seeing this film. &nbsp;<b>seen</b></div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">Had </span><input class="fill-input-wide" data-answer="this film been seen ten years ago" placeholder="..."> , they would have complained.</div>
+        </div>
+        <div class="rewrite-item">
+          <div><b>8</b> &nbsp;Drivers are allowed to park here if they display a local resident permit. &nbsp;<b>condition</b></div>
+          <div style="margin-top:4px;"><span class="rewrite-starter">Drivers are allowed to park here </span><input class="fill-input-wide" data-answer="on condition that they display a local resident permit" placeholder="..."> .</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exJ')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exJ')">Reset</button>
+      </div>
+    </div>
+
+  </div><!-- end section -->
+</main>
+
+<div id="toast"></div>
+
+<script>
+// ── UTILITY ──────────────────────────────────────────────
+function normalize(s) {
+  return s.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+function isCorrect(input, answer) {
+  const val = normalize(input.value);
+  const alts = answer.split('|').map(a => normalize(a));
+  return alts.includes(val);
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2000);
+}
+
+// ── SCORE TRACKING ───────────────────────────────────────
+function updateScore() {
+  const all = document.querySelectorAll('.fill-input, .fill-input-wide');
+  const answered = [...all].filter(i => i.value.trim() !== '').length;
+  const total = all.length;
+  const pct = total ? (answered / total * 100).toFixed(0) : 0;
+  document.getElementById('score-bar-fill').style.width = pct + '%';
+  document.getElementById('score-text').textContent = answered + ' / ' + total + ' answered';
+}
+document.addEventListener('input', updateScore);
+
+// ── FILL IN THE BLANK ────────────────────────────────────
+function checkFill(listId) {
+  const list = document.getElementById(listId);
+  let correct = 0, total = 0;
+  list.querySelectorAll('.fill-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetFill(listId) {
+  document.getElementById(listId).querySelectorAll('.fill-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+function checkAllFillInSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  let correct = 0, total = 0;
+  section.querySelectorAll('.fill-input, .fill-input-wide').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetAllFillInSection(sectionId) {
+  document.getElementById(sectionId).querySelectorAll('.fill-input, .fill-input-wide').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+// ── MULTIPLE CHOICE ──────────────────────────────────────
+document.addEventListener('click', e => {
+  if (!e.target.matches('.mc-btn')) return;
+  const btn = e.target;
+  const q = btn.dataset.q;
+  document.querySelectorAll(`.mc-btn[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+});
+function checkMC(listId) {
+  const list = document.getElementById(listId);
+  const questions = {};
+  list.querySelectorAll('.mc-btn').forEach(btn => {
+    if (!questions[btn.dataset.q]) questions[btn.dataset.q] = [];
+    questions[btn.dataset.q].push(btn);
+  });
+  let correct = 0, total = Object.keys(questions).length;
+  Object.values(questions).forEach(btns => {
+    const answer = btns[0].dataset.answer;
+    btns.forEach(b => {
+      b.classList.remove('correct', 'wrong');
+      if (b.classList.contains('selected')) {
+        if (b.dataset.opt === answer) { b.classList.add('correct'); correct++; }
+        else b.classList.add('wrong');
+      } else if (b.dataset.opt === answer) {
+        b.classList.add('correct');
+      }
+    });
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetMC(listId) {
+  document.getElementById(listId).querySelectorAll('.mc-btn').forEach(b => {
+    b.classList.remove('selected', 'correct', 'wrong');
+  });
+}
+
+// ── CHOOSE OPTION ─────────────────────────────────────────
+function chooseOption(btn) {
+  const q = btn.dataset.q;
+  btn.closest('.choose-pair').querySelectorAll('.choose-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function checkChoose(listId) {
+  const list = document.getElementById(listId);
+  let correct = 0, total = 0;
+  const questions = {};
+  list.querySelectorAll('.choose-btn').forEach(btn => {
+    if (!questions[btn.dataset.q]) questions[btn.dataset.q] = [];
+    questions[btn.dataset.q].push(btn);
+  });
+  total = Object.keys(questions).length;
+  Object.values(questions).forEach(btns => {
+    const answer = btns[0].dataset.answer;
+    btns.forEach(b => {
+      b.classList.remove('correct', 'wrong');
+      if (b.classList.contains('selected')) {
+        if (b.dataset.opt === answer) { b.classList.add('correct'); correct++; }
+        else b.classList.add('wrong');
+      } else if (b.dataset.opt === answer) {
+        b.classList.add('correct');
+      }
+    });
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetChoose(listId) {
+  document.getElementById(listId).querySelectorAll('.choose-btn').forEach(b => {
+    b.classList.remove('selected', 'correct', 'wrong');
+  });
+}
+
+// ── SIDEBAR ACTIVE ────────────────────────────────────────
+const sections = document.querySelectorAll('.exercise[id]');
+const navLinks = document.querySelectorAll('#sidebar nav a');
+function onScroll() {
+  let current = '';
+  sections.forEach(s => {
+    if (s.getBoundingClientRect().top <= 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', onScroll);
+onScroll();
+
+// ── INIT ──────────────────────────────────────────────────
+updateScore();
+</script>
+</body>
+</html>

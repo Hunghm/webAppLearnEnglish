@@ -1,0 +1,87 @@
+{
+  "title": "Complete using the words in the box",
+  "type": "word_bank",
+  "instruction": "Complete the sentences using the words in the box.",
+  "word_bank": [
+    "close",
+    "confident",
+    "cool",
+    "divorced",
+    "generous",
+    "grateful",
+    "independent",
+    "loving",
+    "loyal",
+    "ordinary",
+    "patient",
+    "private",
+    "single"
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "sentence": "Thanks for looking after my dog for the weekend. I’m really ______.",
+      "answer": "grateful"
+    },
+    {
+      "id": 2,
+      "sentence": "Judy is one of the most ______ people I know. She’s always giving me presents!",
+      "answer": "generous"
+    },
+    {
+      "id": 3,
+      "sentence": "I don’t want a girlfriend. I like being ______.",
+      "answer": "single"
+    },
+    {
+      "id": 4,
+      "sentence": "It will take a while for Simon to forgive you. You’ll just have to be ______.",
+      "answer": "patient"
+    },
+    {
+      "id": 5,
+      "sentence": "Adam’s parents are ______, so he only sees his dad at the weekend.",
+      "answer": "divorced"
+    },
+    {
+      "id": 6,
+      "sentence": "Cats are more ______ than dogs. They live their own lives and don’t need human company.",
+      "answer": "independent"
+    },
+    {
+      "id": 7,
+      "sentence": "I’m very ______ to my best friend. I’d never talk about her behind her back.",
+      "answer": "loyal"
+    },
+    {
+      "id": 8,
+      "sentence": "Sandy’s such a ______ dog. He’s always so happy to see us when we come home!",
+      "answer": "loving"
+    },
+    {
+      "id": 9,
+      "sentence": "I’m not a very ______ person. I get nervous when I have to speak in public.",
+      "answer": "confident"
+    },
+    {
+      "id": 10,
+      "sentence": "My diary is ______. No one is allowed to read it apart from me.",
+      "answer": "private"
+    },
+    {
+      "id": 11,
+      "sentence": "I tell my sister all my problems and secrets. We have a very ______ relationship.",
+      "answer": "close"
+    },
+    {
+      "id": 12,
+      "sentence": "My uncle’s really ______! He’s in a rock band!",
+      "answer": "cool"
+    },
+    {
+      "id": 13,
+      "sentence": "I’m just a/an ______ person with a normal life – but I’m quite happy!",
+      "answer": "ordinary"
+    }
+  ]
+}

@@ -1,0 +1,558 @@
+[
+  {
+    "page": 9,
+    "section": "Unit 1 Grammar",
+    "exercises": [
+      {
+        "exercise": "A",
+        "title": "Write the verb in brackets in the correct form, present simple or present continuous, in each gap.",
+        "type": "fill_in_blank",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "My brother ____ (do) a degree at university so I ____ (see) him very often, unfortunately.", "answer": "is doing / don't see", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "Darren ____ usually ____ (get) home until about eight o'clock.", "answer": "doesn't / get", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "I'm sorry to hear that your parents ____ (get) divorced.", "answer": "are getting", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "You ____ (go) to the end of the street and ____ (turn) right.", "answer": "go / turn", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "Why ____ ice ____ (float)?", "answer": "does / float", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "It's lovely now the evenings ____ (get) longer, isn't it?", "answer": "are getting", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "My dad ____ (eat) meat at all - he's a vegetarian.", "answer": "doesn't eat", "options": [], "prompt": "" },
+          { "id": 8, "sentence": "Actually, we ____ (listen) to The Libertines at all - this is Pete Docherty's second band, Babyshambles.", "answer": "aren't listening", "options": [], "prompt": "" },
+          { "id": 9, "sentence": "A man ____ (walk) into a bar. Ouch! Not a good idea to walk into an iron bar!", "answer": "walks", "options": [], "prompt": "" },
+          { "id": 10, "sentence": "____ you ____ (phone) me from your mobile? The line's not very good.", "answer": "Are / phoning", "options": [], "prompt": "" },
+          { "id": 11, "sentence": "____ you often ____ (order) things online?", "answer": "Do / order", "options": [], "prompt": "" },
+          { "id": 12, "sentence": "There's an Englishman, an Irishman and a Scotsman. They ____ (walk) across the desert when one of them ____ (spot) a camel in the distance.", "answer": "are walking / spots", "options": [], "prompt": "" },
+          { "id": 13, "sentence": "Beckham ____ (have) control of the ball ... It's Beckham ... And he ____ (score)!", "answer": "has / scores", "options": [], "prompt": "" },
+          { "id": 14, "sentence": "WOMAN ____ (give) €500 MILLION LOTTERY WIN TO CHARITY", "answer": "gives", "options": [], "prompt": "" },
+          { "id": 15, "sentence": "My dad ____ (always/tell) jokes! They're usually rubbish, though.", "answer": "is always telling", "options": [], "prompt": "" },
+          { "id": 16, "sentence": "'Phil ____ (wear) ties, does he?' 'Actually, he ____ (wear) a tie to work most days.'", "answer": "doesn't wear / wears", "options": [], "prompt": "" }
+        ]
+      },
+      {
+        "exercise": "B",
+        "title": "Write one word in each gap.",
+        "type": "fill_in_blank",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "Why do you ____ leave the light on when you go out of the room? You wait till you start paying the electricity bill!", "answer": "always", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "Fifteen teachers are teaching here full-time at ____ .", "answer": "present", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "My sister's revising for her GCSEs at the ____ .", "answer": "moment", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "I'm quite happy living at home for the time ____ , but I guess I'll have to get my own place eventually.", "answer": "being", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "It's true that Ralph calls us quite ____ , but most students only call their parents when they need something, don't they?", "answer": "regularly", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "We go to the cinema ____ now and then, but only if there's something good on.", "answer": "every", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "I'm alone in my study bedroom reading ____ of the time.", "answer": "most", "options": [], "prompt": "" },
+          { "id": 8, "sentence": "Tim ____ goes out to play until he's done all his homework. I just don't allow it!", "answer": "never", "options": [], "prompt": "" },
+          { "id": 9, "sentence": "I see Lucinda from ____ to time, but not on a regular basis.", "answer": "time", "options": [], "prompt": "" },
+          { "id": 10, "sentence": "I'm sitting in the garden ____ now talking to you on my mobile.", "answer": "right", "options": [], "prompt": "" },
+          { "id": 11, "sentence": "That's the last ____ we're inviting Dave to one of our parties!", "answer": "time", "options": [], "prompt": "" },
+          { "id": 12, "sentence": "Do young people these ____ have more free time than they did in the past?", "answer": "days", "options": [], "prompt": "" },
+          { "id": 13, "sentence": "My mum fills up with petrol ____ she goes to the supermarket.", "answer": "whenever", "options": [], "prompt": "" },
+          { "id": 14, "sentence": "I'm staying in ____ now, but I might go out a bit later on.", "answer": "for", "options": [], "prompt": "" },
+          { "id": 15, "sentence": "____ is the last time I ever order from that pizzeria. It was disgusting!", "answer": "That", "options": [], "prompt": "" }
+        ]
+      }
+    ]
+  },
+  {
+    "page": 10,
+    "section": "Unit 1",
+    "exercises": [
+      {
+        "exercise": "C",
+        "title": "Write a verb from the box in the correct form, present simple or present continuous, in each gap. Use the words in brackets with the verb. Use contractions where possible. You can use the verbs more than once.",
+        "type": "word_bank",
+        "word_bank": ["contact", "do", "drive", "focus", "go", "happen", "have", "like", "look", "need", "say", "sound", "take", "think", "try", "work"],
+        "questions": [
+          { "id": 1, "sentence": "Sandy: Hey, George! How's things? What (1) ____ (you) ____?", "answer": "are you doing", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "George: Hi, Sandy! Fine! (2) ____ (I / just) ____ some research for that history project.", "answer": "I'm just doing", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "Sandy: (3) ____ (how/it) ____?", "answer": "How's it going", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "George: Yeah, (4) ____ (it/well) ____, thanks.", "answer": "it's going well", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "The website (5) ____ (I) ____ at now is very good.", "answer": "I'm looking", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "Sandy: Listen, the reason (6) ____ (I) ____ you is that my (7) ____ (mum) ____ past the library every morning on the way to work.", "answer": "I'm contacting / drives", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "She (8) ____ she can give you a lift tomorrow morning, if you like.", "answer": "says", "options": [], "prompt": "" },
+          { "id": 8, "sentence": "George: Wow, that's really kind of her, but actually (9) ____ (it) ____ long to walk there from here, so (10) ____ (she) ____ to worry.", "answer": "it doesn't take / she doesn't need", "options": [], "prompt": "" },
+          { "id": 9, "sentence": "George: (11) ____ (what) ____ with your project? (12) ____ (you) ____ a title yet?", "answer": "what's happening / Do you have", "options": [], "prompt": "" },
+          { "id": 10, "sentence": "Sandy: No! (13) ____ (I / even) ____ a topic yet! (14) ____ (I / really) ____ on it at the moment, though.", "answer": "I don't even have / I'm really focusing", "options": [], "prompt": "" },
+          { "id": 11, "sentence": "(15) ____ (I) ____ to finish my physics project first.", "answer": "I'm trying", "options": [], "prompt": "" },
+          { "id": 12, "sentence": "George: Why (16) ____ (you) ____ something on the Second World War? That's interesting.", "answer": "don't you do", "options": [], "prompt": "" },
+          { "id": 13, "sentence": "Sandy: No, (17) ____ (I) ____ wars! I'd rather do something (18) ____ (that) ____ more on social history.", "answer": "I don't like / focuses", "options": [], "prompt": "" },
+          { "id": 14, "sentence": "George: (19) ____ (that) ____ good.", "answer": "That sounds", "options": [], "prompt": "" },
+          { "id": 15, "sentence": "Sandy: (20) ____ (you) ____ so? Okay. Maybe I'll do that, then.", "answer": "Do you think", "options": [], "prompt": "" }
+        ]
+      },
+      {
+        "exercise": "D",
+        "title": "Circle the correct word or phrase.",
+        "type": "circle_correct",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "Could you explain what 'antidisestablishmentarianism' means / is meaning, please?", "answer": "means", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "Each song only costs / is only costing 50 cents at the moment because they're on special offer.", "answer": "only costs", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "It doesn't matter / isn't mattering which of the books we've studied this term you do your essay on.", "answer": "doesn't matter", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "It's only a quick call as I ring / I'm ringing from my mobile.", "answer": "I'm ringing", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "I think I recognise / I'm recognising that woman over there. Wasn't she on that quiz show last night?", "answer": "I recognise", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "Excuse me, does the nut cake contain / is the nut cake containing walnuts? I'm allergic to them.", "answer": "does the nut cake contain", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "I really don't agree / I'm really not agreeing that capital punishment deters people from committing murder.", "answer": "don't agree", "options": [], "prompt": "" },
+          { "id": 8, "sentence": "Why don't you play / aren't you playing football, Mark? I thought you had a match this afternoon.", "answer": "aren't you playing", "options": [], "prompt": "" },
+          { "id": 9, "sentence": "Stay out of this, Simon, it doesn't concern / isn't concerning you at all.", "answer": "doesn't concern", "options": [], "prompt": "" },
+          { "id": 10, "sentence": "You really resemble / are resembling your father when you frown like that.", "answer": "resemble", "options": [], "prompt": "" },
+          { "id": 11, "sentence": "If you're not watching / you don't watch TV, turn it off!", "answer": "you're not watching", "options": [], "prompt": "" },
+          { "id": 12, "sentence": "The number you have dialled does not exist / is not existing. Please try again.", "answer": "does not exist", "options": [], "prompt": "" },
+          { "id": 13, "sentence": "I want everyone to do exercise H, and that includes / is including you too, Anne!", "answer": "includes", "options": [], "prompt": "" },
+          { "id": 14, "sentence": "We're having / We have the living room repainted so it's probably best if we go into the kitchen.", "answer": "We're having", "options": [], "prompt": "" },
+          { "id": 15, "sentence": "Right now, my job involves / is involving a huge amount of foreign travel.", "answer": "involves", "options": [], "prompt": "" }
+        ]
+      }
+    ]
+  },
+  {
+    "page": 11,
+    "section": "Unit 1 Grammar",
+    "exercises": [
+      {
+        "exercise": "E",
+        "title": "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.",
+        "type": "word_bank",
+        "word_bank": ["appeal", "be", "consider", "depend", "feel", "have", "look", "see", "smell", "think"],
+        "questions": [
+          { "id": 1, "sentence": "A I ____ for a book on fly fishing. Do you have any in stock?", "answer": "am looking", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "B Stan ____ like he's in a bad mood this morning.", "answer": "looks", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "A How ____ you ____ about inviting Jackie to come with us on Saturday?", "answer": "do / feel", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "B Britney ____ very well, so I've told her she can go home.", "answer": "isn't feeling", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "A Jan and I ____ buying a new flat.", "answer": "are considering", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "B Why ____ you ____ Ray Davis to be a better songwriter than Paul McCartney?", "answer": "do / consider", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "A We ____ a barbecue right now, so can I call you back this evening?", "answer": "are having", "options": [], "prompt": "" },
+          { "id": 8, "sentence": "B ____ the Deacons ____ a swimming pool?", "answer": "Do / have", "options": [], "prompt": "" },
+          { "id": 9, "sentence": "A The idea of going to a Greek island really ____ to me.", "answer": "appeals", "options": [], "prompt": "" },
+          { "id": 10, "sentence": "B Police ____ for witnesses to the attack.", "answer": "are appealing", "options": [], "prompt": "" },
+          { "id": 11, "sentence": "A This chicken ____ very fresh. I think I'll throw it away just to be on the safe side.", "answer": "doesn't smell", "options": [], "prompt": "" },
+          { "id": 12, "sentence": "B Why ____ you ____ that chicken, Mum?", "answer": "are / smelling", "options": [], "prompt": "" },
+          { "id": 13, "sentence": "A I ____ on you, James. Don't let me down!", "answer": "am depending", "options": [], "prompt": "" },
+          { "id": 14, "sentence": "B Whether we get there by six ____ on the traffic.", "answer": "depends", "options": [], "prompt": "" },
+          { "id": 15, "sentence": "A Julian ____ a bit busy at the moment, actually.", "answer": "is being", "options": [], "prompt": "" },
+          { "id": 16, "sentence": "B Guys, you ____ too noisy! Can't you keep it down, please?", "answer": "are being", "options": [], "prompt": "" },
+          { "id": 17, "sentence": "A ____ you ____ Bob would like a CD for his birthday?", "answer": "Do / think", "options": [], "prompt": "" },
+          { "id": 18, "sentence": "B Oliver said he ____ about moving out of the city.", "answer": "is thinking", "options": [], "prompt": "" },
+          { "id": 19, "sentence": "A I hear that Doug ____ quite a lot of Katy these days. Is that true?", "answer": "is seeing", "options": [], "prompt": "" },
+          { "id": 20, "sentence": "B I ____ Manchester United lost again.", "answer": "see", "options": [], "prompt": "" }
+        ]
+      },
+      {
+        "exercise": "F",
+        "title": "Each of the words or phrases in bold is incorrect. Rewrite them correctly.",
+        "type": "rewrite",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "Tammy been able to swim since she was one year old.", "answer": "has been able", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "How many articles has Greg wrote for Newsweek?", "answer": "written", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "Tina and Phil still not managed to sell their flat.", "answer": "still haven't managed", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "I'm never been to China - what's it like?", "answer": "I've never been", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "Have you heard? Carol's breaking her leg again.", "answer": "has broken", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "You're lucky you caught me - I've just came through the front door.", "answer": "come", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "Why you haven't tell Sue yet that you're thinking of dropping out of the course?", "answer": "haven't you told", "options": [], "prompt": "" },
+          { "id": 8, "sentence": "Our family is living in this village for over two hundred years and we're not leaving now!", "answer": "has been living", "options": [], "prompt": "" }
+        ]
+      },
+      {
+        "exercise": "G",
+        "title": "Circle the correct word or phrase. If both are correct, circle both.",
+        "type": "circle_correct",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "They've filled / been filling over six bags with rubbish from the beach already.", "answer": "filled / been filling", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "Have you followed / been following that story in the papers about the elephant that escaped from the zoo? Apparently, they've just caught / been catching it.", "answer": "been following / caught", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "We've seen / been seeing the Tower of London, Buckingham Palace and Oxford Street, and we've only been in London for three hours!", "answer": "seen", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "It's the first time I've heard / been hearing The Editors play live.", "answer": "heard", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "Jake and I have thought / been thinking about where to go on holiday for weeks but we just can't decide.", "answer": "been thinking", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "You can't want to go to the toilet already - we've only driven / been driving for about ten minutes so far!", "answer": "driven / been driving", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "I've stood / been standing up all day and my feet are killing me!", "answer": "been standing", "options": [], "prompt": "" },
+          { "id": 8, "sentence": "Has Jan worked / been working for the company since it started?", "answer": "worked / been working", "options": [], "prompt": "" }
+        ]
+      }
+    ]
+  },
+  {
+    "page": 12,
+    "section": "Unit 1",
+    "exercises": [
+      {
+        "exercise": "H",
+        "title": "Write the verb in brackets in the correct form, present perfect simple or present perfect continuous. Use contractions where possible.",
+        "type": "fill_in_blank",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "____ (I/send off) over 18 press releases this morning so far.", "answer": "I've sent off", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "Is it the first time ____ (you/ever/eat) squid?", "answer": "you've ever eaten", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "____ (we/wait) for you for the past two hours. Where ____ (you/be)?", "answer": "We've been waiting / have you been", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "____ (you/just/receive) an e-mail from Ruth?", "answer": "Have you just received", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "I'm afraid ____ (we/get) any milk. ____ (we/expect) a delivery for the past four hours but ____ (they/show up) yet.", "answer": "we haven't got / We've been expecting / they haven't shown up", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "____ (I/draw up) a list of people to invite to the wedding but ____ (I/get) very far so far. ____ (you/have) any thoughts about it?", "answer": "I've drawn up / I haven't got / Have you had", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "Oh, Clair, my ____ (mum/mean) to ask you for a while. Would you like to come with us to Wimbledon?", "answer": "mum's been meaning", "options": [], "prompt": "" }
+        ]
+      },
+      {
+        "exercise": "I",
+        "title": "Write a word from the box in each gap. You can use each word more than once.",
+        "type": "word_bank",
+        "word_bank": ["already", "before", "ever", "for", "just", "recently", "since", "so", "still", "until", "yet"],
+        "questions": [
+          { "id": 1, "sentence": "I've ____ realised what's different! You've changed your hair.", "answer": "just", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "My grandmother's been quite ill ____ , so she's coming to stay with us for a week or two.", "answer": "recently", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "We've had broadband at home ____ about 2005.", "answer": "since", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "Have you really finished your homework ____ ? Okay, you can watch TV, then.", "answer": "already", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "We've won every match we've played ____ far this season.", "answer": "so", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "I've always lived in a big house ____ now, so it's taking some time to get used to being in a small flat.", "answer": "until", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "We can't cancel the party now - I've ____ invited everyone!", "answer": "already", "options": [], "prompt": "" },
+          { "id": 8, "sentence": "How long has Sue gone abroad ____ ?", "answer": "for", "options": [], "prompt": "" },
+          { "id": 9, "sentence": "Don't get Matthew that game; I'm pretty sure he's got it ____ .", "answer": "already", "options": [], "prompt": "" },
+          { "id": 10, "sentence": "Have you ____ thought of going into business on your own?", "answer": "ever", "options": [], "prompt": "" },
+          { "id": 11, "sentence": "We haven't started ____ so you can join in if you like.", "answer": "yet", "options": [], "prompt": "" },
+          { "id": 12, "sentence": "We've never been to New York ____ , so we're both really looking forward to it.", "answer": "before", "options": [], "prompt": "" },
+          { "id": 13, "sentence": "Have they been living in the neighbourhood ____ you moved in?", "answer": "since", "options": [], "prompt": "" },
+          { "id": 14, "sentence": "I ____ haven't found my sunglasses.", "answer": "still", "options": [], "prompt": "" },
+          { "id": 15, "sentence": "I've been looking for a website like this ____ ages!", "answer": "for", "options": [], "prompt": "" },
+          { "id": 16, "sentence": "It's strange you should ring now. We've ____ been talking about you.", "answer": "just", "options": [], "prompt": "" },
+          { "id": 17, "sentence": "Michael, haven't you done your homework ____ ? I think it's time you started, isn't it?", "answer": "yet", "options": [], "prompt": "" }
+        ]
+      },
+      {
+        "exercise": "J",
+        "title": "Write one word in each gap.",
+        "type": "gap_fill",
+        "word_bank": [],
+        "passage": "Humans and other life forms\nHumans (1) ____ much in common with other life forms on Earth. (2) ____ the very first life forms appeared, all living things have (3) ____ desperately struggling to survive the harsh and changing conditions of our planet. This has (4) ____ adapting to new situations and, in many cases, has (5) ____ to either evolution or extinction. We are (6) ____ alone in making use of the world around us (birds use twigs to build nests, for example) or in being particularly skilful (spiders make intricate webs). Where we (7) ____ differ from other life forms, however, (8) ____ in our ability to record, and learn from, our collective history. In this, it (9) ____ that we (10) ____ unique. (11) ____ is still much mankind (12) ____ not know about the earliest humans, of course, but we are increasingly (13) ____ a species with detailed knowledge about our past. The more we learn, the better (14) ____ our chances of survival in the future. It must also be recognised, however, that we are also the only species on Earth which (15) ____ managed to create the means to destroy the planet we live on.",
+        "questions": [
+          { "id": 1, "sentence": "", "answer": "have", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "", "answer": "Since", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "", "answer": "been", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "", "answer": "meant", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "", "answer": "led", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "", "answer": "not", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "", "answer": "do", "options": [], "prompt": "" },
+          { "id": 8, "sentence": "", "answer": "is", "options": [], "prompt": "" },
+          { "id": 9, "sentence": "", "answer": "seems", "options": [], "prompt": "" },
+          { "id": 10, "sentence": "", "answer": "are", "options": [], "prompt": "" },
+          { "id": 11, "sentence": "", "answer": "There", "options": [], "prompt": "" },
+          { "id": 12, "sentence": "", "answer": "does", "options": [], "prompt": "" },
+          { "id": 13, "sentence": "", "answer": "becoming", "options": [], "prompt": "" },
+          { "id": 14, "sentence": "", "answer": "are", "options": [], "prompt": "" },
+          { "id": 15, "sentence": "", "answer": "has", "options": [], "prompt": "" }
+        ]
+      }
+    ]
+  },
+  {
+    "page": 15,
+    "section": "Unit 2",
+    "exercises": [
+      {
+        "exercise": "A",
+        "title": "Circle the correct word.",
+        "type": "circle_correct",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "Don't be so optimistic / pessimistic. Everything's going to be fine, you'll see!", "answer": "pessimistic", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "Most newspapers are usually biased / prejudiced towards a certain political outlook.", "answer": "biased", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "I'm slightly dubious / cynical about whether Sean's idea is going to work.", "answer": "dubious", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "To suggest that it's possible to create a society without crime is a little naive / sceptical, isn't it?", "answer": "naive", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "The only ingenious / plausible explanation I can think of is that Jenna got the dates wrong.", "answer": "plausible", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "Please don't baffle / discriminate me with loads of technical terminology. Use plain, simple English!", "answer": "baffle", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "It's not always easy to assume / assess someone's suitability for a job just by talking to them in a short interview.", "answer": "assess", "options": [], "prompt": "" },
+          { "id": 8, "sentence": "How can the government justify / speculate spending so much on the armed forces?", "answer": "justify", "options": [], "prompt": "" },
+          { "id": 9, "sentence": "Looking at the damage, I would estimate / deduce that the painting will cost at least €2,000 to restore properly.", "answer": "estimate", "options": [], "prompt": "" },
+          { "id": 10, "sentence": "I don't think you should reflect / presume that lots of people are going to help you with this project.", "answer": "presume", "options": [], "prompt": "" }
+        ]
+      },
+      {
+        "exercise": "B",
+        "title": "Complete using the correct form of the words in the box. More than one word might fit in each gap, but try to use all the words.",
+        "type": "word_bank",
+        "word_bank": ["concentrate", "consider", "contemplate", "deliberate", "gather", "grasp", "ponder", "reckon", "suppose"],
+        "questions": [
+          { "id": 1, "sentence": "It took me quite a long time to ____ what the aim of the game was.", "answer": "grasp", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "The jury are still ____ , but they're expected to reach a verdict soon.", "answer": "deliberating", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "I ____ from your tutor that you're thinking of changing course.", "answer": "gather", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "You really have to ____ very hard when you are doing calligraphy.", "answer": "concentrate", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "I'm seriously ____ asking for a pay rise tomorrow.", "answer": "considering", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "How long do you ____ it'll take to get to Manchester?", "answer": "reckon", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "I don't ____ I could borrow your lecture notes this weekend, could I?", "answer": "suppose", "options": [], "prompt": "" },
+          { "id": 8, "sentence": "If you've ever ____ the question 'Why does the universe bother to exist?', then this is the book for you.", "answer": "pondered", "options": [], "prompt": "" },
+          { "id": 9, "sentence": "Let's not even ____ the possibility of failure.", "answer": "contemplate", "options": [], "prompt": "" }
+        ]
+      },
+      {
+        "exercise": "C",
+        "title": "Each of the words in bold is in the wrong sentence. Write the correct words on the lines.",
+        "type": "error_correction",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "I'm in a real hunch because I've been invited to two parties on Saturday and I don't know which one to go to.", "answer": "dilemma", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "Dave said he's got complete guesswork in us, and thinks we're going to do a great job.", "answer": "faith", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "Sarah's a/an intuition when it comes to astrophysics, but she's not very practical in everyday things.", "answer": "genius", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "You often need to use a little educated notion when you're starting a cryptic crossword.", "answer": "guess", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "I've got a/an ideology that someone in this office is going to get promoted soon.", "answer": "hunch", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "Communism and capitalism are very different types of dilemma.", "answer": "ideology", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "Who gave you the faith for the main character in the book?", "answer": "inspiration", "options": [], "prompt": "" },
+          { "id": 8, "sentence": "Detective Tacker had absolutely no evidence that Roddard was involved, but all his paradox told him that he was.", "answer": "intuition", "options": [], "prompt": "" },
+          { "id": 9, "sentence": "I've got a small inspiration about the exam syllabus. Should I talk to Mrs Jacobs about it?", "answer": "query", "options": [], "prompt": "" },
+          { "id": 10, "sentence": "Paying mothers a salary to raise their children is an interesting genius.", "answer": "notion", "options": [], "prompt": "" },
+          { "id": 11, "sentence": "The fact that more people would come here if the place wasn't so crowded is a real query.", "answer": "paradox", "options": [], "prompt": "" }
+        ]
+      }
+    ]
+  },
+  {
+    "page": 16,
+    "section": "Unit 2",
+    "exercises": [
+      {
+        "exercise": "D",
+        "title": "Choose the correct word.",
+        "type": "multiple_choice",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "The system only views the weakest learners as having special (1) ____.", "answer": "C needs", "options": ["A requests", "B desires", "C needs", "D wants"], "prompt": "" },
+          { "id": 2, "sentence": "The brightest and most (2) ____ students are not encouraged to develop to their full potential.", "answer": "D conscientious", "options": ["A inattentive", "B ignorant", "C intensive", "D conscientious"], "prompt": "" },
+          { "id": 3, "sentence": "My fifteen-year-old daughter has just spent the last month or so (3) ____ for exams.", "answer": "A cramming", "options": ["A cramming", "B lecturing", "C reading", "D practising"], "prompt": "" },
+          { "id": 4, "sentence": "These aren't even real, important exams. They're just (4) ____ exams.", "answer": "B mock", "options": ["A false", "B mock", "C fake", "D artificial"], "prompt": "" },
+          { "id": 5, "sentence": "Is the work she's been doing really going to make her more (5) ____ about her subjects?", "answer": "A knowledgeable", "options": ["A knowledgeable", "B intellectual", "C academic", "D intelligent"], "prompt": "" },
+          { "id": 6, "sentence": "The standard (6) ____ doesn't give students any (7) ____ in developing practical work-related skills.", "answer": "D curriculum", "options": ["A timetable", "B lecture", "C seminar", "D curriculum"], "prompt": "" },
+          { "id": 7, "sentence": "The standard curriculum doesn't give students any (7) ____ in developing practical skills.", "answer": "D tutorial", "options": ["A lesson", "B subject", "C tuition", "D tutorial"], "prompt": "" },
+          { "id": 8, "sentence": "How many students know the difference between (8) ____ someone else's work and making good use of someone else's ideas?", "answer": "C plagiarising", "options": ["A writing", "B going over", "C plagiarising", "D repeating"], "prompt": "" },
+          { "id": 9, "sentence": "How many of them are really able to go about (9) ____ efficiently?", "answer": "D self-study", "options": ["A reviewing", "B revision", "C distance learning", "D self-study"], "prompt": "" },
+          { "id": 10, "sentence": "How many students (10) ____ from university totally unable to spell even simple English words correctly?", "answer": "B graduate", "options": ["A qualify", "B graduate", "C depart", "D exit"], "prompt": "" }
+        ]
+      },
+      {
+        "exercise": "E",
+        "title": "Match to make sentences.",
+        "type": "matching",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "I'm going to have to mull this", "answer": "D over for a while before I make a final decision.", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "Detectives are still trying to piece", "answer": "A together exactly what happened that evening.", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "It took him a very long time to take", "answer": "B in the fact that he'd never see her again.", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "Tell us how you hit", "answer": "G upon such a great idea for a website.", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "It took us ages to figure", "answer": "F out how to get everyone to the sports centre without Phil knowing.", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "I've just thought", "answer": "C up a brilliant excuse to tell Rachel.", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "I'm not sure we've thought", "answer": "E this through properly yet.", "options": [], "prompt": "" }
+        ]
+      }
+    ]
+  },
+  {
+    "page": 17,
+    "section": "Unit 2",
+    "exercises": [
+      {
+        "exercise": "F",
+        "title": "Write one word in each gap so that each second sentence has a similar meaning to the first sentence.",
+        "type": "key_word_transformation",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "I need to consider your offer very carefully before I make a decision.", "answer": "mull", "options": [], "prompt": "mull" },
+          { "id": 2, "sentence": "Lee had the brilliant idea of booking a clown for the end-of-term party.", "answer": "up with", "options": [], "prompt": "came" },
+          { "id": 3, "sentence": "It's time you realised that you've got responsibilities now.", "answer": "up to", "options": [], "prompt": "faced" },
+          { "id": 4, "sentence": "I'm going to have to improve my spoken German before I go to Munich.", "answer": "up on", "options": [], "prompt": "brush" },
+          { "id": 5, "sentence": "I didn't like the idea at first but now I do.", "answer": "come / to", "options": [], "prompt": "come round" },
+          { "id": 6, "sentence": "It's a general knowledge quiz so you can't do any revision for it.", "answer": "up on", "options": [], "prompt": "swot" },
+          { "id": 7, "sentence": "We were right at the back of the hall so I couldn't hear what the speaker was saying.", "answer": "make", "options": [], "prompt": "make" },
+          { "id": 8, "sentence": "We finally thought of a way to get the band into the hotel without the press knowing.", "answer": "out", "options": [], "prompt": "puzzled" },
+          { "id": 9, "sentence": "I've found out a lot of information about the history of English language teaching recently.", "answer": "reading", "options": [], "prompt": "reading" }
+        ]
+      },
+      {
+        "exercise": "G",
+        "title": "Phrasal verbs with out, such as puzzle out, are often connected to the idea of finding information. Which of these phrasal verbs with out are also connected to this idea?",
+        "type": "multiple_choice",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "Did you find out what time the parents' meeting is?", "answer": "yes - finding information", "options": ["yes - finding information", "no - not finding information"], "prompt": "" },
+          { "id": 2, "sentence": "I've been checking out whether it's better to go by ferry or plane.", "answer": "yes - finding information", "options": ["yes - finding information", "no - not finding information"], "prompt": "" },
+          { "id": 3, "sentence": "Susie reckons she's sussed out a great way to get into the club for free.", "answer": "yes - finding information", "options": ["yes - finding information", "no - not finding information"], "prompt": "" },
+          { "id": 4, "sentence": "We all piled out into the playground.", "answer": "no - not finding information", "options": ["yes - finding information", "no - not finding information"], "prompt": "" },
+          { "id": 5, "sentence": "I can't figure out how to change my password.", "answer": "yes - finding information", "options": ["yes - finding information", "no - not finding information"], "prompt": "" },
+          { "id": 6, "sentence": "The band were completely drowned out by all the screaming fans.", "answer": "no - not finding information", "options": ["yes - finding information", "no - not finding information"], "prompt": "" },
+          { "id": 7, "sentence": "I'm going to sound Bob out about his investing in the company.", "answer": "yes - finding information", "options": ["yes - finding information", "no - not finding information"], "prompt": "" },
+          { "id": 8, "sentence": "Two essays really do stand out from the rest.", "answer": "no - not finding information", "options": ["yes - finding information", "no - not finding information"], "prompt": "" },
+          { "id": 9, "sentence": "Jan's good at keeping secrets, so you'll have to worm it out of her!", "answer": "yes - finding information", "options": ["yes - finding information", "no - not finding information"], "prompt": "" },
+          { "id": 10, "sentence": "None of us could fathom out why the experiment wasn't working.", "answer": "yes - finding information", "options": ["yes - finding information", "no - not finding information"], "prompt": "" }
+        ]
+      },
+      {
+        "exercise": "H",
+        "title": "Write one word in each gap.",
+        "type": "fill_in_blank",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "Jim seems to be ____ the misapprehension that tomorrow's a holiday. It isn't.", "answer": "under", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "These findings cast doubt ____ previous research done in this field.", "answer": "on", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "This photo's a little ____ of focus, but you can still see their faces.", "answer": "out", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "Look ____ the bright side - it's nearly the end of term.", "answer": "on", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "I'm not against animal testing ____ principle.", "answer": "in", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "I think I'll always associate this song ____ our holiday in Majorca.", "answer": "with", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "You have to bear ____ mind that there'll be quite a few children there.", "answer": "in", "options": [], "prompt": "" },
+          { "id": 8, "sentence": "Where did Susan's belief ____ reincarnation come from?", "answer": "in", "options": [], "prompt": "" },
+          { "id": 9, "sentence": "Dad said that my borrowing the car tonight was ____ of the question.", "answer": "out", "options": [], "prompt": "" }
+        ]
+      }
+    ]
+  },
+  {
+    "page": 18,
+    "section": "Unit 2",
+    "exercises": [
+      {
+        "exercise": "H (continued)",
+        "title": "Write one word in each gap (continued from page 17).",
+        "type": "fill_in_blank",
+        "word_bank": [],
+        "questions": [
+          { "id": 10, "sentence": "Hearing the news about Caroline put my small problems ____ perspective.", "answer": "into", "options": [], "prompt": "" },
+          { "id": 11, "sentence": "What's the best course of action from your point ____ view?", "answer": "of", "options": [], "prompt": "" },
+          { "id": 12, "sentence": "You were hired ____ the basis that you would be able to work on Sundays.", "answer": "on", "options": [], "prompt": "" },
+          { "id": 13, "sentence": "____ balance, I think the government's doing a reasonable job.", "answer": "On", "options": [], "prompt": "" },
+          { "id": 14, "sentence": "We haven't taken Julie's thoughts ____ account at all.", "answer": "into", "options": [], "prompt": "" },
+          { "id": 15, "sentence": "____ conclusion, I'd like to thank everyone who supported me during the early years.", "answer": "In", "options": [], "prompt": "" }
+        ]
+      },
+      {
+        "exercise": "I",
+        "title": "For each question, write one word which can be used in all three sentences.",
+        "type": "fill_in_blank",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "I was so tired that I couldn't even think ____. / I'll come ____ to the point - you're fired! / It's time to set the record ____ about what really happened that night.", "answer": "straight", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "She's only eight, but she has the ____ age of an 18-year-old. / Many ____ illnesses can be cured these days. / I'm not very good at ____ arithmetic.", "answer": "mental", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "Philip does a very funny ____ of Tony. / You really made an ____ on Pete - he hasn't stopped talking about you! / Why was I under the ____ that the exam was on Thursday?", "answer": "impression", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "Carter was the ____ behind the whole criminal operation. / Could I just pick your ____ about good places to eat around here? / We sat there racking our ____ trying to think of a place to take Paul and Doug.", "answer": "brain", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "Someone with no ____ of smell can't taste food well either. / I can't make ____ of this film at all - what's going on? / Unplugging a toaster before you try to fix it is just common ____ , isn't it?", "answer": "sense", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "I thought Gordon's new invention wouldn't work at all, but in fact it worked like a ____ . / Winning a cruise on the Queen Mary was a ____ come true for me and Albert. / I've had the same recurring ____ for four nights in a row.", "answer": "dream", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "Motorists should always show ____ for pedestrians crossing the street at a zebra crossing. / I'll give some ____ to your proposals and get back to you. / We stupidly didn't take changes in interest rates into ____ when we got a mortgage.", "answer": "consideration", "options": [], "prompt": "" }
+        ]
+      },
+      {
+        "exercise": "J",
+        "title": "Write one word in each gap.",
+        "type": "gap_fill",
+        "word_bank": [],
+        "passage": "I read this week that a new organisation called Don't Trust Online Information has been formed. The founder, Douglas Haverford-West, is quoted as saying, 'It's (1) ____ my principles to trust anything I read on the Internet. I've started this organisation (2) ____ the belief that there are millions like me who (3) ____ their doubts about information presented as fact that has not gone through a thorough editorial process. There's no question (4) ____ us shutting down the Internet - we don't want to do that - but DTOI has been set up with a (5) ____ to raising awareness.' I sympathise with Haverford-West, but I believe he's wrong. I made up my (6) ____ long ago not to completely trust anything I heard or read. Whether it's on the Internet or, say, in a newspaper, is irrelevant in my opinion.",
+        "questions": [
+          { "id": 1, "sentence": "", "answer": "against", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "", "answer": "on", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "", "answer": "have", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "", "answer": "of", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "", "answer": "view", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "", "answer": "mind", "options": [], "prompt": "" }
+        ]
+      }
+    ]
+  },
+  {
+    "page": 19,
+    "section": "Unit 2",
+    "exercises": [
+      {
+        "exercise": "K",
+        "title": "Complete the second sentence so that it has a similar meaning to the first sentence, using the word given. Do not change the word given. You must use between three and eight words, including the word given.",
+        "type": "key_word_transformation",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "I never thought that we'd have legal problems.", "answer": "never crossed my mind that", "options": [], "prompt": "crossed" },
+          { "id": 2, "sentence": "I've decided that teaching is not the right profession for me.", "answer": "come to the conclusion", "options": [], "prompt": "conclusion" },
+          { "id": 3, "sentence": "Could you tell me where you were last night, Mr Johnson?", "answer": "account for your whereabouts", "options": [], "prompt": "account" },
+          { "id": 4, "sentence": "The journalist pretended that she was a parent of one of the children.", "answer": "journalist was under the false impression", "options": [], "prompt": "false" },
+          { "id": 5, "sentence": "You have to use logic and lateral thinking in equal measure in this job.", "answer": "strike a balance between", "options": [], "prompt": "strike" },
+          { "id": 6, "sentence": "I didn't tell Angie because I didn't want to hurt Eddie's feelings.", "answer": "out of consideration for", "options": [], "prompt": "consideration" }
+        ]
+      },
+      {
+        "exercise": "L",
+        "title": "Complete using the words in the box.",
+        "type": "word_bank",
+        "word_bank": ["bell", "bend", "dark", "hairs", "head", "leg", "stock", "two", "uptake", "what", "wits", "wood"],
+        "questions": [
+          { "id": 1, "sentence": "The name Alan Hickson rings a ____ , but I can't place him.", "answer": "bell", "options": [], "prompt": "" },
+          { "id": 2, "sentence": "Stop wasting time splitting ____ and look at the big picture.", "answer": "hairs", "options": [], "prompt": "" },
+          { "id": 3, "sentence": "Ask Simon about the sales targets. He always knows what's ____ .", "answer": "what", "options": [], "prompt": "" },
+          { "id": 4, "sentence": "You've got to have your ____ about you to succeed in advertising.", "answer": "wits", "options": [], "prompt": "" },
+          { "id": 5, "sentence": "Don't let success go to your ____ , will you?", "answer": "head", "options": [], "prompt": "" },
+          { "id": 6, "sentence": "No one told us that Diana was leaving, but we all put two and ____ together.", "answer": "two", "options": [], "prompt": "" },
+          { "id": 7, "sentence": "I'm going to go round the ____ if they don't turn that music down soon.", "answer": "bend", "options": [], "prompt": "" },
+          { "id": 8, "sentence": "Let's take ____ of the situation before we make a final decision.", "answer": "stock", "options": [], "prompt": "" },
+          { "id": 9, "sentence": "How did they manage to keep me completely in the ____ about this for so long?", "answer": "dark", "options": [], "prompt": "" },
+          { "id": 10, "sentence": "The problem with Jane is that sometimes she can't see the ____ for the trees.", "answer": "wood", "options": [], "prompt": "" },
+          { "id": 11, "sentence": "It took Dan a long time to understand what was going on. He's usually quicker on the ____ than that, isn't he?", "answer": "uptake", "options": [], "prompt": "" },
+          { "id": 12, "sentence": "Frankly, you're completely wrong and you haven't got a ____ to stand on.", "answer": "leg", "options": [], "prompt": "" }
+        ]
+      },
+      {
+        "exercise": "M",
+        "title": "Complete the sentences by changing the form of the word in capitals.",
+        "type": "word_formation",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "There was quite a bit of ____ because the examiner handed out the wrong exam papers. (CONFUSE)", "answer": "confusion", "options": [], "prompt": "CONFUSE" },
+          { "id": 2, "sentence": "You're acting completely ____ . Just calm down and pull yourself together. (RATIONAL)", "answer": "irrationally", "options": [], "prompt": "RATIONAL" },
+          { "id": 3, "sentence": "Einstein's ____ went unnoticed at school. (BRILLIANT)", "answer": "brilliance", "options": [], "prompt": "BRILLIANT" },
+          { "id": 4, "sentence": "This is generally considered to be the ____ guide to Australia. (DEFINE)", "answer": "definitive", "options": [], "prompt": "DEFINE" }
+        ]
+      }
+    ]
+  },
+  {
+    "page": 20,
+    "section": "Unit 2",
+    "exercises": [
+      {
+        "exercise": "M (continued)",
+        "title": "Complete the sentences by changing the form of the word in capitals (continued from page 19).",
+        "type": "word_formation",
+        "word_bank": [],
+        "questions": [
+          { "id": 5, "sentence": "It's absolutely ____ why the council decided to close down the youth club. (EXPLAIN)", "answer": "inexplicable", "options": [], "prompt": "EXPLAIN" },
+          { "id": 6, "sentence": "I just stood there and listened in ____ as Ben told me the news. (BELIEVE)", "answer": "disbelief", "options": [], "prompt": "BELIEVE" },
+          { "id": 7, "sentence": "Greg's ____ to say the least, so I wouldn't ask him to choose a hotel. (DECIDE)", "answer": "indecisive", "options": [], "prompt": "DECIDE" },
+          { "id": 8, "sentence": "Many children create ____ friends to talk to. (IMAGINE)", "answer": "imaginary", "options": [], "prompt": "IMAGINE" },
+          { "id": 9, "sentence": "He was found not guilty by reason of ____ and so was sent to a mental institution rather than prison. (SANE)", "answer": "insanity", "options": [], "prompt": "SANE" },
+          { "id": 10, "sentence": "Your argument is ____ . Just because you want me to be a doctor doesn't mean I want to be one. (LOGIC)", "answer": "illogical", "options": [], "prompt": "LOGIC" }
+        ]
+      },
+      {
+        "exercise": "N",
+        "title": "The prefix il-, as in illogical, is often used to make a positive word negative. Which of the words in bold in the following sentences are negative forms of positive words?",
+        "type": "multiple_choice",
+        "word_bank": [],
+        "questions": [
+          { "id": 1, "sentence": "Doctors' handwriting is usually illegible.", "answer": "yes - negative form", "options": ["yes - negative form", "no - not a negative form"], "prompt": "" },
+          { "id": 2, "sentence": "There's a beautiful illustration on page six.", "answer": "no - not a negative form", "options": ["yes - negative form", "no - not a negative form"], "prompt": "" },
+          { "id": 3, "sentence": "People who are illiterate may need some help filling in forms.", "answer": "yes - negative form", "options": ["yes - negative form", "no - not a negative form"], "prompt": "" },
+          { "id": 4, "sentence": "She had an illustrious career as a local politician.", "answer": "no - not a negative form", "options": ["yes - negative form", "no - not a negative form"], "prompt": "" },
+          { "id": 5, "sentence": "It's a totally illiberal law that's just going to restrict our freedoms further.", "answer": "yes - negative form", "options": ["yes - negative form", "no - not a negative form"], "prompt": "" },
+          { "id": 6, "sentence": "Several senior politicians have resigned over the illegality of the war.", "answer": "yes - negative form", "options": ["yes - negative form", "no - not a negative form"], "prompt": "" },
+          { "id": 7, "sentence": "Illegitimate children were given very little social recognition in the past.", "answer": "yes - negative form", "options": ["yes - negative form", "no - not a negative form"], "prompt": "" },
+          { "id": 8, "sentence": "The magician didn't really cut his assistant in two - it was only an illusion.", "answer": "no - not a negative form", "options": ["yes - negative form", "no - not a negative form"], "prompt": "" },
+          { "id": 9, "sentence": "The lights illuminated the building beautifully at night.", "answer": "no - not a negative form", "options": ["yes - negative form", "no - not a negative form"], "prompt": "" }
+        ]
+      },
+      {
+        "exercise": "O",
+        "title": "Use the word given in capitals to form a word that fits in the space.",
+        "type": "word_formation",
+        "word_bank": [],
+        "passage": "The (1) ____ (CONCEIVE) of 'rhetoric', or effective public speaking, dates back thousands of years. The underlying (2) ____ (ASSUME) behind rhetoric is that how you present an argument can greatly influence whether people are persuaded by you or not. There is (3) ____ (DOUBT) plenty of evidence to support this idea - it's practically (4) ____ (THINK), for example, for a successful politician to be a poor communicator - but is it just a question of style winning over substance? Certainly, it is often said of politicians that they talk complete (5) ____ (SENSE) but what they say they say with such (6) ____ (CONVINCE) that we tend to believe them, at least when they're in opposition. On the other hand, (7) ____ (WISE) and knowledge are of little value if you cannot communicate them effectively to your peers or to the next generation. It is the combination of clear (8) ____ (REASON), sound (9) ____ (JUDGE) and effective presentation and communication skills that defines true rhetoric. A true rhetorician should always come across as knowledgeable, and never as (10) ____ (OPINION) or ignorant.",
+        "questions": [
+          { "id": 1, "sentence": "", "answer": "conception", "options": [], "prompt": "CONCEIVE" },
+          { "id": 2, "sentence": "", "answer": "assumption", "options": [], "prompt": "ASSUME" },
+          { "id": 3, "sentence": "", "answer": "undoubtedly", "options": [], "prompt": "DOUBT" },
+          { "id": 4, "sentence": "", "answer": "unthinkable", "options": [], "prompt": "THINK" },
+          { "id": 5, "sentence": "", "answer": "nonsense", "options": [], "prompt": "SENSE" },
+          { "id": 6, "sentence": "", "answer": "conviction", "options": [], "prompt": "CONVINCE" },
+          { "id": 7, "sentence": "", "answer": "wisdom", "options": [], "prompt": "WISE" },
+          { "id": 8, "sentence": "", "answer": "reasoning", "options": [], "prompt": "REASON" },
+          { "id": 9, "sentence": "", "answer": "judgement", "options": [], "prompt": "JUDGE" },
+          { "id": 10, "sentence": "", "answer": "opinionated", "options": [], "prompt": "OPINION" }
+        ]
+      }
+    ]
+  }
+]

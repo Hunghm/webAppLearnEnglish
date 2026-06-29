@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 16 – Materials and the Built Environment | Destination C1</title>
+<style>
+:root {
+  --accent: #2d6a4f;
+  --accent-dark: #1b4332;
+  --accent-light: #d8f3e3;
+  --accent2: #52b788;
+  --bg: #f8faf9;
+  --surface: #ffffff;
+  --border: #d8e8df;
+  --text: #1a2e23;
+  --muted: #5a7a68;
+  --sidebar-w: 260px;
+  --correct: #2d6a4f;
+  --wrong: #c1121f;
+  --correct-bg: #d8f3e3;
+  --wrong-bg: #ffe5e5;
+  --yellow-bg: #fff9e6;
+  --yellow-border: #f9c74f;
+  --blue-bg: #e8f4fd;
+  --blue-border: #4ea8de;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: #b7d5c4; border-radius: 4px; }
+
+#sidebar-header {
+  padding: 16px 14px 12px;
+  background: var(--accent-dark);
+  color: #fff;
+  flex-shrink: 0;
+}
+#sidebar-header h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+#sidebar-header p { font-size: 11px; opacity: 0.7; margin-top: 3px; }
+
+#sidebar nav a {
+  display: block;
+  padding: 9px 14px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 12.5px;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+#sidebar nav a:hover { color: var(--accent); background: var(--accent-light); }
+#sidebar nav a.active {
+  color: var(--accent);
+  background: var(--accent-light);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+.nav-group {
+  padding: 8px 14px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  background: #f0f7f3;
+  border-top: 1px solid var(--border);
+}
+
+/* Score panel */
+#score-panel {
+  margin: 0 12px 12px;
+  padding: 12px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  border: 1px solid var(--accent2);
+  flex-shrink: 0;
+}
+#score-panel .score-label { font-size: 11px; font-weight: 600; color: var(--accent-dark); margin-bottom: 6px; }
+#score-bar-bg { background: #b7d5c4; border-radius: 100px; height: 6px; overflow: hidden; margin-bottom: 6px; }
+#score-bar-fill { height: 100%; background: var(--accent); border-radius: 100px; transition: width 0.5s ease; width: 0%; }
+#score-text { font-size: 12px; color: var(--accent-dark); font-weight: 600; }
+
+/* ── MAIN ── */
+#main {
+  flex: 1;
+  padding: 32px 40px 60px;
+  max-width: 900px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-bottom: 4px;
+}
+.page-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+/* ── SECTIONS ── */
+.section {
+  margin-bottom: 48px;
+  scroll-margin-top: 20px;
+}
+.section-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+}
+
+/* Exercise label */
+.exercise {
+  margin-bottom: 32px;
+}
+.exercise-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.ex-letter {
+  width: 28px;
+  height: 28px;
+  background: var(--accent-dark);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ex-instruction {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Word box */
+.word-box {
+  background: #f0f7f3;
+  border: 1px solid var(--accent2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--accent-dark);
+  text-align: center;
+  line-height: 2;
+}
+.word-box span { margin: 0 6px; }
+
+/* Fill-in items */
+.fill-list { list-style: none; }
+.fill-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 0;
+  border-bottom: 1px solid #edf2ef;
+  flex-wrap: wrap;
+}
+.fill-item:last-child { border-bottom: none; }
+.item-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  min-width: 22px;
+  flex-shrink: 0;
+}
+.item-text { flex: 1; }
+.fill-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  min-width: 120px;
+  outline: none;
+  transition: border-color 0.2s;
+  text-align: center;
+}
+.fill-input:focus { border-bottom-color: var(--accent-dark); }
+.fill-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.fill-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Multiple choice */
+.mc-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+.mc-item:last-child { border-bottom: none; }
+.mc-question { margin-bottom: 8px; font-size: 13.5px; }
+.mc-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 6px;
+}
+.mc-btn {
+  padding: 6px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 12.5px;
+  font-family: inherit;
+  text-align: left;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.mc-btn:hover { border-color: var(--accent2); background: var(--accent-light); }
+.mc-btn.selected { border-color: var(--accent); background: var(--accent-light); }
+.mc-btn.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); font-weight: 600; }
+.mc-btn.wrong { border-color: var(--wrong); background: var(--wrong-bg); color: var(--wrong); }
+
+/* Choose between two */
+.choose-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13.5px;
+}
+.choose-item:last-child { border-bottom: none; }
+.choose-pair { display: inline-flex; gap: 0; border-radius: 6px; overflow: hidden; border: 1.5px solid var(--border); }
+.choose-btn {
+  padding: 3px 10px;
+  border: none;
+  background: var(--surface);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.15s;
+  color: var(--muted);
+}
+.choose-btn + .choose-btn { border-left: 1.5px solid var(--border); }
+.choose-btn:hover { background: var(--accent-light); color: var(--accent); }
+.choose-btn.selected { background: var(--accent); color: #fff; }
+.choose-btn.correct { background: var(--correct); color: #fff; }
+.choose-btn.wrong { background: var(--wrong); color: #fff; }
+
+/* Tick exercise */
+.tick-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+.tick-item:last-child { border-bottom: none; }
+.tick-num { font-size: 12px; font-weight: 700; color: var(--muted); min-width: 22px; }
+.tick-text { flex: 1; font-size: 13.5px; }
+.tick-text b { color: var(--accent-dark); }
+.tick-actions { display: flex; gap: 6px; align-items: center; }
+.tick-btn {
+  padding: 3px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.tick-btn.tick-yes { color: var(--correct); }
+.tick-btn.tick-yes:hover, .tick-btn.tick-yes.selected { background: var(--correct-bg); border-color: var(--correct); }
+.tick-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  min-width: 100px;
+  outline: none;
+}
+.tick-input:focus { border-bottom-color: var(--accent-dark); }
+.tick-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.tick-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Passage / text exercise */
+.passage-box {
+  background: var(--yellow-bg);
+  border: 1px solid var(--yellow-border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  font-size: 13.5px;
+  line-height: 2;
+}
+.passage-box h3 {
+  font-family: 'Georgia', serif;
+  font-size: 16px;
+  color: var(--accent-dark);
+  margin-bottom: 10px;
+}
+.passage-box.blue-box {
+  background: var(--blue-bg);
+  border-color: var(--blue-border);
+}
+.gap-num {
+  font-weight: 700;
+  color: var(--accent-dark);
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+/* Check / Reset buttons */
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.btn-check {
+  padding: 8px 20px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-check:hover { background: var(--accent-dark); }
+.btn-reset {
+  padding: 8px 16px;
+  background: var(--surface);
+  color: var(--muted);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-reset:hover { border-color: var(--wrong); color: var(--wrong); }
+
+/* Answer reveal */
+.answer-reveal {
+  display: none;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--accent-dark);
+  background: var(--accent-light);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border-left: 3px solid var(--accent);
+}
+.answer-reveal.visible { display: block; }
+
+/* H exercise - two-column fill */
+.h-item {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid #edf2ef;
+  font-size: 13px;
+}
+.h-item:last-child { border-bottom: none; }
+.h-small-input {
+  border: none;
+  border-bottom: 1.5px solid var(--accent2);
+  background: transparent;
+  padding: 2px 4px;
+  font-size: 13px;
+  font-family: inherit;
+  width: 90px;
+  outline: none;
+  text-align: center;
+}
+.h-small-input:focus { border-bottom-color: var(--accent-dark); }
+.h-small-input.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.h-small-input.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+.h-tick {
+  padding: 3px 8px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 11px;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.h-tick.selected { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); }
+.h-tick.correct { background: var(--correct-bg); border-color: var(--correct); color: var(--correct); font-weight: 700; }
+.h-tick.wrong { background: var(--wrong-bg); border-color: var(--wrong); color: var(--wrong); }
+
+/* Word grid */
+.word-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.word-chip {
+  padding: 6px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.word-chip:hover { border-color: var(--accent2); background: var(--accent-light); }
+.word-chip.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 600; }
+.word-chip.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); font-weight: 600; }
+.word-chip.wrong { border-color: var(--wrong); background: var(--wrong-bg); color: var(--wrong); }
+.word-chip.missed { border-color: var(--yellow-border); background: var(--yellow-bg); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  #sidebar { display: none; }
+  #main { padding: 20px 16px 40px; }
+  .mc-options { grid-template-columns: 1fr 1fr; }
+}
+
+/* Progress toast */
+#toast {
+  position: fixed;
+  bottom: 20px; right: 20px;
+  background: var(--accent-dark);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  display: none;
+  z-index: 9999;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div id="sidebar-header">
+    <h2>Unit 16</h2>
+    <p>Materials and the Built Environment</p>
+  </div>
+
+  <div id="score-panel">
+    <div class="score-label">Progress</div>
+    <div id="score-bar-bg"><div id="score-bar-fill"></div></div>
+    <div id="score-text">0 / 0 answered</div>
+  </div>
+
+  <nav>
+    <div class="nav-group">Topic Vocab: Materials</div>
+    <a href="#exA">A — Fill in (word groups)</a>
+    <a href="#exB">B — Complete bold words</a>
+
+    <div class="nav-group">Topic Vocab: Built Environment</div>
+    <a href="#exC">C — Fill in (word box)</a>
+    <a href="#exD">D — Circle correct word</a>
+
+    <div class="nav-group">Phrasal Verbs</div>
+    <a href="#exE">E — Britain's Inner Cities</a>
+    <a href="#exF">F — Phrasal verbs A+B boxes</a>
+    <a href="#exG">G — Pile up / increase tick</a>
+
+    <div class="nav-group">Phrases &amp; Collocations</div>
+    <a href="#exH">H — Complete from box</a>
+    <a href="#exI">I — Building the future</a>
+    <a href="#exJ">J — One word for 3 sentences</a>
+
+    <div class="nav-group">Idioms</div>
+    <a href="#exK">K — Idioms from box</a>
+
+    <div class="nav-group">Word Formation</div>
+    <a href="#exL">L — Rewrite bold words</a>
+    <a href="#exM">M — Rebuilding Coventry</a>
+    <a href="#exN">N — Suffix -en tick</a>
+    <a href="#exO">O — Use -en words</a>
+  </nav>
+</aside>
+
+<!-- MAIN -->
+<main id="main">
+  <div class="page-title">Unit 16 — Vocabulary</div>
+  <div class="page-subtitle">Materials and the Built Environment &nbsp;·&nbsp; Destination C1 &amp; C2</div>
+
+  <!-- ════════ TOPIC VOCABULARY: MATERIALS ════════ -->
+  <div class="section" id="sec-materials">
+    <div class="section-title">Topic vocabulary: Materials</div>
+
+    <!-- Exercise A -->
+    <div class="exercise" id="exA">
+      <div class="exercise-label">
+        <div class="ex-letter">A</div>
+        <div class="ex-instruction">Complete using the correct form of the words in the boxes.</div>
+      </div>
+
+      <!-- Group 1: block chip crumb flake grain lump pile speck -->
+      <div style="display:grid; grid-template-columns:1fr 180px; gap:16px; align-items:start; margin-bottom:12px;">
+        <div>
+          <div class="fill-item"><span class="item-num">1</span><span class="item-text">When are you going to move that <input class="fill-input" data-answer="pile" placeholder="..."> of clothes in your bedroom?</span></div>
+          <div class="fill-item"><span class="item-num">2</span><span class="item-text">The old man slowly put a few more <input class="fill-input" data-answer="lumps|chunks" placeholder="..."> of coal on the dying fire.</span></div>
+          <div class="fill-item"><span class="item-num">3</span><span class="item-text">We need to redecorate. Look – there are <input class="fill-input" data-answer="flakes" placeholder="..."> of paint coming off the walls.</span></div>
+          <div class="fill-item"><span class="item-num">4</span><span class="item-text">The building is composed of <input class="fill-input" data-answer="blocks" placeholder="..."> of concrete held together by metal poles.</span></div>
+          <div class="fill-item"><span class="item-num">5</span><span class="item-text">When I come back, I don't want to find a single <input class="fill-input" data-answer="speck" placeholder="..."> of dust in here.</span></div>
+          <div class="fill-item"><span class="item-num">6</span><span class="item-text">How many <input class="fill-input" data-answer="grains" placeholder="..."> of sand do you think there are on this beach?</span></div>
+          <div class="fill-item"><span class="item-num">7</span><span class="item-text">Eat your sandwich in the kitchen, because I don't want <input class="fill-input" data-answer="crumbs" placeholder="..."> on my new sofa.</span></div>
+          <div class="fill-item"><span class="item-num">8</span><span class="item-text">Be careful! I dropped something and there are <input class="fill-input" data-answer="chips" placeholder="..."> of glass all over the floor.</span></div>
+        </div>
+        <div class="word-box" style="text-align:left; font-size:12px; padding:8px 12px;">
+          block<br>chip<br>crumb<br>flake<br>grain<br>lump<br>pile<br>speck
+        </div>
+      </div>
+
+      <!-- Group 2: pat polish scratch scrub stroke -->
+      <div style="display:grid; grid-template-columns:1fr 180px; gap:16px; align-items:start; margin-bottom:12px;">
+        <div>
+          <div class="fill-item"><span class="item-num">9</span><span class="item-text">Don't <input class="fill-input" data-answer="scratch" placeholder="..."> your mosquito bites or you'll make them worse.</span></div>
+          <div class="fill-item"><span class="item-num">10</span><span class="item-text">I felt great when the coach <input class="fill-input" data-answer="patted" placeholder="..."> me on the back and said, 'Well done'.</span></div>
+          <div class="fill-item"><span class="item-num">11</span><span class="item-text">Martin quickly <input class="fill-input" data-answer="polished" placeholder="..."> his shoes and walked out the door.</span></div>
+          <div class="fill-item"><span class="item-num">12</span><span class="item-text">Don't <input class="fill-input" data-answer="stroke" placeholder="..."> the dog's fur the wrong way. She doesn't like it.</span></div>
+          <div class="fill-item"><span class="item-num">13</span><span class="item-text">I had to really <input class="fill-input" data-answer="scrub" placeholder="..."> that wall to get the graffiti off it.</span></div>
+        </div>
+        <div class="word-box" style="text-align:left; font-size:12px; padding:8px 12px;">
+          pat<br>polish<br>scratch<br>scrub<br>stroke
+        </div>
+      </div>
+
+      <!-- Group 3: crack crush grind smash squash squeeze tear -->
+      <div style="display:grid; grid-template-columns:1fr 180px; gap:16px; align-items:start; margin-bottom:12px;">
+        <div>
+          <div class="fill-item"><span class="item-num">14</span><span class="item-text">You'll have to <input class="fill-input" data-answer="squeeze" placeholder="..."> your T-shirt to get all the water out of it.</span></div>
+          <div class="fill-item"><span class="item-num">15</span><span class="item-text">You get the orange juice, and I'll <input class="fill-input" data-answer="crush" placeholder="..."> some ice.</span></div>
+          <div class="fill-item"><span class="item-num">16</span><span class="item-text">I like to <input class="fill-input" data-answer="grind" placeholder="..."> my own coffee because it tastes so much better.</span></div>
+          <div class="fill-item"><span class="item-num">17</span><span class="item-text">Don't <input class="fill-input" data-answer="squash" placeholder="..."> that spider! Just put it outside on the grass.</span></div>
+          <div class="fill-item"><span class="item-num">18</span><span class="item-text"><input class="fill-input" data-answer="Tear" placeholder="..."> the paper in half and give half to the student next to you.</span></div>
+          <div class="fill-item"><span class="item-num">19</span><span class="item-text">You haven't broken the window, but you have <input class="fill-input" data-answer="cracked" placeholder="..."> it.</span></div>
+          <div class="fill-item"><span class="item-num">20</span><span class="item-text">Eva was so angry she <input class="fill-input" data-answer="smashed" placeholder="..."> a glass against the wall.</span></div>
+        </div>
+        <div class="word-box" style="text-align:left; font-size:12px; padding:8px 12px;">
+          crack<br>crush<br>grind<br>smash<br>squash<br>squeeze<br>tear
+        </div>
+      </div>
+
+      <!-- Group 4: brittle dense fragile hollow opaque stiff transparent -->
+      <div style="display:grid; grid-template-columns:1fr 180px; gap:16px; align-items:start; margin-bottom:12px;">
+        <div>
+          <div class="fill-item"><span class="item-num">21</span><span class="item-text">Be careful with that old wedding dress – it's very <input class="fill-input" data-answer="brittle" placeholder="...">.</span></div>
+          <div class="fill-item"><span class="item-num">22</span><span class="item-text">Why can you see through glass, whereas concrete isn't <input class="fill-input" data-answer="transparent" placeholder="..."> at all?</span></div>
+          <div class="fill-item"><span class="item-num">23</span><span class="item-text">This paper isn't <input class="fill-input" data-answer="stiff" placeholder="..."> enough to make a birthday card out of.</span></div>
+          <div class="fill-item"><span class="item-num">24</span><span class="item-text">The windows of the limousine were <input class="fill-input" data-answer="opaque" placeholder="...">, so I couldn't see who was inside.</span></div>
+          <div class="fill-item"><span class="item-num">25</span><span class="item-text">After being out in the sun for a month, the plastic container became <input class="fill-input" data-answer="fragile" placeholder="...">.</span></div>
+          <div class="fill-item"><span class="item-num">26</span><span class="item-text">Rocks sink in water because they are <input class="fill-input" data-answer="dense" placeholder="...">.</span></div>
+          <div class="fill-item"><span class="item-num">27</span><span class="item-text">This wall appears solid, but when you knock on it, it sounds <input class="fill-input" data-answer="hollow" placeholder="...">.</span></div>
+        </div>
+        <div class="word-box" style="text-align:left; font-size:12px; padding:8px 12px;">
+          brittle<br>dense<br>fragile<br>hollow<br>opaque<br>stiff<br>transparent
+        </div>
+      </div>
+
+      <!-- Group 5: mould stack stuff -->
+      <div style="display:grid; grid-template-columns:1fr 180px; gap:16px; align-items:start; margin-bottom:12px;">
+        <div>
+          <div class="fill-item"><span class="item-num">28</span><span class="item-text">Alice quickly <input class="fill-input" data-answer="stuffed" placeholder="..."> a few clothes into a suitcase and ran out of the house.</span></div>
+          <div class="fill-item"><span class="item-num">29</span><span class="item-text">You could help by <input class="fill-input" data-answer="stacking" placeholder="..."> those boxes over there.</span></div>
+          <div class="fill-item"><span class="item-num">30</span><span class="item-text">Try to <input class="fill-input" data-answer="mould" placeholder="..."> the clay into the basic shape of a vase.</span></div>
+        </div>
+        <div class="word-box" style="text-align:left; font-size:12px; padding:8px 12px;">
+          mould<br>stack<br>stuff
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exA')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exA')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise B -->
+    <div class="exercise" id="exB">
+      <div class="exercise-label">
+        <div class="ex-letter">B</div>
+        <div class="ex-instruction">Complete using the words in bold in the correct form.</div>
+      </div>
+      <ol class="fill-list" id="B-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">Why do we slip on ice, but not on wood? The answer is <input class="fill-input" data-answer="friction" placeholder="...">, the force that stops one object moving against another. When two <input class="fill-input" data-answer="solids" placeholder="..."> are in contact, tiny bumps on each surface prevent them from moving easily. The surface of ice is actually covered in <input class="fill-input" data-answer="liquid" placeholder="...">, so your shoes slide over it. Once you slip, the force of <input class="fill-input" data-answer="gravity" placeholder="..."> takes over, and you fall down! (<b>friction</b>, <b>gravity</b>, <b>liquid</b>, <b>solid</b>)</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">Nylon was the first <input class="fill-input" data-answer="synthetic" placeholder="..."> material to be produced using coal, water and air. Since its invention in 1935, it has been used to make many products and long thin strands of it can be made into <input class="fill-input" data-answer="fabric" placeholder="..."> for clothing. Although cheap, many people dislike the plastic <input class="fill-input" data-answer="texture" placeholder="..."> of nylon and prefer natural fibres, such as cotton. (<b>fabric</b>, <b>synthetic</b>, <b>texture</b>)</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">Rocks are formed in different ways. One type, metamorphic rocks, are produced by high pressure beneath the Earth's surface, which <input class="fill-input" data-answer="compacts" placeholder="..."> the rocks and makes them <input class="fill-input" data-answer="firm" placeholder="...">. Most rocks are a mixture of different chemicals. When a <input class="fill-input" data-answer="mineral" placeholder="..."> occurs in rock form but is not mixed with other chemicals, it is known as a <input class="fill-input" data-answer="substance" placeholder="...">. (<b>compact</b>, <b>firm</b>, <b>mineral</b>, <b>substance</b>)</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">If you take a glass of water and <input class="fill-input" data-answer="dissolve" placeholder="..."> salt in it, you produce what's called a solution. If you add more water, the solution becomes more <input class="fill-input" data-answer="dilute" placeholder="...">. You can <input class="fill-input" data-answer="concentrate" placeholder="..."> the solution by adding more salt. (<b>concentrate</b>, <b>dilute</b>, <b>dissolve</b>)</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('B-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('B-list')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ TOPIC VOCABULARY: THE BUILT ENVIRONMENT ════════ -->
+  <div class="section" id="sec-builtenviron">
+    <div class="section-title">Topic vocabulary: The built environment</div>
+
+    <!-- Exercise C -->
+    <div class="exercise" id="exC">
+      <div class="exercise-label">
+        <div class="ex-letter">C</div>
+        <div class="ex-instruction">Complete using the correct form of the words in the box.</div>
+      </div>
+      <div class="word-box">
+        bypass &nbsp;•&nbsp; construct &nbsp;•&nbsp; district &nbsp;•&nbsp; dwell &nbsp;•&nbsp; inner city &nbsp;•&nbsp; occupy &nbsp;•&nbsp; populated &nbsp;•&nbsp; suburban &nbsp;•&nbsp; surroundings &nbsp;•&nbsp; urban
+      </div>
+      <div class="passage-box">
+        <h3 style="text-align:center; font-size:15px; text-transform:uppercase; letter-spacing:2px;">Row Over New Road Intensifies</h3>
+        The proposed <span class="gap-num">(1)</span> <input class="fill-input" data-answer="bypass" placeholder="..."> around the city of Rushton has run into more controversy. The local council have been attempting to <span class="gap-num">(2)</span> <input class="fill-input" data-answer="construct" placeholder="..."> the road for five years now in order to ease traffic in the <span class="gap-num">(3)</span> <input class="fill-input" data-answer="inner city" placeholder="...">, which is amongst the most densely <span class="gap-num">(4)</span> <input class="fill-input" data-answer="populated" placeholder="..."> areas in the country. However, residents in <span class="gap-num">(5)</span> <input class="fill-input" data-answer="suburban" placeholder="..."> areas, on the outskirts of the city, are up in arms about the plan, which they claim would spoil the <span class="gap-num">(6)</span> <input class="fill-input" data-answer="surroundings" placeholder="...">. 'We live in beautiful <span class="gap-num">(7)</span> <input class="fill-input" data-answer="urban" placeholder="..."> here,' commented Ada Fowler, one of those whose house <span class="gap-num">(8)</span> <input class="fill-input" data-answer="occupies" placeholder="..."> a position next to the proposed route of the new road. 'The council have no real concept of <span class="gap-num">(9)</span> <input class="fill-input" data-answer="urban" placeholder="..."> planning.' Many of those who <span class="gap-num">(10)</span> <input class="fill-input" data-answer="dwell" placeholder="..."> in the area agree. The council were unavailable for comment.
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exC')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exC')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise D -->
+    <div class="exercise" id="exD">
+      <div class="exercise-label">
+        <div class="ex-letter">D</div>
+        <div class="ex-instruction">Circle the correct word.</div>
+      </div>
+      <div id="D-list">
+        <div class="choose-item"><span class="item-num">1</span> &nbsp;I'd hate to live in such a <span class="choose-pair"><button class="choose-btn" data-q="D1" data-opt="A" data-answer="A" onclick="chooseOption(this)">built-up</button><button class="choose-btn" data-q="D1" data-opt="B" data-answer="A" onclick="chooseOption(this)">high-rise</button></span> area as this.</div>
+        <div class="choose-item"><span class="item-num">2</span> &nbsp;My grandparents have just moved into a <span class="choose-pair"><button class="choose-btn" data-q="D2" data-opt="A" data-answer="B" onclick="chooseOption(this)">built-up</button><button class="choose-btn" data-q="D2" data-opt="B" data-answer="B" onclick="chooseOption(this)">high-rise</button></span> block and they seem to like it.</div>
+        <div class="choose-item"><span class="item-num">3</span> &nbsp;The first <span class="choose-pair"><button class="choose-btn" data-q="D3" data-opt="A" data-answer="B" onclick="chooseOption(this)">skyline</button><button class="choose-btn" data-q="D3" data-opt="B" data-answer="B" onclick="chooseOption(this)">skyscraper</button></span> was made possible by advances in the use of metal and glass as building materials.</div>
+        <div class="choose-item"><span class="item-num">4</span> &nbsp;I love to look at the <span class="choose-pair"><button class="choose-btn" data-q="D4" data-opt="A" data-answer="A" onclick="chooseOption(this)">skyline</button><button class="choose-btn" data-q="D4" data-opt="B" data-answer="A" onclick="chooseOption(this)">skyscraper</button></span> of London at night, don't you?</div>
+        <div class="choose-item"><span class="item-num">5</span> &nbsp;The government is planning to provide low-cost <span class="choose-pair"><button class="choose-btn" data-q="D5" data-opt="A" data-answer="A" onclick="chooseOption(this)">estate</button><button class="choose-btn" data-q="D5" data-opt="B" data-answer="A" onclick="chooseOption(this)">housing</button></span> for people on low incomes.</div>
+        <div class="choose-item"><span class="item-num">6</span> &nbsp;I grew up on a local <span class="choose-pair"><button class="choose-btn" data-q="D6" data-opt="A" data-answer="B" onclick="chooseOption(this)">estate</button><button class="choose-btn" data-q="D6" data-opt="B" data-answer="B" onclick="chooseOption(this)">housing</button></span>, so I know the area quite well.</div>
+        <div class="choose-item"><span class="item-num">7</span> &nbsp;They're going to <span class="choose-pair"><button class="choose-btn" data-q="D7" data-opt="A" data-answer="A" onclick="chooseOption(this)">demolish</button><button class="choose-btn" data-q="D7" data-opt="B" data-answer="A" onclick="chooseOption(this)">evict</button></span> the old Town Hall today.</div>
+        <div class="choose-item"><span class="item-num">8</span> &nbsp;You can't <span class="choose-pair"><button class="choose-btn" data-q="D8" data-opt="A" data-answer="B" onclick="chooseOption(this)">demolish</button><button class="choose-btn" data-q="D8" data-opt="B" data-answer="B" onclick="chooseOption(this)">evict</button></span> a poor old woman like that and just leave her homeless!</div>
+        <div class="choose-item"><span class="item-num">9</span> &nbsp;St Paul's Cathedral is a really impressive <span class="choose-pair"><button class="choose-btn" data-q="D9" data-opt="A" data-answer="A" onclick="chooseOption(this)">structure</button><button class="choose-btn" data-q="D9" data-opt="B" data-answer="A" onclick="chooseOption(this)">infrastructure</button></span>.</div>
+        <div class="choose-item"><span class="item-num">10</span> &nbsp;This country just doesn't have the <span class="choose-pair"><button class="choose-btn" data-q="D10" data-opt="A" data-answer="B" onclick="chooseOption(this)">structure</button><button class="choose-btn" data-q="D10" data-opt="B" data-answer="B" onclick="chooseOption(this)">infrastructure</button></span> to host the Olympic Games.</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkChoose('D-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetChoose('D-list')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ PHRASAL VERBS ════════ -->
+  <div class="section" id="sec-phrasal">
+    <div class="section-title">Phrasal verbs</div>
+
+    <!-- Exercise E -->
+    <div class="exercise" id="exE">
+      <div class="exercise-label">
+        <div class="ex-letter">E</div>
+        <div class="ex-instruction">Write one word in each gap.</div>
+      </div>
+      <div class="passage-box blue-box">
+        <h3 style="text-align:center; font-size:16px; font-weight:700; color:#1a3d6e;">Britain's Inner Cities</h3>
+        After decades of neglect, it's not unusual to see buildings which have been boarded <span class="gap-num">(1)</span> <input class="fill-input" data-answer="up" placeholder="..."> in Britain's inner cities. After businesses have closed <span class="gap-num">(2)</span> <input class="fill-input" data-answer="down" placeholder="..."> for the day, many city centres are depressing, no-go areas. The problems of decay have been piling <span class="gap-num">(3)</span> <input class="fill-input" data-answer="up" placeholder="..."> for years and will not be solved easily. However, some councils are finally deciding to fix inner city areas <span class="gap-num">(4)</span> <input class="fill-input" data-answer="up" placeholder="..."> to attract residents and investors back. The process begins by knocking <span class="gap-num">(5)</span> <input class="fill-input" data-answer="down" placeholder="..."> old, ugly buildings and putting <span class="gap-num">(6)</span> <input class="fill-input" data-answer="up" placeholder="..."> attractive office and apartment blocks. Advertising hoardings are taken <span class="gap-num">(7)</span> <input class="fill-input" data-answer="down" placeholder="..."> and facilities to attract families, such as play areas, are put <span class="gap-num">(8)</span> <input class="fill-input" data-answer="in" placeholder="...">. Urban regeneration can be a long, expensive process, but for many towns and cities it has paid off.
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exE')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exE')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise F -->
+    <div class="exercise" id="exF">
+      <div class="exercise-label">
+        <div class="ex-letter">F</div>
+        <div class="ex-instruction">Complete using a phrasal verb with a word from box A in the right form and a word from box B. You need to use some words from box B more than once.</div>
+      </div>
+      <div style="display:flex; gap:16px; margin-bottom:16px; flex-wrap:wrap;">
+        <div class="word-box" style="flex:1; min-width:200px;"><b>A</b> &nbsp; come &nbsp;•&nbsp; cut &nbsp;•&nbsp; prop &nbsp;•&nbsp; put &nbsp;•&nbsp; set &nbsp;•&nbsp; spread &nbsp;•&nbsp; water &nbsp;•&nbsp; wear</div>
+        <div class="word-box" style="flex:1; min-width:150px;"><b>B</b> &nbsp; down &nbsp;•&nbsp; out &nbsp;•&nbsp; together &nbsp;•&nbsp; up</div>
+      </div>
+      <ol class="fill-list" id="F-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">The fair must be happening in town because they've <input class="fill-input" data-answer="put up" placeholder="..."> tents.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text"><input class="fill-input" data-answer="Cut out" placeholder="..."> a circle of the first piece of card and stick it on the second piece.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">If the juice is too strong for you, why don't you <input class="fill-input" data-answer="water" placeholder="..."> it <input class="fill-input" data-answer="down" placeholder="...">?</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">That wall would fall over if it wasn't <input class="fill-input" data-answer="propped up" placeholder="..."> with planks of wood.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">You've got blood on your collar. It won't <input class="fill-input" data-answer="come out" placeholder="...">, you know.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">I've got a large family, but they've all <input class="fill-input" data-answer="spread out" placeholder="..."> across the whole country.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">I hate buying furniture from that place because you have to <input class="fill-input" data-answer="put" placeholder="..."> it <input class="fill-input" data-answer="together" placeholder="..."> yourself.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">The steps were <input class="fill-input" data-answer="worn down" placeholder="..."> after many years of use.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('F-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('F-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise G -->
+    <div class="exercise" id="exG">
+      <div class="exercise-label">
+        <div class="ex-letter">G</div>
+        <div class="ex-instruction">The phrasal verb <em>pile up</em> has a meaning connected to 'increase'. Tick the sentences where the phrasal verb means something like 'increase'.</div>
+      </div>
+      <p style="font-size:12px; color:var(--muted); margin-bottom:12px;">Click "Increase?" if the phrasal verb means something like 'increase'.</p>
+      <div id="G-tick-list">
+        <div class="tick-item">
+          <span class="tick-num">1</span>
+          <span class="tick-text">I see the supermarket has <b>put</b> its prices <b>up</b> again.</span>
+          <span class="tick-actions"><button class="tick-btn tick-yes" data-q="GT1" data-answer="yes" onclick="toggleTick(this)">Increase?</button></span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">2</span>
+          <span class="tick-text"><b>Speed up</b>, or we're never going to get there!</span>
+          <span class="tick-actions"><button class="tick-btn tick-yes" data-q="GT2" data-answer="yes" onclick="toggleTick(this)">Increase?</button></span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">3</span>
+          <span class="tick-text">Pass me a cloth and I'll just <b>wipe up</b> that water on the table.</span>
+          <span class="tick-actions"><button class="tick-btn tick-yes" data-q="GT3" data-answer="no" onclick="toggleTick(this)">Increase?</button></span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">4</span>
+          <span class="tick-text">Work is really beginning to <b>mount up</b>, so I'll have to go into the office this weekend.</span>
+          <span class="tick-actions"><button class="tick-btn tick-yes" data-q="GT4" data-answer="yes" onclick="toggleTick(this)">Increase?</button></span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">5</span>
+          <span class="tick-text">Marianne had something stuck in her throat, but she finally <b>coughed it up</b>.</span>
+          <span class="tick-actions"><button class="tick-btn tick-yes" data-q="GT5" data-answer="no" onclick="toggleTick(this)">Increase?</button></span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">6</span>
+          <span class="tick-text">You'll have to <b>speak up</b> because I'm a little deaf, you know.</span>
+          <span class="tick-actions"><button class="tick-btn tick-yes" data-q="GT6" data-answer="yes" onclick="toggleTick(this)">Increase?</button></span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">7</span>
+          <span class="tick-text">You need to <b>build up</b> your strength if you're going to take part in the marathon.</span>
+          <span class="tick-actions"><button class="tick-btn tick-yes" data-q="GT7" data-answer="yes" onclick="toggleTick(this)">Increase?</button></span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">8</span>
+          <span class="tick-text">Oh, I wanted to watch this programme. <b>Turn</b> the TV <b>up</b>.</span>
+          <span class="tick-actions"><button class="tick-btn tick-yes" data-q="GT8" data-answer="yes" onclick="toggleTick(this)">Increase?</button></span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">9</span>
+          <span class="tick-text">Jill and I had a terrible row, but we soon <b>made up</b>.</span>
+          <span class="tick-actions"><button class="tick-btn tick-yes" data-q="GT9" data-answer="no" onclick="toggleTick(this)">Increase?</button></span>
+        </div>
+        <div class="tick-item">
+          <span class="tick-num">10</span>
+          <span class="tick-text">Honestly, I couldn't eat another thing! What are you trying to do – <b>fatten</b> me <b>up</b>?</span>
+          <span class="tick-actions"><button class="tick-btn tick-yes" data-q="GT10" data-answer="yes" onclick="toggleTick(this)">Increase?</button></span>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkGTick()">Check answers</button>
+        <button class="btn-reset" onclick="resetGTick()">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ PHRASES, PATTERNS AND COLLOCATIONS ════════ -->
+  <div class="section" id="sec-phrases">
+    <div class="section-title">Phrases, patterns and collocations</div>
+
+    <!-- Exercise H -->
+    <div class="exercise" id="exH">
+      <div class="exercise-label">
+        <div class="ex-letter">H</div>
+        <div class="ex-instruction">Complete using the phrases in the box.</div>
+      </div>
+      <div class="word-box">
+        bricks and mortar &nbsp;•&nbsp; on the house &nbsp;•&nbsp; on the table &nbsp;•&nbsp; out of shape &nbsp;•&nbsp; precious metal &nbsp;•&nbsp; raw materials &nbsp;•&nbsp; smooth sailing &nbsp;•&nbsp; the town of
+      </div>
+      <ol class="fill-list" id="H-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">We had a few difficulties at first, but it was pretty <input class="fill-input" data-answer="smooth sailing" placeholder="..."> after that.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">Don't worry – these drinks are <input class="fill-input" data-answer="on the house" placeholder="...">.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">Lance built a log cabin in a Canadian forest, using <input class="fill-input" data-answer="raw materials" placeholder="..."> that were all around him.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">Isambard Kingdom Brunel, the great engineer, was born in <input class="fill-input" data-answer="the town of" placeholder="..."> Portsmouth in 1806.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">The offer <input class="fill-input" data-answer="on the table" placeholder="..."> is far too low and I'm going to ask them to increase it.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">I would invest in <input class="fill-input" data-answer="bricks and mortar" placeholder="...">, because property is usually a safe investment.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">Charles was so <input class="fill-input" data-answer="out of shape" placeholder="..."> that he was exhausted after just half a day on the building site.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">A <input class="fill-input" data-answer="precious metal" placeholder="..."> such as silver is valuable because of its rarity.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('H-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('H-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise I -->
+    <div class="exercise" id="exI">
+      <div class="exercise-label">
+        <div class="ex-letter">I</div>
+        <div class="ex-instruction">Write one word in each gap.</div>
+      </div>
+      <div class="passage-box" style="background:#f0f7f3; border-color:#52b788;">
+        <h3 style="font-family:'Georgia',serif; font-size:15px; color:#1b4332; margin-bottom:10px; text-align:center; font-style:italic;">Building the home of the future</h3>
+        I've always kept a sharp eye <span class="gap-num">(1)</span> <input class="fill-input" data-answer="on" placeholder="..."> developments in building, so when it was time to plan my own home, I was determined to build the home of the future. It wasn't easy. There are rules and regulations everywhere that seem to block <span class="gap-num">(2)</span> <input class="fill-input" data-answer="every" placeholder="..."> way and, to <span class="gap-num">(3)</span> <input class="fill-input" data-answer="make" placeholder="..."> matters worse, not everyone agrees on the best way to go about it. It certainly gave me a window <span class="gap-num">(4)</span> <input class="fill-input" data-answer="into" placeholder="..."> the world of architecture to hear my architect explain the problems he knew we were going to face. Perhaps I was crazy (that's a <span class="gap-num">(5)</span> <input class="fill-input" data-answer="matter" placeholder="..."> of opinion!), but I knew what I wanted. It had to look great, but <span class="gap-num">(6)</span> <input class="fill-input" data-answer="beneath" placeholder="..."> the surface I wanted it to be high-tech and environmentally friendly. I did a lot of research, and that certainly smoothed the <span class="gap-num">(7)</span> <input class="fill-input" data-answer="way" placeholder="..."> for what was to come. I did some of the physical work myself, putting up walls and bending things <span class="gap-num">(8)</span> <input class="fill-input" data-answer="into" placeholder="..."> shape, and I'd like to erect a monument <span class="gap-num">(9)</span> <input class="fill-input" data-answer="to" placeholder="..."> the person who invented solar-powered heating. In the end, my architect's predictions of doom <span class="gap-num">(10)</span> <input class="fill-input" data-answer="without" placeholder="..."> no foundation and it all took just eight months.
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exI')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exI')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise J -->
+    <div class="exercise" id="exJ">
+      <div class="exercise-label">
+        <div class="ex-letter">J</div>
+        <div class="ex-instruction">For each question, write one word which can be used in all three sentences.</div>
+      </div>
+      <div id="J-list">
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>1</b></div>
+          <div style="font-size:13px; line-height:2; margin-bottom:6px;">
+            These accusations are completely without <input class="fill-input" data-answer="foundation" placeholder="...">.<br>
+            The <input class="fill-input" data-answer="foundation" placeholder="..."> stone for the new hospital was laid by the Mayor.<br>
+            You have to do a <input class="fill-input" data-answer="foundation" placeholder="..."> course before you can start your degree.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>2</b></div>
+          <div style="font-size:13px; line-height:2; margin-bottom:6px;">
+            Joshua looks aggressive, but he's not such a <input class="fill-input" data-answer="tough" placeholder="..."> guy once you get to know him.<br>
+            It's time this government got <input class="fill-input" data-answer="tough" placeholder="..."> with people exceeding the speed limit.<br>
+            The last few years have been quite <input class="fill-input" data-answer="tough" placeholder="..."> on Amanda and I'm glad things seem to be getting better.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>3</b></div>
+          <div style="font-size:13px; line-height:2; margin-bottom:6px;">
+            The building collapsed only a <input class="fill-input" data-answer="matter" placeholder="..."> of months after construction was completed.<br>
+            My parents said that I have to find a flat of my own this month, no <input class="fill-input" data-answer="matter" placeholder="..."> what.<br>
+            We need to install traffic lights at this junction as a <input class="fill-input" data-answer="matter" placeholder="..."> of some urgency.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>4</b></div>
+          <div style="font-size:13px; line-height:2; margin-bottom:6px;">
+            There was a hush in Parliament as the Minister took the <input class="fill-input" data-answer="floor" placeholder="...">.<br>
+            I'd be afraid of burglars if I lived in a ground <input class="fill-input" data-answer="floor" placeholder="..."> flat.<br>
+            I quite enjoyed the club, but I thought the <input class="fill-input" data-answer="floor" placeholder="..."> show was terrible.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>5</b></div>
+          <div style="font-size:13px; line-height:2; margin-bottom:6px;">
+            The Smiths were pretty quick off the <input class="fill-input" data-answer="mark" placeholder="..."> to sell when they heard house prices were falling.<br>
+            I think that what you said to Rita about her taste in furniture really hit the <input class="fill-input" data-answer="mark" placeholder="...">.<br>
+            Poverty and unemployment have certainly left a <input class="fill-input" data-answer="mark" placeholder="..."> on this area.
+          </div>
+        </div>
+        <div class="mc-item">
+          <div style="margin-bottom:6px; font-size:13px;"><b>6</b></div>
+          <div style="font-size:13px; line-height:2; margin-bottom:6px;">
+            A record number of businesses are predicted to <input class="fill-input" data-answer="fold" placeholder="..."> in the next 12 months.<br>
+            Now carefully <input class="fill-input" data-answer="fold" placeholder="..."> the paper in two, and you can begin to see the shape of the paper plane.<br>
+            Don't <input class="fill-input" data-answer="fold" placeholder="..."> your arms and talk to me in that tone of voice!
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exJ')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exJ')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ IDIOMS ════════ -->
+  <div class="section" id="sec-idioms">
+    <div class="section-title">Idioms</div>
+
+    <!-- Exercise K -->
+    <div class="exercise" id="exK">
+      <div class="exercise-label">
+        <div class="ex-letter">K</div>
+        <div class="ex-instruction">Complete using the words in the box. You have to use some words more than once.</div>
+      </div>
+      <div class="word-box">
+        belt &nbsp;•&nbsp; home &nbsp;•&nbsp; jungle &nbsp;•&nbsp; landscape &nbsp;•&nbsp; sticks &nbsp;•&nbsp; street &nbsp;•&nbsp; town
+      </div>
+      <ol class="fill-list" id="K-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">That awful new office block is a real blot on the <input class="fill-input" data-answer="landscape" placeholder="...">.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">The crime rate is soaring! It's becoming a real concrete <input class="fill-input" data-answer="jungle" placeholder="..."> out there.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">Make yourself at <input class="fill-input" data-answer="home" placeholder="..."> while I just put the kettle on and make us a nice cup of tea.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">It's my birthday, so I'm planning to go out on the <input class="fill-input" data-answer="town" placeholder="..."> with my friends this evening.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">Living in the commuter <input class="fill-input" data-answer="belt" placeholder="..."> is okay, but I'd love to move back into the city.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">I don't know how Nicole survives, living all the way out in the <input class="fill-input" data-answer="sticks" placeholder="...">.</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">We couldn't afford to live in London, so we ended up living in a satellite <input class="fill-input" data-answer="town" placeholder="..."> about half an hour away.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">I love this hotel, and it's always been a kind of <input class="fill-input" data-answer="home" placeholder="..."> from home for me.</span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">After losing his job and getting divorced, it seemed only a matter of time before Anthony was out on the <input class="fill-input" data-answer="street" placeholder="...">.</span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">It's fine to travel, but there's nothing better than <input class="fill-input" data-answer="home" placeholder="..."> sweet home.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('K-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('K-list')">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ WORD FORMATION ════════ -->
+  <div class="section" id="sec-wordform">
+    <div class="section-title">Word formation</div>
+
+    <!-- Exercise L -->
+    <div class="exercise" id="exL">
+      <div class="exercise-label">
+        <div class="ex-letter">L</div>
+        <div class="ex-instruction">Each of the words in bold is in the wrong form. Rewrite them correctly.</div>
+      </div>
+      <ol class="fill-list" id="L-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">The <b>manufacturer</b> industries are a major employer in this area. <input class="fill-input" data-answer="manufacturing" placeholder="..."></span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">Dunscar and the <b>roundness</b> areas have seen a sharp increase in house prices. <input class="fill-input" data-answer="surrounding" placeholder="..."></span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">When the mixture starts to <b>solidity</b>, put it in the freezer. <input class="fill-input" data-answer="solidify" placeholder="..."></span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">Each <b>housing</b> is responsible for maintaining the area in front of their house. <input class="fill-input" data-answer="householder" placeholder="..."></span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">'I'll always be here for you,' Brittany said <b>soften</b>. <input class="fill-input" data-answer="softly" placeholder="..."></span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">Be careful – the floor's wet and it's a bit <b>slippage</b>. <input class="fill-input" data-answer="slippery" placeholder="..."></span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">I dropped a spanner and it made a loud, <b>metallurgy</b> sound. <input class="fill-input" data-answer="metallic" placeholder="..."></span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">There have been <b>substance</b> improvements to the local area. <input class="fill-input" data-answer="substantial" placeholder="..."></span></li>
+        <li class="fill-item"><span class="item-num">9</span><span class="item-text">The council apply the rules on building quite <b>rigidity</b>. <input class="fill-input" data-answer="rigidly" placeholder="..."></span></li>
+        <li class="fill-item"><span class="item-num">10</span><span class="item-text">After the earthquake, all the buildings were checked for <b>structure</b> damage. <input class="fill-input" data-answer="structural" placeholder="..."></span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('L-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('L-list')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise M -->
+    <div class="exercise" id="exM">
+      <div class="exercise-label">
+        <div class="ex-letter">M</div>
+        <div class="ex-instruction">Use the word given in capitals at the end of the line to form a word that fits in the space in the same line.</div>
+      </div>
+      <div class="passage-box" style="background:#f0f7f3; border-color:#52b788;">
+        <h3 style="font-family:'Georgia',serif; font-size:15px; color:#1b4332; margin-bottom:10px; text-align:center; font-weight:700; letter-spacing:1px;">Rebuilding Coventry</h3>
+        In the late 30s, <span class="gap-num">(1)</span> <input class="fill-input" data-answer="analysts" placeholder="..."> knew that the centre of the historic town of Coventry in the West Midlands needed to be redeveloped. Plans had to be <span class="gap-num">(2)</span> <input class="fill-input" data-answer="shelved" placeholder="..."> when the Second World War started in 1939. However, the architects' opportunity <span class="gap-num">(3)</span> <input class="fill-input" data-answer="materialised" placeholder="..."> when the city centre was practically destroyed during the war. Many buildings were <span class="gap-num">(4)</span> <input class="fill-input" data-answer="repaired" placeholder="..."> damaged and demolition work began. Aiming to create a much more <span class="gap-num">(5)</span> <input class="fill-input" data-answer="spacious" placeholder="..."> area for <span class="gap-num">(6)</span> <input class="fill-input" data-answer="residents" placeholder="..."> to work and shop in, town planners came up with a radical idea. They would make the city more <span class="gap-num">(7)</span> <input class="fill-input" data-answer="inhabitable" placeholder="..."> by pedestrianising the centre, preventing cars entering. There were <span class="gap-num">(8)</span> <input class="fill-input" data-answer="objections" placeholder="..."> from local shopkeepers, who thought that it would have an impact on trade, but the planners went ahead. What was once a <span class="gap-num">(9)</span> <input class="fill-input" data-answer="densely" placeholder="..."> populated area became a pleasant, attractive place to visit. It was a real <span class="gap-num">(10)</span> <input class="fill-input" data-answer="architectural" placeholder="..."> achievement, one that many British towns have emulated since.
+        <br><br>
+        <small style="color:var(--muted);">ANALYSE &nbsp;•&nbsp; SHELF &nbsp;•&nbsp; MATERIAL &nbsp;•&nbsp; REPAIR &nbsp;•&nbsp; SPACE &nbsp;•&nbsp; RESIDE &nbsp;•&nbsp; INHABIT &nbsp;•&nbsp; OBJECT &nbsp;•&nbsp; DENSE &nbsp;•&nbsp; ARCHITECT</small>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkAllFillInSection('exM')">Check answers</button>
+        <button class="btn-reset" onclick="resetAllFillInSection('exM')">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise N -->
+    <div class="exercise" id="exN">
+      <div class="exercise-label">
+        <div class="ex-letter">N</div>
+        <div class="ex-instruction">The suffix <em>-en</em>, as in <em>soften</em>, can be added to nouns or adjectives to form verbs and means 'cause to become' or 'become'. Tick the nouns and adjectives below which can take <em>-en</em> to form verbs. You may have to double a final letter or remove a final <em>-e</em>.</div>
+      </div>
+      <p style="font-size:12px; color:var(--muted); margin-bottom:12px;">Click words that can take <em>-en</em> to form a verb:</p>
+      <div class="word-grid" id="N-grid">
+        <button class="word-chip" data-word="black" data-answer="yes" onclick="toggleChip(this)">black → blacken</button>
+        <button class="word-chip" data-word="bright" data-answer="yes" onclick="toggleChip(this)">bright → brighten</button>
+        <button class="word-chip" data-word="broad" data-answer="yes" onclick="toggleChip(this)">broad → broaden</button>
+        <button class="word-chip" data-word="brown" data-answer="yes" onclick="toggleChip(this)">brown → brownen?</button>
+        <button class="word-chip" data-word="damp" data-answer="yes" onclick="toggleChip(this)">damp → dampen</button>
+        <button class="word-chip" data-word="deep" data-answer="yes" onclick="toggleChip(this)">deep → deepen</button>
+        <button class="word-chip" data-word="fright" data-answer="yes" onclick="toggleChip(this)">fright → frighten</button>
+        <button class="word-chip" data-word="hard" data-answer="yes" onclick="toggleChip(this)">hard → harden</button>
+        <button class="word-chip" data-word="length" data-answer="yes" onclick="toggleChip(this)">length → lengthen</button>
+        <button class="word-chip" data-word="loose" data-answer="yes" onclick="toggleChip(this)">loose → loosen</button>
+        <button class="word-chip" data-word="narrow" data-answer="yes" onclick="toggleChip(this)">narrow → narrow?</button>
+        <button class="word-chip" data-word="red" data-answer="yes" onclick="toggleChip(this)">red → redden</button>
+        <button class="word-chip" data-word="short" data-answer="yes" onclick="toggleChip(this)">short → shorten</button>
+        <button class="word-chip" data-word="strength" data-answer="yes" onclick="toggleChip(this)">strength → strengthen</button>
+        <button class="word-chip" data-word="tall" data-answer="no" onclick="toggleChip(this)">tall → ?</button>
+        <button class="word-chip" data-word="tight" data-answer="yes" onclick="toggleChip(this)">tight → tighten</button>
+        <button class="word-chip" data-word="weak" data-answer="yes" onclick="toggleChip(this)">weak → weaken</button>
+        <button class="word-chip" data-word="wide" data-answer="yes" onclick="toggleChip(this)">wide → widen</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkN()">Check answers</button>
+        <button class="btn-reset" onclick="resetN()">Reset</button>
+      </div>
+    </div>
+
+    <!-- Exercise O -->
+    <div class="exercise" id="exO">
+      <div class="exercise-label">
+        <div class="ex-letter">O</div>
+        <div class="ex-instruction">Complete the sentences using words formed in exercise N in the correct form.</div>
+      </div>
+      <ol class="fill-list" id="O-list">
+        <li class="fill-item"><span class="item-num">1</span><span class="item-text">Apparently, they're going to <input class="fill-input" data-answer="widen" placeholder="..."> the road here so that it can cope with the heavy traffic.</span></li>
+        <li class="fill-item"><span class="item-num">2</span><span class="item-text">This decision by the authorities only <input class="fill-input" data-answer="strengthens|strengthened" placeholder="..."> our determination to fight on.</span></li>
+        <li class="fill-item"><span class="item-num">3</span><span class="item-text">Ryan's face <input class="fill-input" data-answer="reddened" placeholder="..."> as he realised what a terrible mistake he'd made.</span></li>
+        <li class="fill-item"><span class="item-num">4</span><span class="item-text">The dress suits you, but it's a bit long. You can always <input class="fill-input" data-answer="shorten" placeholder="..."> it.</span></li>
+        <li class="fill-item"><span class="item-num">5</span><span class="item-text">Could you help me <input class="fill-input" data-answer="loosen" placeholder="..."> my seat belt? It's a bit loose.</span></li>
+        <li class="fill-item"><span class="item-num">6</span><span class="item-text">Some flowers in here would certainly <input class="fill-input" data-answer="brighten" placeholder="..."> the place up, wouldn't they?</span></li>
+        <li class="fill-item"><span class="item-num">7</span><span class="item-text">They leave the clay in the sun to <input class="fill-input" data-answer="harden" placeholder="..."> and use the bricks to build houses.</span></li>
+        <li class="fill-item"><span class="item-num">8</span><span class="item-text">We must remain strong and not <input class="fill-input" data-answer="weaken" placeholder="..."> if we're going to stop this bypass being built.</span></li>
+      </ol>
+      <div class="btn-row">
+        <button class="btn-check" onclick="checkFill('O-list')">Check answers</button>
+        <button class="btn-reset" onclick="resetFill('O-list')">Reset</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="toast"></div>
+
+<script>
+// ── UTILITY ──────────────────────────────────────────────
+function normalize(s) {
+  return s.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+function isCorrect(input, answer) {
+  const val = normalize(input.value);
+  const alts = answer.split('|').map(a => normalize(a));
+  return alts.includes(val);
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2000);
+}
+
+// ── SCORE TRACKING ───────────────────────────────────────
+function updateScore() {
+  const all = document.querySelectorAll('.fill-input, .h-small-input');
+  const answered = [...all].filter(i => i.value.trim() !== '').length;
+  const total = all.length;
+  const pct = total ? (answered / total * 100).toFixed(0) : 0;
+  document.getElementById('score-bar-fill').style.width = pct + '%';
+  document.getElementById('score-text').textContent = answered + ' / ' + total + ' answered';
+}
+document.addEventListener('input', updateScore);
+
+// ── FILL IN THE BLANK ────────────────────────────────────
+function checkFill(listId) {
+  const list = document.getElementById(listId);
+  let correct = 0, total = 0;
+  list.querySelectorAll('.fill-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetFill(listId) {
+  document.getElementById(listId).querySelectorAll('.fill-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+function checkAllFillInSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  let correct = 0, total = 0;
+  section.querySelectorAll('.fill-input').forEach(inp => {
+    total++;
+    inp.classList.remove('correct', 'wrong');
+    if (isCorrect(inp, inp.dataset.answer)) { inp.classList.add('correct'); correct++; }
+    else if (inp.value.trim()) inp.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetAllFillInSection(sectionId) {
+  document.getElementById(sectionId).querySelectorAll('.fill-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct', 'wrong');
+  });
+  updateScore();
+}
+
+// ── MULTIPLE CHOICE ──────────────────────────────────────
+document.addEventListener('click', e => {
+  if (!e.target.matches('.mc-btn')) return;
+  const btn = e.target;
+  const q = btn.dataset.q;
+  document.querySelectorAll(`.mc-btn[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+});
+function checkMC(listId) {
+  const list = document.getElementById(listId);
+  const questions = {};
+  list.querySelectorAll('.mc-btn').forEach(btn => {
+    if (!questions[btn.dataset.q]) questions[btn.dataset.q] = [];
+    questions[btn.dataset.q].push(btn);
+  });
+  let correct = 0, total = Object.keys(questions).length;
+  Object.values(questions).forEach(btns => {
+    const answer = btns[0].dataset.answer;
+    btns.forEach(b => {
+      b.classList.remove('correct', 'wrong');
+      if (b.classList.contains('selected')) {
+        if (b.dataset.opt === answer) { b.classList.add('correct'); correct++; }
+        else b.classList.add('wrong');
+      } else if (b.dataset.opt === answer) {
+        b.classList.add('correct');
+      }
+    });
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetMC(listId) {
+  document.getElementById(listId).querySelectorAll('.mc-btn').forEach(b => {
+    b.classList.remove('selected', 'correct', 'wrong');
+  });
+}
+
+// ── CHOOSE OPTION ─────────────────────────────────────────
+function chooseOption(btn) {
+  const q = btn.dataset.q;
+  btn.closest('.choose-pair').querySelectorAll('.choose-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function checkChoose(listId) {
+  const list = document.getElementById(listId);
+  let correct = 0, total = 0;
+  const questions = {};
+  list.querySelectorAll('.choose-btn').forEach(btn => {
+    if (!questions[btn.dataset.q]) questions[btn.dataset.q] = [];
+    questions[btn.dataset.q].push(btn);
+  });
+  total = Object.keys(questions).length;
+  Object.values(questions).forEach(btns => {
+    const answer = btns[0].dataset.answer;
+    btns.forEach(b => {
+      b.classList.remove('correct', 'wrong');
+      if (b.classList.contains('selected')) {
+        if (b.dataset.opt === answer) { b.classList.add('correct'); correct++; }
+        else b.classList.add('wrong');
+      } else if (b.dataset.opt === answer) {
+        b.classList.add('correct');
+      }
+    });
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetChoose(listId) {
+  document.getElementById(listId).querySelectorAll('.choose-btn').forEach(b => {
+    b.classList.remove('selected', 'correct', 'wrong');
+  });
+}
+
+// ── EXERCISE G TICK ──────────────────────────────────────
+function toggleTick(btn) {
+  btn.classList.toggle('selected');
+}
+// correct answers: 1=yes,2=yes,3=no,4=yes,5=no,6=yes,7=yes,8=yes,9=no,10=yes
+const gtCorrect = { GT1:'yes', GT2:'yes', GT3:'no', GT4:'yes', GT5:'no', GT6:'yes', GT7:'yes', GT8:'yes', GT9:'no', GT10:'yes' };
+function checkGTick() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#G-tick-list .tick-btn').forEach(btn => {
+    total++;
+    const q = btn.dataset.q;
+    const shouldTick = gtCorrect[q] === 'yes';
+    const isSelected = btn.classList.contains('selected');
+    btn.classList.remove('correct', 'wrong');
+    if (shouldTick === isSelected) { btn.classList.add('correct'); correct++; }
+    else btn.classList.add('wrong');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetGTick() {
+  document.querySelectorAll('#G-tick-list .tick-btn').forEach(b => b.classList.remove('selected', 'correct', 'wrong'));
+}
+
+// ── EXERCISE N CHIP ──────────────────────────────────────
+function toggleChip(btn) {
+  btn.classList.toggle('selected');
+}
+function checkN() {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#N-grid .word-chip').forEach(btn => {
+    total++;
+    const shouldSelect = btn.dataset.answer === 'yes';
+    const isSelected = btn.classList.contains('selected');
+    btn.classList.remove('correct', 'wrong', 'missed');
+    if (shouldSelect === isSelected) { btn.classList.add('correct'); correct++; }
+    else if (isSelected && !shouldSelect) btn.classList.add('wrong');
+    else btn.classList.add('missed');
+  });
+  showToast(correct + ' / ' + total + ' correct');
+}
+function resetN() {
+  document.querySelectorAll('#N-grid .word-chip').forEach(b => b.classList.remove('selected', 'correct', 'wrong', 'missed'));
+}
+
+// ── SIDEBAR ACTIVE ────────────────────────────────────────
+const sections = document.querySelectorAll('.exercise[id]');
+const navLinks = document.querySelectorAll('#sidebar nav a');
+function onScroll() {
+  let current = '';
+  sections.forEach(s => {
+    if (s.getBoundingClientRect().top <= 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', onScroll);
+onScroll();
+
+// ── INIT ──────────────────────────────────────────────────
+updateScore();
+</script>
+</body>
+</html>

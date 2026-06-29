@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 25 – Grammar Exercises</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #333; min-height: 100vh; }
+  .header { background: #1565C0; color: white; padding: 16px 20px; text-align: center; }
+  .header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+  .header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+  .tab-bar { display: flex; background: #1976D2; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn { flex: 1; min-width: 44px; padding: 12px 6px; border: none; background: transparent; color: rgba(255,255,255,0.7); font-size: 0.95rem; font-weight: 600; cursor: pointer; border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap; }
+  .tab-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+  .tab-btn.active { color: white; border-bottom-color: #FFD600; }
+  .tab-badge { display: inline-block; font-size: 0.65rem; background: rgba(255,255,255,0.25); border-radius: 10px; padding: 1px 5px; margin-left: 4px; vertical-align: middle; }
+  .tab-badge.perfect { background: #4CAF50; }
+  .content { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+  .exercise { display: none; }
+  .exercise.active { display: block; }
+  .ex-header { margin-bottom: 16px; }
+  .ex-title { font-size: 1.1rem; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+  .ex-instruction { font-size: 0.9rem; color: #555; background: #E3F2FD; border-left: 4px solid #2196F3; padding: 8px 12px; border-radius: 0 6px 6px 0; }
+  .question-list { list-style: none; }
+  .question-item { background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s; }
+  .question-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .question-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+  .q-num { font-weight: 700; color: #1976D2; margin-right: 6px; }
+  .q-sentence { line-height: 1.8; }
+  input[type="text"] { border: 2px solid #BBDEFB; border-radius: 6px; padding: 5px 10px; font-size: 0.95rem; outline: none; background: #FAFAFA; transition: border .2s; min-width: 100px; }
+  input[type="text"]:focus { border-color: #2196F3; background: white; }
+  input[type="text"].correct { border-color: #4CAF50; background: #F1F8E9; color: #2E7D32; }
+  input[type="text"].wrong { border-color: #F44336; background: #FFF5F5; color: #C62828; }
+  .mc-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .mc-btn { border: 2px solid #90CAF9; background: white; border-radius: 6px; padding: 5px 16px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #1565C0; }
+  .mc-btn:hover { background: #E3F2FD; }
+  .mc-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .mc-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .mc-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+  .passage-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .passage-line { margin-bottom: 12px; line-height: 2.1; }
+  .passage-title { font-style: italic; font-weight: 700; font-size: 1.05rem; text-align: center; color: #1565C0; margin-bottom: 12px; }
+  .passage-input { min-width: 80px; width: 90px; }
+  .transform-original { margin-bottom: 6px; color: #555; font-size: 0.92rem; }
+  .transform-key { display: inline-block; background: #FFF9C4; border: 1px solid #F9A825; border-radius: 4px; padding: 1px 8px; font-weight: 700; color: #5D4037; font-size: 0.88rem; margin: 0 6px; }
+  .transform-blank { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+  .transform-input { min-width: 200px; flex: 1; }
+  .extra-word-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .extra-line { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; padding: 8px; background: #f9f9f9; border-radius: 6px; }
+  .extra-line-num { font-weight: 700; color: #1976D2; min-width: 20px; padding-top: 6px; }
+  .extra-line-input { min-width: 80px; width: 90px; }
+  .extra-line-text { flex: 1; line-height: 1.6; font-size: 0.9rem; }
+  .extra-line.correct { background: #F1F8E9; border-left: 3px solid #4CAF50; }
+  .extra-line.wrong { background: #FFF5F5; border-left: 3px solid #F44336; }
+  .answer-reveal { font-size: 0.82rem; color: #388E3C; margin-top: 4px; display: none; }
+  .show-answers .answer-reveal { display: block; }
+  .action-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+  .btn { padding: 10px 22px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-check { background: #2196F3; color: white; }
+  .btn-check:hover { background: #1976D2; }
+  .btn-reset { background: #FF9800; color: white; }
+  .btn-reset:hover { background: #F57C00; }
+  .btn-show { background: #9C27B0; color: white; }
+  .btn-show:hover { background: #7B1FA2; }
+  .score-display { font-size: 1rem; font-weight: 700; padding: 8px 16px; border-radius: 8px; background: #E8F5E9; color: #2E7D32; display: none; }
+  .score-display.visible { display: inline-block; }
+  .score-display.perfect { background: #4CAF50; color: white; }
+  @media (max-width: 600px) { .tab-btn { font-size: 0.8rem; padding: 10px 4px; } .content { padding: 12px 10px 50px; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Unit 25 – Grammar</h1>
+  <p>Unreal past, wishes and contrast · 10 exercises · Click a tab to start</p>
+</div>
+
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" onclick="switchTab('a')">A</button>
+  <button class="tab-btn" onclick="switchTab('b')">B</button>
+  <button class="tab-btn" onclick="switchTab('c')">C</button>
+  <button class="tab-btn" onclick="switchTab('d')">D</button>
+  <button class="tab-btn" onclick="switchTab('e')">E</button>
+  <button class="tab-btn" onclick="switchTab('f')">F</button>
+  <button class="tab-btn" onclick="switchTab('g')">G</button>
+  <button class="tab-btn" onclick="switchTab('h')">H</button>
+  <button class="tab-btn" onclick="switchTab('i')">I</button>
+  <button class="tab-btn" onclick="switchTab('j')">J</button>
+</div>
+
+<div class="content">
+
+<!-- ===== EXERCISE A: Verb form – wishes, suppositions ===== -->
+<div class="exercise active" id="ex-a">
+  <div class="ex-header">
+    <div class="ex-title">Exercise A – Complete using the correct form of the verb in brackets</div>
+    <div class="ex-instruction">Use the correct verb form for unreal past, wishes, it's time, I'd rather, suppose, what if, if only.</div>
+  </div>
+  <ul class="question-list" id="ql-a">
+    <li class="question-item" data-answer="told">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Don't you think it's time you <input type="text" class="ex-a-input" placeholder="…" style="min-width:100px"> (tell) Andrea the truth?</span>
+      <div class="answer-reveal">✓ told (it's time + past simple)</div>
+    </li>
+    <li class="question-item" data-answer="rented">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">What if we <input type="text" class="ex-a-input" placeholder="…" style="min-width:100px"> (rent) a villa by the sea for the summer?</span>
+      <div class="answer-reveal">✓ rented (what if + past simple = unreal suggestion)</div>
+    </li>
+    <li class="question-item" data-answer="sent|would send / phoned|called">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">I'd rather people <input type="text" class="ex-a-input" placeholder="…" style="min-width:100px"> (send) me e-mails than <input type="text" class="ex-a-input" placeholder="…" style="min-width:100px"> (phone) me.</span>
+      <div class="answer-reveal">✓ sent / phoned (I'd rather + past simple for preferences about others)</div>
+    </li>
+    <li class="question-item" data-answer="were going to">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Suppose you <input type="text" class="ex-a-input" placeholder="…" style="min-width:140px"> (be going to) open a clothes shop. What kind of clothes would you stock?</span>
+      <div class="answer-reveal">✓ were going to (suppose + past continuous/unreal)</div>
+    </li>
+    <li class="question-item" data-answer="go">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">It's time to <input type="text" class="ex-a-input" placeholder="…" style="min-width:80px"> (go) now.</span>
+      <div class="answer-reveal">✓ go (it's time + to-infinitive = simple instruction)</div>
+    </li>
+    <li class="question-item" data-answer="had">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">If you <input type="text" class="ex-a-input" placeholder="…" style="min-width:80px"> (have) a time machine, which era would you want to go back to?</span>
+      <div class="answer-reveal">✓ had (second conditional: if + past simple)</div>
+    </li>
+    <li class="question-item" data-answer="didn't have to">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Shelia would come with us if she <input type="text" class="ex-a-input" placeholder="…" style="min-width:150px"> (not have to) work tomorrow.</span>
+      <div class="answer-reveal">✓ didn't have to (second conditional: if + past simple)</div>
+    </li>
+    <li class="question-item" data-answer="didn't lend">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">We'd rather you <input type="text" class="ex-a-input" placeholder="…" style="min-width:130px"> (not lend) Brenda any more money – she's got to learn not to spend what she doesn't have.</span>
+      <div class="answer-reveal">✓ didn't lend (I'd rather + past simple for preference about others)</div>
+    </li>
+    <li class="question-item" data-answer="left">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">It's high time I <input type="text" class="ex-a-input" placeholder="…" style="min-width:90px"> (leave).</span>
+      <div class="answer-reveal">✓ left (it's high time + past simple)</div>
+    </li>
+    <li class="question-item" data-answer="got">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">What if we <input type="text" class="ex-a-input" placeholder="…" style="min-width:80px"> (get) married? Would that make you happy?</span>
+      <div class="answer-reveal">✓ got (what if + past simple = hypothetical)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('a')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('a')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('a')">Reset</button>
+    <span class="score-display" id="score-a"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE B: Rewrite incorrect wish/if only forms ===== -->
+<div class="exercise" id="ex-b">
+  <div class="ex-header">
+    <div class="ex-title">Exercise B – Rewrite the bold word/phrase correctly</div>
+    <div class="ex-instruction">Each bold word or phrase is incorrect. Rewrite the sentence with the correct form.</div>
+  </div>
+  <ul class="question-list" id="ql-b">
+    <li class="question-item" data-answer="knew">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">I wish I <strong>know</strong> how to set the timer on this video. Where are the instructions?<br>
+      <input type="text" class="ex-b-input" placeholder="correct form…" style="min-width:160px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ knew (I wish + past simple for present wish)</div>
+    </li>
+    <li class="question-item" data-answer="had listened">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">'If only I <strong>listened</strong> to Hilary,' said Warren sadly. 'Now it's too late.'<br>
+      <input type="text" class="ex-b-input" placeholder="correct form…" style="min-width:160px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ had listened (if only + past perfect for past regret)</div>
+    </li>
+    <li class="question-item" data-answer="would shut up|shut up">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">I wish you <strong>did</strong> shut up for five minutes!<br>
+      <input type="text" class="ex-b-input" placeholder="correct form…" style="min-width:160px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ would shut up (I wish + would for irritation about someone else's behaviour)</div>
+    </li>
+    <li class="question-item" data-answer="could get">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">If only Charlie <strong>can</strong> get tomorrow off work.<br>
+      <input type="text" class="ex-b-input" placeholder="correct form…" style="min-width:160px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ could get (if only + could = unreal wish for the present)</div>
+    </li>
+    <li class="question-item" data-answer="could go|were going">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Do you wish you <strong>went</strong> with Jack to the concert tomorrow night?<br>
+      <input type="text" class="ex-b-input" placeholder="correct form…" style="min-width:160px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ could go (future wish: wish + could for future event)</div>
+    </li>
+    <li class="question-item" data-answer="to speak">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Excuse me. I wish <strong>speaking</strong> with the manager of this establishment immediately.<br>
+      <input type="text" class="ex-b-input" placeholder="correct form…" style="min-width:160px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ to speak (polite request: I wish to speak = I would like to speak)</div>
+    </li>
+    <li class="question-item" data-answer="had been driving">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Albert wishes like anything that he <strong>was driving</strong> more slowly that night.<br>
+      <input type="text" class="ex-b-input" placeholder="correct form…" style="min-width:160px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ had been driving (past regret: wishes + past perfect continuous)</div>
+    </li>
+    <li class="question-item" data-answer="felt">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">I wish I <strong>would feel</strong> well enough to eat something.<br>
+      <input type="text" class="ex-b-input" placeholder="correct form…" style="min-width:160px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ felt (I wish + past simple for present state — would not used for own wishes)</div>
+    </li>
+    <li class="question-item" data-answer="hope">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">I <strong>wish</strong> I'll get my exam results sooner rather than later.<br>
+      <input type="text" class="ex-b-input" placeholder="correct form…" style="min-width:160px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ hope (I hope I'll get = future realistic expectation; wish ≠ hope)</div>
+    </li>
+    <li class="question-item" data-answer="would listen">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">If only you <strong>to listen</strong> to what your teachers tell you!<br>
+      <input type="text" class="ex-b-input" placeholder="correct form…" style="min-width:160px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ would listen (if only + would = wish for change in behaviour)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('b')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('b')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('b')">Reset</button>
+    <span class="score-display" id="score-b"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE C: MCQ – wishes and unreal past ===== -->
+<div class="exercise" id="ex-c">
+  <div class="ex-header">
+    <div class="ex-title">Exercise C – Choose the correct answer</div>
+    <div class="ex-instruction">Choose the best option A, B, C or D.</div>
+  </div>
+  <ul class="question-list" id="ql-c">
+    <li class="question-item" data-answer="C">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">It's about time you ………… thinking about setting up your own business.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A start</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B have started</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C started</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D to start</button>
+      </div>
+      <div class="answer-reveal">✓ C started (it's about time + past simple)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">I'd really rather you ………… the kids drop bits of pizza all over my new sofa.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A didn't let</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B don't let</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C won't let</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D aren't letting</button>
+      </div>
+      <div class="answer-reveal">✓ A didn't let (I'd rather + past simple for preference about others)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">………… anything particular in mind or are you just browsing?</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A Did you have</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B Are you having</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C Can you have</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D Had you had</button>
+      </div>
+      <div class="answer-reveal">✓ D Had you had (Had you had anything in mind? = polite shop assistant inquiry)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">I wish Karen ………… that we're not trying to interfere in her life.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A understands</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B would understand</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C has understood</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D is going to understand</button>
+      </div>
+      <div class="answer-reveal">✓ B would understand (I wish + would for wish someone would change behaviour)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">I'd have been able to say goodbye to Trish if only ………… to the airport in time.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A I get</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B I got</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C I have got</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D I had got</button>
+      </div>
+      <div class="answer-reveal">✓ D I had got (if only + past perfect for past regret; matches I'd have been)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Don't you sometimes wish you ………… invisible?</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A could be</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B would be</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C will be</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D are</button>
+      </div>
+      <div class="answer-reveal">✓ A could be (wish + could for present ability wish)</div>
+    </li>
+    <li class="question-item" data-answer="C">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Suppose we ………… we could go and live on another planet. Would you want to go?</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A to hear</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B hearing</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C heard</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D having heard</button>
+      </div>
+      <div class="answer-reveal">✓ C heard (suppose we heard = past simple for hypothetical)</div>
+    </li>
+    <li class="question-item" data-answer="C">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Do you wish ………… an official complaint?</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A making</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B to make</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C you made</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D you make</button>
+      </div>
+      <div class="answer-reveal">✓ C you made (do you wish + past simple = did you want to)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">Adrian was ………… enough money to buy a new computer for the school.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A wishing to have raised</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B wishing he will raise</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C hoping to have raised</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D hoping he will raise</button>
+      </div>
+      <div class="answer-reveal">✓ A wishing to have raised (wishing to have done = past perfect infinitive for unrealised wish)</div>
+    </li>
+    <li class="question-item" data-answer="C">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">Don't you wish we ………… the exam a week on Monday and not tomorrow?</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A take</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B will take</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C would take</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D were taking</button>
+      </div>
+      <div class="answer-reveal">✓ C would take (wish + would for future wish — we don't control the schedule)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExMC('c')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('c')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('c')">Reset</button>
+    <span class="score-display" id="score-c"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE D: Sentence transformation – wishes ===== -->
+<div class="exercise" id="ex-d">
+  <div class="ex-header">
+    <div class="ex-title">Exercise D – Complete so that the meaning remains the same</div>
+    <div class="ex-instruction">Rewrite each sentence using the beginning given (I wish / If only / Suppose / I'd rather / It's high time).</div>
+  </div>
+  <ul class="question-list" id="ql-d">
+    <li class="question-item" data-answer="you didn't criticise me all the time|you would stop criticising me all the time">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">I don't like your criticising me all the time.<br>
+      I wish <input type="text" class="ex-d-input" placeholder="…" style="width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ I wish you didn't criticise me all the time.</div>
+    </li>
+    <li class="question-item" data-answer="sam knew how i feel about him|sam knew how i felt about him">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">It's awful – Sam doesn't know how I feel about him!<br>
+      If only <input type="text" class="ex-d-input" placeholder="…" style="width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ If only Sam knew how I feel/felt about him!</div>
+    </li>
+    <li class="question-item" data-answer="i were with you in switzerland right now|i was with you in switzerland right now">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">I'd love to be with you in Switzerland right now.<br>
+      I wish <input type="text" class="ex-d-input" placeholder="…" style="width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ I wish I were/was with you in Switzerland right now.</div>
+    </li>
+    <li class="question-item" data-answer="he had taken the job when he had the chance|he had taken the job">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Frank regrets not taking the job when he had the chance.<br>
+      Frank wishes <input type="text" class="ex-d-input" placeholder="…" style="width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ Frank wishes he had taken the job when he had the chance.</div>
+    </li>
+    <li class="question-item" data-answer="we were standing in the middle of times square right now">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Wouldn't you like us to be standing in the middle of Times Square right now?<br>
+      Don't you wish <input type="text" class="ex-d-input" placeholder="…" style="width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ Don't you wish we were standing in the middle of Times Square right now?</div>
+    </li>
+    <li class="question-item" data-answer="i could play chess as well as steve">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">It's a shame I can't play chess as well as Steve.<br>
+      I wish <input type="text" class="ex-d-input" placeholder="…" style="width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ I wish I could play chess as well as Steve.</div>
+    </li>
+    <li class="question-item" data-answer="you had a million euros, what would you do|you had a million euros? what would you do">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">What would you do if you had a million euros?<br>
+      Suppose <input type="text" class="ex-d-input" placeholder="…" style="width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ Suppose you had a million euros, what would you do?</div>
+    </li>
+    <li class="question-item" data-answer="you didn't smoke in here|you not smoke in here">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">I don't really want you to smoke in here.<br>
+      I'd rather <input type="text" class="ex-d-input" placeholder="…" style="width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ I'd rather you didn't smoke in here.</div>
+    </li>
+    <li class="question-item" data-answer="they went to bed|they were in bed">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">It's time for them to go to bed.<br>
+      It's high time <input type="text" class="ex-d-input" placeholder="…" style="width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ It's high time they went to bed.</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('d')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('d')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('d')">Reset</button>
+    <span class="score-display" id="score-d"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE E: Matching – contrast connectors ===== -->
+<div class="exercise" id="ex-e">
+  <div class="ex-header">
+    <div class="ex-title">Exercise E – Match to make sentences about Aesop the vegetarian</div>
+    <div class="ex-instruction">Match each beginning (1–9) with the correct ending (A–I).</div>
+  </div>
+  <ul class="question-list" id="ql-e">
+    <li class="question-item" data-answer="C">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Although …
+        <div class="mc-options">
+          <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A of being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="E" onclick="chooseMC(this)">E occasionally eat fish, however.</button>
+          <button class="mc-btn" data-val="F" onclick="chooseMC(this)">F Aesop's a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="G" onclick="chooseMC(this)">G been a vegetarian for years, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="H" onclick="chooseMC(this)">H fact that Aesop is a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="I" onclick="chooseMC(this)">I although he does occasionally eat fish.</button>
+        </div>
+      </span>
+      <div class="answer-reveal">✓ C – Although Aesop is a vegetarian, he does occasionally eat fish. (clause follows)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Despite …
+        <div class="mc-options">
+          <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A of being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="E" onclick="chooseMC(this)">E occasionally eat fish, however.</button>
+          <button class="mc-btn" data-val="F" onclick="chooseMC(this)">F Aesop's a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="G" onclick="chooseMC(this)">G been a vegetarian for years, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="H" onclick="chooseMC(this)">H fact that Aesop is a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="I" onclick="chooseMC(this)">I although he does occasionally eat fish.</button>
+        </div>
+      </span>
+      <div class="answer-reveal">✓ D – Despite being a vegetarian, Aesop does occasionally eat fish. (despite + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="H">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Despite the …
+        <div class="mc-options">
+          <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A of being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="E" onclick="chooseMC(this)">E occasionally eat fish, however.</button>
+          <button class="mc-btn" data-val="F" onclick="chooseMC(this)">F Aesop's a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="G" onclick="chooseMC(this)">G been a vegetarian for years, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="H" onclick="chooseMC(this)">H fact that Aesop is a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="I" onclick="chooseMC(this)">I although he does occasionally eat fish.</button>
+        </div>
+      </span>
+      <div class="answer-reveal">✓ H – Despite the fact that Aesop is a vegetarian… (despite the fact that + clause)</div>
+    </li>
+    <li class="question-item" data-answer="I">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Aesop is a vegetarian, …
+        <div class="mc-options">
+          <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A of being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="E" onclick="chooseMC(this)">E occasionally eat fish, however.</button>
+          <button class="mc-btn" data-val="F" onclick="chooseMC(this)">F Aesop's a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="G" onclick="chooseMC(this)">G been a vegetarian for years, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="H" onclick="chooseMC(this)">H fact that Aesop is a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="I" onclick="chooseMC(this)">I although he does occasionally eat fish.</button>
+        </div>
+      </span>
+      <div class="answer-reveal">✓ I – Aesop is a vegetarian, although he does occasionally eat fish.</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Despite his vegetarianism, …
+        <div class="mc-options">
+          <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C of being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="E" onclick="chooseMC(this)">E occasionally eat fish, however.</button>
+          <button class="mc-btn" data-val="F" onclick="chooseMC(this)">F Aesop's a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="G" onclick="chooseMC(this)">G been a vegetarian for years, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="H" onclick="chooseMC(this)">H fact that Aesop is a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="I" onclick="chooseMC(this)">I although he does occasionally eat fish.</button>
+        </div>
+      </span>
+      <div class="answer-reveal">✓ A – Despite his vegetarianism, Aesop does occasionally eat fish.</div>
+    </li>
+    <li class="question-item" data-answer="F">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">In spite …
+        <div class="mc-options">
+          <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A of being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="E" onclick="chooseMC(this)">E occasionally eat fish, however.</button>
+          <button class="mc-btn" data-val="F" onclick="chooseMC(this)">F Aesop's a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="G" onclick="chooseMC(this)">G been a vegetarian for years, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="H" onclick="chooseMC(this)">H fact that Aesop is a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="I" onclick="chooseMC(this)">I although he does occasionally eat fish.</button>
+        </div>
+      </span>
+      <div class="answer-reveal">✓ A – In spite of being a vegetarian, Aesop does occasionally eat fish.</div>
+    </li>
+    <li class="question-item" data-answer="G">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Despite having …
+        <div class="mc-options">
+          <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A of being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="E" onclick="chooseMC(this)">E occasionally eat fish, however.</button>
+          <button class="mc-btn" data-val="F" onclick="chooseMC(this)">F Aesop's a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="G" onclick="chooseMC(this)">G been a vegetarian for years, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="H" onclick="chooseMC(this)">H fact that Aesop is a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="I" onclick="chooseMC(this)">I although he does occasionally eat fish.</button>
+        </div>
+      </span>
+      <div class="answer-reveal">✓ G – Despite having been a vegetarian for years, Aesop does occasionally eat fish.</div>
+    </li>
+    <li class="question-item" data-answer="E">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Aesop is a vegetarian. However, he …
+        <div class="mc-options">
+          <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A of being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="E" onclick="chooseMC(this)">E occasionally eat fish, however.</button>
+          <button class="mc-btn" data-val="F" onclick="chooseMC(this)">F Aesop's a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="G" onclick="chooseMC(this)">G been a vegetarian for years, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="H" onclick="chooseMC(this)">H fact that Aesop is a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="I" onclick="chooseMC(this)">I although he does occasionally eat fish.</button>
+        </div>
+      </span>
+      <div class="answer-reveal">✓ B – Aesop is a vegetarian. However, he does occasionally eat fish.</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">Aesop is a vegetarian. He does …
+        <div class="mc-options">
+          <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A of being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D being a vegetarian, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="E" onclick="chooseMC(this)">E occasionally eat fish, however.</button>
+          <button class="mc-btn" data-val="F" onclick="chooseMC(this)">F Aesop's a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="G" onclick="chooseMC(this)">G been a vegetarian for years, Aesop does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="H" onclick="chooseMC(this)">H fact that Aesop is a vegetarian, he does occasionally eat fish.</button>
+          <button class="mc-btn" data-val="I" onclick="chooseMC(this)">I although he does occasionally eat fish.</button>
+        </div>
+      </span>
+      <div class="answer-reveal">✓ E – Aesop is a vegetarian. He does occasionally eat fish, however.</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExMC('e')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('e')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('e')">Reset</button>
+    <span class="score-display" id="score-e"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE F: Complete with although / despite / however / while ===== -->
+<div class="exercise" id="ex-f">
+  <div class="ex-header">
+    <div class="ex-title">Exercise F – Complete using <em>although</em>, <em>despite</em>, <em>however</em> or <em>while</em></div>
+    <div class="ex-instruction">Write the correct contrast connector in each gap.</div>
+  </div>
+  <ul class="question-list" id="ql-f">
+    <li class="question-item" data-answer="despite">
+      <span class="q-num">1.</span>
+      <span class="q-sentence"><input type="text" class="ex-f-input" placeholder="…" style="min-width:130px"> the storm, over ten thousand people took part in the marathon.</span>
+      <div class="answer-reveal">✓ Despite (despite + noun phrase)</div>
+    </li>
+    <li class="question-item" data-answer="although">
+      <span class="q-num">2.</span>
+      <span class="q-sentence"><input type="text" class="ex-f-input" placeholder="…" style="min-width:130px"> I wrote myself a note to remind me, I still forgot to call George tonight.</span>
+      <div class="answer-reveal">✓ Although (although + clause)</div>
+    </li>
+    <li class="question-item" data-answer="however">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Most Egyptologists believe that the Sphinx is about 4000 years old. Some geologists, <input type="text" class="ex-f-input" placeholder="…" style="min-width:130px">, argue that it must be at least 14,000 years old.</span>
+      <div class="answer-reveal">✓ however (however = nevertheless, used mid-sentence with commas)</div>
+    </li>
+    <li class="question-item" data-answer="despite">
+      <span class="q-num">4.</span>
+      <span class="q-sentence"><input type="text" class="ex-f-input" placeholder="…" style="min-width:130px"> having taken two aspirin, I had such a bad headache that I had to go home.</span>
+      <div class="answer-reveal">✓ Despite (despite + having + past participle)</div>
+    </li>
+    <li class="question-item" data-answer="although">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">I've never seen a UFO. <input type="text" class="ex-f-input" placeholder="…" style="min-width:130px">, that doesn't mean that I don't believe in them.</span>
+      <div class="answer-reveal">✓ However (However, that doesn't mean… — sentence connector)</div>
+    </li>
+    <li class="question-item" data-answer="despite">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">There are still two million people unemployed <input type="text" class="ex-f-input" placeholder="…" style="min-width:130px"> the fact that we're in the middle of an economic boom.</span>
+      <div class="answer-reveal">✓ despite (despite the fact that = even though)</div>
+    </li>
+    <li class="question-item" data-answer="while|although">
+      <span class="q-num">7.</span>
+      <span class="q-sentence"><input type="text" class="ex-f-input" placeholder="…" style="min-width:130px"> no European country carries out capital punishment, it is widely used throughout the United States.</span>
+      <div class="answer-reveal">✓ While / Although (contrast between Europe and the US)</div>
+    </li>
+    <li class="question-item" data-answer="however">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Technology has benefited humankind enormously. There are drawbacks with our reliance on technology, <input type="text" class="ex-f-input" placeholder="…" style="min-width:130px">.</span>
+      <div class="answer-reveal">✓ however (however at end of sentence with comma)</div>
+    </li>
+    <li class="question-item" data-answer="despite">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">I couldn't find my keys <input type="text" class="ex-f-input" placeholder="…" style="min-width:130px"> searching for them everywhere.</span>
+      <div class="answer-reveal">✓ despite (despite + -ing)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('f')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('f')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('f')">Reset</button>
+    <span class="score-display" id="score-f"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE G: Sentence transformation – contrast ===== -->
+<div class="exercise" id="ex-g">
+  <div class="ex-header">
+    <div class="ex-title">Exercise G – Complete using the key word (2–5 words)</div>
+    <div class="ex-instruction">Complete the second sentence so it has a similar meaning to the first.</div>
+  </div>
+  <ul class="question-list" id="ql-g">
+    <li class="question-item" data-answer="spite of the fact that|spite of him being exhausted">
+      <span class="q-num">1.</span>
+      <div class="transform-original">Although he was exhausted, Mike kept on climbing. <span class="transform-key">fact</span></div>
+      <div class="transform-blank">In <input type="text" class="ex-g-input transform-input" placeholder="…"> he was exhausted, Mike kept on climbing.</div>
+      <div class="answer-reveal">✓ In spite of the fact that he was exhausted, Mike kept on climbing.</div>
+    </li>
+    <li class="question-item" data-answer="having been sure she would|being sure she would">
+      <span class="q-num">2.</span>
+      <div class="transform-original">Sally had been sure she would win the music competition. She came third, however. <span class="transform-key">been</span></div>
+      <div class="transform-blank">Despite <input type="text" class="ex-g-input transform-input" placeholder="…"> win the music competition, Sally came third.</div>
+      <div class="answer-reveal">✓ Despite having been sure she would win the music competition, Sally came third.</div>
+    </li>
+    <li class="question-item" data-answer="in spite of having|despite having">
+      <span class="q-num">3.</span>
+      <div class="transform-original">Doug wasn't shortlisted for the job even though he had a great CV. <span class="transform-key">spite</span></div>
+      <div class="transform-blank">Doug wasn't shortlisted for the job <input type="text" class="ex-g-input transform-input" placeholder="…"> a great CV.</div>
+      <div class="answer-reveal">✓ in spite of having a great CV</div>
+    </li>
+    <li class="question-item" data-answer="whereas planes are still|while planes are still">
+      <span class="q-num">4.</span>
+      <div class="transform-original">Planes can still take off and land but ferries have been cancelled. <span class="transform-key">whereas</span></div>
+      <div class="transform-blank">Ferries have been cancelled, <input type="text" class="ex-g-input transform-input" placeholder="…"> able to take off and land.</div>
+      <div class="answer-reveal">✓ whereas planes are still able to take off and land.</div>
+    </li>
+    <li class="question-item" data-answer="even though she had|although she had">
+      <span class="q-num">5.</span>
+      <div class="transform-original">Despite having got a good degree, Sandra couldn't find a well-paid job. <span class="transform-key">even</span></div>
+      <div class="transform-blank">Sandra couldn't find a well-paid job <input type="text" class="ex-g-input transform-input" placeholder="…"> a good degree.</div>
+      <div class="answer-reveal">✓ even though she had a good degree</div>
+    </li>
+    <li class="question-item" data-answer="having been robbed|been robbed">
+      <span class="q-num">6.</span>
+      <div class="transform-original">Even though he'd been robbed twice, Red still enjoyed living in the city. <span class="transform-key">having</span></div>
+      <div class="transform-blank">Red still enjoyed living in the city <input type="text" class="ex-g-input transform-input" placeholder="…"> twice.</div>
+      <div class="answer-reveal">✓ despite having been robbed twice</div>
+    </li>
+    <li class="question-item" data-answer="even though the plot is|although the plot is|though the plot is">
+      <span class="q-num">7.</span>
+      <div class="transform-original">It's a great film despite the plot being a little complicated. <span class="transform-key">though</span></div>
+      <div class="transform-blank">It's a great film, <input type="text" class="ex-g-input transform-input" placeholder="…"> a little complicated.</div>
+      <div class="answer-reveal">✓ even though / although the plot is a little complicated</div>
+    </li>
+    <li class="question-item" data-answer="although they looked|even though they looked|despite looking">
+      <span class="q-num">8.</span>
+      <div class="transform-original">Despite looking everywhere, the kids failed to find the tennis ball. <span class="transform-key">although</span></div>
+      <div class="transform-blank">The kids failed to find the tennis ball <input type="text" class="ex-g-input transform-input" placeholder="…"> everywhere.</div>
+      <div class="answer-reveal">✓ although they looked everywhere</div>
+    </li>
+    <li class="question-item" data-answer="spite of being beaten|spite of losing">
+      <span class="q-num">9.</span>
+      <div class="transform-original">Pat really enjoyed the match even though she was beaten. <span class="transform-key">of</span></div>
+      <div class="transform-blank">In <input type="text" class="ex-g-input transform-input" placeholder="…">, Pat really enjoyed the match.</div>
+      <div class="answer-reveal">✓ In spite of being beaten, Pat really enjoyed the match.</div>
+    </li>
+    <li class="question-item" data-answer="having thoroughly investigated the case|investigating the case thoroughly">
+      <span class="q-num">10.</span>
+      <div class="transform-original">Despite their thorough investigation of the case, the police didn't manage to catch the culprit. <span class="transform-key">investigated</span></div>
+      <div class="transform-blank">Despite <input type="text" class="ex-g-input transform-input" placeholder="…">, the police didn't manage to catch the culprit.</div>
+      <div class="answer-reveal">✓ Despite having thoroughly investigated the case</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('g')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('g')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('g')">Reset</button>
+    <span class="score-display" id="score-g"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE H: Extra word passage ===== -->
+<div class="exercise" id="ex-h">
+  <div class="ex-header">
+    <div class="ex-title">Exercise H – Extra word: tick (✓) or write the extra word</div>
+    <div class="ex-instruction">If a line is correct, write ✓. If there is an extra word, write it.</div>
+  </div>
+  <div class="extra-word-container" id="ql-h">
+    <div class="passage-title">The school dance</div>
+    <div class="extra-line" data-answer="✓">
+      <span class="extra-line-num">1</span>
+      <input type="text" class="ex-h-input extra-line-input" placeholder="✓ or word">
+      <span class="extra-line-text">I went to my first school dance last Saturday night and it was a disaster! If</span>
+    </div>
+    <div class="extra-line" data-answer="that">
+      <span class="extra-line-num">2</span>
+      <input type="text" class="ex-h-input extra-line-input" placeholder="✓ or word">
+      <span class="extra-line-text">only <strong>that</strong> I'd thought about what I was going to wear a bit more carefully. Although</span>
+    </div>
+    <div class="extra-line" data-answer="✓">
+      <span class="extra-line-num">3</span>
+      <input type="text" class="ex-h-input extra-line-input" placeholder="✓ or word">
+      <span class="extra-line-text">being my best friend Jenny had told me it wasn't that kind of event, I'd decided</span>
+    </div>
+    <div class="extra-line" data-answer="✓">
+      <span class="extra-line-num">4</span>
+      <input type="text" class="ex-h-input extra-line-input" placeholder="✓ or word">
+      <span class="extra-line-text">to look really grown-up and wear a dress and high-heeled shoes. When I got</span>
+    </div>
+    <div class="extra-line" data-answer="of">
+      <span class="extra-line-num">5</span>
+      <input type="text" class="ex-h-input extra-line-input" placeholder="✓ or word">
+      <span class="extra-line-text">there, I looked totally ridiculous and some people started laughing. Despite <strong>of</strong></span>
+    </div>
+    <div class="extra-line" data-answer="have">
+      <span class="extra-line-num">6</span>
+      <input type="text" class="ex-h-input extra-line-input" placeholder="✓ or word">
+      <span class="extra-line-text">this slight setback, I thought I'd hit the dance floor. If I could <strong>have</strong> survive that,</span>
+    </div>
+    <div class="extra-line" data-answer="✓">
+      <span class="extra-line-num">7</span>
+      <input type="text" class="ex-h-input extra-line-input" placeholder="✓ or word">
+      <span class="extra-line-text">I could survive anything. But even though that went wrong! One of my heels</span>
+    </div>
+    <div class="extra-line" data-answer="though">
+      <span class="extra-line-num">8</span>
+      <input type="text" class="ex-h-input extra-line-input" placeholder="✓ or word">
+      <span class="extra-line-text">snapped – even if <strong>though</strong> my shoes were brand new – and I had to carry them</span>
+    </div>
+    <div class="extra-line" data-answer="✓">
+      <span class="extra-line-num">9</span>
+      <input type="text" class="ex-h-input extra-line-input" placeholder="✓ or word">
+      <span class="extra-line-text">to the side of the room. It was very embarrassing! Still, despite the disastrous</span>
+    </div>
+    <div class="extra-line" data-answer="was">
+      <span class="extra-line-num">10</span>
+      <input type="text" class="ex-h-input extra-line-input" placeholder="✓ or word">
+      <span class="extra-line-text">start <strong>was</strong>, Craig Fielding came up to me and asked me if I wanted to go out with him next Saturday. Of course I said no, but he is cute! We'll see what happens!</span>
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExtraWord('h')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('h')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExtraWord('h')">Reset</button>
+    <span class="score-display" id="score-h"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE I: Passage – one word per gap ===== -->
+<div class="exercise" id="ex-i">
+  <div class="ex-header">
+    <div class="ex-title">Exercise I – Write one word in each gap</div>
+    <div class="ex-instruction">Complete the passage with one word in each numbered gap.</div>
+  </div>
+  <div class="passage-container" id="ql-i">
+    <div class="passage-title">On the Catwalk with Sunny Magenta</div>
+    <p class="passage-line">
+      (1) <input type="text" class="ex-i-input passage-input" data-answer="despite" placeholder="…"> the fact that I try to be as upbeat as possible in this column, I have to say Milan has disappointed me.
+      If only we (2) <input type="text" class="ex-i-input passage-input" data-answer="could" placeholder="…"> possibly go back to the glory days of fashion (ie last year) when skirts were short and pink was the new black.
+      Pink is still in this year, interestingly enough.
+      (3) <input type="text" class="ex-i-input passage-input" data-answer="however|although" placeholder="…">, it's only being used in accessories such as buckles, belts, braces and beads.
+      Brown – the must-have colour of the season – has never been my favourite colour,
+      (4) <input type="text" class="ex-i-input passage-input" data-answer="although|though|however" placeholder="…"> I have to say that Belinda Steven's all-brown paper beachwear was quite stunning.
+      That's in (5) <input type="text" class="ex-i-input passage-input" data-answer="spite" placeholder="…"> of its complete impracticality, of course.
+      It really is (6) <input type="text" class="ex-i-input passage-input" data-answer="high|about" placeholder="…"> time that haute couture entered the real world just a tiny bit.
+      I know it's supposed to be more art than clothing, but suppose you actually
+      (7) <input type="text" class="ex-i-input passage-input" data-answer="made" placeholder="…"> the mistake of buying a Diego Fernandez baseball cap made of candle wax.
+      That's one walk in the sunshine and five thousand euros is dripping down your face!
+      Now, I'm not saying I wish I (8) <input type="text" class="ex-i-input passage-input" data-answer="had" placeholder="…"> stayed back in dull and grey London – the after-show parties were tremendous, as always.
+      But I do hope that next season I (9) <input type="text" class="ex-i-input passage-input" data-answer="will" placeholder="…"> be able to report that the fashion world's got a grip on itself once more,
+      and then – (10) <input type="text" class="ex-i-input passage-input" data-answer="even" placeholder="…"> though none of us will ever be able to afford any of the items I describe in this column – at least we'll have something to dream about once more.
+    </p>
+    <div class="answer-reveal" style="margin-top:10px">
+      ✓ (1) despite &nbsp;(2) could &nbsp;(3) However &nbsp;(4) although &nbsp;(5) spite &nbsp;(6) high/about &nbsp;
+      (7) made &nbsp;(8) had &nbsp;(9) will &nbsp;(10) even
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExPassage('i')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('i')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('i')">Reset</button>
+    <span class="score-display" id="score-i"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE J: Sentence transformation mixed ===== -->
+<div class="exercise" id="ex-j">
+  <div class="ex-header">
+    <div class="ex-title">Exercise J – Mixed sentence transformations</div>
+    <div class="ex-instruction">Complete the second sentence using the key word so it has a similar meaning to the first. Write 2–5 words.</div>
+  </div>
+  <ul class="question-list" id="ql-j">
+    <li class="question-item" data-answer="wish i could play|wish i were able to play">
+      <span class="q-num">1.</span>
+      <div class="transform-original">It's a shame I can't play the piano. <span class="transform-key">wish</span></div>
+      <div class="transform-blank">I <input type="text" class="ex-j-input transform-input" placeholder="…"> the piano.</div>
+      <div class="answer-reveal">✓ I wish I could play the piano.</div>
+    </li>
+    <li class="question-item" data-answer="only i had studied harder|only i had revised more">
+      <span class="q-num">2.</span>
+      <div class="transform-original">I regret not studying harder for the exam. <span class="transform-key">only</span></div>
+      <div class="transform-blank">If <input type="text" class="ex-j-input transform-input" placeholder="…"> for the exam.</div>
+      <div class="answer-reveal">✓ If only I had studied harder for the exam.</div>
+    </li>
+    <li class="question-item" data-answer="high time you apologised|high time you said sorry">
+      <span class="q-num">3.</span>
+      <div class="transform-original">You should apologise to Helen. <span class="transform-key">time</span></div>
+      <div class="transform-blank">It's <input type="text" class="ex-j-input transform-input" placeholder="…"> to Helen.</div>
+      <div class="answer-reveal">✓ It's high time you apologised to Helen.</div>
+    </li>
+    <li class="question-item" data-answer="rather you didn't stay up so late|rather you went to bed earlier">
+      <span class="q-num">4.</span>
+      <div class="transform-original">I want you to go to bed earlier. <span class="transform-key">rather</span></div>
+      <div class="transform-blank">I'd <input type="text" class="ex-j-input transform-input" placeholder="…">.</div>
+      <div class="answer-reveal">✓ I'd rather you didn't stay up so late / I'd rather you went to bed earlier.</div>
+    </li>
+    <li class="question-item" data-answer="spite of being tired|spite of the tiredness">
+      <span class="q-num">5.</span>
+      <div class="transform-original">Although she was tired, Emma finished her essay. <span class="transform-key">spite</span></div>
+      <div class="transform-blank">In <input type="text" class="ex-j-input transform-input" placeholder="…">, Emma finished her essay.</div>
+      <div class="answer-reveal">✓ In spite of being tired, Emma finished her essay.</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('j')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('j')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('j')">Reset</button>
+    <span class="score-display" id="score-j"></span>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+const tabs = ['a','b','c','d','e','f','g','h','i','j'];
+
+function switchTab(id) {
+  document.querySelector('.exercise.active').classList.remove('active');
+  document.getElementById('ex-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', tabs[i] === id);
+  });
+}
+
+function normalize(s) { return s.trim().toLowerCase().replace(/\s+/g,' ').replace(/[?.!'"]$/,''); }
+
+function updateScore(id, correct, total) {
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = correct + ' / ' + total + ' correct';
+  scoreEl.classList.add('visible');
+  scoreEl.classList.toggle('perfect', correct === total);
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabIdx = tabs.indexOf(id);
+  let badge = tabBtns[tabIdx].querySelector('.tab-badge');
+  if (!badge) { badge = document.createElement('span'); badge.className = 'tab-badge'; tabBtns[tabIdx].appendChild(badge); }
+  badge.textContent = correct + '/' + total;
+  badge.classList.toggle('perfect', correct === total);
+}
+
+function chooseMC(btn) {
+  const opts = btn.closest('.mc-options').querySelectorAll('.mc-btn');
+  opts.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function checkExMC(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    total++;
+    const sel = item.querySelector('.mc-btn.selected');
+    const ok = sel && sel.dataset.val === item.dataset.answer;
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    item.querySelectorAll('.mc-btn').forEach(btn => {
+      btn.classList.remove('correct','wrong');
+      if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+      else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+    });
+  });
+  updateScore(id, correct, total);
+}
+
+function checkExText(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    const inputs = item.querySelectorAll('input[type="text"]');
+    if (!inputs.length) return;
+    // For items with multiple inputs (ex A item 3), check at least one
+    let itemOk = true;
+    inputs.forEach(inp => {
+      if (!inp.dataset.answer) return;
+      total++;
+      const answers = inp.dataset.answer ? inp.dataset.answer.split('|') : (item.dataset.answer || '').split('|');
+      const ok = answers.some(a => normalize(inp.value) === normalize(a));
+      if (!ok) itemOk = false;
+      inp.classList.toggle('correct', ok);
+      inp.classList.toggle('wrong', !ok);
+    });
+    if (inputs.length === 1) {
+      total = total; // already counted above
+      if (itemOk) correct++;
+      item.classList.toggle('correct', itemOk);
+      item.classList.toggle('wrong', !itemOk);
+    } else {
+      // multiple inputs — handled per input above
+    }
+  });
+  // For single-input items, recount
+  if (id !== 'a') {
+    let c2 = 0, t2 = 0;
+    document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+      const inp = item.querySelector('input[type="text"]');
+      if (!inp) return;
+      t2++;
+      const answers = item.dataset.answer.split('|');
+      const ok = answers.some(a => normalize(inp.value) === normalize(a));
+      if (ok) c2++;
+      item.classList.toggle('correct', ok);
+      item.classList.toggle('wrong', !ok);
+      inp.classList.toggle('correct', ok);
+      inp.classList.toggle('wrong', !ok);
+    });
+    updateScore(id, c2, t2);
+    return;
+  }
+  updateScore(id, correct, total);
+}
+
+function checkExPassage(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .ex-' + id + '-input').forEach(inp => {
+    total++;
+    const answers = (inp.dataset.answer || '').split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+function checkExtraWord(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .extra-line').forEach(line => {
+    total++;
+    const inp = line.querySelector('input[type="text"]');
+    const answers = (line.dataset.answer || '').split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    line.classList.toggle('correct', ok);
+    line.classList.toggle('wrong', !ok);
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+function showAnswers(id) {
+  if (id === 'c' || id === 'e') checkExMC(id);
+  else if (id === 'h') checkExtraWord(id);
+  else if (id === 'i') {
+    checkExPassage(id);
+    const reveal = document.querySelector('#ql-' + id + ' .answer-reveal');
+    if (reveal) reveal.style.display = 'block';
+  } else checkExText(id);
+  document.getElementById('ex-' + id).classList.add('show-answers');
+}
+
+function resetEx(id) {
+  const exEl = document.getElementById('ex-' + id);
+  exEl.classList.remove('show-answers');
+  exEl.querySelectorAll('input[type="text"]').forEach(inp => { inp.value = ''; inp.classList.remove('correct','wrong'); });
+  exEl.querySelectorAll('.question-item, .extra-line').forEach(item => item.classList.remove('correct','wrong'));
+  exEl.querySelectorAll('.choice-btn, .mc-btn').forEach(btn => btn.classList.remove('selected','correct','wrong'));
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = ''; scoreEl.classList.remove('visible','perfect');
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const idx = tabs.indexOf(id);
+  const badge = tabBtns[idx]?.querySelector('.tab-badge');
+  if (badge) badge.textContent = '';
+  const reveal = document.querySelector('#ql-' + id + ' .answer-reveal');
+  if (reveal) reveal.style.display = '';
+}
+
+function resetExPassage(id) { resetEx(id); }
+function resetExtraWord(id) { resetEx(id); }
+</script>
+</body>
+</html>

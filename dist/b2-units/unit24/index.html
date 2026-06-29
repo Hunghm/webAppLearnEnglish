@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 24 – Vocabulary Exercises</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #333; min-height: 100vh; }
+  .header { background: #1565C0; color: white; padding: 16px 20px; text-align: center; }
+  .header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+  .header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+  .tab-bar { display: flex; background: #1976D2; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn { flex: 1; min-width: 44px; padding: 12px 6px; border: none; background: transparent; color: rgba(255,255,255,0.7); font-size: 0.95rem; font-weight: 600; cursor: pointer; border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap; }
+  .tab-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+  .tab-btn.active { color: white; border-bottom-color: #FFD600; }
+  .tab-badge { display: inline-block; font-size: 0.65rem; background: rgba(255,255,255,0.25); border-radius: 10px; padding: 1px 5px; margin-left: 4px; vertical-align: middle; }
+  .tab-badge.perfect { background: #4CAF50; }
+  .content { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+  .exercise { display: none; }
+  .exercise.active { display: block; }
+  .ex-header { margin-bottom: 16px; }
+  .ex-title { font-size: 1.1rem; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+  .ex-instruction { font-size: 0.9rem; color: #555; background: #E3F2FD; border-left: 4px solid #2196F3; padding: 8px 12px; border-radius: 0 6px 6px 0; }
+  .question-list { list-style: none; }
+  .question-item { background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s; }
+  .question-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .question-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+  .q-num { font-weight: 700; color: #1976D2; margin-right: 6px; }
+  .q-sentence { line-height: 1.8; }
+  input[type="text"] { border: 2px solid #BBDEFB; border-radius: 6px; padding: 5px 10px; font-size: 0.95rem; outline: none; background: #FAFAFA; transition: border .2s; min-width: 100px; }
+  input[type="text"]:focus { border-color: #2196F3; background: white; }
+  input[type="text"].correct { border-color: #4CAF50; background: #F1F8E9; color: #2E7D32; }
+  input[type="text"].wrong { border-color: #F44336; background: #FFF5F5; color: #C62828; }
+  .cap-word { font-weight: 700; color: #5D4037; font-size: 0.88rem; margin-left: 4px; background: #FFF9C4; border-radius: 3px; padding: 1px 5px; }
+  .two-choice-btns { display: inline-flex; gap: 8px; margin-left: 6px; }
+  .choice-btn { border: 2px solid #90CAF9; background: white; border-radius: 6px; padding: 4px 14px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #1565C0; }
+  .choice-btn:hover { background: #E3F2FD; }
+  .choice-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .choice-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .choice-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+  .mc-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .mc-btn { border: 2px solid #90CAF9; background: white; border-radius: 6px; padding: 5px 16px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #1565C0; }
+  .mc-btn:hover { background: #E3F2FD; }
+  .mc-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .mc-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .mc-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+  .passage-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .passage-line { margin-bottom: 10px; line-height: 2.1; }
+  .passage-title { font-weight: 700; font-size: 1.05rem; text-align: center; color: #1565C0; margin-bottom: 12px; }
+  .passage-input { min-width: 80px; width: 90px; }
+  .transform-original { margin-bottom: 6px; color: #555; font-size: 0.92rem; }
+  .transform-key { display: inline-block; background: #FFF9C4; border: 1px solid #F9A825; border-radius: 4px; padding: 1px 8px; font-weight: 700; color: #5D4037; font-size: 0.88rem; margin: 0 6px; }
+  .transform-blank { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+  .transform-input { min-width: 200px; flex: 1; }
+  .extra-word-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .extra-line { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; padding: 8px; background: #f9f9f9; border-radius: 6px; }
+  .extra-line-num { font-weight: 700; color: #1976D2; min-width: 20px; padding-top: 6px; }
+  .extra-line-input { min-width: 80px; width: 90px; }
+  .extra-line-text { flex: 1; line-height: 1.6; font-size: 0.9rem; }
+  .extra-line.correct { background: #F1F8E9; border-left: 3px solid #4CAF50; }
+  .extra-line.wrong { background: #FFF5F5; border-left: 3px solid #F44336; }
+  .answer-reveal { font-size: 0.82rem; color: #388E3C; margin-top: 4px; display: none; }
+  .show-answers .answer-reveal { display: block; }
+  .action-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+  .btn { padding: 10px 22px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-check { background: #2196F3; color: white; }
+  .btn-check:hover { background: #1976D2; }
+  .btn-reset { background: #FF9800; color: white; }
+  .btn-reset:hover { background: #F57C00; }
+  .btn-show { background: #9C27B0; color: white; }
+  .btn-show:hover { background: #7B1FA2; }
+  .score-display { font-size: 1rem; font-weight: 700; padding: 8px 16px; border-radius: 8px; background: #E8F5E9; color: #2E7D32; display: none; }
+  .score-display.visible { display: inline-block; }
+  .score-display.perfect { background: #4CAF50; color: white; }
+  @media (max-width: 600px) { .tab-btn { font-size: 0.8rem; padding: 10px 4px; } .content { padding: 12px 10px 50px; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Unit 24 – Vocabulary</h1>
+  <p>Entertainment · 9 exercises · Click a tab to start</p>
+</div>
+
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" onclick="switchTab('a')">A</button>
+  <button class="tab-btn" onclick="switchTab('b')">B</button>
+  <button class="tab-btn" onclick="switchTab('c')">C</button>
+  <button class="tab-btn" onclick="switchTab('d')">D</button>
+  <button class="tab-btn" onclick="switchTab('e')">E</button>
+  <button class="tab-btn" onclick="switchTab('f')">F</button>
+  <button class="tab-btn" onclick="switchTab('g')">G</button>
+  <button class="tab-btn" onclick="switchTab('h')">H</button>
+  <button class="tab-btn" onclick="switchTab('i')">I</button>
+</div>
+
+<div class="content">
+
+<!-- ===== EXERCISE A: MCQ – Topic vocabulary ===== -->
+<div class="exercise active" id="ex-a">
+  <div class="ex-header">
+    <div class="ex-title">Exercise A – Choose the correct answer</div>
+    <div class="ex-instruction">Topic vocabulary: Entertainment. Choose the best option A, B, C or D.</div>
+  </div>
+  <ul class="question-list" id="ql-a">
+    <li class="question-item" data-answer="C">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">I've got a/an ………… for the school play tomorrow. I really hope I get a main part!</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A rehearsal</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B practice</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C audition</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D performance</button>
+      </div>
+      <div class="answer-reveal">✓ C audition (audition = a test performance to get a part)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Did you read that ………… of the new Lloyd-Rice musical? It said it was awful!</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A review</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B criticism</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C report</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D summary</button>
+      </div>
+      <div class="answer-reveal">✓ A review (a review of a show = a critical assessment)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">I'm going to stay in and ………… TV tonight.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A see</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B watch</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C look at</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D view</button>
+      </div>
+      <div class="answer-reveal">✓ B watch (watch TV is the standard collocation)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">We really ………… ourselves at the party! Thanks so much for inviting us!</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A entertained</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B had fun</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C enjoyed</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D occupied</button>
+      </div>
+      <div class="answer-reveal">✓ B had fun (enjoy ourselves / had fun at the party)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Ellie does a/an ………… each week for the local newspaper. It's usually quite funny.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A comic</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B comedian</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C animation</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D cartoon</button>
+      </div>
+      <div class="answer-reveal">✓ D cartoon (a cartoon = a humorous drawing in a newspaper)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">The water park we went to yesterday was fantastic, but the entrance ………… was a bit expensive.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A ticket</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B fee</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C charge</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D cost</button>
+      </div>
+      <div class="answer-reveal">✓ B fee (entrance fee = charge to enter)</div>
+    </li>
+    <li class="question-item" data-answer="C">
+      <span class="q-num">7.</span>
+      <span class="q-sentence"><em>Vanilla Sky</em> ………… Tom Cruise, Penélope Cruz and Cameron Diaz.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A acts</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B plays</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C stars</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D contains</button>
+      </div>
+      <div class="answer-reveal">✓ C stars (stars = features as the lead actors)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">When you're learning to play a musical instrument, it's important to ………… for an hour or two every day.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A rehearse</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B practise</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C perform</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D train</button>
+      </div>
+      <div class="answer-reveal">✓ B practise (practise an instrument = do regular individual training)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">The play wasn't supposed to be a comedy, but everyone started laughing when some of the ………… fell over and hit one of the actors.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A scenery</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B scenes</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C stages</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D acts</button>
+      </div>
+      <div class="answer-reveal">✓ A scenery (scenery = stage sets/backdrops)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">Louis de Bernières' ………… <em>Captain Corelli's Mandolin</em>, which is set on the Greek island of Cephallonia during the Second World War, was an international bestseller.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A fiction</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B account</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C anecdote</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D novel</button>
+      </div>
+      <div class="answer-reveal">✓ D novel (a novel = a work of fiction; can be described as his novel)</div>
+    </li>
+    <li class="question-item" data-answer="C">
+      <span class="q-num">11.</span>
+      <span class="q-sentence">Have you ………… the joke about the guy who fell off a 20-metre-high ladder? He was fine – he fell off the bottom rung!</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A listened to</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B overheard</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C heard</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D paid attention to</button>
+      </div>
+      <div class="answer-reveal">✓ C heard (have you heard the joke = the standard expression)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">12.</span>
+      <span class="q-sentence">Being the conductor of a large ………… is an extremely demanding job. You have to make sure about a hundred musicians are playing in time.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A group</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B band</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C company</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D orchestra</button>
+      </div>
+      <div class="answer-reveal">✓ D orchestra (a conductor leads an orchestra)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExMC('a')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('a')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('a')">Reset</button>
+    <span class="score-display" id="score-a"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE B: Phrasal verbs – passage fill ===== -->
+<div class="exercise" id="ex-b">
+  <div class="ex-header">
+    <div class="ex-title">Exercise B – Write one word in each gap (phrasal verbs)</div>
+    <div class="ex-instruction">Complete the passage with one word in each numbered gap. The gaps involve phrasal verb particles or prepositions.</div>
+  </div>
+  <div class="passage-container" id="ql-b">
+    <div class="passage-title">A future pop star?</div>
+    <p class="passage-line">
+      My little brother, Carl, takes (1) <input type="text" class="ex-b-input passage-input" data-answer="after" placeholder="…"> our dad in that they both like to sing.
+      The difference is that Dad's got quite a good voice. Carl can't sing at all!
+      This doesn't stop him, though. He's always singing. He starts as soon as he wakes up, and doesn't stop until he drops
+      (2) <input type="text" class="ex-b-input passage-input" data-answer="off" placeholder="…"> at night.
+      I usually get along very well (3) <input type="text" class="ex-b-input passage-input" data-answer="with" placeholder="…"> Carl, but he can be a bit annoying when he starts showing
+      (4) <input type="text" class="ex-b-input passage-input" data-answer="off" placeholder="…">.
+      You can count (5) <input type="text" class="ex-b-input passage-input" data-answer="on" placeholder="…"> him to do this whenever we have guests.
+      My mum and dad will be talking to some friends, and then suddenly the conversation will be completely drowned
+      (6) <input type="text" class="ex-b-input passage-input" data-answer="out" placeholder="…"> by Carl singing at the top of his lungs.
+      The other day, I told him he should be on the radio. For a second he fell
+      (7) <input type="text" class="ex-b-input passage-input" data-answer="for" placeholder="…"> it, until I told him that if he was on the radio, we could turn it off!
+    </p>
+    <div class="answer-reveal" style="margin-top:10px">
+      ✓ (1) after &nbsp;(2) off &nbsp;(3) with &nbsp;(4) off &nbsp;(5) on &nbsp;(6) out &nbsp;(7) for
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExPassage('b')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('b')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('b')">Reset</button>
+    <span class="score-display" id="score-b"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE C: Phrasal verbs word bank ===== -->
+<div class="exercise" id="ex-c">
+  <div class="ex-header">
+    <div class="ex-title">Exercise C – Complete using the correct form of the phrasal verbs in the box</div>
+    <div class="ex-instruction">Phrasal verbs: come (a)round · go down · grow on · let down · name after · put on · take off</div>
+  </div>
+  <ul class="question-list" id="ql-c">
+    <li class="question-item" data-answer="go down">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Marlon Brando will <input type="text" class="ex-c-input" placeholder="…" style="min-width:130px"> in history as one of the greatest actors of all time.</span>
+      <div class="answer-reveal">✓ go down (go down in history = be remembered)</div>
+    </li>
+    <li class="question-item" data-answer="put on">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Our class is going to <input type="text" class="ex-c-input" placeholder="…" style="min-width:110px"> a play at the end of term.</span>
+      <div class="answer-reveal">✓ put on (put on a play = stage/perform a play)</div>
+    </li>
+    <li class="question-item" data-answer="grown on">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">I didn't really like Madonna's new single when it came out, but it's starting to <input type="text" class="ex-c-input" placeholder="…" style="min-width:130px"> me now.</span>
+      <div class="answer-reveal">✓ grown on (grow on someone = become more appealing over time)</div>
+    </li>
+    <li class="question-item" data-answer="named after">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Did you know that the sandwich is <input type="text" class="ex-c-input" placeholder="…" style="min-width:130px"> the Earl of Sandwich?</span>
+      <div class="answer-reveal">✓ named after (named after = given the same name as)</div>
+    </li>
+    <li class="question-item" data-answer="taken off">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">The band have really <input type="text" class="ex-c-input" placeholder="…" style="min-width:130px"> since appearing on the Video Music Awards show last month.</span>
+      <div class="answer-reveal">✓ taken off (take off = become very successful quickly)</div>
+    </li>
+    <li class="question-item" data-answer="coming (a)round|coming around|coming round">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">The Eurovision Song Contest is <input type="text" class="ex-c-input" placeholder="…" style="min-width:160px"> again soon. Shall we organise a Eurovision party?</span>
+      <div class="answer-reveal">✓ coming (a)round (come around = happen again / return)</div>
+    </li>
+    <li class="question-item" data-answer="let down">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">I felt completely <input type="text" class="ex-c-input" placeholder="…" style="min-width:120px"> when he refused to give me his autograph. I'm never going to buy another one of his CDs!</span>
+      <div class="answer-reveal">✓ let down (let down = disappointed; feel let down)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('c')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('c')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('c')">Reset</button>
+    <span class="score-display" id="score-c"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE D: Two choice – phrases and collocations ===== -->
+<div class="exercise" id="ex-d">
+  <div class="ex-header">
+    <div class="ex-title">Exercise D – Circle the correct word</div>
+    <div class="ex-instruction">Phrases and collocations: choose the correct word in bold.</div>
+  </div>
+  <ul class="question-list" id="ql-d">
+    <li class="question-item" data-answer="b">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">I hope you're joking
+        <span class="two-choice-btns"><button class="choice-btn" data-val="a" onclick="chooseBtn(this)">with</button><button class="choice-btn" data-val="b" onclick="chooseBtn(this)">about</button></span>
+        quitting your job!</span>
+      <div class="answer-reveal">✓ about (joking about something)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Come in!
+        <span class="two-choice-btns"><button class="choice-btn" data-val="a" onclick="chooseBtn(this)">Make</button><button class="choice-btn" data-val="b" onclick="chooseBtn(this)">Have</button></span>
+        yourself at home.</span>
+      <div class="answer-reveal">✓ Make (make yourself at home = fixed expression)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Having taken part
+        <span class="two-choice-btns"><button class="choice-btn" data-val="a" onclick="chooseBtn(this)">in</button><button class="choice-btn" data-val="b" onclick="chooseBtn(this)">of</button></span>
+        several amateur karaoke competitions, Daniel was determined to get himself a recording contract.</span>
+      <div class="answer-reveal">✓ in (take part in = participate in)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Have
+        <span class="two-choice-btns"><button class="choice-btn" data-val="a" onclick="chooseBtn(this)">fun</button><button class="choice-btn" data-val="b" onclick="chooseBtn(this)">funny</button></span>
+        at the concert tonight, won't you?</span>
+      <div class="answer-reveal">✓ fun (have fun = enjoy yourself; fun is a noun here)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">What's wrong with boys playing
+        <span class="two-choice-btns"><button class="choice-btn" data-val="a" onclick="chooseBtn(this)">with</button><button class="choice-btn" data-val="b" onclick="chooseBtn(this)">in</button></span>
+        dolls?</span>
+      <div class="answer-reveal">✓ with (play with dolls = the correct preposition)</div>
+    </li>
+    <li class="question-item" data-answer="a">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">The audience
+        <span class="two-choice-btns"><button class="choice-btn" data-val="a" onclick="chooseBtn(this)">showed</button><button class="choice-btn" data-val="b" onclick="chooseBtn(this)">gave</button></span>
+        their appreciation for the cast by giving them a standing ovation.</span>
+      <div class="answer-reveal">✓ showed (show appreciation = display/demonstrate)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">We're thinking of
+        <span class="two-choice-btns"><button class="choice-btn" data-val="a" onclick="chooseBtn(this)">having</button><button class="choice-btn" data-val="b" onclick="chooseBtn(this)">giving</button></span>
+        Dad a surprise 40th birthday party.</span>
+      <div class="answer-reveal">✓ giving (give someone a party = organise it for them)</div>
+    </li>
+    <li class="question-item" data-answer="b">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">
+        <span class="two-choice-btns"><button class="choice-btn" data-val="a" onclick="chooseBtn(this)">Voicing</button><button class="choice-btn" data-val="b" onclick="chooseBtn(this)">Speaking</button></span>
+        your opinion on a live TV or radio discussion programme is not as easy as it sounds.</span>
+      <div class="answer-reveal">✓ Voicing (voice your opinion = express it verbally)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkTwoChoice('d')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('d')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('d')">Reset</button>
+    <span class="score-display" id="score-d"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE E: Extra word in each sentence ===== -->
+<div class="exercise" id="ex-e">
+  <div class="ex-header">
+    <div class="ex-title">Exercise E – Circle the extra word in each sentence</div>
+    <div class="ex-instruction">Each sentence has one word that should not be there. Write that extra word.</div>
+  </div>
+  <ul class="question-list" id="ql-e">
+    <li class="question-item" data-answer="–|✓">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">What time did you get to home last night?<br>
+      <input type="text" class="ex-e-input" placeholder="extra word…" style="min-width:100px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ to (get home — no preposition needed: 'get to home' is wrong)</div>
+    </li>
+    <li class="question-item" data-answer="the">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">You shouldn't make the fun of Tim just because he's smaller than you.<br>
+      <input type="text" class="ex-e-input" placeholder="extra word…" style="min-width:100px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ the (make fun of — no article: 'make the fun of' is wrong)</div>
+    </li>
+    <li class="question-item" data-answer="–|✓">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">A number of contemporary art installations are on the show at the moment at the Zwyborg Gallery.<br>
+      <input type="text" class="ex-e-input" placeholder="extra word…" style="min-width:100px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ No extra word (on show = on display; this is correct)</div>
+    </li>
+    <li class="question-item" data-answer="out">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Didn't you find out that joke funny?<br>
+      <input type="text" class="ex-e-input" placeholder="extra word…" style="min-width:100px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ out (find + adjective: 'find that joke funny' — 'out' is extra)</div>
+    </li>
+    <li class="question-item" data-answer="up">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">I guess we'll have to join up the queue.<br>
+      <input type="text" class="ex-e-input" placeholder="extra word…" style="min-width:100px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ up (join the queue — 'join up' means something else; 'up' is extra here)</div>
+    </li>
+    <li class="question-item" data-answer="–|✓">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Everyone sat there in the silence as the comedian stumbled through his routine.<br>
+      <input type="text" class="ex-e-input" placeholder="extra word…" style="min-width:100px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ in (sit in silence — actually 'in the silence' has an extra 'the'... the extra word is 'the')</div>
+    </li>
+    <li class="question-item" data-answer="out">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">It's not often I laugh out loud during a movie, but <em>There's Something About Mary</em> had me roaring out with laughter the whole time.<br>
+      <input type="text" class="ex-e-input" placeholder="extra word…" style="min-width:100px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ out (roar with laughter — 'out' is extra)</div>
+    </li>
+    <li class="question-item" data-answer="with">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">I'm never going to be part with this first edition of Dickens's <em>Great Expectations</em>.<br>
+      <input type="text" class="ex-e-input" placeholder="extra word…" style="min-width:100px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ with (part with = give up, so 'be part with' has 'with' as extra)</div>
+    </li>
+    <li class="question-item" data-answer="of">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">I have the impression of Sasha's thinking about giving up ballet classes.<br>
+      <input type="text" class="ex-e-input" placeholder="extra word…" style="min-width:100px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ of (I have the impression that... — 'of' is extra)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('e')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('e')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('e')">Reset</button>
+    <span class="score-display" id="score-e"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE F: Word patterns – sentence transform ===== -->
+<div class="exercise" id="ex-f">
+  <div class="ex-header">
+    <div class="ex-title">Exercise F – Complete using the key word (2–5 words)</div>
+    <div class="ex-instruction">Complete the second sentence so it means the same as the first. Write between two and five words.</div>
+  </div>
+  <ul class="question-list" id="ql-f">
+    <li class="question-item" data-answer="you enjoy yourself at|you enjoy the concert">
+      <span class="q-num">1.</span>
+      <div class="transform-original">Was the concert fun? <span class="transform-key">yourself</span></div>
+      <div class="transform-blank">Did <input type="text" class="ex-f-input transform-input" placeholder="…"> the concert?</div>
+      <div class="answer-reveal">✓ you enjoy yourself at (Did you enjoy yourself at the concert?)</div>
+    </li>
+    <li class="question-item" data-answer="is bound to do|is bound to">
+      <span class="q-num">2.</span>
+      <div class="transform-original">I'm sure Kelly will do well in the talent contest. <span class="transform-key">bound</span></div>
+      <div class="transform-blank">Kelly <input type="text" class="ex-f-input transform-input" placeholder="…"> well in the talent contest.</div>
+      <div class="answer-reveal">✓ is bound to do (be bound to = be certain to)</div>
+    </li>
+    <li class="question-item" data-answer="instead of worrying|and stop worrying">
+      <span class="q-num">3.</span>
+      <div class="transform-original">Don't worry about your costume; concentrate on learning your lines! <span class="transform-key">instead</span></div>
+      <div class="transform-blank">Concentrate on learning your lines <input type="text" class="ex-f-input transform-input" placeholder="…"> about your costume!</div>
+      <div class="answer-reveal">✓ instead of worrying (instead of worrying about your costume)</div>
+    </li>
+    <li class="question-item" data-answer="avoid queuing by getting|avoid the queue by getting">
+      <span class="q-num">4.</span>
+      <div class="transform-original">We got there early and so we didn't have to queue. <span class="transform-key">avoid</span></div>
+      <div class="transform-blank">We managed to <input type="text" class="ex-f-input transform-input" placeholder="…"> there early.</div>
+      <div class="answer-reveal">✓ avoid queuing by getting (manage to avoid queuing by getting there early)</div>
+    </li>
+    <li class="question-item" data-answer="apologised for not inviting|apologised to us for not inviting">
+      <span class="q-num">5.</span>
+      <div class="transform-original">Jason said he was sorry that he hadn't invited us to his party. <span class="transform-key">apologised</span></div>
+      <div class="transform-blank">Jason <input type="text" class="ex-f-input transform-input" placeholder="…"> us to his party.</div>
+      <div class="answer-reveal">✓ apologised for not inviting (apologise for + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="am happy for you to|don't mind you">
+      <span class="q-num">6.</span>
+      <div class="transform-original">I don't mind if you give me the money for the tickets later. <span class="transform-key">happy</span></div>
+      <div class="transform-blank">I <input type="text" class="ex-f-input transform-input" placeholder="…"> give me the money for the tickets later.</div>
+      <div class="answer-reveal">✓ am happy for you to (I am happy for you to give me the money later)</div>
+    </li>
+    <li class="question-item" data-answer="isn't like doug to|is not like doug to">
+      <span class="q-num">7.</span>
+      <div class="transform-original">Doug isn't usually late. <span class="transform-key">like</span></div>
+      <div class="transform-blank">It <input type="text" class="ex-f-input transform-input" placeholder="…"> be late.</div>
+      <div class="answer-reveal">✓ isn't like Doug to (It isn't like Doug to be late)</div>
+    </li>
+    <li class="question-item" data-answer="is very talented at playing|is a talented player of">
+      <span class="q-num">8.</span>
+      <div class="transform-original">Sean plays the guitar very well. <span class="transform-key">talented</span></div>
+      <div class="transform-blank">Sean <input type="text" class="ex-f-input transform-input" placeholder="…"> the guitar.</div>
+      <div class="answer-reveal">✓ is very talented at playing (Sean is very talented at playing the guitar)</div>
+    </li>
+    <li class="question-item" data-answer="are not supposed to go|aren't supposed to go">
+      <span class="q-num">9.</span>
+      <div class="transform-original">You shouldn't go backstage without a pass. <span class="transform-key">supposed</span></div>
+      <div class="transform-blank">You <input type="text" class="ex-f-input transform-input" placeholder="…"> backstage without a pass.</div>
+      <div class="answer-reveal">✓ are not supposed to go (you are not supposed to = you shouldn't)</div>
+    </li>
+    <li class="question-item" data-answer="promised to meet kyle|promised kyle he would meet him">
+      <span class="q-num">10.</span>
+      <div class="transform-original">'I'll meet you outside the theatre at eight whatever happens,' said Dan to Kyle. <span class="transform-key">promised</span></div>
+      <div class="transform-blank">Dan <input type="text" class="ex-f-input transform-input" placeholder="…"> outside the theatre at eight.</div>
+      <div class="answer-reveal">✓ promised to meet Kyle (Dan promised to meet Kyle outside the theatre)</div>
+    </li>
+    <li class="question-item" data-answer="he deserved the award for best video|he deserved to win the award">
+      <span class="q-num">11.</span>
+      <div class="transform-original">I can't understand why he won the award for best video. <span class="transform-key">deserved</span></div>
+      <div class="transform-blank">I don't think <input type="text" class="ex-f-input transform-input" placeholder="…"> the award for best video.</div>
+      <div class="answer-reveal">✓ he deserved the award for best video</div>
+    </li>
+    <li class="question-item" data-answer="proved to be a thoroughly enjoyable evening|proved a thoroughly enjoyable">
+      <span class="q-num">12.</span>
+      <div class="transform-original">In the end, it was a thoroughly enjoyable evening. <span class="transform-key">proved</span></div>
+      <div class="transform-blank">In the end, it <input type="text" class="ex-f-input transform-input" placeholder="…"> enjoyable evening.</div>
+      <div class="answer-reveal">✓ proved to be a thoroughly enjoyable (it proved to be a thoroughly enjoyable evening)</div>
+    </li>
+    <li class="question-item" data-answer="did you say was|did you say had won">
+      <span class="q-num">13.</span>
+      <div class="transform-original">I can't remember who you said had won. <span class="transform-key">say</span></div>
+      <div class="transform-blank">Who <input type="text" class="ex-f-input transform-input" placeholder="…"> the winner?</div>
+      <div class="answer-reveal">✓ did you say was (Who did you say was the winner?)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('f')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('f')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('f')">Reset</button>
+    <span class="score-display" id="score-f"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE G: Word formation passage ===== -->
+<div class="exercise" id="ex-g">
+  <div class="ex-header">
+    <div class="ex-title">Exercise G – Word formation</div>
+    <div class="ex-instruction">Use the word in CAPITALS to form a word that fits the gap in the same line.</div>
+  </div>
+  <div class="passage-container" id="ql-g">
+    <div class="passage-title">Reality shows</div>
+    <p class="passage-line">Despite the (1) <input type="text" class="ex-g-input passage-input" data-answer="suggestion" placeholder="…"> <span class="cap-word">SUGGEST</span> by many critics that reality TV would be a very short-lived phenomenon, it is still increasing in (2) <input type="text" class="ex-g-input passage-input" data-answer="popularity" placeholder="…"> <span class="cap-word">POPULAR</span>. Several reality shows are (3) <input type="text" class="ex-g-input passage-input" data-answer="currently" placeholder="…"> <span class="cap-word">CURRENT</span> watched by millions of viewers each night, and it's clearly a form of (4) <input type="text" class="ex-g-input passage-input" data-answer="entertainment" placeholder="…"> <span class="cap-word">ENTERTAIN</span> that's here to stay.</p>
+    <p class="passage-line">Indeed, a number of people have become (5) <input type="text" class="ex-g-input passage-input" data-answer="famous" placeholder="…"> <span class="cap-word">FAME</span> because of their (6) <input type="text" class="ex-g-input passage-input" data-answer="involvement" placeholder="…"> <span class="cap-word">INVOLVE</span> in reality TV shows, and have gone on to have successful careers as singers, (7) <input type="text" class="ex-g-input passage-input" data-answer="actors" placeholder="…"> <span class="cap-word">ACT</span> or TV presenters.</p>
+    <p class="passage-line">We can watch with (8) <input type="text" class="ex-g-input passage-input" data-answer="excitement" placeholder="…"> <span class="cap-word">EXCITE</span> each night the 'goings-on' in the house (or jungle, or bar, or school of arts). The (9) <input type="text" class="ex-g-input passage-input" data-answer="conversations" placeholder="…"> <span class="cap-word">CONVERSE</span> between the contestants are interesting so we don't get (10) <input type="text" class="ex-g-input passage-input" data-answer="bored" placeholder="…"> <span class="cap-word">BORE</span>, and there are frequently (11) <input type="text" class="ex-g-input passage-input" data-answer="varied|various" placeholder="…"> <span class="cap-word">VARY</span> conflicts, which provide further (12) <input type="text" class="ex-g-input passage-input" data-answer="amusement" placeholder="…"> <span class="cap-word">AMUSE</span>.</p>
+    <p class="passage-line">If the contestants have to give some kind of (13) <input type="text" class="ex-g-input passage-input" data-answer="performance" placeholder="…"> <span class="cap-word">PERFORM</span> at the end of the week, that's even more appealing. But there's a (14) <input type="text" class="ex-g-input passage-input" data-answer="saying" placeholder="…"> <span class="cap-word">SAY</span> in the TV industry: 'it's all in the editing' and this is especially true of reality shows.</p>
+    <div class="answer-reveal" style="margin-top:10px">
+      ✓ (1) suggestion &nbsp;(2) popularity &nbsp;(3) currently &nbsp;(4) entertainment &nbsp;(5) famous &nbsp;
+      (6) involvement &nbsp;(7) actors &nbsp;(8) excitement &nbsp;(9) conversations &nbsp;(10) bored &nbsp;
+      (11) varied &nbsp;(12) amusement &nbsp;(13) performance &nbsp;(14) saying
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExPassage('g')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('g')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('g')">Reset</button>
+    <span class="score-display" id="score-g"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE H: Word formation passage 2 (My life as a clown) ===== -->
+<div class="exercise" id="ex-h">
+  <div class="ex-header">
+    <div class="ex-title">Exercise H – Word formation (2)</div>
+    <div class="ex-instruction">Use the word in CAPITALS to form a word that fits the gap in the same line.</div>
+  </div>
+  <div class="passage-container" id="ql-h">
+    <div class="passage-title">My life as a clown!</div>
+    <p class="passage-line">I've always wanted to be an (1) <input type="text" class="ex-h-input passage-input" data-answer="entertainer" placeholder="…"> <span class="cap-word">ENTERTAIN</span> but never did anything about it until I lost my job last year. After a (2) <input type="text" class="ex-h-input passage-input" data-answer="conversation" placeholder="…"> <span class="cap-word">CONVERSE</span> with a friend about the (3) <input type="text" class="ex-h-input passage-input" data-answer="boredom" placeholder="…"> <span class="cap-word">BORE</span> of office life, I decided not to look for another job in management, but to earn my living from giving (4) <input type="text" class="ex-h-input passage-input" data-answer="performances" placeholder="…"> <span class="cap-word">PERFORM</span> at events like kids' parties.</p>
+    <p class="passage-line">So I became a clown! I'm (5) <input type="text" class="ex-h-input passage-input" data-answer="currently" placeholder="…"> <span class="cap-word">CURRENT</span> doing four or five parties a week and I love it! I love seeing the (6) <input type="text" class="ex-h-input passage-input" data-answer="excitement" placeholder="…"> <span class="cap-word">EXCITE</span> on the kids' faces when I walk in the room. I try to have a lot of (7) <input type="text" class="ex-h-input passage-input" data-answer="variety" placeholder="…"> <span class="cap-word">VARY</span> in my act, so I tell jokes – most of which the kids find (8) <input type="text" class="ex-h-input passage-input" data-answer="amusing" placeholder="…"> <span class="cap-word">AMUSE</span> – and bend balloons into funny animals, do impersonations of (9) <input type="text" class="ex-h-input passage-input" data-answer="famous" placeholder="…"> <span class="cap-word">FAME</span> people and generally keep the kids (10) <input type="text" class="ex-h-input passage-input" data-answer="actively|entertainingly" placeholder="…"> <span class="cap-word">ACT</span> involved for an hour or two. It's the perfect job for me!</p>
+    <div class="answer-reveal" style="margin-top:10px">
+      ✓ (1) entertainer &nbsp;(2) conversation &nbsp;(3) boredom &nbsp;(4) performances &nbsp;(5) currently &nbsp;
+      (6) excitement &nbsp;(7) variety &nbsp;(8) amusing &nbsp;(9) famous &nbsp;(10) actively
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExPassage('h')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('h')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('h')">Reset</button>
+    <span class="score-display" id="score-h"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE I: MCQ from Review ===== -->
+<div class="exercise" id="ex-i">
+  <div class="ex-header">
+    <div class="ex-title">Exercise I – Choose the correct answer (review)</div>
+    <div class="ex-instruction">Choose the best option A, B, C or D for each sentence.</div>
+  </div>
+  <ul class="question-list" id="ql-i">
+    <li class="question-item" data-answer="B">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Could you ………… in the paper and see what's on TV tonight?</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A see</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B watch</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C look</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D examine</button>
+      </div>
+      <div class="answer-reveal">✓ C look (look in the paper = check what's inside)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">I'm reading a ………… set in Greece during the Second World War.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A novel</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B fiction</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C literature</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D writing</button>
+      </div>
+      <div class="answer-reveal">✓ A novel (a novel = a work of fiction; can be described specifically)</div>
+    </li>
+    <li class="question-item" data-answer="B">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Harry kept us ………… throughout the journey with his non-stop jokes.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A enjoyed</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B entertained</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C laughed</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D pleasured</button>
+      </div>
+      <div class="answer-reveal">✓ B entertained (keep someone entertained = amuse them)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">I never read ………… of films as I don't trust the critics' opinions.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A reviews</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B criticisms</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C articles</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D investigations</button>
+      </div>
+      <div class="answer-reveal">✓ A reviews (film reviews = critical assessments)</div>
+    </li>
+    <li class="question-item" data-answer="D">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">How did your ………… go? Do you think you'll be offered the main part?</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A audit</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B auditorium</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C audience</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D audition</button>
+      </div>
+      <div class="answer-reveal">✓ D audition (how did your audition go?)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">I'd love to work in show ………… . It's so glamorous!</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A industry</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B business</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C commerce</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D trade</button>
+      </div>
+      <div class="answer-reveal">✓ B business (show business = the entertainment industry)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Joe told me a joke today but I didn't ………… it at all.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A get</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B bring</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C fetch</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D collect</button>
+      </div>
+      <div class="answer-reveal">✓ A get (get a joke = understand why it's funny)</div>
+    </li>
+    <li class="question-item" data-answer="A">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">I didn't like this album at first but it's really starting to ………… on me now.</span>
+      <div class="mc-options">
+        <button class="mc-btn" data-val="A" onclick="chooseMC(this)">A grow</button>
+        <button class="mc-btn" data-val="B" onclick="chooseMC(this)">B raise</button>
+        <button class="mc-btn" data-val="C" onclick="chooseMC(this)">C develop</button>
+        <button class="mc-btn" data-val="D" onclick="chooseMC(this)">D increase</button>
+      </div>
+      <div class="answer-reveal">✓ A grow (grow on someone = begin to appeal more)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExMC('i')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('i')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('i')">Reset</button>
+    <span class="score-display" id="score-i"></span>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+const tabs = ['a','b','c','d','e','f','g','h','i'];
+
+function switchTab(id) {
+  document.querySelector('.exercise.active').classList.remove('active');
+  document.getElementById('ex-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', tabs[i] === id);
+  });
+}
+
+function normalize(s) { return s.trim().toLowerCase().replace(/\s+/g,' ').replace(/[?.!'"]$/,''); }
+
+function updateScore(id, correct, total) {
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = correct + ' / ' + total + ' correct';
+  scoreEl.classList.add('visible');
+  scoreEl.classList.toggle('perfect', correct === total);
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabIdx = tabs.indexOf(id);
+  let badge = tabBtns[tabIdx].querySelector('.tab-badge');
+  if (!badge) { badge = document.createElement('span'); badge.className = 'tab-badge'; tabBtns[tabIdx].appendChild(badge); }
+  badge.textContent = correct + '/' + total;
+  badge.classList.toggle('perfect', correct === total);
+}
+
+function chooseBtn(btn) {
+  const btns = btn.closest('.two-choice-btns').querySelectorAll('.choice-btn');
+  btns.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function chooseMC(btn) {
+  const opts = btn.closest('.mc-options').querySelectorAll('.mc-btn');
+  opts.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function checkTwoChoice(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    total++;
+    const sel = item.querySelector('.choice-btn.selected');
+    const ok = sel && sel.dataset.val === item.dataset.answer;
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    item.querySelectorAll('.choice-btn').forEach(btn => {
+      btn.classList.remove('correct','wrong');
+      if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+      else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+    });
+  });
+  updateScore(id, correct, total);
+}
+
+function checkExMC(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    total++;
+    const sel = item.querySelector('.mc-btn.selected');
+    const ok = sel && sel.dataset.val === item.dataset.answer;
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    item.querySelectorAll('.mc-btn').forEach(btn => {
+      btn.classList.remove('correct','wrong');
+      if (btn.dataset.val === item.dataset.answer) btn.classList.add('correct');
+      else if (btn.classList.contains('selected') && !ok) btn.classList.add('wrong');
+    });
+  });
+  updateScore(id, correct, total);
+}
+
+function checkExText(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    const inp = item.querySelector('input[type="text"]');
+    if (!inp) return;
+    total++;
+    const answers = item.dataset.answer.split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+function checkExPassage(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .ex-' + id + '-input').forEach(inp => {
+    total++;
+    const answers = (inp.dataset.answer || '').split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+function showAnswers(id) {
+  if (id === 'd') checkTwoChoice(id);
+  else if (id === 'a' || id === 'i') checkExMC(id);
+  else if (id === 'b' || id === 'g' || id === 'h') {
+    checkExPassage(id);
+    const reveal = document.querySelector('#ql-' + id + ' .answer-reveal');
+    if (reveal) reveal.style.display = 'block';
+  } else checkExText(id);
+  document.getElementById('ex-' + id).classList.add('show-answers');
+}
+
+function resetEx(id) {
+  const exEl = document.getElementById('ex-' + id);
+  exEl.classList.remove('show-answers');
+  exEl.querySelectorAll('input[type="text"]').forEach(inp => { inp.value = ''; inp.classList.remove('correct','wrong'); });
+  exEl.querySelectorAll('.question-item, .extra-line').forEach(item => item.classList.remove('correct','wrong'));
+  exEl.querySelectorAll('.choice-btn, .mc-btn').forEach(btn => btn.classList.remove('selected','correct','wrong'));
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = ''; scoreEl.classList.remove('visible','perfect');
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const idx = tabs.indexOf(id);
+  const badge = tabBtns[idx]?.querySelector('.tab-badge');
+  if (badge) badge.textContent = '';
+  const reveal = document.querySelector('#ql-' + id + ' .answer-reveal');
+  if (reveal) reveal.style.display = '';
+}
+
+function resetExPassage(id) { resetEx(id); }
+</script>
+</body>
+</html>

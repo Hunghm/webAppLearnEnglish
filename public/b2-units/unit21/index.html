@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 21 – Grammar Exercises</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #333; min-height: 100vh; }
+
+  .header { background: #1565C0; color: white; padding: 16px 20px; text-align: center; }
+  .header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+  .header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+
+  .tab-bar { display: flex; background: #1976D2; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 1; min-width: 44px; padding: 12px 6px; border: none; background: transparent;
+    color: rgba(255,255,255,0.7); font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap;
+  }
+  .tab-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+  .tab-btn.active { color: white; border-bottom-color: #FFD600; }
+  .tab-badge {
+    display: inline-block; font-size: 0.65rem; background: rgba(255,255,255,0.25);
+    border-radius: 10px; padding: 1px 5px; margin-left: 4px; vertical-align: middle;
+  }
+  .tab-badge.perfect { background: #4CAF50; }
+
+  .content { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+  .exercise { display: none; }
+  .exercise.active { display: block; }
+
+  .ex-header { margin-bottom: 16px; }
+  .ex-title { font-size: 1.1rem; font-weight: 700; color: #1565C0; margin-bottom: 4px; }
+  .ex-instruction {
+    font-size: 0.9rem; color: #555; background: #E3F2FD; border-left: 4px solid #2196F3;
+    padding: 8px 12px; border-radius: 0 6px 6px 0;
+  }
+
+  .question-list { list-style: none; }
+  .question-item {
+    background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: all .2s;
+  }
+  .question-item.correct { border-left: 4px solid #4CAF50; background: #F1F8E9; }
+  .question-item.wrong { border-left: 4px solid #F44336; background: #FFF5F5; }
+
+  .q-num { font-weight: 700; color: #1976D2; margin-right: 6px; }
+  .q-sentence { line-height: 1.8; }
+
+  input[type="text"] {
+    border: 2px solid #BBDEFB; border-radius: 6px; padding: 5px 10px;
+    font-size: 0.95rem; outline: none; background: #FAFAFA; transition: border .2s;
+    min-width: 100px;
+  }
+  input[type="text"]:focus { border-color: #2196F3; background: white; }
+  input[type="text"].correct { border-color: #4CAF50; background: #F1F8E9; color: #2E7D32; }
+  input[type="text"].wrong { border-color: #F44336; background: #FFF5F5; color: #C62828; }
+
+  /* Two Choice */
+  .two-choice-btns { display: inline-flex; gap: 8px; margin-left: 6px; }
+  .choice-btn {
+    border: 2px solid #90CAF9; background: white; border-radius: 6px;
+    padding: 4px 14px; font-size: 0.9rem; cursor: pointer; transition: all .2s; color: #1565C0;
+  }
+  .choice-btn:hover { background: #E3F2FD; }
+  .choice-btn.selected { background: #1976D2; color: white; border-color: #1976D2; }
+  .choice-btn.correct { background: #4CAF50 !important; color: white; border-color: #4CAF50; }
+  .choice-btn.wrong { background: #F44336 !important; color: white; border-color: #F44336; }
+
+  /* Passage */
+  .passage-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .passage-line { margin-bottom: 12px; line-height: 2.1; }
+  .passage-title { font-style: italic; font-weight: 700; font-size: 1.05rem; text-align: center; color: #1565C0; margin-bottom: 12px; }
+  .passage-input { min-width: 80px; width: 90px; }
+
+  /* Word bank */
+  .word-bank { background: #E8F5E9; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; }
+  .word-bank-label { font-size: 0.8rem; color: #555; margin-bottom: 6px; }
+  .word-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .word-chip {
+    background: white; border: 2px solid #A5D6A7; border-radius: 20px;
+    padding: 3px 12px; font-size: 0.88rem; cursor: pointer; transition: all .2s;
+  }
+  .word-chip:hover { background: #C8E6C9; }
+  .word-chip.used { opacity: 0.4; text-decoration: line-through; cursor: default; }
+
+  /* Extra word */
+  .extra-word-container { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .extra-line { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; padding: 8px; background: #f9f9f9; border-radius: 6px; }
+  .extra-line-num { font-weight: 700; color: #1976D2; min-width: 20px; padding-top: 6px; }
+  .extra-line-input { min-width: 80px; width: 90px; }
+  .extra-line-text { flex: 1; line-height: 1.6; font-size: 0.9rem; }
+  .extra-line.correct { background: #F1F8E9; border-left: 3px solid #4CAF50; }
+  .extra-line.wrong { background: #FFF5F5; border-left: 3px solid #F44336; }
+
+  /* Sentence transform */
+  .transform-original { margin-bottom: 6px; color: #555; font-size: 0.92rem; }
+  .transform-key { display: inline-block; background: #FFF9C4; border: 1px solid #F9A825; border-radius: 4px; padding: 1px 8px; font-weight: 700; color: #5D4037; font-size: 0.88rem; margin: 0 6px; }
+  .transform-blank { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+  .transform-input { min-width: 200px; flex: 1; }
+
+  /* Answer reveal */
+  .answer-reveal { font-size: 0.82rem; color: #388E3C; margin-top: 4px; display: none; }
+  .show-answers .answer-reveal { display: block; }
+
+  /* Action buttons */
+  .action-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+  .btn { padding: 10px 22px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-check { background: #2196F3; color: white; }
+  .btn-check:hover { background: #1976D2; }
+  .btn-reset { background: #FF9800; color: white; }
+  .btn-reset:hover { background: #F57C00; }
+  .btn-show { background: #9C27B0; color: white; }
+  .btn-show:hover { background: #7B1FA2; }
+
+  .score-display {
+    font-size: 1rem; font-weight: 700; padding: 8px 16px; border-radius: 8px;
+    background: #E8F5E9; color: #2E7D32; display: none;
+  }
+  .score-display.visible { display: inline-block; }
+  .score-display.perfect { background: #4CAF50; color: white; }
+
+  @media (max-width: 600px) {
+    .tab-btn { font-size: 0.8rem; padding: 10px 4px; }
+    .content { padding: 12px 10px 50px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Unit 21 – Grammar</h1>
+  <p>Reported speech / reported questions / reporting verbs · 10 exercises · Click a tab to start</p>
+</div>
+
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" onclick="switchTab('a')">A</button>
+  <button class="tab-btn" onclick="switchTab('b')">B</button>
+  <button class="tab-btn" onclick="switchTab('c')">C</button>
+  <button class="tab-btn" onclick="switchTab('d')">D</button>
+  <button class="tab-btn" onclick="switchTab('e')">E</button>
+  <button class="tab-btn" onclick="switchTab('f')">F</button>
+  <button class="tab-btn" onclick="switchTab('g')">G</button>
+  <button class="tab-btn" onclick="switchTab('h')">H</button>
+  <button class="tab-btn" onclick="switchTab('i')">I</button>
+  <button class="tab-btn" onclick="switchTab('j')">J</button>
+</div>
+
+<div class="content">
+
+<!-- ===== EXERCISE A: Verb form in reported speech ===== -->
+<div class="exercise active" id="ex-a">
+  <div class="ex-header">
+    <div class="ex-title">Exercise A – Complete using the correct form of the verb in brackets</div>
+    <div class="ex-instruction">Apply reported speech tense backshift rules to complete each sentence.</div>
+  </div>
+  <ul class="question-list" id="ql-a">
+    <li class="question-item" data-answer="didn't want|would not want|wouldn't want">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Stewart said he <input type="text" class="ex-a-input" placeholder="…" style="min-width:140px"> (not / want) any dessert as he was full.</span>
+      <div class="answer-reveal">✓ didn't want (say → said; present simple → past simple in backshift)</div>
+    </li>
+    <li class="question-item" data-answer="hadn't seen">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Derek said that he and Belinda <input type="text" class="ex-a-input" placeholder="…" style="min-width:140px"> (see) Adam recently.</span>
+      <div class="answer-reveal">✓ hadn't seen (present perfect → past perfect in backshift)</div>
+    </li>
+    <li class="question-item" data-answer="was giving">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">When I called, Susie said she <input type="text" class="ex-a-input" placeholder="…" style="min-width:130px"> (give) the dog a bath so she asked me to phone back in half an hour.</span>
+      <div class="answer-reveal">✓ was giving (present continuous → past continuous)</div>
+    </li>
+    <li class="question-item" data-answer="had been trying">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Marcus said he <input type="text" class="ex-a-input" placeholder="…" style="min-width:160px"> (try) to find a flat for ages before he finally found one he liked.</span>
+      <div class="answer-reveal">✓ had been trying (present perfect continuous → past perfect continuous)</div>
+    </li>
+    <li class="question-item" data-answer="has decided|decided">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Debbie says she <input type="text" class="ex-a-input" placeholder="…" style="min-width:130px"> (decide) to quit her job but I don't believe her.</span>
+      <div class="answer-reveal">✓ has decided (says = present tense reporting verb; no backshift needed)</div>
+    </li>
+    <li class="question-item" data-answer="was|is">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Our English teacher said that Shakespeare <input type="text" class="ex-a-input" placeholder="…" style="min-width:80px"> (be) probably the greatest writer in the English language ever.</span>
+      <div class="answer-reveal">✓ was (general truth/historical fact; backshift to past)</div>
+    </li>
+    <li class="question-item" data-answer="were going to">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Richard said he and Patricia <input type="text" class="ex-a-input" placeholder="…" style="min-width:150px"> (be going to) invite her parents for the weekend, but I don't know if they went or not.</span>
+      <div class="answer-reveal">✓ were going to (be going to → were going to in backshift)</div>
+    </li>
+    <li class="question-item" data-answer="loved|really loved">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Charlotte said last night that she really <input type="text" class="ex-a-input" placeholder="…" style="min-width:100px"> (love) me, even if she doesn't always show it.</span>
+      <div class="answer-reveal">✓ loved (present simple → past simple in backshift)</div>
+    </li>
+    <li class="question-item" data-answer="had asked">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">Ollie said to Linda that he <input type="text" class="ex-a-input" placeholder="…" style="min-width:130px"> (ask) me to be his best man on Monday but in fact he asked Grant.</span>
+      <div class="answer-reveal">✓ had asked (past simple → past perfect in backshift)</div>
+    </li>
+    <li class="question-item" data-answer="had been brought up">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">Pete told Francis he <input type="text" class="ex-a-input" placeholder="…" style="min-width:190px"> (bring up) by his grandparents but in fact he hadn't at all.</span>
+      <div class="answer-reveal">✓ had been brought up (past passive → past perfect passive in backshift)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('a')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('a')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('a')">Reset</button>
+    <span class="score-display" id="score-a"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE B: Tick or correct modal in reported speech ===== -->
+<div class="exercise" id="ex-b">
+  <div class="ex-header">
+    <div class="ex-title">Exercise B – Tick (✓) if correct; rewrite if incorrect</div>
+    <div class="ex-instruction">If the bold word/phrase is correct in reported speech, write ✓. If incorrect, write the correct word(s).</div>
+  </div>
+  <ul class="question-list" id="ql-b">
+    <li class="question-item" data-answer="could">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">On Monday, my boss said I <strong>can</strong> take Wednesday off, but he changed his mind today for some reason.<br>
+      <input type="text" class="ex-b-input" placeholder="✓ or correction…" style="min-width:150px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ could (can → could in backshift)</div>
+    </li>
+    <li class="question-item" data-answer="would">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">The receptionist said that if I wanted to have breakfast, I <strong>will</strong> have to pay extra.<br>
+      <input type="text" class="ex-b-input" placeholder="✓ or correction…" style="min-width:150px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ would (will → would in backshift)</div>
+    </li>
+    <li class="question-item" data-answer="✓|might">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">A lot of people at school have said that Andrew <strong>may</strong> get the lead in the school play.<br>
+      <input type="text" class="ex-b-input" placeholder="✓ or correction…" style="min-width:150px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ Correct (may can remain in reported speech after present tense reporting verb)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Colin said <strong>he'd been planning</strong> to ask Rich to move in with him for ages.<br>
+      <input type="text" class="ex-b-input" placeholder="✓ or correction…" style="min-width:150px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ Correct (he'd been planning = past perfect continuous, correct backshift)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Lucy says she <strong>would</strong> let us know as soon as she gets the tickets.<br>
+      <input type="text" class="ex-b-input" placeholder="✓ or correction…" style="min-width:150px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ Correct (says = present; would is correct here for future-in-past intention)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">Jordan said that she <strong>has to</strong> get up at five thirty every morning.<br>
+      <input type="text" class="ex-b-input" placeholder="✓ or correction…" style="min-width:150px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ had to (has to → had to in backshift) — actually correction: had to</div>
+    </li>
+    <li class="question-item" data-answer="might">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Before he got his results, Philip said that he <strong>may</strong> have to retake some exams, but now he knows he doesn't have to.<br>
+      <input type="text" class="ex-b-input" placeholder="✓ or correction…" style="min-width:150px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ might (may → might in backshift with past reporting verb)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Did Mrs Morgan say why <strong>she'd called</strong>?<br>
+      <input type="text" class="ex-b-input" placeholder="✓ or correction…" style="min-width:150px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ Correct (she'd called = past perfect in indirect question)</div>
+    </li>
+    <li class="question-item" data-answer="✓">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">Paul said he <strong>should</strong> be here tomorrow night at about nine.<br>
+      <input type="text" class="ex-b-input" placeholder="✓ or correction…" style="min-width:150px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ Correct (should does not change in backshift)</div>
+    </li>
+    <li class="question-item" data-answer="had to">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">Dan said he <strong>must</strong> drive to Liverpool that night, but apparently he didn't go in the end.<br>
+      <input type="text" class="ex-b-input" placeholder="✓ or correction…" style="min-width:150px;margin-top:6px"></span>
+      <div class="answer-reveal">✓ had to (must → had to in backshift for obligation)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('b')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('b')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('b')">Reset</button>
+    <span class="score-display" id="score-b"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE C: Write one word in each gap ===== -->
+<div class="exercise" id="ex-c">
+  <div class="ex-header">
+    <div class="ex-title">Exercise C – Write one word in each gap</div>
+    <div class="ex-instruction">Complete the reported speech sentences. Write one word in each gap.</div>
+  </div>
+  <ul class="question-list" id="ql-c">
+    <li class="question-item" data-answer="her">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">Tonya said <input type="text" class="ex-c-input" placeholder="…" style="min-width:80px"> TV was broken and asked if she could come around to watch the football with us.</span>
+      <div class="answer-reveal">✓ her (her TV was broken — possessive pronoun changed from my)</div>
+    </li>
+    <li class="question-item" data-answer="those|the">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">Your father said that <input type="text" class="ex-c-input" placeholder="…" style="min-width:80px"> old newspapers in the garage might be collector's items.</span>
+      <div class="answer-reveal">✓ those / the (those or the — demonstrative/article changed from 'these')</div>
+    </li>
+    <li class="question-item" data-answer="them">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">Dana told the kids she had no option but to punish <input type="text" class="ex-c-input" placeholder="…" style="min-width:80px">.</span>
+      <div class="answer-reveal">✓ them (object pronoun: told the kids she had to punish them)</div>
+    </li>
+    <li class="question-item" data-answer="they">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Wendy said to thank you for the tomatoes and that <input type="text" class="ex-c-input" placeholder="…" style="min-width:80px"> were the tastiest ones she'd ever eaten.</span>
+      <div class="answer-reveal">✓ they (they were = reported speech subject pronoun)</div>
+    </li>
+    <li class="question-item" data-answer="it">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Before he left, Carsen told his hosts that <input type="text" class="ex-c-input" placeholder="…" style="min-width:80px"> had been a lovely evening.</span>
+      <div class="answer-reveal">✓ it (it had been a lovely evening)</div>
+    </li>
+    <li class="question-item" data-answer="them">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">As soon as he saw the jeans, Bob told us that he had to have <input type="text" class="ex-c-input" placeholder="…" style="min-width:80px">.</span>
+      <div class="answer-reveal">✓ them (he had to have them — object pronoun)</div>
+    </li>
+    <li class="question-item" data-answer="their">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">The Pattersons said that <input type="text" class="ex-c-input" placeholder="…" style="min-width:80px"> eldest daughter has just got a job working at the White House.</span>
+      <div class="answer-reveal">✓ their (their eldest daughter — possessive changed from 'our')</div>
+    </li>
+    <li class="question-item" data-answer="that">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Grandpa said that <input type="text" class="ex-c-input" placeholder="…" style="min-width:80px"> picture over there was painted by his great-grandfather.</span>
+      <div class="answer-reveal">✓ that (that picture — demonstrative changed from 'this')</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('c')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('c')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('c')">Reset</button>
+    <span class="score-display" id="score-c"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE D: Sentence transformation (key word) ===== -->
+<div class="exercise" id="ex-d">
+  <div class="ex-header">
+    <div class="ex-title">Exercise D – Complete using the key word (2–5 words)</div>
+    <div class="ex-instruction">Complete the second sentence using the word in bold so it has a similar meaning to the first. Write between two and five words.</div>
+  </div>
+  <ul class="question-list" id="ql-d">
+    <li class="question-item" data-answer="they would be travelling|he would be travelling">
+      <span class="q-num">1.</span>
+      <div class="transform-original">'We'll be travelling round Europe next month,' said Jerry. <span class="transform-key">following</span></div>
+      <div class="transform-blank">
+        Jerry said that <input type="text" class="ex-d-input transform-input" placeholder="…"> be travelling round Europe.
+      </div>
+      <div class="answer-reveal">✓ they would be travelling (following month = the next month)</div>
+    </li>
+    <li class="question-item" data-answer="she had had evan and christie over|she had invited evan and christie">
+      <span class="q-num">2.</span>
+      <div class="transform-original">'I had Evan and Christie over for dinner last night,' said Liz. <span class="transform-key">before</span></div>
+      <div class="transform-blank">
+        Liz said that <input type="text" class="ex-d-input transform-input" placeholder="…"> had Evan and Christie over for dinner.
+      </div>
+      <div class="answer-reveal">✓ she had had Evan and Christie over (the night before = last night)</div>
+    </li>
+    <li class="question-item" data-answer="come there two days before and then suddenly">
+      <span class="q-num">3.</span>
+      <div class="transform-original">'Daz came here two days ago and then suddenly left,' said Barry. <span class="transform-key">gone</span></div>
+      <div class="transform-blank">
+        Barry said that Daz had <input type="text" class="ex-d-input transform-input" placeholder="…"> and then suddenly left.
+      </div>
+      <div class="answer-reveal">✓ come there two days before and then suddenly (ago → before in backshift)</div>
+    </li>
+    <li class="question-item" data-answer="they were starting their yearly diet|they would be starting their yearly diet">
+      <span class="q-num">4.</span>
+      <div class="transform-original">'We're going on our yearly diet tomorrow,' said Jessie and Sandy together. <span class="transform-key">starting</span></div>
+      <div class="transform-blank">
+        Jessie and Sandy said together that <input type="text" class="ex-d-input transform-input" placeholder="…"> yearly diet the next day.
+      </div>
+      <div class="answer-reveal">✓ they were starting their yearly diet (tomorrow → the next day)</div>
+    </li>
+    <li class="question-item" data-answer="that he could pick them|he could pick them">
+      <span class="q-num">5.</span>
+      <div class="transform-original">'I can pick you two boys up from school this afternoon,' said their father to George and Kevin. <span class="transform-key">that</span></div>
+      <div class="transform-blank">
+        George and Kevin's father told his sons <input type="text" class="ex-d-input transform-input" placeholder="…"> up from school that afternoon.
+      </div>
+      <div class="answer-reveal">✓ that he could pick them (can → could; you → them)</div>
+    </li>
+    <li class="question-item" data-answer="was going to buy them|was going to get them">
+      <span class="q-num">6.</span>
+      <div class="transform-original">'I'll buy these as they're so cheap!' said Toby. <span class="transform-key">going</span></div>
+      <div class="transform-blank">
+        Toby said he <input type="text" class="ex-d-input transform-input" placeholder="…"> as they were so cheap.
+      </div>
+      <div class="answer-reveal">✓ was going to buy them (will → was going to; these → them)</div>
+    </li>
+    <li class="question-item" data-answer="told him to study harder|asked him to study harder">
+      <span class="q-num">7.</span>
+      <div class="transform-original">'You must study harder, Dave,' said Dave's mum. <span class="transform-key">him</span></div>
+      <div class="transform-blank">
+        Dave's mum <input type="text" class="ex-d-input transform-input" placeholder="…"> study harder.
+      </div>
+      <div class="answer-reveal">✓ told him to study harder (imperative in direct → told + object + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="i might be coming down|he thought i might be coming">
+      <span class="q-num">8.</span>
+      <div class="transform-original">'I think you may be coming down with flu,' Greg said to me. <span class="transform-key">thought</span></div>
+      <div class="transform-blank">
+        Greg said that <input type="text" class="ex-d-input transform-input" placeholder="…"> with flu.
+      </div>
+      <div class="answer-reveal">✓ I might be coming down (think → thought; may → might)</div>
+    </li>
+    <li class="question-item" data-answer="they had not contacted her|they hadn't contacted her">
+      <span class="q-num">9.</span>
+      <div class="transform-original">'I don't know why they haven't contacted me recently,' said Tine. <span class="transform-key">been</span></div>
+      <div class="transform-blank">
+        Tine said she didn't know why <input type="text" class="ex-d-input transform-input" placeholder="…"> recently.
+      </div>
+      <div class="answer-reveal">✓ they hadn't contacted her (haven't → hadn't; me → her)</div>
+    </li>
+    <li class="question-item" data-answer="had been different the day|had been different before">
+      <span class="q-num">10.</span>
+      <div class="transform-original">'Everything was different yesterday,' said Ben. <span class="transform-key">been</span></div>
+      <div class="transform-blank">
+        Ben said everything <input type="text" class="ex-d-input transform-input" placeholder="…"> before.
+      </div>
+      <div class="answer-reveal">✓ had been different the day (yesterday → the day before; was → had been)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('d')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('d')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('d')">Reset</button>
+    <span class="score-display" id="score-d"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE E: Passage – one word per gap ===== -->
+<div class="exercise" id="ex-e">
+  <div class="ex-header">
+    <div class="ex-title">Exercise E – Write one word in each gap</div>
+    <div class="ex-instruction">Complete the passage by writing one word in each numbered gap.</div>
+  </div>
+  <div class="passage-container" id="ql-e">
+    <div class="passage-title">The Excuses</div>
+    <p class="passage-line">
+      The office was silent. 'So, let me get this right,' (1) <input type="text" class="ex-e-input passage-input" data-answer="said" placeholder="…"> Alison calmly.
+      'Not one of you is willing to donate some money towards Mr Bartlett's leaving present.' There was silence again for a moment,
+      then Deidre (2) <input type="text" class="ex-e-input passage-input" data-answer="spoke" placeholder="…"> up, saying that she
+      (3) <input type="text" class="ex-e-input passage-input" data-answer="would" placeholder="…"> love to give a donation, but unfortunately
+      her house (4) <input type="text" class="ex-e-input passage-input" data-answer="was" placeholder="…"> being painted that week and she
+      (5) <input type="text" class="ex-e-input passage-input" data-answer="did|could" placeholder="…"> not have any spare cash at all.
+      Alec was next. He was very apologetic and said that he (6) <input type="text" class="ex-e-input passage-input" data-answer="had" placeholder="…"> meant to bring some money to work
+      (7) <input type="text" class="ex-e-input passage-input" data-answer="that" placeholder="…"> morning, but had forgotten. Perhaps tomorrow? Betty said she
+      (8) <input type="text" class="ex-e-input passage-input" data-answer="was" placeholder="…"> completely broke at (9) <input type="text" class="ex-e-input passage-input" data-answer="that" placeholder="…"> moment in time,
+      and said she (10) <input type="text" class="ex-e-input passage-input" data-answer="could|would" placeholder="…"> not give anything until she
+      (11) <input type="text" class="ex-e-input passage-input" data-answer="got|received" placeholder="…"> her pay cheque at the end of the week.
+      Alison stared at them all. She (12) <input type="text" class="ex-e-input passage-input" data-answer="told" placeholder="…"> them how disappointed she
+      (13) <input type="text" class="ex-e-input passage-input" data-answer="was" placeholder="…"> with all of them, and that she
+      (14) <input type="text" class="ex-e-input passage-input" data-answer="would" placeholder="…"> remember their excuses when it was time for
+      (15) <input type="text" class="ex-e-input passage-input" data-answer="them" placeholder="…"> to retire. She slammed the door behind her as she left the room.
+    </p>
+    <div class="answer-reveal" style="margin-top:10px">
+      ✓ (1) said &nbsp;(2) spoke &nbsp;(3) would &nbsp;(4) was &nbsp;(5) did/could &nbsp;(6) had &nbsp;(7) that &nbsp;
+      (8) was &nbsp;(9) that &nbsp;(10) could/would &nbsp;(11) got/received &nbsp;(12) told &nbsp;(13) was &nbsp;(14) would &nbsp;(15) them
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExPassage('e')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('e')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExPassage('e')">Reset</button>
+    <span class="score-display" id="score-e"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE F: Reported questions ===== -->
+<div class="exercise" id="ex-f">
+  <div class="ex-header">
+    <div class="ex-title">Exercise F – Rewrite as reported questions</div>
+    <div class="ex-instruction">Rewrite each direct question as a reported question, beginning with the words given.</div>
+  </div>
+  <ul class="question-list" id="ql-f">
+    <li class="question-item" data-answer="i had had my ear pierced|i had got my ear pierced">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">'Have you had your ear pierced?'<br>
+      My mum asked me if <input type="text" class="ex-f-input" placeholder="…" style="min-width:340px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ I had had my ear pierced (have you → if I had)</div>
+    </li>
+    <li class="question-item" data-answer="he could meet doug there at six o'clock that night|he could meet him there at six">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">'Can I meet you there at six o'clock tonight, Doug?'<br>
+      Julian wanted to know whether <input type="text" class="ex-f-input" placeholder="…" style="min-width:340px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ he could meet Doug there at six o'clock that night (can → could; tonight → that night)</div>
+    </li>
+    <li class="question-item" data-answer="they were still moving to blackpool the following week|they were still moving to blackpool the next week">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">'Are you still moving to Blackpool next week?'<br>
+      Fiona asked Rod and Jenny whether <input type="text" class="ex-f-input" placeholder="…" style="min-width:340px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ they were still moving to Blackpool the following/next week</div>
+    </li>
+    <li class="question-item" data-answer="had to wear a suit to work|had to wear a suit for work">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">'Does Graham have to wear a suit to work?'<br>
+      I asked Mrs Daley if Graham <input type="text" class="ex-f-input" placeholder="…" style="min-width:300px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ had to wear a suit to work (does → did → had to in reported)</div>
+    </li>
+    <li class="question-item" data-answer="i wanted someone to feed my cat while i was away|i wanted someone to feed her cat while she was away">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">'Do you want someone to feed your cat while you're away?'<br>
+      Jan asked me if <input type="text" class="ex-f-input" placeholder="…" style="min-width:340px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ I wanted someone to feed my cat while I was away</div>
+    </li>
+    <li class="question-item" data-answer="she could guess what she had given lindsay for her birthday|she could guess what daisy had given lindsay">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">'Can you guess what I've given Lindsay for her birthday?'<br>
+      Daisy asked Wendy if <input type="text" class="ex-f-input" placeholder="…" style="min-width:340px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ she could guess what she had given Lindsay for her birthday</div>
+    </li>
+    <li class="question-item" data-answer="she loved him or not">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">'Do you love me or not, Gloria?'<br>
+      Fred asked Gloria whether <input type="text" class="ex-f-input" placeholder="…" style="min-width:300px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ she loved him or not</div>
+    </li>
+    <li class="question-item" data-answer="simon would be coming to the party the following night|simon would be coming to the party that night">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">'Will Simon be coming to the party tomorrow night?'<br>
+      Adrian wondered whether <input type="text" class="ex-f-input" placeholder="…" style="min-width:340px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ Simon would be coming to the party the following night</div>
+    </li>
+    <li class="question-item" data-answer="had been anywhere near 34 aylesford street the previous night|had been anywhere near 34 aylesford street the night before">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">'Tell me if you were anywhere near 34 Aylesford Street last night!'<br>
+      The police officer demanded to know whether Sykes <input type="text" class="ex-f-input" placeholder="…" style="min-width:340px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ had been anywhere near 34 Aylesford Street the previous night/the night before</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('f')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('f')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('f')">Reset</button>
+    <span class="score-display" id="score-f"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE G: Rewrite as direct questions ===== -->
+<div class="exercise" id="ex-g">
+  <div class="ex-header">
+    <div class="ex-title">Exercise G – Rewrite as direct questions</div>
+    <div class="ex-instruction">Change each reported question into a direct question.</div>
+  </div>
+  <ul class="question-list" id="ql-g">
+    <li class="question-item" data-answer="why are you thinking of quitting the gym?">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">She asked me why I was thinking of quitting the gym.<br>
+      <input type="text" class="ex-g-input" placeholder="Write the direct question…" style="min-width:340px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ 'Why are you thinking of quitting the gym?'</div>
+    </li>
+    <li class="question-item" data-answer="what is the difference between a refugee and an asylum seeker?|what's the difference between a refugee and an asylum seeker?">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">He asked her what the difference was between a refugee and an asylum seeker.<br>
+      <input type="text" class="ex-g-input" placeholder="Write the direct question…" style="min-width:340px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ 'What is the difference between a refugee and an asylum seeker?'</div>
+    </li>
+    <li class="question-item" data-answer="how did you get on with peter three days ago?|how have you got on with peter?">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">They asked us how we had got on with Peter three days before.<br>
+      <input type="text" class="ex-g-input" placeholder="Write the direct question…" style="min-width:340px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ 'How did you get on with Peter three days ago?'</div>
+    </li>
+    <li class="question-item" data-answer="when did you last go on holiday?|when have you last been on holiday?">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">I asked them when they had last been on holiday.<br>
+      <input type="text" class="ex-g-input" placeholder="Write the direct question…" style="min-width:340px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ 'When did you last go on holiday?'</div>
+    </li>
+    <li class="question-item" data-answer="which of them do you prefer?|which of them did you prefer?">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">She asked him which of them he preferred.<br>
+      <input type="text" class="ex-g-input" placeholder="Write the direct question…" style="min-width:340px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ 'Which of them do you prefer?'</div>
+    </li>
+    <li class="question-item" data-answer="how are you going to get to manchester tomorrow?|how will you get to manchester?">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">I asked you how you were going to get to Manchester tomorrow.<br>
+      <input type="text" class="ex-g-input" placeholder="Write the direct question…" style="min-width:340px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ 'How are you going to get to Manchester tomorrow?'</div>
+    </li>
+    <li class="question-item" data-answer="who were you out with at the weekend?|who have you been out with this weekend?">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">Carl asked Megan who she had been out with the weekend before.<br>
+      <input type="text" class="ex-g-input" placeholder="Write the direct question…" style="min-width:340px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ 'Who were you out with at the weekend?'</div>
+    </li>
+    <li class="question-item" data-answer="what gives you the right to ask questions like that?|what gave you the right to ask questions like that?">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">Megan asked Carl what gave him the right to ask questions like that.<br>
+      <input type="text" class="ex-g-input" placeholder="Write the direct question…" style="min-width:340px;width:100%;margin-top:6px"></span>
+      <div class="answer-reveal">✓ 'What gives you the right to ask questions like that?'</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('g')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('g')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('g')">Reset</button>
+    <span class="score-display" id="score-g"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE H: Reporting verbs word bank ===== -->
+<div class="exercise" id="ex-h">
+  <div class="ex-header">
+    <div class="ex-title">Exercise H – Complete using the correct form of the word in the box</div>
+    <div class="ex-instruction">Use each verb in the correct form. Word bank: agree · apologise · ask · claim · deny · order · refuse · state · suggest · tell</div>
+  </div>
+  <ul class="question-list" id="ql-h">
+    <li class="question-item" data-answer="to ask">
+      <span class="q-num">1.</span>
+      <span class="q-sentence">If you want <input type="text" class="ex-h-input" placeholder="…" style="min-width:100px"> me a question, put your hand up.</span>
+      <div class="answer-reveal">✓ to ask (want + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="have stated|stated">
+      <span class="q-num">2.</span>
+      <span class="q-sentence">I <input type="text" class="ex-h-input" placeholder="…" style="min-width:130px"> very clearly several times already that this government is not going to be blackmailed by terrorists.</span>
+      <div class="answer-reveal">✓ have stated (state + that-clause; present perfect fits context)</div>
+    </li>
+    <li class="question-item" data-answer="ordered">
+      <span class="q-num">3.</span>
+      <span class="q-sentence">The general <input type="text" class="ex-h-input" placeholder="…" style="min-width:110px"> the soldiers to retreat, which they did as quickly as they could!</span>
+      <div class="answer-reveal">✓ ordered (order + object + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="tell">
+      <span class="q-num">4.</span>
+      <span class="q-sentence">Isabelle, <input type="text" class="ex-h-input" placeholder="…" style="min-width:80px"> that story about the giraffe. I love that story!</span>
+      <div class="answer-reveal">✓ tell (imperative: tell that story)</div>
+    </li>
+    <li class="question-item" data-answer="apologises|has apologised|apologised">
+      <span class="q-num">5.</span>
+      <span class="q-sentence">Glenda still <input type="text" class="ex-h-input" placeholder="…" style="min-width:150px"> to me for losing my CD player.</span>
+      <div class="answer-reveal">✓ apologises (apologise + to + person + for + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="had refused|refused">
+      <span class="q-num">6.</span>
+      <span class="q-sentence">If you <input type="text" class="ex-h-input" placeholder="…" style="min-width:130px"> to cooperate with the police, you would have been in big trouble!</span>
+      <div class="answer-reveal">✓ had refused (third conditional: if + past perfect, would have)</div>
+    </li>
+    <li class="question-item" data-answer="to suggest">
+      <span class="q-num">7.</span>
+      <span class="q-sentence">I'd like <input type="text" class="ex-h-input" placeholder="…" style="min-width:120px"> waiting a few more days before we make a final decision.</span>
+      <div class="answer-reveal">✓ to suggest (I'd like + to-infinitive: I'd like to suggest + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="denied">
+      <span class="q-num">8.</span>
+      <span class="q-sentence">The politician <input type="text" class="ex-h-input" placeholder="…" style="min-width:110px"> having done anything wrong, despite the evidence against him.</span>
+      <div class="answer-reveal">✓ denied (deny + -ing form)</div>
+    </li>
+    <li class="question-item" data-answer="agreed">
+      <span class="q-num">9.</span>
+      <span class="q-sentence">I <input type="text" class="ex-h-input" placeholder="…" style="min-width:110px"> to help you with your homework, not do it all for you!</span>
+      <div class="answer-reveal">✓ agreed (agree + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="claim">
+      <span class="q-num">10.</span>
+      <span class="q-sentence">Some thieves <input type="text" class="ex-h-input" placeholder="…" style="min-width:100px"> to be electricity meter readers so they can gain access to people's houses.</span>
+      <div class="answer-reveal">✓ claim (claim + to-infinitive)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('h')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('h')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('h')">Reset</button>
+    <span class="score-display" id="score-h"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE I: Extra word passage ===== -->
+<div class="exercise" id="ex-i">
+  <div class="ex-header">
+    <div class="ex-title">Exercise I – Circle the extra word in each line</div>
+    <div class="ex-instruction">Each line has one extra word that should not be there. Write that word (or "–" if the line is correct).</div>
+  </div>
+  <div class="extra-word-container" id="ql-i">
+    <div class="passage-title">Getting a mortgage</div>
+    <div class="extra-line" data-answer="–">
+      <span class="extra-line-num">1</span>
+      <input type="text" class="ex-i-input extra-line-input" placeholder="extra word…">
+      <span class="extra-line-text">Someone told to me a few months ago that getting a mortgage would be easy. How</span>
+    </div>
+    <div class="extra-line" data-answer="if">
+      <span class="extra-line-num">2</span>
+      <input type="text" class="ex-i-input extra-line-input" placeholder="extra word…">
+      <span class="extra-line-text">wrong they were! When I first went into the bank, I asked <strong>if</strong> them how much I could</span>
+    </div>
+    <div class="extra-line" data-answer="that">
+      <span class="extra-line-num">3</span>
+      <input type="text" class="ex-i-input extra-line-input" placeholder="extra word…">
+      <span class="extra-line-text">borrow. They refused <strong>that</strong> to answer even such a simple question, saying that I had to</span>
+    </div>
+    <div class="extra-line" data-answer="have">
+      <span class="extra-line-num">4</span>
+      <input type="text" class="ex-i-input extra-line-input" placeholder="extra word…">
+      <span class="extra-line-text">actually find a house before they could tell me whether they would <strong>have</strong> lend me the</span>
+    </div>
+    <div class="extra-line" data-answer="it">
+      <span class="extra-line-num">5</span>
+      <input type="text" class="ex-i-input extra-line-input" placeholder="extra word…">
+      <span class="extra-line-text">money or not. I thought this was ridiculous and so told <strong>it</strong> a white lie, saying that</span>
+    </div>
+    <div class="extra-line" data-answer="been">
+      <span class="extra-line-num">6</span>
+      <input type="text" class="ex-i-input extra-line-input" placeholder="extra word…">
+      <span class="extra-line-text">I had <strong>been</strong> already found a house. They finally said they would lend me the money, so</span>
+    </div>
+    <div class="extra-line" data-answer="that">
+      <span class="extra-line-num">7</span>
+      <input type="text" class="ex-i-input extra-line-input" placeholder="extra word…">
+      <span class="extra-line-text">that was great. Then the problems started. A few weeks later a friend told me <strong>that</strong> about</span>
+    </div>
+    <div class="extra-line" data-answer="to">
+      <span class="extra-line-num">8</span>
+      <input type="text" class="ex-i-input extra-line-input" placeholder="extra word…">
+      <span class="extra-line-text">a wonderful flat that was for sale. He suggested <strong>to</strong> our buying it together because it was</span>
+    </div>
+    <div class="extra-line" data-answer="so">
+      <span class="extra-line-num">9</span>
+      <input type="text" class="ex-i-input extra-line-input" placeholder="extra word…">
+      <span class="extra-line-text">so large and I agreed. When I went back to the bank and said <strong>so</strong> I was planning to</span>
+    </div>
+    <div class="extra-line" data-answer="doing">
+      <span class="extra-line-num">10</span>
+      <input type="text" class="ex-i-input extra-line-input" placeholder="extra word…">
+      <span class="extra-line-text">buy a flat with a friend, the bank manager denied <strong>doing</strong> that he had ever said the bank</span>
+    </div>
+    <div class="extra-line" data-answer="has">
+      <span class="extra-line-num">11</span>
+      <input type="text" class="ex-i-input extra-line-input" placeholder="extra word…">
+      <span class="extra-line-text">would give me a mortgage and claimed that he <strong>has</strong> had looked at my finances and knew</span>
+    </div>
+    <div class="extra-line" data-answer="–">
+      <span class="extra-line-num">12</span>
+      <input type="text" class="ex-i-input extra-line-input" placeholder="extra word…">
+      <span class="extra-line-text">I wasn't earning enough to borrow money. I begged with him to have another look at my</span>
+    </div>
+    <div class="extra-line" data-answer="me">
+      <span class="extra-line-num">13</span>
+      <input type="text" class="ex-i-input extra-line-input" placeholder="extra word…">
+      <span class="extra-line-text">records as I knew he was wrong. Finally, he agreed <strong>me</strong> to reconsider my case and</span>
+    </div>
+    <div class="extra-line" data-answer="was">
+      <span class="extra-line-num">14</span>
+      <input type="text" class="ex-i-input extra-line-input" placeholder="extra word…">
+      <span class="extra-line-text">eventually sent me a letter which stated that the bank would <strong>was</strong> quite happy to give me</span>
+    </div>
+    <div class="extra-line" data-answer="–">
+      <span class="extra-line-num">15</span>
+      <input type="text" class="ex-i-input extra-line-input" placeholder="extra word…">
+      <span class="extra-line-text">a mortgage. By then, though, it was said too late as someone else had bought the flat!</span>
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExtraWord('i')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('i')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetExtraWord('i')">Reset</button>
+    <span class="score-display" id="score-i"></span>
+  </div>
+</div>
+
+<!-- ===== EXERCISE J: Sentence transformation ===== -->
+<div class="exercise" id="ex-j">
+  <div class="ex-header">
+    <div class="ex-title">Exercise J – Sentence transformation</div>
+    <div class="ex-instruction">Complete the second sentence using the key word so that it means the same as the first. Use between two and five words.</div>
+  </div>
+  <ul class="question-list" id="ql-j">
+    <li class="question-item" data-answer="told me not to worry|asked me not to worry">
+      <span class="q-num">1.</span>
+      <div class="transform-original">'Don't worry,' my mum said to me. <span class="transform-key">told</span></div>
+      <div class="transform-blank">
+        My mum <input type="text" class="ex-j-input transform-input" placeholder="…"> about it.
+      </div>
+      <div class="answer-reveal">✓ told me not to worry (negative imperative → told + object + not + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="suggested going|suggested that we go|suggested we go">
+      <span class="q-num">2.</span>
+      <div class="transform-original">'Let's go to the cinema tonight,' said Rob. <span class="transform-key">suggested</span></div>
+      <div class="transform-blank">
+        Rob <input type="text" class="ex-j-input transform-input" placeholder="…"> to the cinema that night.
+      </div>
+      <div class="answer-reveal">✓ suggested going (suggest + -ing / that-clause)</div>
+    </li>
+    <li class="question-item" data-answer="apologised to kate for forgetting|apologised for forgetting">
+      <span class="q-num">3.</span>
+      <div class="transform-original">'I'm sorry I forgot your birthday, Kate,' said Phil. <span class="transform-key">apologised</span></div>
+      <div class="transform-blank">
+        Phil <input type="text" class="ex-j-input transform-input" placeholder="…"> her birthday.
+      </div>
+      <div class="answer-reveal">✓ apologised to Kate for forgetting (apologise + to + person + for + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="refused to lend|refused to give">
+      <span class="q-num">4.</span>
+      <div class="transform-original">'No, I won't lend you any money,' said Sam to Jade. <span class="transform-key">refused</span></div>
+      <div class="transform-blank">
+        Sam <input type="text" class="ex-j-input transform-input" placeholder="…"> Jade any money.
+      </div>
+      <div class="answer-reveal">✓ refused to lend (refuse + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="denied stealing|denied taking|denied having stolen">
+      <span class="q-num">5.</span>
+      <div class="transform-original">'I didn't steal the money,' said the suspect. <span class="transform-key">denied</span></div>
+      <div class="transform-blank">
+        The suspect <input type="text" class="ex-j-input transform-input" placeholder="…"> the money.
+      </div>
+      <div class="answer-reveal">✓ denied stealing (deny + -ing)</div>
+    </li>
+    <li class="question-item" data-answer="claimed to have seen|claimed that he had seen|claimed to have met">
+      <span class="q-num">6.</span>
+      <div class="transform-original">'I've seen a UFO,' said the man. <span class="transform-key">claimed</span></div>
+      <div class="transform-blank">
+        The man <input type="text" class="ex-j-input transform-input" placeholder="…"> a UFO.
+      </div>
+      <div class="answer-reveal">✓ claimed to have seen (claim + to have + past participle)</div>
+    </li>
+    <li class="question-item" data-answer="agreed to drive|agreed to take">
+      <span class="q-num">7.</span>
+      <div class="transform-original">'OK, I'll drive you to the airport,' said Tom. <span class="transform-key">agreed</span></div>
+      <div class="transform-blank">
+        Tom <input type="text" class="ex-j-input transform-input" placeholder="…"> me to the airport.
+      </div>
+      <div class="answer-reveal">✓ agreed to drive (agree + to-infinitive)</div>
+    </li>
+    <li class="question-item" data-answer="ordered the soldiers to stop|ordered them to stop">
+      <span class="q-num">8.</span>
+      <div class="transform-original">'Stop!' the general shouted to the soldiers. <span class="transform-key">ordered</span></div>
+      <div class="transform-blank">
+        The general <input type="text" class="ex-j-input transform-input" placeholder="…"> firing.
+      </div>
+      <div class="answer-reveal">✓ ordered the soldiers to stop (order + object + to-infinitive)</div>
+    </li>
+  </ul>
+  <div class="action-bar">
+    <button class="btn btn-check" onclick="checkExText('j')">Check Answers</button>
+    <button class="btn btn-show" onclick="showAnswers('j')">Show Answers</button>
+    <button class="btn btn-reset" onclick="resetEx('j')">Reset</button>
+    <span class="score-display" id="score-j"></span>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+const tabs = ['a','b','c','d','e','f','g','h','i','j'];
+
+function switchTab(id) {
+  document.querySelector('.exercise.active').classList.remove('active');
+  document.getElementById('ex-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', tabs[i] === id);
+  });
+}
+
+// Word Bank
+let focusedInput = null;
+function setFocus(inp) { focusedInput = inp; }
+function useWord(chip, exId) {
+  const word = chip.textContent;
+  const inputs = document.querySelectorAll('.ex-' + exId + '-input');
+  const target = focusedInput && focusedInput.value === '' && focusedInput.classList.contains('ex-' + exId + '-input')
+    ? focusedInput : Array.from(inputs).find(i => i.value === '');
+  if (!target) return;
+  target.value = word;
+  focusedInput = null;
+  updateWordBankUsage(exId);
+}
+function onWordBankInput(inp, exId) { updateWordBankUsage(exId); }
+function updateWordBankUsage(exId) {
+  const used = new Set();
+  document.querySelectorAll('.ex-' + exId + '-input').forEach(i => {
+    if (i.value.trim()) used.add(i.value.trim().toLowerCase());
+  });
+  document.querySelectorAll('#wordbank-' + exId + ' .word-chip').forEach(chip => {
+    chip.classList.toggle('used', used.has(chip.textContent.toLowerCase()));
+  });
+}
+
+// Two Choice
+function chooseBtn(btn) {
+  const btns = btn.closest('.two-choice-btns').querySelectorAll('.choice-btn');
+  btns.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+// Normalize
+function normalize(s) { return s.trim().toLowerCase().replace(/\s+/g,' ').replace(/[?.!'"]$/,''); }
+
+// Score
+function updateScore(id, correct, total) {
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = correct + ' / ' + total + ' correct';
+  scoreEl.classList.add('visible');
+  scoreEl.classList.toggle('perfect', correct === total);
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabIdx = tabs.indexOf(id);
+  let badge = tabBtns[tabIdx].querySelector('.tab-badge');
+  if (!badge) { badge = document.createElement('span'); badge.className = 'tab-badge'; tabBtns[tabIdx].appendChild(badge); }
+  badge.textContent = correct + '/' + total;
+  badge.classList.toggle('perfect', correct === total);
+}
+
+// Text input check
+function checkExText(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .question-item').forEach(item => {
+    const inp = item.querySelector('input[type="text"]');
+    if (!inp) return;
+    total++;
+    const answers = item.dataset.answer.split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    item.classList.toggle('correct', ok);
+    item.classList.toggle('wrong', !ok);
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+// Passage fill check
+function checkExPassage(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .ex-' + id + '-input').forEach(inp => {
+    total++;
+    const answers = (inp.dataset.answer || '').split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+// Extra word check
+function checkExtraWord(id) {
+  let correct = 0, total = 0;
+  document.querySelectorAll('#ql-' + id + ' .extra-line').forEach(line => {
+    total++;
+    const inp = line.querySelector('input[type="text"]');
+    const answers = (line.dataset.answer || '').split('|');
+    const ok = answers.some(a => normalize(inp.value) === normalize(a));
+    if (ok) correct++;
+    line.classList.toggle('correct', ok);
+    line.classList.toggle('wrong', !ok);
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+  });
+  updateScore(id, correct, total);
+}
+
+// Show answers
+function showAnswers(id) {
+  if (id === 'e') {
+    checkExPassage(id);
+    const reveal = document.querySelector('#ql-' + id + ' .answer-reveal');
+    if (reveal) reveal.style.display = 'block';
+  } else if (id === 'i') {
+    checkExtraWord(id);
+  } else {
+    checkExText(id);
+  }
+  document.getElementById('ex-' + id).classList.add('show-answers');
+}
+
+// Reset
+function resetEx(id) {
+  const exEl = document.getElementById('ex-' + id);
+  exEl.classList.remove('show-answers');
+  exEl.querySelectorAll('input[type="text"]').forEach(inp => {
+    inp.value = ''; inp.classList.remove('correct','wrong');
+  });
+  exEl.querySelectorAll('.question-item, .extra-line').forEach(item => {
+    item.classList.remove('correct','wrong');
+  });
+  exEl.querySelectorAll('.choice-btn, .mc-btn').forEach(btn => {
+    btn.classList.remove('selected','correct','wrong');
+  });
+  const scoreEl = document.getElementById('score-' + id);
+  scoreEl.textContent = ''; scoreEl.classList.remove('visible','perfect');
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const idx = tabs.indexOf(id);
+  const badge = tabBtns[idx]?.querySelector('.tab-badge');
+  if (badge) badge.textContent = '';
+}
+
+function resetExPassage(id) {
+  resetEx(id);
+  if (id === 'e') {
+    document.querySelectorAll('#wordbank-' + id + ' .word-chip').forEach(c => c.classList.remove('used'));
+    const reveal = document.querySelector('#ql-' + id + ' .answer-reveal');
+    if (reveal) reveal.style.display = '';
+  }
+  focusedInput = null;
+}
+
+function resetExtraWord(id) {
+  resetEx(id);
+}
+</script>
+</body>
+</html>
