@@ -1043,8 +1043,8 @@
         "questions": [
           {
             "id": 1,
-            "sentence": "Diana: Hello, is that Jenny? I'm bored (1) ______ watching TV and I felt (2) ______ a chat.",
-            "answer": "of / like"
+            "sentence": "Diana: Hello, is that Jenny? I'm bored (1) ______ watching TV and I felt (2) ______ a chat. What are you doing?",
+            "answer": "with / like"
           },
           {
             "id": 3,
@@ -1058,17 +1058,17 @@
           },
           {
             "id": 5,
-            "sentence": "Diana: Really? Oh, I'm really interested (5) ______ acting.",
+            "sentence": "Diana: Really? Oh, I'm really interested (5) ______ acting. Tel me about it",
             "answer": "in"
           },
           {
             "id": 6,
-            "sentence": "Jenny: She says it takes a long time to get good (6) ______ acting.",
+            "sentence": "Jenny: He says it takes a long time to get good (6) ______ acting.",
             "answer": "at"
           },
           {
             "id": 7,
-            "sentence": "To become popular (7) ______ the public, you need to really understand people.",
+            "sentence": "To become popular (7) ______ the public, you need to really understand people. Diana: That sounds just like me! Tell me more . What else does he say?",
             "answer": "with"
           }
         ]
@@ -1080,32 +1080,32 @@
         "questions": [
           {
             "id": 1,
-            "sentence": "I'm completely crazy with skateboarding! I love it!",
+            "sentence": "I'm completely crazy (with) skateboarding! I love it!",
             "answer": "about"
           },
           {
             "id": 2,
-            "sentence": "In my free time I listen on music on CD or on the radio.",
+            "sentence": "In my free time I listen (on) music on CD or on the radio.",
             "answer": "to"
           },
           {
             "id": 3,
-            "sentence": "Elsa isn't very keen for this group, but they're one of my favourites.",
+            "sentence": "Elsa isn't very keen (for) this group, but they're one of my favourites.",
             "answer": "on"
           },
           {
             "id": 4,
-            "sentence": "Next week we've got a game to a team from Hungary.",
+            "sentence": "Next week we've got a game (to) a team from Hungary.",
             "answer": "against"
           },
           {
             "id": 5,
-            "sentence": "Is that Kylie? Oh, I'm a really big fan from hers.",
+            "sentence": "Is that Kylie? Oh, I'm a really big fan (from) hers.",
             "answer": "of"
           },
           {
             "id": 6,
-            "sentence": "I was really scared when I took part to the singing competition last year.",
+            "sentence": "I was really scared when I took part (to) the singing competition last year.",
             "answer": "in"
           }
         ]

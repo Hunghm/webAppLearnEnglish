@@ -5,101 +5,101 @@ import { shuffle } from '../utils/helpers.js';
 
 const imageKeywordMap = {
   // Ambiguous / abstract vocabulary
-  "apologise":       "apology",
-  "cool":            "relaxed calm",
-  "defend":          "protection defense",
-  "divorced":        "divorce separation",
-  "flat":            "apartment interior",
-  "loving":          "love affection",
-  "mood":            "emotion feeling",
-  "neighbourhood":   "neighborhood street",
-  "ordinary":        "everyday life simple",
-  "patient":         "patience calm",
-  "private":         "privacy alone",
-  "recognise":       "recognition identify",
-  "relation":        "family people",
-  "rent":            "apartment rental",
-  "single":          "alone individual",
-  "stranger":        "unknown person",
+  "apologise": "apology",
+  "cool": "relaxed calm",
+  "defend": "protection defense",
+  "divorced": "divorce separation",
+  "flat": "apartment interior",
+  "loving": "love affection",
+  "mood": "emotion feeling",
+  "neighbourhood": "neighborhood street",
+  "ordinary": "everyday life simple",
+  "patient": "patience calm",
+  "private": "privacy alone",
+  "recognise": "recognition identify",
+  "relation": "family people",
+  "rent": "apartment rental",
+  "single": "alone individual",
+  "stranger": "unknown person",
   // Phrasal verbs
-  "bring up":        "parenting family",
-  "fall out with":   "conflict argument",
-  "get on with":     "friendship smile",
-  "go out with":     "couple date",
-  "grow up":         "growing child",
-  "let down":        "disappointment sad",
-  "look after":      "caregiving nurture",
-  "split up":        "separation",
+  "bring up": "parenting family",
+  "fall out with": "conflict argument",
+  "get on with": "friendship smile",
+  "go out with": "couple date",
+  "grow up": "growing child",
+  "let down": "disappointment sad",
+  "look after": "caregiving nurture",
+  "split up": "separation",
   // Word formations
-  "able":            "capability skill",
-  "ability":         "talent skill",
-  "disabled":        "accessibility",
-  "unable":          "impossible challenge",
-  "admiration":      "admire beauty",
-  "careless":        "reckless danger",
-  "confidence":      "confidence self",
-  "forgiveness":     "peace reconciliation",
-  "honesty":         "truth integrity",
-  "dishonest":       "deception",
-  "introduction":    "meeting people",
-  "lie":             "deception dishonesty",
-  "liar":            "deception",
-  "lying":           "dishonesty",
-  "personality":     "character people",
-  "personal":        "privacy personal",
-  "relate":          "connection",
-  "relative":        "family relatives",
-  "relationship":    "couple relationship",
+  "able": "capability skill",
+  "ability": "talent skill",
+  "disabled": "accessibility",
+  "unable": "impossible challenge",
+  "admiration": "admire beauty",
+  "careless": "reckless danger",
+  "confidence": "confidence self",
+  "forgiveness": "peace reconciliation",
+  "honesty": "truth integrity",
+  "dishonest": "deception",
+  "introduction": "meeting people",
+  "lie": "deception dishonesty",
+  "liar": "deception",
+  "lying": "dishonesty",
+  "personality": "character people",
+  "personal": "privacy personal",
+  "relate": "connection",
+  "relative": "family relatives",
+  "relationship": "couple relationship",
   // Prepositional phrases
-  "by yourself":     "alone solitude",
-  "in common with":  "similarity sharing",
+  "by yourself": "alone solitude",
+  "in common with": "similarity sharing",
   "in contact with": "contact communication",
-  "in love with":    "love romance",
-  "on purpose":      "intention focus",
-  "on your own":     "independence",
+  "in love with": "love romance",
+  "on purpose": "intention focus",
+  "on your own": "independence",
   // Word patterns
-  "fond of":         "affection liking",
-  "jealous of":      "jealousy envy",
-  "kind to":         "kindness help",
-  "married to":      "wedding marriage",
-  "proud of":        "pride achievement",
-  "admire for":      "admiration",
-  "apologise for":   "apology sorry",
-  "argue about":     "argument debate",
-  "care about":      "compassion care",
-  "chat about":      "conversation friends",
-  "argument about":  "argument discussion",
+  "fond of": "affection liking",
+  "jealous of": "jealousy envy",
+  "kind to": "kindness help",
+  "married to": "wedding marriage",
+  "proud of": "pride achievement",
+  "admire for": "admiration",
+  "apologise for": "apology sorry",
+  "argue about": "argument debate",
+  "care about": "compassion care",
+  "chat about": "conversation friends",
+  "argument about": "argument discussion",
   "relationship with": "couple togetherness",
 };
 // //
 // Đăng ký tài khoản Cloudinary miễn phí để lấy Cloud Name của bạn
-const CLOUDINARY_CLOUD_NAME = 'dipe6pl88'; 
-const PIXABAY_API_KEY = '56468288-5689d1fc39b7e2e6a0a37779a'; 
+const CLOUDINARY_CLOUD_NAME = 'dipe6pl88';
+// const PIXABAY_API_KEY = '56468288-5689d1fc39b7e2e6a0a37779a';
 
 export async function getImageUrl(word) {
   const keyword = (imageKeywordMap[word] ?? word).trim().replace(/\s+/g, '+');
-  const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${encodeURIComponent(keyword)}&image_type=photo&per_page=3&safesearch=true`;
-  
+  const url = `/api/pixabay?q=${encodeURIComponent(keyword)}&image_type=photo&per_page=3&safesearch=true`;
+  // const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${encodeURIComponent(keyword)}&image_type=photo&per_page=3&safesearch=true`;
   try {
     const response = await fetch(url);
     const data = await response.json();
 
     if (data.hits && data.hits.length > 0) {
       const index = Math.abs(hashCode(word)) % data.hits.length;
-      const pixabayUrl = data.hits[index].webformatURL; 
+      const pixabayUrl = data.hits[index].webformatURL;
 
       // 🔥 BƯỚC ĐỔI ĐƯỜNG DẪN QUA CLOUDINARY:
       // f_auto: Tự động chuyển định dạng tốt nhất (WebP/AVIF) dựa trên trình duyệt
       // q_auto: Tự động nén chất lượng ảnh để tối ưu dung lượng mà không mờ hình
       const cloudinaryUrl = `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/fetch/f_auto,q_auto/${encodeURIComponent(pixabayUrl)}`;
-      
+
       // console.log(`[Cloudinary Fetch] Từ: "${word}" ->`, cloudinaryUrl);
-      return cloudinaryUrl; 
+      return cloudinaryUrl;
     }
-    
+
     // Fallback nếu không có ảnh
     return `https://loremflickr.com/600/400/${keyword.replace(/\+/g, ',')}`;
-    
+
   } catch (error) {
     console.error("Lỗi:", error);
     return `https://loremflickr.com/600/400/vocabulary,book`;
@@ -109,7 +109,7 @@ export async function getImageUrl(word) {
 // export async function getImageUrl(word) {
 //   // 1. Xử lý keyword (Pixabay dùng dấu cộng '+' để nối các từ, ví dụ: 'carry+on')
 //   const keyword = (imageKeywordMap[word] ?? word).trim().replace(/\s+/g, '+');
-  
+
 //   // Bạn có thể ép kiểu ảnh về 'illustration' hoặc 'vector' để hợp với web từ vựng, hoặc để trống để lấy cả ảnh chụp
 //   const imageType = 'photo'; 
 
@@ -124,16 +124,16 @@ export async function getImageUrl(word) {
 //       // Dùng thuật toán hashCode cũ của bạn để chọn ổn định 1 trong các ảnh trả về (tránh việc mỗi lần load ra 1 ảnh khác nhau)
 //       const index = Math.abs(hashCode(word)) % data.hits.length;
 //       const finalUrl = data.hits[index].webformatURL; // hoặc data.photos[index].src.large với Pexels
-      
+
 //       // CHÈN VÀO ĐÂY: Kiểm tra khi API trả về ảnh thành công
 //       // console.log(`[API Thành Công] Từ: "${word}" -> Ảnh:`, finalUrl);
-      
+
 //       return finalUrl;
 //     }
-    
+
 //     // 3. Fallback: Nếu không tìm thấy ảnh nào từ Pixabay, trả về 1 ảnh mặc định hoặc dùng lại LoremFlickr làm dự phòng
 //     return `https://loremflickr.com/600/400/${keyword.replace(/\+/g, ',')}`;
-    
+
 //   } catch (error) {
 //     console.error("Lỗi khi gọi Pixabay API:", error);
 //     // Nếu API lỗi (hết hạn mức hoặc mất mạng), trả về ảnh dự phòng để giao diện không bị vỡ
@@ -155,7 +155,7 @@ function hashCode(str) {
 // export function getImageUrl(word) {
 //   // Tạo seed cố định dựa trên từ khóa để luôn ra cùng một ảnh cho cùng một từ
 //   const seed = word.toLowerCase().replace(/\s+/g, '-');
-  
+
 //   // Dùng Picsum với seed và kích thước cố định
 //   return `https://picsum.photos/seed/${seed}/600/400`;
 // }
@@ -241,7 +241,7 @@ export function buildQuestions(words, unitId) {
 // }
 export async function buildFlashcards(vocabList) {
   console.log("buildFlashcards");
-  
+
   // Dùng Promise.all để gọi API ảnh song song cho tất cả các từ cùng lúc, giúp tối ưu tốc độ
   const cards = await Promise.all(
     vocabList.map(async (v) => {
@@ -277,8 +277,8 @@ export async function buildFlashcardsFromFolder(folderWords) {
   const cards = await Promise.all(
     folderWords.map(async (w) => {
       // Đợi lấy URL ảnh thực tế từ API (Pixabay/Pexels)
-      const url = await getImageUrl(w.word); 
-      
+      const url = await getImageUrl(w.word);
+
       return {
         word: w.word,
         wordType: w.wordType || '',
@@ -288,7 +288,7 @@ export async function buildFlashcardsFromFolder(folderWords) {
       };
     })
   );
-  
+
   return cards;
 }
 

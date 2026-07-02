@@ -23,12 +23,14 @@ import C1C2CategoryPage from './pages/destination/C1C2CategoryPage.jsx'
 import C1C2GrammarDetailPage from './pages/destination/C1C2GrammarDetailPage.jsx'
 import C1C2ExercisesPage from './pages/destination/C1C2ExercisesPage.jsx'
 import C1C2ExerciseUnitPage from './pages/destination/C1C2ExerciseUnitPage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
 
 export default function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-gray-50">
         <Routes>
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/category/:unitId" element={<CategoryPage />} />
           <Route path="/flashcard" element={<FlashcardPage />} />

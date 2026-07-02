@@ -36,6 +36,23 @@ export default function SpellingPage() {
       inputRef.current?.focus()
     }
   }, [index])
+  // THÊM MỚI: focus lại input mỗi khi nó xuất hiện trở lại (status về null)
+  useEffect(() => {
+    if (!status) {
+      inputRef.current?.focus()
+    }
+  }, [status])
+
+  // Lắng nghe Enter trên toàn trang
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        handleSubmit()
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  })
 
   if (words.length === 0) {
     return (
@@ -139,7 +156,7 @@ export default function SpellingPage() {
               type="text"
               value={input}
               onChange={e => setInput(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && handleSubmit()}
+              // onKeyDown={e => e.key === 'Enter' && handleSubmit()}
               placeholder="Nhập từ tiếng Anh..."
               className="w-full border-2 border-gray-300 rounded-xl px-4 py-3 text-base text-center focus:outline-none focus:border-violet-500 transition-colors"
               autoCapitalize="none"
@@ -151,11 +168,10 @@ export default function SpellingPage() {
 
         <button
           onClick={handleSubmit}
-          className={`w-full py-3.5 rounded-xl font-semibold transition-colors ${
-            status
-              ? 'bg-blue-600 text-white hover:bg-blue-700'
-              : 'bg-violet-600 text-white hover:bg-violet-700'
-          }`}
+          className={`w-full py-3.5 rounded-xl font-semibold transition-colors ${status
+            ? 'bg-blue-600 text-white hover:bg-blue-700'
+            : 'bg-violet-600 text-white hover:bg-violet-700'
+            }`}
         >
           {status
             ? (index + 1 >= words.length ? 'Xem kết quả' : 'Tiếp theo →')
