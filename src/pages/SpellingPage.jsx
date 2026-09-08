@@ -4,6 +4,12 @@ import PageHeader from '../components/layout/PageHeader.jsx'
 import { useTTS } from '../hooks/useTTS.js'
 import { shuffle } from '../utils/helpers.js'
 
+// Tìm từ vựng (kể cả dạng biến đổi đuôi) trong câu ví dụ để khoét trống
+const buildClozeRegex = (word) => {
+  const esc = word.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  return new RegExp(`\\b${esc}(?:s|es|ed|ing|d|ies)?\\b`, 'i')
+}
+
 export default function SpellingPage() {
   const location = useLocation()
   const navigate = useNavigate()
@@ -12,30 +18,39 @@ export default function SpellingPage() {
 
   const { unitId, source, words: stateWords, studySetName } = location.state || {}
 
-  const words = useMemo(() => {
-    if (!stateWords || stateWords.length === 0) return []
-    return shuffle([...stateWords]).slice(0, 30)
-  }, [])
-
-  const [index, setIndex] = useState(0)
-  const [input, setInput] = useState('')
-  const [status, setStatus] = useState(null) // null | 'correct' | 'wrong'
-  const [score, setScore] = useState(0)
-
-  const current = words[index]
-
   // Get word and definition based on word format
   const getWord = (w) => w.word
   const getDef = (w) => w.def || w.definition || ''
   const getType = (w) => w.typeFull || w.wordType || ''
 
+  const initialWords = useMemo(() => {
+    if (!stateWords || stateWords.length === 0) return []
+    return shuffle([...stateWords]).slice(0, 30)
+  }, [])
+
+  const total = initialWords.length
+
+  // Hàng đợi động: từ nào làm sai sẽ bị đẩy xuống cuối để làm lại,
+  // từ nào làm đúng sẽ được lấy ra khỏi hàng đợi. Học tới khi hết hàng đợi.
+  const [queue, setQueue] = useState(() => initialWords)
+  const [input, setInput] = useState('')
+  const [submitted, setSubmitted] = useState('') // từ người dùng vừa gõ (để đối chiếu khi sai)
+  const [status, setStatus] = useState(null) // null | 'correct' | 'wrong'
+  const [score, setScore] = useState(0) // số từ làm đúng ngay lần đầu
+  const wrongSetRef = useRef(new Set()) // các từ đã từng làm sai
+  const firstTryCorrectRef = useRef([]) // các từ đúng ngay lần đầu
+  const firstTryWrongRef = useRef([]) // các từ sai ở lần đầu
+
+  const current = queue[0]
+  const done = total - queue.length
+
+  // Reset input/status + focus mỗi khi chuyển sang từ mới trong hàng đợi
   useEffect(() => {
-    if (current) {
-      setInput('')
-      setStatus(null)
-      inputRef.current?.focus()
-    }
-  }, [index])
+    setInput('')
+    setStatus(null)
+    inputRef.current?.focus()
+  }, [queue])
+
   // THÊM MỚI: focus lại input mỗi khi nó xuất hiện trở lại (status về null)
   useEffect(() => {
     if (!status) {
@@ -54,7 +69,7 @@ export default function SpellingPage() {
     return () => document.removeEventListener('keydown', handleKeyDown)
   })
 
-  if (words.length === 0) {
+  if (total === 0) {
     return (
       <div className="min-h-screen bg-gray-50">
         <PageHeader title="Spelling" />
@@ -68,29 +83,83 @@ export default function SpellingPage() {
     )
   }
 
-  const letterHint = getWord(current).split('').map((c, i) => {
+  const letterHint = getWord(current).split('').map((c) => {
     if (c === ' ') return ' '
     if (status === 'correct' || status === 'wrong') return c
     return '_'
   }).join(' ')
 
+  // Câu ví dụ với chỗ trống ở vị trí từ vựng
+  const exampleText = (current.example || current.ex || '').trim()
+  const clozeMatch = exampleText ? exampleText.match(buildClozeRegex(getWord(current))) : null
+
+  const renderCloze = () => {
+    if (!clozeMatch) return null
+    const start = clozeMatch.index
+    const end = start + clozeMatch[0].length
+    const before = exampleText.slice(0, start)
+    const after = exampleText.slice(end)
+    const blankLen = Math.max(5, clozeMatch[0].length)
+    return (
+      <p className="text-lg text-gray-700 text-center leading-relaxed">
+        {before}
+        <span
+          className={`font-bold ${
+            status === 'correct'
+              ? 'text-green-600'
+              : status === 'wrong'
+                ? 'text-red-600'
+                : 'text-violet-600 tracking-widest'
+          }`}
+        >
+          {status ? clozeMatch[0] : '_'.repeat(blankLen)}
+        </span>
+        {after}
+      </p>
+    )
+  }
+
+  // Đối chiếu từng ký tự người dùng gõ với đáp án đúng để tô đỏ chỗ sai
+  const typedDiff = submitted.split('').map((ch, i) => {
+    const expected = getWord(current)[i]
+    const ok = expected != null && ch.toLowerCase() === expected.toLowerCase()
+    return (
+      <span key={i} className={ok ? 'text-gray-700' : 'bg-red-200 text-red-700 rounded'}>
+        {ch === ' ' ? ' ' : ch}
+      </span>
+    )
+  })
+
+  const finish = () => {
+    navigate('/spelling-result', {
+      state: {
+        score,
+        total,
+        mode: 'spelling',
+        unitId,
+        source,
+        words: stateWords,
+        studySetName,
+        firstTryCorrect: firstTryCorrectRef.current,
+        firstTryWrong: firstTryWrongRef.current,
+      }
+    })
+  }
+
   const handleSubmit = () => {
     if (status) {
-      // Move to next
-      if (index + 1 >= words.length) {
-        navigate('/result', {
-          state: {
-            score,
-            total: words.length,
-            mode: 'spelling',
-            unitId,
-            source,
-            words: stateWords,
-            studySetName,
-          }
-        })
+      // Chuyển sang từ tiếp theo
+      if (status === 'correct') {
+        // Làm đúng: bỏ từ này ra khỏi hàng đợi
+        const nextQueue = queue.slice(1)
+        if (nextQueue.length === 0) {
+          finish()
+        } else {
+          setQueue(nextQueue)
+        }
       } else {
-        setIndex(i => i + 1)
+        // Làm sai: đẩy từ này xuống cuối hàng đợi để làm lại
+        setQueue([...queue.slice(1), queue[0]])
       }
       return
     }
@@ -98,23 +167,37 @@ export default function SpellingPage() {
     const trimmed = input.trim()
     if (!trimmed) return
 
-    const isCorrect = trimmed.toLowerCase() === getWord(current).toLowerCase()
+    setSubmitted(trimmed)
+    const key = getWord(current).toLowerCase()
+    const isCorrect = trimmed.toLowerCase() === key
+    const firstAttempt = !wrongSetRef.current.has(key)
+
+    // Luôn phát âm từ vựng sau khi kiểm tra (cả đúng lẫn sai)
+    speak(getWord(current))
+
     if (isCorrect) {
-      setScore(s => s + 1)
+      if (firstAttempt) {
+        setScore(s => s + 1)
+        firstTryCorrectRef.current.push(current)
+      }
       setStatus('correct')
     } else {
+      if (firstAttempt) {
+        firstTryWrongRef.current.push(current)
+      }
+      wrongSetRef.current.add(key)
       setStatus('wrong')
-      speak(getWord(current))
     }
   }
 
-  const progress = ((index + 1) / words.length) * 100
+  const progress = (done / total) * 100
+  const remaining = queue.length
 
   return (
     <div className="min-h-screen bg-gray-50">
       <PageHeader
         title={studySetName || 'Spelling'}
-        subtitle={`${index + 1} / ${words.length}`}
+        subtitle={`${done} / ${total} · còn lại ${remaining}`}
       />
 
       <div className="h-1.5 bg-gray-200">
@@ -130,6 +213,12 @@ export default function SpellingPage() {
             </span>
           </div>
           <div className="text-xl font-bold text-gray-800 text-center">{getDef(current)}</div>
+          {clozeMatch && (
+            <div className="mt-4 pt-4 border-t border-gray-100">
+              <p className="text-xs text-gray-400 text-center mb-1">Điền từ vào chỗ trống</p>
+              {renderCloze()}
+            </div>
+          )}
         </div>
 
         {/* Letter hint */}
@@ -139,8 +228,17 @@ export default function SpellingPage() {
             {status ? getWord(current) : letterHint}
           </div>
           {status === 'wrong' && (
-            <div className="mt-2 text-sm text-red-600">
-              Đáp án đúng: <span className="font-bold">{getWord(current)}</span>
+            <div className="mt-2 text-sm">
+              <div className="text-gray-500">
+                Bạn đã gõ:{' '}
+                <span className="font-mono font-semibold tracking-wide line-through decoration-red-400/60">
+                  {typedDiff}
+                </span>
+              </div>
+              <div className="text-red-600 mt-1">
+                Đáp án đúng: <span className="font-bold">{getWord(current)}</span>
+              </div>
+              <div className="text-xs text-gray-400 mt-1">Từ này sẽ được hỏi lại ở cuối danh sách</div>
             </div>
           )}
           {status === 'correct' && (
@@ -174,7 +272,7 @@ export default function SpellingPage() {
             }`}
         >
           {status
-            ? (index + 1 >= words.length ? 'Xem kết quả' : 'Tiếp theo →')
+            ? (status === 'correct' && queue.length === 1 ? 'Xem kết quả' : 'Tiếp theo →')
             : 'Kiểm tra'}
         </button>
       </div>

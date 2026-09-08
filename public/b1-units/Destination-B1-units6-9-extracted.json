@@ -1,0 +1,1207 @@
+{
+  "6": {
+    "exercises": [
+      {
+        "exercise": "F",
+        "type": "word_formation",
+        "title": "Complete by changing the form of the word in capitals.",
+        "questions": [
+          {
+            "id": 1,
+            "capital_word": "EDUCATE",
+            "answer": "education"
+          },
+          {
+            "id": 2,
+            "capital_word": "BEGIN",
+            "answer": "beginner"
+          },
+          {
+            "id": 3,
+            "capital_word": "BRAVE",
+            "answer": "bravery"
+          },
+          {
+            "id": 4,
+            "capital_word": "REFER",
+            "answer": "reference"
+          },
+          {
+            "id": 5,
+            "capital_word": "SILENT",
+            "answer": "silence"
+          },
+          {
+            "id": 6,
+            "capital_word": "INSTRUCT",
+            "answer": "instructor"
+          },
+          {
+            "id": 7,
+            "capital_word": "CORRECT",
+            "answer": "incorrect"
+          },
+          {
+            "id": 8,
+            "capital_word": "DIVIDE",
+            "answer": "division"
+          },
+          {
+            "id": 9,
+            "capital_word": "SIMPLE",
+            "answer": "simplify"
+          },
+          {
+            "id": 10,
+            "capital_word": "MEMORY",
+            "answer": "memorise"
+          }
+        ]
+      },
+      {
+        "exercise": "G",
+        "type": "gap_fill",
+        "title": "Write one word in each gap.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "You didn't cheat ______ the exam, did you?",
+            "answer": "in"
+          },
+          {
+            "id": 2,
+            "sentence": "We're learning ______ dinosaurs at the moment at school.",
+            "answer": "about"
+          },
+          {
+            "id": 3,
+            "sentence": "What's your opinion ______ children going to school at a very young age?",
+            "answer": "about / of"
+          },
+          {
+            "id": 4,
+            "sentence": "I think you've confused astronomy ______ astrology - they're not the same!",
+            "answer": "with"
+          },
+          {
+            "id": 5,
+            "sentence": "I hope Mr Aziz doesn't ask me a question ______ the book because I haven't read it!",
+            "answer": "about"
+          },
+          {
+            "id": 6,
+            "sentence": "I can't cope ______ all this homework I've got to do!",
+            "answer": "with"
+          }
+        ]
+      },
+      {
+        "exercise": "H",
+        "type": "key_word_transformation",
+        "title": "Complete each second sentence using the word given (2-5 words).",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "",
+            "answer": "talented at"
+          },
+          {
+            "id": 2,
+            "sentence": "",
+            "answer": "continued (with)"
+          },
+          {
+            "id": 3,
+            "sentence": "",
+            "answer": "don't know anything / know nothing about"
+          },
+          {
+            "id": 4,
+            "sentence": "",
+            "answer": "helping Dan with / to do"
+          },
+          {
+            "id": 5,
+            "sentence": "",
+            "answer": "is capable of learning"
+          },
+          {
+            "id": 6,
+            "sentence": "",
+            "answer": "succeed in finding"
+          }
+        ]
+      }
+    ]
+  },
+  "7": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "sentence_writing",
+        "title": "Look at Shelley's diary and use the prompts to write sentences. Use the correct form of the present continuous.",
+        "questions": [
+          {
+            "id": 1,
+            "prompt": "meet Alison - Friends Cafe",
+            "sentence": "",
+            "answer": "is meeting Alison at Friends Cafe"
+          },
+          {
+            "id": 2,
+            "prompt": "go shopping - Mum",
+            "sentence": "",
+            "answer": "is going shopping with her mum"
+          },
+          {
+            "id": 3,
+            "prompt": "catch train - Brighton",
+            "sentence": "",
+            "answer": "is catching the train to Brighton"
+          },
+          {
+            "id": 4,
+            "prompt": "spend day - Charlie in Brighton",
+            "sentence": "",
+            "answer": "is spending the day with Charlie in Brighton"
+          },
+          {
+            "id": 5,
+            "prompt": "catch train - home - 10 am",
+            "sentence": "",
+            "answer": "is catching the train home at 10 am"
+          },
+          {
+            "id": 6,
+            "prompt": "work - Dad's shop - all morning",
+            "sentence": "",
+            "answer": "is working in her dad's shop all morning"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "gap_fill",
+        "title": "Complete using will or shall and the verbs in the box. You may have to use some negative forms.",
+        "word_bank": [
+          "be",
+          "come",
+          "find",
+          "have",
+          "lend",
+          "live",
+          "take",
+          "visit"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "This year, more than a million tourists ______ our local area.",
+            "answer": "will visit"
+          },
+          {
+            "id": 2,
+            "sentence": "I'm sure we ______ your bag soon. Where did you last see it?",
+            "answer": "will find"
+          },
+          {
+            "id": 3,
+            "sentence": "______ you ______ me some money until Saturday?",
+            "answer": "Will / lend"
+          },
+          {
+            "id": 4,
+            "sentence": "Everything on the menu looks delicious! Erm . . . I ______ Chicken Kiev, please.",
+            "answer": "will have"
+          },
+          {
+            "id": 5,
+            "sentence": "I ______ you to the bus station, if you like.",
+            "answer": "will take"
+          },
+          {
+            "id": 6,
+            "sentence": "One day, people ______ on Mars in special buildings.",
+            "answer": "will live"
+          },
+          {
+            "id": 7,
+            "sentence": "No, there ______ any problems with delivering your new furniture next week.",
+            "answer": "won't be"
+          },
+          {
+            "id": 8,
+            "sentence": "______ we ______ at six to help you get things ready for dinner?",
+            "answer": "Shall / come"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "gap_fill",
+        "title": "Complete using the correct form of be going to and the verbs in brackets.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "When I grow up, I ______ (play) guitar in a rock group!",
+            "answer": "am going to play"
+          },
+          {
+            "id": 2,
+            "sentence": "Rick and Mark ______ (start) going to the gym twice a week.",
+            "answer": "are going to start"
+          },
+          {
+            "id": 3,
+            "sentence": "______ Lauren ______ (tell) her mum about what happened?",
+            "answer": "Is / going to tell"
+          },
+          {
+            "id": 4,
+            "sentence": "I ______ (look) on the Internet for information about snowboarding.",
+            "answer": "am going to look"
+          },
+          {
+            "id": 5,
+            "sentence": "No, Nadine ______ (invite) everyone from class - just her close friends.",
+            "answer": "isn't going to invite"
+          },
+          {
+            "id": 6,
+            "sentence": "______ Harry ______ (be) ready on time or not?",
+            "answer": "Is / going to be"
+          },
+          {
+            "id": 7,
+            "sentence": "Careful! You ______ (break) something with that ball! Go outside!",
+            "answer": "are going to break"
+          },
+          {
+            "id": 8,
+            "sentence": "I ______ (lie down) for half an hour. Call me at six o'clock.",
+            "answer": "am going to lie down"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "gap_fill",
+        "title": "Complete using correct present simple form.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "'I'm so excited about my holiday! My plane ______ the airport here at nine o'clock and we ______ in Paris two hours later. We then ______ the train from the airport to the city. We'll have a great week, and then we ______ back on the 17th. I can't wait!'",
+            "answer": "leaves"
+          },
+          {
+            "id": 2,
+            "sentence": "'I'm so excited about my holiday! My plane ______ the airport here at nine o'clock and we ______ in Paris two hours later. We then ______ the train from the airport to the city. We'll have a great week, and then we ______ back on the 17th. I can't wait!'",
+            "answer": "arrive"
+          },
+          {
+            "id": 3,
+            "sentence": "'I'm so excited about my holiday! My plane ______ the airport here at nine o'clock and we ______ in Paris two hours later. We then ______ the train from the airport to the city. We'll have a great week, and then we ______ back on the 17th. I can't wait!'",
+            "answer": "take"
+          },
+          {
+            "id": 4,
+            "sentence": "'I'm so excited about my holiday! My plane ______ the airport here at nine o'clock and we ______ in Paris two hours later. We then ______ the train from the airport to the city. We'll have a great week, and then we ______ back on the 17th. I can't wait!'",
+            "answer": "come"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "multiple_choice",
+        "title": "Circle the correct word or phrase.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Oscar says he is doing / will do the washing-up after dinner.",
+            "answer": "will do"
+          },
+          {
+            "id": 2,
+            "sentence": "I'm a bit scared because I am seeing / will see the dentist this afternoon.",
+            "answer": "am seeing"
+          },
+          {
+            "id": 3,
+            "sentence": "What are you going to do / do you do this evening?",
+            "answer": "are you going to do"
+          },
+          {
+            "id": 4,
+            "sentence": "Shall you tell / Will you tell Rupert I'm sorry about yesterday?",
+            "answer": "Will you tell"
+          },
+          {
+            "id": 5,
+            "sentence": "My dad will grow / is going to grow a beard, but my mum doesn't like the idea.",
+            "answer": "is going to grow"
+          },
+          {
+            "id": 6,
+            "sentence": "I have to revise tonight because we are having / will have an exam tomorrow.",
+            "answer": "are having"
+          },
+          {
+            "id": 7,
+            "sentence": "I am remembering / will remember this day for the rest of my life!",
+            "answer": "will remember"
+          },
+          {
+            "id": 8,
+            "sentence": "Do you go / Are you going to Australia next Christmas?",
+            "answer": "Are you going"
+          },
+          {
+            "id": 9,
+            "sentence": "I'm sure you are passing / will pass your driving test. Don't worry.",
+            "answer": "will pass"
+          },
+          {
+            "id": 10,
+            "sentence": "If you want me to, I will complain / am going to complain to the manager about it.",
+            "answer": "will complain"
+          }
+        ]
+      },
+      {
+        "exercise": "F",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "options": {
+              "A": "We'll go",
+              "B": "We're going",
+              "C": "We go"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 2,
+            "options": {
+              "A": "I help",
+              "B": "I'm helping",
+              "C": "I'll help"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 3,
+            "options": {
+              "A": "Do you pass",
+              "B": "Will you pass",
+              "C": "Are you passing"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 4,
+            "options": {
+              "A": "I be",
+              "B": "I'm going to be",
+              "C": "I'm being"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 5,
+            "options": {
+              "A": "He'll win",
+              "B": "He wins",
+              "C": "He's winning"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 6,
+            "options": {
+              "A": "it's going to rain",
+              "B": "it's raining",
+              "C": "it rains"
+            },
+            "answer": "A"
+          }
+        ]
+      }
+    ]
+  },
+  "8": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "error_correction",
+        "title": "Tick correct or write correct word in bold.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "We first visited China on 2006.",
+            "answer": "in"
+          },
+          {
+            "id": 2,
+            "sentence": "My birthday is at the second of July.",
+            "answer": "on"
+          },
+          {
+            "id": 3,
+            "sentence": "Let's meet on five o'clock, shall we?",
+            "answer": "at"
+          },
+          {
+            "id": 4,
+            "sentence": "School starts again in September.",
+            "answer": "correct"
+          },
+          {
+            "id": 5,
+            "sentence": "There's a party at Emily's at Saturday.",
+            "answer": "on"
+          },
+          {
+            "id": 6,
+            "sentence": "What do you want to do on the morning?",
+            "answer": "in"
+          },
+          {
+            "id": 7,
+            "sentence": "Let's go and see Grandma on Easter.",
+            "answer": "at"
+          },
+          {
+            "id": 8,
+            "sentence": "Where do you usually go in Christmas Day?",
+            "answer": "at"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "gap_fill",
+        "title": "Complete using on, in or at.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "There are lots of people ______ the restaurant.",
+            "answer": "in"
+          },
+          {
+            "id": 2,
+            "sentence": "The people who live ______ number 44 are away on holiday.",
+            "answer": "at"
+          },
+          {
+            "id": 3,
+            "sentence": "You should go to the Louvre when you're ______ Paris.",
+            "answer": "in"
+          },
+          {
+            "id": 4,
+            "sentence": "Gorillas live ______ forests in Africa and eat fruit.",
+            "answer": "in"
+          },
+          {
+            "id": 5,
+            "sentence": "What does that sign ______ the wall say?",
+            "answer": "on"
+          },
+          {
+            "id": 6,
+            "sentence": "What did Ethan say ______ his letter?",
+            "answer": "in"
+          },
+          {
+            "id": 7,
+            "sentence": "Have you heard of the strange statues ______ Easter Island?",
+            "answer": "on"
+          },
+          {
+            "id": 8,
+            "sentence": "Do you really want to spend the whole day ______ the beach?",
+            "answer": "on"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "gap_fill",
+        "title": "Look at the pictures and complete the sentences.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "This photo was taken ______ winter.",
+            "answer": "in"
+          },
+          {
+            "id": 2,
+            "sentence": "We're ______ a concert.",
+            "answer": "at"
+          },
+          {
+            "id": 3,
+            "sentence": "She's ______ the sea.",
+            "answer": "by"
+          },
+          {
+            "id": 4,
+            "sentence": "It's ______ page 62.",
+            "answer": "on"
+          },
+          {
+            "id": 5,
+            "sentence": "It's ______ the middle.",
+            "answer": "in"
+          },
+          {
+            "id": 6,
+            "sentence": "He's ______ an island.",
+            "answer": "on"
+          },
+          {
+            "id": 7,
+            "sentence": "It's ______ the mountain.",
+            "answer": "on"
+          },
+          {
+            "id": 8,
+            "sentence": "They're ______ a wedding.",
+            "answer": "at"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "gap_fill",
+        "title": "Complete using the words in the box.",
+        "word_bank": [
+          "at",
+          "in",
+          "on",
+          "to"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "My aunt and uncle have decided to move ______ New Zealand.",
+            "answer": "to"
+          },
+          {
+            "id": 2,
+            "sentence": "Do you want to go ______ the theatre tomorrow?",
+            "answer": "to"
+          },
+          {
+            "id": 3,
+            "sentence": "We stayed ______ a great hotel in Dubai.",
+            "answer": "in"
+          },
+          {
+            "id": 4,
+            "sentence": "Wait ______ the end of the street and I'll come and meet you.",
+            "answer": "at"
+          },
+          {
+            "id": 5,
+            "sentence": "You can come ______ my house for dinner, if you like.",
+            "answer": "to"
+          },
+          {
+            "id": 6,
+            "sentence": "Connor was walking ______ the corner shop when he realised he'd lost his wallet.",
+            "answer": "to"
+          },
+          {
+            "id": 7,
+            "sentence": "We drove all night and finally arrived ______ Lisbon at eight o'clock.",
+            "answer": "in"
+          },
+          {
+            "id": 8,
+            "sentence": "Did you leave your book ______ the teacher's desk, so she can see it?",
+            "answer": "on"
+          },
+          {
+            "id": 9,
+            "sentence": "Look at those sheep ______ that field over there.",
+            "answer": "in"
+          },
+          {
+            "id": 10,
+            "sentence": "It takes about six hours to fly ______ Asia from here.",
+            "answer": "to"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "multiple_choice",
+        "title": "Circle the correct word.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I'm meeting Andy at / on the cinema in an hour.",
+            "options": {
+              "A": "at",
+              "B": "on"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 2,
+            "sentence": "Have you seen the new building at / in front of the school?",
+            "options": {
+              "A": "at",
+              "B": "in"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 3,
+            "sentence": "My new job starts in / on the first day of August.",
+            "options": {
+              "A": "in",
+              "B": "on"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 4,
+            "sentence": "We're going to Martin's to see their new baby in / on Wednesday evening.",
+            "options": {
+              "A": "in",
+              "B": "on"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 5,
+            "sentence": "See if there are any tomatoes at / in the fridge, will you?",
+            "options": {
+              "A": "at",
+              "B": "in"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 6,
+            "sentence": "We'll all have computers connected to our brains at / in the future.",
+            "options": {
+              "A": "at",
+              "B": "in"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 7,
+            "sentence": "I don't feel like playing chess at / on the moment.",
+            "options": {
+              "A": "at",
+              "B": "on"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 8,
+            "sentence": "I think there's someone at / in the door. I'll go and check.",
+            "options": {
+              "A": "at",
+              "B": "in"
+            },
+            "answer": "A"
+          }
+        ]
+      },
+      {
+        "exercise": "F",
+        "type": "gap_fill",
+        "title": "Write one word in each gap (Jetlag passage).",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "When you travel ______ the other side of the world, jetlag is a real problem.",
+            "answer": "to"
+          },
+          {
+            "id": 2,
+            "sentence": "You find yourself awake ______ the middle of the night and you feel like going to bed ______ the morning, just when everyone around you is getting up.",
+            "answer": "in"
+          },
+          {
+            "id": 3,
+            "sentence": "Jetlag happens when you go ______ a country where the time is very different.",
+            "answer": "to"
+          },
+          {
+            "id": 4,
+            "sentence": "For example, you might leave London ______ midday and fly ______ Los Angeles.",
+            "answer": "at"
+          },
+          {
+            "id": 5,
+            "sentence": "The flight takes about eleven hours, so when you arrive ______ Los Angeles airport, your body thinks you're there ______ 11 pm.",
+            "answer": "at"
+          },
+          {
+            "id": 6,
+            "sentence": "But Los Angeles is eight hours behind London, so you actually get there ______ 3 pm local time.",
+            "answer": "at"
+          },
+          {
+            "id": 7,
+            "sentence": "So, ______ midnight Los Angeles time, your body (which still thinks it's ______ London) says it's 8 am.",
+            "answer": "at"
+          },
+          {
+            "id": 8,
+            "sentence": "It takes a few days for your body clock to change.",
+            "answer": "in"
+          }
+        ]
+      }
+    ]
+  },
+  "9": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "anagram",
+        "title": "Complete using a word formed from the letters given.",
+        "questions": [
+          {
+            "id": 1,
+            "letters": "EGULGAG",
+            "sentence": "",
+            "answer": "luggage"
+          },
+          {
+            "id": 2,
+            "letters": "EUNSVORI",
+            "sentence": "",
+            "answer": "souvenir"
+          },
+          {
+            "id": 3,
+            "letters": "MLFRAPOT",
+            "sentence": "",
+            "answer": "platform"
+          },
+          {
+            "id": 4,
+            "letters": "YUNORJE",
+            "sentence": "",
+            "answer": "journey"
+          },
+          {
+            "id": 5,
+            "letters": "BUROHAR",
+            "sentence": "",
+            "answer": "harbour"
+          },
+          {
+            "id": 6,
+            "letters": "INETIDSOTAN",
+            "sentence": "",
+            "answer": "destination"
+          },
+          {
+            "id": 7,
+            "letters": "HEICEVL",
+            "sentence": "",
+            "answer": "vehicle"
+          },
+          {
+            "id": 8,
+            "letters": "HIGLTF",
+            "sentence": "",
+            "answer": "flight"
+          },
+          {
+            "id": 9,
+            "letters": "HACSR",
+            "sentence": "",
+            "answer": "crash"
+          },
+          {
+            "id": 10,
+            "letters": "CONDIOMACAOMT",
+            "sentence": "",
+            "answer": "accommodation"
+          },
+          {
+            "id": 11,
+            "letters": "DARAOB",
+            "sentence": "",
+            "answer": "abroad"
+          },
+          {
+            "id": 12,
+            "letters": "KERAB",
+            "sentence": "",
+            "answer": "break"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "multiple_choice",
+        "title": "Circle the correct word or phrase (pictures).",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "______ / ______",
+            "options": {
+              "A": "ferry",
+              "B": "traffic"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 2,
+            "sentence": "______ / ______",
+            "options": {
+              "A": "crowded",
+              "B": "nearby"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 3,
+            "sentence": "______ / ______",
+            "options": {
+              "A": "cruise",
+              "B": "coach"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 4,
+            "sentence": "______ / ______",
+            "options": {
+              "A": "convenient",
+              "B": "foreign"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 5,
+            "sentence": "______ / ______",
+            "options": {
+              "A": "passport",
+              "B": "public transport"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 6,
+            "sentence": "______ / ______",
+            "options": {
+              "A": "resort",
+              "B": "trip"
+            },
+            "answer": "A"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "gap_fill",
+        "title": "Complete using the correct form of the verbs in the box.",
+        "word_bank": [
+          "book",
+          "cancel",
+          "catch",
+          "delay",
+          "pack",
+          "reach"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "They've ______ all today's trains. How are we going to get home?",
+            "answer": "cancelled"
+          },
+          {
+            "id": 2,
+            "sentence": "What's the first thing you want to do when we ______ New York?",
+            "answer": "reach"
+          },
+          {
+            "id": 3,
+            "sentence": "It's cold in Moscow, so ______ some warm clothes.",
+            "answer": "pack"
+          },
+          {
+            "id": 4,
+            "sentence": "You ______ the hotel room and I'll go and buy the train tickets.",
+            "answer": "book"
+          },
+          {
+            "id": 5,
+            "sentence": "Our plane has been ______ by four hours.",
+            "answer": "delayed"
+          },
+          {
+            "id": 6,
+            "sentence": "If we're quick, then maybe we can still ______ the bus.",
+            "answer": "catch"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "matching",
+        "title": "Match to make sentences (phrasal verbs).",
+        "questions": [
+          {
+            "id": 1,
+            "left": "As the plane took",
+            "right": "off, I held my mum's hand tightly.",
+            "answer": "C"
+          },
+          {
+            "id": 2,
+            "left": "The door is open, so you can get",
+            "right": "in the car, if you like.",
+            "answer": "F"
+          },
+          {
+            "id": 3,
+            "left": "We were in a hurry and when we got",
+            "right": "on the bus, I realised I didn't have a ticket.",
+            "answer": "H"
+          },
+          {
+            "id": 4,
+            "left": "The man selling the tickets told us to go",
+            "right": "out on the right because it was safer.",
+            "answer": "G"
+          },
+          {
+            "id": 5,
+            "left": "It was raining when we set",
+            "right": "off on our walk, but it soon stopped.",
+            "answer": "E"
+          },
+          {
+            "id": 6,
+            "left": "We loved the hotel so we went",
+            "right": "back there the following year.",
+            "answer": "B"
+          },
+          {
+            "id": 7,
+            "left": "Ray fell as he was getting",
+            "right": "off the bus and couldn't walk properly.",
+            "answer": "D"
+          },
+          {
+            "id": 8,
+            "left": "The taxi driver asked us to get",
+            "right": "away and come back again later.",
+            "answer": "A"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "gap_fill",
+        "title": "Complete using the correct form of the phrasal verbs from exercise D.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Before Darren ______ on his journey, he packed some boots and plenty of warm clothes.",
+            "answer": "set off"
+          },
+          {
+            "id": 2,
+            "sentence": "Why don't you ______ and think about what I've said to you?",
+            "answer": "go away"
+          },
+          {
+            "id": 3,
+            "sentence": "We should ______ the train at the next station and then find a taxi.",
+            "answer": "get off"
+          },
+          {
+            "id": 4,
+            "sentence": "The helicopter ______ and suddenly we were in the air!",
+            "answer": "took off"
+          },
+          {
+            "id": 5,
+            "sentence": "There was a fire alarm and we all had to ______ of the hotel.",
+            "answer": "get out"
+          },
+          {
+            "id": 6,
+            "sentence": "Without saying anything, the man ______ his car and drove up the road.",
+            "answer": "got in"
+          },
+          {
+            "id": 7,
+            "sentence": "We ran to the train and ______ just before it started to move.",
+            "answer": "got on"
+          },
+          {
+            "id": 8,
+            "sentence": "My parents ______ to the little Spanish town where they first met.",
+            "answer": "are going back"
+          }
+        ]
+      },
+      {
+        "exercise": "F",
+        "type": "gap_fill",
+        "title": "Complete using the words in the box. Add any other words you need.",
+        "word_bank": [
+          "board",
+          "bus",
+          "coast",
+          "foot",
+          "holiday",
+          "schedule"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "When you go ______, it always takes a few days to completely relax.",
+            "answer": "on holiday"
+          },
+          {
+            "id": 2,
+            "sentence": "I hope our plane arrives ______. I'm bored just sitting here, waiting.",
+            "answer": "on schedule"
+          },
+          {
+            "id": 3,
+            "sentence": "If you come ______, don't forget to get off at the stop outside the bank.",
+            "answer": "by bus"
+          },
+          {
+            "id": 4,
+            "sentence": "Living ______ is great. I love walking on the beach every morning.",
+            "answer": "on the coast"
+          },
+          {
+            "id": 5,
+            "sentence": "The cowboys got off their horses and went the rest of the way ______.",
+            "answer": "on foot"
+          },
+          {
+            "id": 6,
+            "sentence": "Now we're ______ the ship let's have a look around.",
+            "answer": "on board"
+          }
+        ]
+      },
+      {
+        "exercise": "G",
+        "type": "word_formation",
+        "title": "Use the word given in capitals at the end of each line to form a word that fits in the gap in the same line.",
+        "questions": [
+          {
+            "id": 1,
+            "capital_word": "FLY",
+            "sentence": "Up until the 1960s, not many British people had ______ abroad for their holidays.",
+            "answer": "flown"
+          },
+          {
+            "id": 2,
+            "capital_word": "ATTRACT",
+            "sentence": "Although the idea was ______, flying was still too expensive for most people.",
+            "answer": "attractive"
+          },
+          {
+            "id": 3,
+            "capital_word": "CHOOSE",
+            "sentence": "The only ______ people had was to go to British resorts.",
+            "answer": "choice"
+          },
+          {
+            "id": 4,
+            "capital_word": "DRIVE",
+            "sentence": "Instead of flying, families ______ to the British coast.",
+            "answer": "drove"
+          },
+          {
+            "id": 5,
+            "capital_word": "VISIT",
+            "sentence": "Places like Blackpool and Brighton had millions of ______ every year.",
+            "answer": "visitors"
+          },
+          {
+            "id": 6,
+            "capital_word": "TRAVEL",
+            "sentence": "During the 60s and 70s, prices dropped and ______ began to visit places like Spain.",
+            "answer": "travellers"
+          },
+          {
+            "id": 7,
+            "capital_word": "COMFORT",
+            "sentence": "At first, hotels were ______, but they slowly got better.",
+            "answer": "uncomfortable"
+          },
+          {
+            "id": 8,
+            "capital_word": "DEPART",
+            "sentence": "These days, the ______ lounges at airports are full and people travel",
+            "answer": "departure"
+          },
+          {
+            "id": 9,
+            "capital_word": "BACK",
+            "sentence": "______ and forwards across the world for work and on holiday.",
+            "answer": "backwards"
+          },
+          {
+            "id": 10,
+            "capital_word": "DIRECT",
+            "sentence": "Every summer, tourists go in all ______ in search of the perfect beach and the perfect resort.",
+            "answer": "directions"
+          }
+        ]
+      },
+      {
+        "exercise": "H",
+        "type": "gap_fill",
+        "title": "Write one word in each gap.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Sydney is famous ______ its harbour. You should also look ______ the Opera House and the bridge while you're there.",
+            "answer": "for / at"
+          },
+          {
+            "id": 2,
+            "sentence": "We arrived ______ the hotel and they provided us ______ a map of the area.",
+            "answer": "at / with"
+          },
+          {
+            "id": 3,
+            "sentence": "When you're preparing ______ a holiday, pack clothes that are suitable ______ the place where you're going.",
+            "answer": "for / for"
+          },
+          {
+            "id": 4,
+            "sentence": "I prefer to be far ______ other people when I'm on holiday. I don't like being close ______ crowds of tourists.",
+            "answer": "from / to"
+          },
+          {
+            "id": 5,
+            "sentence": "While we were waiting ______ our train, I asked someone ______ the delay.",
+            "answer": "for / about"
+          },
+          {
+            "id": 6,
+            "sentence": "Will was late ______ his appointment so he asked me ______ some money for a taxi.",
+            "answer": "for / for"
+          }
+        ]
+      }
+    ]
+  }
+}

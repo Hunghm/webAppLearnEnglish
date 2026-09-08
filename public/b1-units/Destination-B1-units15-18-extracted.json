@@ -1,0 +1,1205 @@
+{
+  "15": {
+    "exercises": [
+      {
+        "exercise": "F",
+        "type": "error_correction",
+        "title": "One of the words in each sentence is in the wrong form. Write the correct word.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "The serve in this place is absolutely terrible and I want to see the manager.",
+            "answer": "service"
+          },
+          {
+            "id": 2,
+            "sentence": "Could you help me make a decide? I don't know which phone to get.",
+            "answer": "decision"
+          },
+          {
+            "id": 3,
+            "sentence": "Even very good quality clothes are quite afford in this shop.",
+            "answer": "affordable"
+          },
+          {
+            "id": 4,
+            "sentence": "Companies should always tell the true in advertisements.",
+            "answer": "truth"
+          },
+          {
+            "id": 5,
+            "sentence": "Credit cards are really use, but you have to be careful with them.",
+            "answer": "useful"
+          },
+          {
+            "id": 6,
+            "sentence": "I read a compare of all the supermarkets and Safeshop was the most expensive.",
+            "answer": "comparison"
+          },
+          {
+            "id": 7,
+            "sentence": "My grandma had no idea that her old vase was so value.",
+            "answer": "valuable"
+          },
+          {
+            "id": 8,
+            "sentence": "Pete never shops at Mayfield's because he says it's too expense.",
+            "answer": "expensive"
+          },
+          {
+            "id": 9,
+            "sentence": "Before you borrow from the bank, you have to make a judge about whether you can pay it back or not.",
+            "answer": "judgement"
+          },
+          {
+            "id": 10,
+            "sentence": "Is the bill right? Could you just check your add, please?",
+            "answer": "addition"
+          }
+        ]
+      },
+      {
+        "exercise": "G",
+        "type": "multiple_choice",
+        "title": "Circle the correct word.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Don't lend any money on / to George because you'll never get it back.",
+            "answer": "to"
+          },
+          {
+            "id": 2,
+            "sentence": "Where did you buy your new shoes at / from? They're great!",
+            "answer": "from"
+          },
+          {
+            "id": 3,
+            "sentence": "Let me just pay about / for these things and then we can go home.",
+            "answer": "for"
+          },
+          {
+            "id": 4,
+            "sentence": "There's something wrong in / with the CD player I've just bought.",
+            "answer": "with"
+          },
+          {
+            "id": 5,
+            "sentence": "Carol seems to spend all her pocket money for / on going out.",
+            "answer": "on"
+          },
+          {
+            "id": 6,
+            "sentence": "Look inside the wallet and maybe we can find out who it belongs in / to.",
+            "answer": "to"
+          },
+          {
+            "id": 7,
+            "sentence": "Have you decided in / on a name for your new business?",
+            "answer": "on"
+          }
+        ]
+      },
+      {
+        "exercise": "H",
+        "type": "gap_fill",
+        "title": "Complete using the words in the box. Add any other words you need.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I need to get a new bag for school but I can't ______ ______ these two.",
+            "answer": "choose / between"
+          },
+          {
+            "id": 2,
+            "sentence": "This CD player seems expensive, but if you ______ it ______ the one in the other shop, it's actually not bad.",
+            "answer": "compare / with"
+          },
+          {
+            "id": 3,
+            "sentence": "Madeleine ______ a really nice top ______ me and she still hasn't given it back!",
+            "answer": "borrowed / from"
+          },
+          {
+            "id": 4,
+            "sentence": "The ______ the website said you could sell your old things to people all over the country.",
+            "answer": "advertisement"
+          },
+          {
+            "id": 5,
+            "sentence": "The shop assistant was ______ the price so I had to show her the label.",
+            "answer": "wrong about"
+          }
+        ]
+      }
+    ]
+  },
+  "16": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "gap_fill",
+        "title": "Complete using the words in the box. You have to use some words more than once.",
+        "word_bank": [
+          "I",
+          "you",
+          "he",
+          "she",
+          "it",
+          "we",
+          "they"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "______",
+            "answer": "I / he / it"
+          },
+          {
+            "id": 2,
+            "sentence": "Hi Diana! Are ______ still coming shopping with us tomorrow?",
+            "answer": "you"
+          },
+          {
+            "id": 3,
+            "sentence": "My mum studied history at university. ______ says ______ was a really interesting course.",
+            "answer": "She / it"
+          },
+          {
+            "id": 4,
+            "sentence": "Scientists are working hard to find cures for lots of diseases, but ______ haven't found a cure for the common cold yet.",
+            "answer": "they"
+          },
+          {
+            "id": 5,
+            "sentence": "Adam, do ______ think ______ should all bring some food with us to your party?",
+            "answer": "you / we"
+          },
+          {
+            "id": 6,
+            "sentence": "Dad, do ______ know if ______ sell computer games in the market?",
+            "answer": "you / they"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "substitution",
+        "title": "Replace each word or phrase in bold with a word from the box.",
+        "word_bank": [
+          "him",
+          "her",
+          "it",
+          "us",
+          "them"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Did you give that book back to Alicia?",
+            "answer": "her"
+          },
+          {
+            "id": 2,
+            "sentence": "I told Bill that you don't eat meat.",
+            "answer": "him"
+          },
+          {
+            "id": 3,
+            "sentence": "Why does she always give our class more tests than the other class?",
+            "answer": "us"
+          },
+          {
+            "id": 4,
+            "sentence": "They paid Kate Winslet a lot of money to be in this film.",
+            "answer": "her"
+          },
+          {
+            "id": 5,
+            "sentence": "I haven't seen Rich and Andy for ages.",
+            "answer": "them"
+          },
+          {
+            "id": 6,
+            "sentence": "Did you give an invitation to Mr and Mrs Clark?",
+            "answer": "them"
+          },
+          {
+            "id": 7,
+            "sentence": "A TV channel has invited my family to take part in a game show!",
+            "answer": "us"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "sentence_rewrite",
+        "title": "Rewrite the sentences using the word given.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "This is where we live.",
+            "answer": "This is our house."
+          },
+          {
+            "id": 2,
+            "sentence": "That wallet belongs to me!",
+            "answer": "That is my wallet!"
+          },
+          {
+            "id": 3,
+            "sentence": "Do those shoes belong to you?",
+            "answer": "Are those your shoes?"
+          },
+          {
+            "id": 4,
+            "sentence": "That car doesn't belong to them.",
+            "answer": "That's not their car."
+          },
+          {
+            "id": 5,
+            "sentence": "This is where she sleeps.",
+            "answer": "This is her bed."
+          },
+          {
+            "id": 6,
+            "sentence": "That isn't what he does.",
+            "answer": "That isn't his job."
+          },
+          {
+            "id": 7,
+            "sentence": "Have you seen the dog's blanket?",
+            "answer": "Where's its blanket?"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "error_correction",
+        "title": "If a sentence is correct, put a tick. If there is an extra word, write the word.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Is that my milkshake or yours milkshake?",
+            "answer": "milkshake"
+          },
+          {
+            "id": 2,
+            "sentence": "Look where the dog has put its bone!",
+            "answer": ""
+          },
+          {
+            "id": 3,
+            "sentence": "I haven't got a camera with me because I've lent mine to my brother.",
+            "answer": ""
+          },
+          {
+            "id": 4,
+            "sentence": "Your DVD player is just the same as theirs is.",
+            "answer": ""
+          },
+          {
+            "id": 5,
+            "sentence": "Was it your decision or hers decision?",
+            "answer": "decision"
+          },
+          {
+            "id": 6,
+            "sentence": "You can borrow my laptop, but why aren't you using yours laptop?",
+            "answer": "laptop"
+          },
+          {
+            "id": 7,
+            "sentence": "I think those are your CDs and these are ours.",
+            "answer": ""
+          },
+          {
+            "id": 8,
+            "sentence": "This is her book, these are your books and these two are mine books.",
+            "answer": "books"
+          },
+          {
+            "id": 9,
+            "sentence": "That video belongs to Carol and Doug - at least, I think it's theirs video.",
+            "answer": "video"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "error_correction",
+        "title": "Each word in bold is in the wrong sentence. Write the correct word.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "That's great, Cathy. Did you make that herself?",
+            "answer": "yourself"
+          },
+          {
+            "id": 2,
+            "sentence": "Doug hit myself in the eye by mistake with his toothbrush!",
+            "answer": "himself"
+          },
+          {
+            "id": 3,
+            "sentence": "Cats can look after yourself, can't they?",
+            "answer": "themselves"
+          },
+          {
+            "id": 4,
+            "sentence": "I hope you all enjoy himself on holiday!",
+            "answer": "yourselves"
+          },
+          {
+            "id": 5,
+            "sentence": "Dad didn't help me. I did it all themselves!",
+            "answer": "myself"
+          },
+          {
+            "id": 6,
+            "sentence": "We painted the room yourselves; we didn't pay anyone to do it.",
+            "answer": "ourselves"
+          },
+          {
+            "id": 7,
+            "sentence": "This kitchen isn't going to clean ourselves, you know!",
+            "answer": "itself"
+          },
+          {
+            "id": 8,
+            "sentence": "Wendy decided that she would buy itself a new dress in the sales.",
+            "answer": "herself"
+          }
+        ]
+      },
+      {
+        "exercise": "F",
+        "type": "gap_fill",
+        "title": "Complete using the correct pronouns or determiners.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "If you invented something important, ______ would want to make money out of ______, right?",
+            "answer": "you / it"
+          },
+          {
+            "id": 2,
+            "sentence": "Most of us would want to make some money from ______ invention.",
+            "answer": "our / the"
+          },
+          {
+            "id": 3,
+            "sentence": "It seems only fair - we did the work, so the money should be ______ too.",
+            "answer": "ours"
+          },
+          {
+            "id": 4,
+            "sentence": "Many inventors who have had ______ inventions produced, have become rich and famous and we shouldn't blame ______ for that.",
+            "answer": "their / them"
+          },
+          {
+            "id": 5,
+            "sentence": "But have ______ heard of Tim Berners-Lee?",
+            "answer": "you"
+          },
+          {
+            "id": 6,
+            "sentence": "______ invented the World Wide Web on the Internet, one of the most important inventions of the last fifty years.",
+            "answer": "He"
+          },
+          {
+            "id": 7,
+            "sentence": "Millions of lives have been changed by ______ introduction.",
+            "answer": "its"
+          },
+          {
+            "id": 8,
+            "sentence": "When Tim Berners-Lee invented the Web, he made a promise to ______ - that he wouldn't make any money out of it, and that he would give ______ invention to the world.",
+            "answer": "himself / his / this"
+          },
+          {
+            "id": 9,
+            "sentence": "He did, and now the Web belongs to all of ______.",
+            "answer": "us"
+          },
+          {
+            "id": 10,
+            "sentence": "Ask ______ what life would be like if the World Wide Web wasn't free.",
+            "answer": "yourself / yourselves"
+          },
+          {
+            "id": 11,
+            "sentence": "We should be grateful to Tim Berners-Lee, and thank ______ for ______ amazing gift to the world.",
+            "answer": "him / his / this"
+          }
+        ]
+      }
+    ]
+  },
+  "17": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "gap_fill",
+        "title": "Complete using where, which, who or whose.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "There's a film on tonight ______ I really want to see.",
+            "answer": "which"
+          },
+          {
+            "id": 2,
+            "sentence": "Do you know any restaurants ______ they serve vegetarian dishes?",
+            "answer": "where"
+          },
+          {
+            "id": 3,
+            "sentence": "Can you remember ______ told you about the new nightclub?",
+            "answer": "who"
+          },
+          {
+            "id": 4,
+            "sentence": "The film, ______ stars Tom Hanks, is based on a book by Dan Brown.",
+            "answer": "which"
+          },
+          {
+            "id": 5,
+            "sentence": "I've never met anyone before ______ mother was famous!",
+            "answer": "whose"
+          },
+          {
+            "id": 6,
+            "sentence": "Lorenzo, ______ is from Spain originally, has lived here for about ten years.",
+            "answer": "who"
+          },
+          {
+            "id": 7,
+            "sentence": "Carla, ______ parents are from Mexico, was born in the UK.",
+            "answer": "whose"
+          },
+          {
+            "id": 8,
+            "sentence": "Here's a photo of the hotel ______ we stayed.",
+            "answer": "where"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "error_correction",
+        "title": "Circle the extra word in each sentence.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "The boy who he sits next to me in class is called Vladimir.",
+            "answer": "he"
+          },
+          {
+            "id": 2,
+            "sentence": "This book, which I started reading it last week, is really funny.",
+            "answer": "it"
+          },
+          {
+            "id": 3,
+            "sentence": "Jean, whose her mother is a nurse, wants to be a doctor.",
+            "answer": "her"
+          },
+          {
+            "id": 4,
+            "sentence": "My mum and dad, who they got married fifteen years ago, met over thirty years ago.",
+            "answer": "they"
+          },
+          {
+            "id": 5,
+            "sentence": "The jeans which I was telling you about them are over there.",
+            "answer": "them"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "sentence_rewrite",
+        "title": "Rewrite as one sentence using a relative clause.",
+        "questions": [
+          {
+            "id": 1,
+            "prompt": "",
+            "sentence": "",
+            "answer": "My grandfather, who is sixty-five years old now, was an airline pilot."
+          },
+          {
+            "id": 2,
+            "prompt": "",
+            "sentence": "",
+            "answer": "Friendly People, which is my favourite programme, is a comedy."
+          },
+          {
+            "id": 3,
+            "prompt": "",
+            "sentence": "",
+            "answer": "My friend Michael, who hasn't got any brothers and sisters, often comes to play with me."
+          },
+          {
+            "id": 4,
+            "prompt": "",
+            "sentence": "",
+            "answer": "My sister, whose hair is brown, loves wearing hats."
+          },
+          {
+            "id": 5,
+            "prompt": "",
+            "sentence": "",
+            "answer": "New York, where I was born, is an enormous city."
+          },
+          {
+            "id": 6,
+            "prompt": "",
+            "sentence": "",
+            "answer": "This CD, which I only bought yesterday, is scratched."
+          },
+          {
+            "id": 7,
+            "prompt": "",
+            "sentence": "",
+            "answer": "My brother George, who hates me borrowing his clothes, has got some great shirts!"
+          },
+          {
+            "id": 8,
+            "prompt": "",
+            "sentence": "",
+            "answer": "Our neighbours, whose house is directly opposite ours, have never invited us to dinner."
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "sentence_writing",
+        "title": "Look at the pictures and use the prompts to write sentences.",
+        "questions": [
+          {
+            "id": "1A",
+            "prompt": "tree/tall/have/leaves",
+            "sentence": "",
+            "answer": "The trees which have leaves are short."
+          },
+          {
+            "id": "1B",
+            "prompt": "trees/have/leaves/be/short",
+            "sentence": "",
+            "answer": "The trees which have leaves are short."
+          },
+          {
+            "id": "2A",
+            "prompt": "bottle/big/full",
+            "sentence": "",
+            "answer": "The bottle which is big is full."
+          },
+          {
+            "id": "2B",
+            "prompt": "bottles/small/empty",
+            "sentence": "",
+            "answer": "The bottles which are small are empty."
+          },
+          {
+            "id": "3A",
+            "prompt": "girl/has/short hair/be called/Melissa",
+            "sentence": "",
+            "answer": "The girl who has short hair is called Melissa."
+          },
+          {
+            "id": "3B",
+            "prompt": "girls/hair/be/long/be called/Lucy, Tina and Debbi",
+            "sentence": "",
+            "answer": "The girls whose hair is long are called Lucy, Tina and Debbie."
+          },
+          {
+            "id": "4A",
+            "prompt": "boy/hold/black basketball/wear/school uniform",
+            "sentence": "",
+            "answer": "The boy who is holding the black basketball is wearing a/his school uniform."
+          },
+          {
+            "id": "4B",
+            "prompt": "boys/basketballs/be/white/wear/tracksuits",
+            "sentence": "",
+            "answer": "The boys whose basketballs are white are wearing tracksuits."
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "tick_cross",
+        "title": "Tick sentences where relative pronoun can be replaced by that. Put cross where it cannot.",
+        "questions": [
+          {
+            "id": "1A",
+            "left": "",
+            "right": "",
+            "answer": "A"
+          },
+          {
+            "id": "1B",
+            "left": "",
+            "right": "",
+            "answer": "B"
+          },
+          {
+            "id": "2A",
+            "left": "",
+            "right": "",
+            "answer": "A"
+          },
+          {
+            "id": "2B",
+            "left": "",
+            "right": "",
+            "answer": "B"
+          },
+          {
+            "id": "3A",
+            "left": "",
+            "right": "",
+            "answer": "A"
+          },
+          {
+            "id": "3B",
+            "left": "",
+            "right": "",
+            "answer": "X"
+          },
+          {
+            "id": "4A",
+            "left": "",
+            "right": "",
+            "answer": "A"
+          },
+          {
+            "id": "4B",
+            "left": "",
+            "right": "",
+            "answer": "X"
+          }
+        ]
+      },
+      {
+        "exercise": "F",
+        "type": "gap_fill",
+        "title": "Write one word in each gap (Actuaries passage).",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Did you know that there are people ______ are paid to predict the future?",
+            "answer": "who/that"
+          },
+          {
+            "id": 2,
+            "sentence": "I'd never heard of actuaries until my friend Greg, ______ mother is an actuary, told me about them.",
+            "answer": "whose"
+          },
+          {
+            "id": 3,
+            "sentence": "It's a job ______ sounds quite interesting.",
+            "answer": "which/that"
+          },
+          {
+            "id": 4,
+            "sentence": "Actuaries usually work for companies, like insurance companies, ______ deal with the chances of things happening in the future .",
+            "answer": "which/that"
+          },
+          {
+            "id": 5,
+            "sentence": "For example, it's more probable that buildings will be flooded in places ______ it rains a lot.",
+            "answer": "where"
+          },
+          {
+            "id": 6,
+            "sentence": "Greg's mum, ______ has been an actuary for about five years, is involved with car insurance.",
+            "answer": "who"
+          },
+          {
+            "id": 7,
+            "sentence": "She works in an office ______ they decide how much car insurance people should pay.",
+            "answer": "where"
+          },
+          {
+            "id": 8,
+            "sentence": "It's more probable that a car ______ is new is safer and more reliable than a very old car, so people ______ cars are new pay less insurance.",
+            "answer": "which/that"
+          },
+          {
+            "id": 9,
+            "sentence": "It's more probable that a car ______ is new is safer and more reliable than a very old car, so people ______ cars are new pay less insurance.",
+            "answer": "whose"
+          },
+          {
+            "id": 10,
+            "sentence": "If there are drivers ______ she thinks will probably have more accidents, she makes them pay more insurance!",
+            "answer": "who/that"
+          }
+        ]
+      }
+    ]
+  },
+  "18": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "matching",
+        "title": "Match the pictures with the words in the box.",
+        "questions": [
+          {
+            "id": 1,
+            "left": "",
+            "right": "laboratory",
+            "answer": "1"
+          },
+          {
+            "id": 2,
+            "left": "",
+            "right": "screen",
+            "answer": "2"
+          },
+          {
+            "id": 3,
+            "left": "",
+            "right": "experiment",
+            "answer": "3"
+          },
+          {
+            "id": 4,
+            "left": "",
+            "right": "equipment",
+            "answer": "4"
+          },
+          {
+            "id": 5,
+            "left": "",
+            "right": "laptop",
+            "answer": "5"
+          },
+          {
+            "id": 6,
+            "left": "",
+            "right": "gadgets",
+            "answer": "6"
+          },
+          {
+            "id": 7,
+            "left": "",
+            "right": "software",
+            "answer": "7"
+          },
+          {
+            "id": 8,
+            "left": "",
+            "right": "hardware",
+            "answer": "8"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "gap_fill",
+        "title": "Complete using the words in the box.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "1 I can't get the printer to work - I think there's a problem with the ______.",
+            "answer": "digital"
+          },
+          {
+            "id": 2,
+            "sentence": "2 The lecture theatre was designed to hold a ______ of 200 students.",
+            "answer": "maximum"
+          },
+          {
+            "id": 3,
+            "sentence": "3 The instructions for using this equipment are very ______.",
+            "answer": "complicated"
+          },
+          {
+            "id": 4,
+            "sentence": "4 My mobile phone has a ______ cover.",
+            "answer": "plastic"
+          },
+          {
+            "id": 5,
+            "sentence": "5 The experiment showed that the new material was made of ______ fibres.",
+            "answer": "artificial"
+          },
+          {
+            "id": 6,
+            "sentence": "6 There was a ______ increase in temperature last night.",
+            "answer": "sudden"
+          },
+          {
+            "id": 7,
+            "sentence": "7 My computer is very old, but it still has an ______ processor.",
+            "answer": "automatic"
+          },
+          {
+            "id": 8,
+            "sentence": "8 This new software is ______ for translating documents.",
+            "answer": "unique"
+          },
+          {
+            "id": 9,
+            "sentence": "9 The minimum temperature was only 2°C, but the ______ was 20°C.",
+            "answer": "minimum"
+          },
+          {
+            "id": 10,
+            "sentence": "10 Can you give me the ______ answer to the question?",
+            "answer": "exact"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "multiple_choice",
+        "title": "Circle the correct word.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Do you know who invented / discovered the planet Mars?",
+            "answer": "A"
+          },
+          {
+            "id": 2,
+            "sentence": "The number of people dying of malaria has run / decreased enormously over the last 100 years.",
+            "answer": "A"
+          },
+          {
+            "id": 3,
+            "sentence": "You need at least three people to operate / estimate this machine safely.",
+            "answer": "A"
+          }
+        ]
+      },
+      {
+        "exercise": "C_cont",
+        "type": "multiple_choice",
+        "title": "Circle the correct word (continued).",
+        "questions": [
+          {
+            "id": 4,
+            "sentence": "Modern technology / equipment makes all our lives easier.",
+            "answer": "A"
+          },
+          {
+            "id": 5,
+            "sentence": "We've done a lot of research / experiment into why people are scared of spiders.",
+            "answer": "A"
+          },
+          {
+            "id": 6,
+            "sentence": "I'm using a computer research / program that translates from English into Greek.",
+            "answer": "B"
+          },
+          {
+            "id": 7,
+            "sentence": "This drug seems to have no effect / lack on humans at all.",
+            "answer": "A"
+          },
+          {
+            "id": 8,
+            "sentence": "The experiment just involves / operates answering a few questions.",
+            "answer": "A"
+          },
+          {
+            "id": 9,
+            "sentence": "Could you program / estimate how many times a week you eat cheese?",
+            "answer": "B"
+          },
+          {
+            "id": 10,
+            "sentence": "Do you think anyone will ever invent / discover a time machine?",
+            "answer": "A"
+          },
+          {
+            "id": 11,
+            "sentence": "Professor Reinhart decreases / runs the computer lab with her three assistants.",
+            "answer": "B"
+          },
+          {
+            "id": 12,
+            "sentence": "There's a lack / an effect of phones in this office. We need some more!",
+            "answer": "A"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "multiple_choice",
+        "title": "Phrasal verbs - Choose the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "options": {
+              "A": "went",
+              "B": "found",
+              "C": "came",
+              "D": "looked"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 2,
+            "options": {
+              "A": "off",
+              "B": "away",
+              "C": "in",
+              "D": "over"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 3,
+            "options": {
+              "A": "across",
+              "B": "up",
+              "C": "off",
+              "D": "out"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 4,
+            "options": {
+              "A": "off",
+              "B": "down",
+              "C": "out",
+              "D": "in"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 5,
+            "options": {
+              "A": "took",
+              "B": "wrote",
+              "C": "created",
+              "D": "made"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 6,
+            "options": {
+              "A": "Put",
+              "B": "Set",
+              "C": "Turn",
+              "D": "Make"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 7,
+            "options": {
+              "A": "off",
+              "B": "away",
+              "C": "down",
+              "D": "back"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 8,
+            "options": {
+              "A": "over",
+              "B": "up",
+              "C": "round",
+              "D": "on"
+            },
+            "answer": "D"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "gap_fill",
+        "title": "Complete using the words in the box (prepositional phrases).",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "1 These toilets have been out of ______ for a week now. When are they going to fix them?",
+            "answer": "order"
+          },
+          {
+            "id": 2,
+            "sentence": "2 In my ______, humans will never live on other planets.",
+            "answer": "opinion"
+          },
+          {
+            "id": 3,
+            "sentence": "3 Alexander Fleming discovered penicillin by ______. He didn't expect to find it at all.",
+            "answer": "chance"
+          },
+          {
+            "id": 4,
+            "sentence": "4 I wonder what new technology will be invented in the ______.",
+            "answer": "future"
+          },
+          {
+            "id": 5,
+            "sentence": "5 Helen couldn't get the experiment to work for ages, but in the ______ it was fine.",
+            "answer": "end"
+          },
+          {
+            "id": 6,
+            "sentence": "6 It's so nice to have my own computer at ______.",
+            "answer": "last"
+          }
+        ]
+      },
+      {
+        "exercise": "F",
+        "type": "word_formation",
+        "title": "Word formation passage - Mr Thomas.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "He'd trained as a (1) ______________________________ and usually taught history.",
+            "answer": "historian",
+            "capital_word": "HISTORY"
+          },
+          {
+            "id": 2,
+            "sentence": "He definitely wasn't a (2) ______________________________ , but for some strange reason he taught us (3) ______________________________ for a term.",
+            "answer": "scientist",
+            "capital_word": "SCIENCE"
+          },
+          {
+            "id": 3,
+            "sentence": "He definitely wasn't a (2) ______________________________ , but for some strange reason he taught us (3) ______________________________ for a term.",
+            "answer": "chemistry",
+            "capital_word": "CHEMIST"
+          },
+          {
+            "id": 4,
+            "sentence": "His lessons were always (4) ______________________________ , but that was mainly because his experiments always went wrong!",
+            "answer": "fascinating",
+            "capital_word": "FASCINATE"
+          },
+          {
+            "id": 5,
+            "sentence": "If he was supposed to use (5) ______________________________ water for an experiment, Mr Thomas would use cold water by mistake.",
+            "answer": "boiling",
+            "capital_word": "BOIL"
+          },
+          {
+            "id": 6,
+            "sentence": "Once, he was measuring the (6) ______________________________ of some pieces of sodium.",
+            "answer": "length",
+            "capital_word": "LONG"
+          },
+          {
+            "id": 7,
+            "sentence": "I can't remember exactly why he needed this (7) ______________________________ , but I think he wanted all the pieces to react (8) ______________________________ .",
+            "answer": "measurement",
+            "capital_word": "MEASURE"
+          },
+          {
+            "id": 8,
+            "sentence": "I can't remember exactly why he needed this (7) ______________________________ , but I think he wanted all the pieces to react (8) ______________________________ .",
+            "answer": "identically",
+            "capital_word": "IDENTICAL"
+          },
+          {
+            "id": 9,
+            "sentence": "I think after that Mr Thomas came to the (9) ______________________________ that he should stick to history!",
+            "answer": "conclusion",
+            "capital_word": "CONCLUDE"
+          },
+          {
+            "id": 10,
+            "sentence": "Whenever there was a question in a science (10) ______________________________ about what happens when sodium reacts with water, I always got the answer right!",
+            "answer": "examination",
+            "capital_word": "EXAMINE"
+          }
+        ]
+      },
+      {
+        "exercise": "G",
+        "type": "matching",
+        "title": "Match to make sentences.",
+        "questions": [
+          {
+            "id": 1,
+            "left": "What's the difference",
+            "right": "between H2O and H2SO4?",
+            "answer": "D"
+          },
+          {
+            "id": 2,
+            "left": "This box is full",
+            "right": "of old camping equipment.",
+            "answer": "F"
+          },
+          {
+            "id": 3,
+            "left": "This resulted",
+            "right": "in us having to call the fire brigade.",
+            "answer": "A"
+          },
+          {
+            "id": 4,
+            "left": "Connect this cable",
+            "right": "to that piece of equipment over there.",
+            "answer": "B"
+          },
+          {
+            "id": 5,
+            "left": "I've had an idea",
+            "right": "about how to do this experiment.",
+            "answer": "C"
+          },
+          {
+            "id": 6,
+            "left": "Could you fill this bottle",
+            "right": "with water?",
+            "answer": "E"
+          }
+        ]
+      },
+      {
+        "exercise": "H",
+        "type": "gap_fill",
+        "title": "Write one word in each gap.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "This program is very different ... the one you're using at the moment.",
+            "answer": "from"
+          },
+          {
+            "id": 2,
+            "sentence": "Let's begin the lesson ... a short test on the names of the different parts of an insect.",
+            "answer": "with"
+          },
+          {
+            "id": 3,
+            "sentence": "Disconnect your PC ... the power supply before you take the case off.",
+            "answer": "from"
+          },
+          {
+            "id": 4,
+            "sentence": "There are a number ... different ways of doing this experiment.",
+            "answer": "of"
+          },
+          {
+            "id": 5,
+            "sentence": "How many types ... building can you think of?",
+            "answer": "of"
+          },
+          {
+            "id": 6,
+            "sentence": "What were your reasons ... choosing to do biology at university?",
+            "answer": "for"
+          }
+        ]
+      }
+    ]
+  }
+}

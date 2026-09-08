@@ -8,7 +8,7 @@ export function useExercises() {
 
   useEffect(() => {
     if (cachedData) { setData(cachedData); setLoading(false); return }
-    fetch('/exercises.json')
+    fetch('/exercises_v2.json')
       .then(r => r.json())
       .then(d => { cachedData = d; setData(d); setLoading(false) })
   }, [])

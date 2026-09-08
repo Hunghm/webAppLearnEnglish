@@ -92,11 +92,17 @@ export const GRAMMAR_LESSONS = [
             <td class="example-en">Prices are rising all the time.</td>
             <td class="example-vi">Giá cả đang tăng liên tục.</td>
           </tr>
+          <tr>
+            <td><em>Annoying habits (usually with always)</em></td>
+            <td>Thói quen lặp đi lặp lại gây khó chịu hoặc phàn nàn (thường dùng với <em>always</em>, <em>constantly</em>, <em>forever</em>)</td>
+            <td class="example-en">He's always losing his keys.</td>
+            <td class="example-vi">Anh ấy suốt ngày làm mất chìa khóa.</td>
+          </tr>
         </tbody>
       </table>
       <div class="hints-box">
         <strong>💡 Lưu ý quan trọng:</strong>
-        <ul><li>Dấu hiệu nhận biết: now, at the moment, at present, currently, today, this week, still, Look!, Listen!</li><li>Quy tắc thêm -ing: come → coming, run → running, lie → lying</li>
+        <ul><li>Dấu hiệu nhận biết: now, at the moment, at present, currently, today, this week, still, Look!, Listen!</li><li>Diễn tả thói quen gây khó chịu: dùng always/constantly/forever + V-ing, thường mang sắc thái phàn nàn (She's always complaining!)</li><li>Quy tắc thêm -ing: come → coming, run → running, lie → lying</li>
         </ul>
       </div></div>
     <div class="vi-section">

@@ -1,6 +1,31 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import QuestionItem from './QuestionItem'
+import ExplanationToggle from './ExplanationToggle'
 import { InlineInput, InlineChoiceButtons } from './SentenceRenderer'
+import {
+  getExerciseProgress,
+  saveExerciseProgress,
+  clearExerciseProgress,
+} from '../../utils/exerciseProgress'
+
+// ─── Per-question explanations under a passage-style exercise ────────────────
+function PassageExplanations({ questions, explanations }) {
+  if (!explanations) return null
+  const rows = questions
+    .map(q => ({ id: q.id ?? q.num, text: explanations[String(q.id ?? q.num)] }))
+    .filter(r => r.text)
+  if (rows.length === 0) return null
+  return (
+    <div className="mt-3 flex flex-col gap-1.5">
+      {rows.map(r => (
+        <div key={r.id} className="flex items-start gap-1.5">
+          <span className="text-xs font-bold text-blue-600 select-none mt-0.5">{r.id}.</span>
+          <ExplanationToggle text={r.text} className="flex-1" />
+        </div>
+      ))}
+    </div>
+  )
+}
 
 const TYPE_META = {
   fill_in_blank: { label: 'Fill in the Blank', icon: '✏️', color: '#1d4ed8', bg: '#dbeafe' },
@@ -25,6 +50,9 @@ const TYPE_META = {
   extra_word: { label: 'Extra Word', icon: '➕', color: '#374151', bg: '#f3f4f6' },
   word_form: { label: 'Word Form', icon: '📚', color: '#374151', bg: '#f3f4f6' },
   crossword: { label: 'Crossword', icon: '⬛', color: '#374151', bg: '#f3f4f6' },
+  key_word_transform: { label: 'Key Word Transformation', icon: '🔑', color: '#b45309', bg: '#fef3c7' },
+  picture_completion: { label: 'Picture Completion', icon: '🖼️', color: '#0369a1', bg: '#e0f2fe' },
+  picture_matching: { label: 'Picture Matching', icon: '🖼️', color: '#0369a1', bg: '#e0f2fe' },
 }
 
 function getTypeMeta(type) {
@@ -228,12 +256,14 @@ function ScoreRing({ correct, total }) {
 
 // ─── Main component ──────────────────────────────────────────────────────────
 
-export default function ExerciseBlock({ exercise, exLabel, sectionLabel, onScoreUpdate }) {
+export default function ExerciseBlock({ exercise, exLabel, sectionLabel, explanations, onScoreUpdate, progressUnit }) {
   const questions = exercise.questions ?? exercise.items ?? []
-  const [answers, setAnswers] = useState({})
-  const [checked, setChecked] = useState(false)
+  // Restore any previously saved work for this exercise (per unit + tab label).
+  const saved = progressUnit ? getExerciseProgress(progressUnit, exLabel) : null
+  const [answers, setAnswers] = useState(() => saved?.answers ?? {})
+  const [checked, setChecked] = useState(() => saved?.checked ?? false)
   const [showAnswers, setShowAnswers] = useState(false)
-  const [score, setScore] = useState(null)
+  const [score, setScore] = useState(() => saved?.score ?? null)
   const focusedInputId = useRef(null)
 
   const meta = getTypeMeta(exercise.type)
@@ -242,7 +272,29 @@ export default function ExerciseBlock({ exercise, exLabel, sectionLabel, onScore
   const hasGapPassage = passage.length > 0 && /\(\d+\)\s*______/.test(passage)
   const hasCirclePassage = passage.length > 0 && !hasGapPassage && exercise.type === 'circle_correct'
   const hasReadingPassage = passage.length > 0 && !hasGapPassage && !hasCirclePassage
-  const isDisplayOnly = exercise.type === 'crossword' || questions.length === 0
+
+  const isCrossword = exercise.type === 'crossword'
+  const crosswordSrc = typeof exercise.html === 'string' ? exercise.html.trim() : ''
+  // Free composition ("write your own sentence") — can't be auto-graded reliably.
+  const isFreeWriting = ['sentence_writing', 'sentence_transformation', 'sentence_rewrite'].includes(exercise.type)
+  // A question carries something the UI can actually render/answer.
+  const hasRenderableContent = questions.some(q =>
+    (q.answer ?? '').toString().trim() ||
+    (q.sentence ?? '').toString().trim() ||
+    (q.sentence1 ?? '').toString().trim() ||
+    (q.sentence2 ?? '').toString().trim() ||
+    (q.prompt ?? '').toString().trim() ||
+    (q.stem ?? '').toString().trim() ||
+    (q.letters ?? '').toString().trim() ||
+    q.options
+  )
+  // Show the "needs textbook" placeholder instead of an empty broken form when
+  // the data has no content (e.g. questions are just `{ num: 1 }`) or a
+  // crossword is missing its embed URL.
+  const isDisplayOnly =
+    (isCrossword && !crosswordSrc) ||
+    (questions.length === 0 && !exercise.image) ||
+    (!isCrossword && !exercise.image && !hasReadingPassage && !hasGapPassage && !hasCirclePassage && !hasRenderableContent)
 
   // Flat set of all used string values (for word bank dedup)
   // const usedWords = new Set(
@@ -393,16 +445,20 @@ export default function ExerciseBlock({ exercise, exLabel, sectionLabel, onScore
 
       if (blankCount > 1) {
         // Multi-blank: answer là object { 0: '...', 1: '...' }
-        const correctParts = correctAns.split(' / ').map(s => s.trim());
+        // Tách trên "/" có hoặc không có dấu cách ("Are / watching" hoặc "Are/watching").
+        const correctParts = correctAns.split(/\s*\/\s*/).map(s => s.trim());
         const answersObj = typeof answer === 'object' && answer !== null ? answer : {};
+        // Chỉ chấm những ô có đáp án mẫu; ô thừa (thiếu đáp án) coi như không tính.
         const allCorrect = correctParts.every((part, i) =>
           (answersObj[i] || '').trim().toLowerCase() === part.toLowerCase()
         );
         if (allCorrect) correct++;
       } else {
-        // Single blank: answer là string
-        const given = (answer || '').trim().toLowerCase();
-        const accepted = correctAns.toLowerCase().split('/').map(s => s.trim());
+        // Single blank: answer là string. Bỏ ghi chú trong ngoặc kiểu "had (extra word)".
+        const given = (answer || '').trim().toLowerCase().replace(/\s*\([^)]*\)\s*/g, ' ').trim();
+        const accepted = correctAns.toLowerCase().split('/').map(s =>
+          s.trim().replace(/\s*\([^)]*\)\s*/g, ' ').trim()
+        );
         if (accepted.includes(given)) correct++;
       }
     });
@@ -417,7 +473,7 @@ export default function ExerciseBlock({ exercise, exLabel, sectionLabel, onScore
   }
 
   const handleShowAnswers = () => {
-    if (!checked) handleCheck()
+    if (!checked && !isFreeWriting) handleCheck()
     setShowAnswers(true)
   }
 
@@ -427,6 +483,7 @@ export default function ExerciseBlock({ exercise, exLabel, sectionLabel, onScore
     setShowAnswers(false)
     setScore(null)
     focusedInputId.current = null
+    if (progressUnit) clearExerciseProgress(progressUnit, exLabel)
   }
 
   // Progress: count answered blanks across all questions
@@ -435,7 +492,32 @@ export default function ExerciseBlock({ exercise, exLabel, sectionLabel, onScore
     return getAnsweredBlanks(a, q).length > 0
   }).length
   const progressPct = questions.length > 0 ? (answeredCount / questions.length) * 100 : 0
-  const answerableQs = questions.filter(q => (q.answer ?? '').trim())
+  const answerableQs = questions.filter(q => (q.answer ?? '').toString().trim())
+  // No reference answers anywhere -> hide "Kiểm tra"/"Xem đáp án" (nothing to grade).
+  const canAutoCheck = answerableQs.length > 0
+
+  // ── Persist progress ──
+  // "done" once graded, or once every question in an ungraded exercise is filled.
+  useEffect(() => {
+    if (!progressUnit) return
+    const touched = checked || answeredCount > 0
+    if (!touched) {
+      clearExerciseProgress(progressUnit, exLabel)
+      return
+    }
+    const status =
+      checked || (questions.length > 0 && answeredCount >= questions.length)
+        ? 'done'
+        : 'started'
+    saveExerciseProgress(progressUnit, exLabel, {
+      answers,
+      checked,
+      score,
+      answered: answeredCount,
+      total: questions.length,
+      status,
+    })
+  }, [answers, checked, score, answeredCount, questions.length, progressUnit, exLabel])
 
   return (
     <div className="bg-white rounded-2xl shadow-sm overflow-hidden" style={{ border: '1.5px solid #e5e7eb' }}>
@@ -483,6 +565,21 @@ export default function ExerciseBlock({ exercise, exLabel, sectionLabel, onScore
 
       {/* Body */}
       <div className="px-5 py-4">
+        {exercise.image && (
+          <figure className="mb-4 m-0">
+            <img
+              src={exercise.image}
+              alt={exercise.title || 'Exercise picture'}
+              loading="lazy"
+              className="w-full rounded-xl"
+              style={{ border: '1.5px solid #e5e7eb', background: '#fff' }}
+            />
+            <figcaption className="text-xs text-gray-400 mt-1.5">
+              Hình trong sách — dùng để trả lời các câu bên dưới.
+            </figcaption>
+          </figure>
+        )}
+
         {hasWordBank && (
           <WordBankChips
             words={exercise.word_bank}
@@ -497,7 +594,7 @@ export default function ExerciseBlock({ exercise, exLabel, sectionLabel, onScore
           </div>
         )}
         {
-          exercise.type === 'crossword' ? (
+          isCrossword && crosswordSrc ? (
             <div
               className="rounded-xl overflow-hidden"
               style={{
@@ -506,7 +603,7 @@ export default function ExerciseBlock({ exercise, exLabel, sectionLabel, onScore
               }}
             >
               <iframe
-                src={exercise.html}
+                src={crosswordSrc}
                 title="Crossword"
                 width="100%"
                 height="100%"
@@ -525,27 +622,33 @@ export default function ExerciseBlock({ exercise, exLabel, sectionLabel, onScore
               }}
             >
               <div className="text-2xl mb-2">📖</div>
-              Bài tập này cần sách giáo khoa để thực hành.
+              Bài tập này chưa có nội dung số hoá — cần sách giáo khoa để thực hành.
             </div>
           ) :
             hasGapPassage ? (
-              <PassageRenderer
-                passage={passage}
-                questions={questions}
-                answers={answers}
-                checked={checked}
-                showAnswers={showAnswers}
-                onAnswerChange={handlePassageAnswerChange}
-              />
+              <>
+                <PassageRenderer
+                  passage={passage}
+                  questions={questions}
+                  answers={answers}
+                  checked={checked}
+                  showAnswers={showAnswers}
+                  onAnswerChange={handlePassageAnswerChange}
+                />
+                <PassageExplanations questions={questions} explanations={explanations} />
+              </>
             ) : hasCirclePassage ? (
-              <CirclePassageRenderer
-                passage={passage}
-                questions={questions}
-                answers={answers}
-                checked={checked}
-                showAnswers={showAnswers}
-                onAnswerChange={handlePassageAnswerChange}
-              />
+              <>
+                <CirclePassageRenderer
+                  passage={passage}
+                  questions={questions}
+                  answers={answers}
+                  checked={checked}
+                  showAnswers={showAnswers}
+                  onAnswerChange={handlePassageAnswerChange}
+                />
+                <PassageExplanations questions={questions} explanations={explanations} />
+              </>
             ) : (
               <ul className="list-none p-0 m-0 flex flex-col gap-2">
                 {questions.map(q => {
@@ -559,6 +662,7 @@ export default function ExerciseBlock({ exercise, exLabel, sectionLabel, onScore
                       answer={answers[id]}
                       onAnswerChange={val => handleAnswerChange(id, val)}
                       showAnswer={showAnswers}
+                      explanation={explanations?.[String(id)]}
                     />
                   )
                 })}
@@ -567,9 +671,20 @@ export default function ExerciseBlock({ exercise, exLabel, sectionLabel, onScore
         }
 
         {/* Action bar */}
-        {!isDisplayOnly && questions.length > 0 && (
+        {!isDisplayOnly && questions.length > 0 && !canAutoCheck && (
+          <div className="mt-5 pt-4 border-t border-gray-100 text-xs text-gray-400 leading-relaxed">
+            Bài này chưa có đáp án mẫu trong dữ liệu — bạn có thể tự làm rồi đối chiếu với sách.
+          </div>
+        )}
+        {!isDisplayOnly && questions.length > 0 && canAutoCheck && (
           <div className="mt-5 pt-4 border-t border-gray-100">
+            {isFreeWriting && (
+              <p className="text-xs text-gray-400 mb-2 leading-relaxed">
+                Bài viết câu tự do — không chấm tự động. Dùng "Xem đáp án" để đối chiếu câu mẫu.
+              </p>
+            )}
             <div className="flex flex-wrap items-center gap-2">
+              {!isFreeWriting && (
               <button
                 onClick={handleCheck}
                 className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold text-white transition-all active:scale-95 shadow-sm"
@@ -580,6 +695,7 @@ export default function ExerciseBlock({ exercise, exLabel, sectionLabel, onScore
                 </svg>
                 Kiểm tra
               </button>
+              )}
               <button
                 onClick={handleShowAnswers}
                 className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition-all active:scale-95"

@@ -6,6 +6,7 @@ import FlashcardPage2 from './pages/FlashcardPage2.jsx'
 import QuizPage from './pages/QuizPage.jsx'
 import SpellingPage from './pages/SpellingPage.jsx'
 import ResultPage from './pages/ResultPage.jsx'
+import SpellingResultPage from './pages/SpellingResultPage.jsx'
 import GrammarDetailPage from './pages/GrammarDetailPage.jsx'
 import FolderPage from './pages/FolderPage.jsx'
 import ExercisesPage from './pages/ExercisesPage.jsx'
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="/quiz" element={<QuizPage />} />
           <Route path="/spelling" element={<SpellingPage />} />
           <Route path="/result" element={<ResultPage />} />
+          <Route path="/spelling-result" element={<SpellingResultPage />} />
           <Route path="/grammar/:index" element={<GrammarDetailPage />} />
           <Route path="/folder/:folderId" element={<FolderPage />} />
           <Route path="/exercises" element={<ExercisesPage />} />

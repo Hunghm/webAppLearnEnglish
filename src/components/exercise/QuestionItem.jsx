@@ -1,4 +1,38 @@
+import { useState } from 'react'
 import { InlineInput, InlineChoiceButtons, parseCircleOptions } from './SentenceRenderer'
+
+/**
+ * Normalise a multiple_choice `options` value into an ordered { key: label } object.
+ * Handles the three shapes seen in the data:
+ *   - object:  { A: "went", B: "go" }                     -> unchanged
+ *   - array:   ["A We'll go", "B We're going", "C We go"]  -> { A: "We'll go", ... }
+ *   - string:  "ferry/traffic"                            -> { A: "ferry", B: "traffic" }
+ */
+export function normalizeOptions(raw) {
+  if (!raw) return null
+  if (Array.isArray(raw)) {
+    const out = {}
+    raw.forEach((item, i) => {
+      const s = String(item).trim()
+      const m = s.match(/^([A-Za-z])[.)]?\s+(.*)$/)
+      if (m) out[m[1].toUpperCase()] = m[2].trim()
+      else out[String.fromCharCode(65 + i)] = s
+    })
+    return out
+  }
+  if (typeof raw === 'string') {
+    const out = {}
+    raw.split('/').map(s => s.trim()).filter(Boolean).forEach((o, i) => {
+      out[String.fromCharCode(65 + i)] = o
+    })
+    return Object.keys(out).length ? out : null
+  }
+  if (typeof raw === 'object') return raw
+  return null
+}
+
+// Strip a trailing parenthetical note, e.g. "had (extra word)" -> "had".
+const stripNote = s => (s || '').replace(/\s*\([^)]*\)\s*/g, ' ').trim()
 
 /**
  * FillSentence — renders a sentence with one or more ______ blanks.
@@ -66,18 +100,20 @@ function FillSentence({ sentence, answers, correctAnswers, onChange, checked }) 
   )
 }
 
-export default function QuestionItem({ question, exerciseType, checked, answer, onAnswerChange, showAnswer }) {
+export default function QuestionItem({ question, exerciseType, checked, answer, onAnswerChange, showAnswer, explanation }) {
   const num = question.id ?? question.num ?? '?'
   const correctAnswer = question.answer ?? ''
+  const [showExpl, setShowExpl] = useState(false)
 
   // For multi-blank questions, answer is an object { 0: '...', 1: '...' }
   // For single-answer questions, answer is a string — normalise to object
   const blankCount = (question.sentence ?? '').split('______').length - 1
   const isMultiBlank = blankCount > 1
 
-  // correctAnswers: split on ' / ' for multi-blank, else wrap in array
+  // correctAnswers: split on "/" (with or without surrounding spaces) for multi-blank,
+  // else this is a 1-element array.
   const correctAnswers = correctAnswer
-    .split(' / ')
+    .split(/\s*\/\s*/)
     .map(s => s.trim())
 
   // answers object: { 0: string, 1: string, ... }
@@ -93,9 +129,9 @@ export default function QuestionItem({ question, exerciseType, checked, answer, 
         (answersObj[i] || '').trim().toLowerCase() === ans.toLowerCase()
       )
     }
-    const given = (answersObj[0] || '').trim().toLowerCase()
-    // Accept slash-separated alternatives for single-blank
-    const accepted = correctAnswer.toLowerCase().split('/').map(s => s.trim())
+    const given = stripNote((answersObj[0] || '').trim().toLowerCase())
+    // Accept slash-separated alternatives for single-blank; ignore "(extra word)" notes
+    const accepted = correctAnswer.toLowerCase().split('/').map(s => stripNote(s.trim()))
     return accepted.includes(given)
   })()
 
@@ -129,15 +165,42 @@ export default function QuestionItem({ question, exerciseType, checked, answer, 
     </div>
   )
 
+  const explBlock = explanation ? (
+    <div className="mt-1.5">
+      <button
+        type="button"
+        onClick={() => setShowExpl(v => !v)}
+        className="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:text-indigo-800 transition-colors"
+      >
+        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        {showExpl ? 'Ẩn giải thích' : 'Vì sao?'}
+      </button>
+      {showExpl && (
+        <div className="mt-1 text-xs leading-relaxed text-gray-700 rounded-lg px-3 py-2" style={{ background: '#eef2ff', border: '1px solid #e0e7ff' }}>
+          {explanation}
+        </div>
+      )}
+    </div>
+  ) : null
+
   // ── multiple_choice ──
-  if (exerciseType === 'multiple_choice' && question.options) {
+  const mcOptions = exerciseType === 'multiple_choice' ? normalizeOptions(question.options) : null
+  if (exerciseType === 'multiple_choice' && mcOptions) {
+    const normCorrect = (correctAnswer || '').trim().toLowerCase()
     return (
       <li className={qItemClass}>
-        <div>{numSpan}<span>{question.sentence}</span></div>
+        {question.sentence && <div>{numSpan}<span>{question.sentence}</span></div>}
+        {!question.sentence && <div>{numSpan}</div>}
         <div className="flex flex-wrap gap-2 mt-2">
-          {Object.entries(question.options).map(([key, val]) => {
+          {Object.entries(mcOptions).map(([key, val]) => {
             const isOpt = answer === key
-            const isCorrectOpt = key === correctAnswer
+            // Correct answer may be stored as the key ("A") or the label ("went").
+            const isCorrectOpt = !!normCorrect && (
+              key.toLowerCase() === normCorrect ||
+              String(val).trim().toLowerCase() === normCorrect
+            )
             let cls = 'border-2 rounded-lg px-3 py-1.5 text-sm cursor-pointer transition-all font-medium '
             if (checked) {
               if (isCorrectOpt) cls += 'bg-green-500 border-green-500 text-white shadow-sm'
@@ -156,8 +219,26 @@ export default function QuestionItem({ question, exerciseType, checked, answer, 
           })}
         </div>
         {answerReveal}
+        {explBlock}
       </li>
     )
+  }
+
+  // ── multiple_choice with no options object but "x / y" inside the sentence ──
+  if (exerciseType === 'multiple_choice' && !mcOptions && (question.sentence || '').includes(' / ')) {
+    const parsed = parseCircleOptions(question.sentence, correctAnswer)
+    if (parsed) {
+      return (
+        <li className={qItemClass}>
+          {numSpan}
+          <span>{parsed.before}</span>
+          <InlineChoiceButtons options={[parsed.option1, parsed.option2]} selected={answer} onSelect={onAnswerChange} checked={checked} correctAnswer={correctAnswer} />
+          <span>{parsed.after}</span>
+          {answerReveal}
+          {explBlock}
+        </li>
+      )
+    }
   }
 
   // ── circle_correct (compound: "out / up") ──
@@ -191,6 +272,7 @@ export default function QuestionItem({ question, exerciseType, checked, answer, 
             <InlineChoiceButtons options={[optionA, optionB]} selected={answer} onSelect={onAnswerChange} checked={checked} correctAnswer={correctAnswer} />
           </div>
           {answerReveal}
+          {explBlock}
         </li>
       )
     }
@@ -207,6 +289,7 @@ export default function QuestionItem({ question, exerciseType, checked, answer, 
           <InlineChoiceButtons options={[parsed.option1, parsed.option2]} selected={answer} onSelect={onAnswerChange} checked={checked} correctAnswer={correctAnswer} />
           <span>{parsed.after}</span>
           {answerReveal}
+          {explBlock}
         </li>
       )
     }
@@ -231,6 +314,7 @@ export default function QuestionItem({ question, exerciseType, checked, answer, 
           />
         </div>
         {answerReveal}
+        {explBlock}
       </li>
     )
   }
@@ -240,7 +324,7 @@ export default function QuestionItem({ question, exerciseType, checked, answer, 
     return (
       <li className={qItemClass}>
         {numSpan}
-        <span className="text-blue-700 font-medium">{question.prompt}</span>
+        <span className="text-blue-700 font-medium">{question.prompt || question.sentence || question.stem}</span>
         <div className="mt-1.5">
           <textarea
             value={answersObj[0] || ''}
@@ -256,6 +340,28 @@ export default function QuestionItem({ question, exerciseType, checked, answer, 
           />
         </div>
         {answerReveal}
+        {explBlock}
+      </li>
+    )
+  }
+
+  // ── key_word_transformation (single sentence + keyword chip) ──
+  if ((exerciseType === 'key_word_transformation' || exerciseType === 'key_word_transform') && !question.sentence1) {
+    return (
+      <li className={qItemClass}>
+        {numSpan}
+        <FillSentence
+          sentence={question.sentence || '______'}
+          answers={answersObj}
+          correctAnswers={correctAnswers}
+          onChange={handleChange}
+          checked={checked}
+        />
+        {question.keyword && (
+          <span className="ml-2 text-xs font-bold text-purple-700 bg-purple-100 px-1.5 py-0.5 rounded">[{question.keyword}]</span>
+        )}
+        {answerReveal}
+        {explBlock}
       </li>
     )
   }
@@ -274,18 +380,35 @@ export default function QuestionItem({ question, exerciseType, checked, answer, 
         />
         <span className="ml-2 font-mono text-xs bg-yellow-100 text-yellow-800 rounded-lg px-2 py-0.5 border border-yellow-200">{question.capital_word}</span>
         {answerReveal}
+        {explBlock}
       </li>
     )
   }
 
   // ── anagram ──
   if (exerciseType === 'anagram') {
+    const stem = (question.sentence || '').trim()
+    if (stem && stem.includes('______')) {
+      const [before, after = ''] = stem.split('______')
+      return (
+        <li className={qItemClass}>
+          {numSpan}
+          <span className="leading-relaxed">{before}</span>
+          <InlineInput value={answersObj[0] || ''} onChange={v => handleChange(0, v)} checked={checked} isCorrect={isCorrect} size="lg" />
+          <span className="leading-relaxed">{after}</span>
+          <span className="ml-2 font-mono text-xs tracking-widest bg-amber-100 text-amber-900 rounded-lg px-2 py-0.5 border border-amber-200">{question.letters}</span>
+          {answerReveal}
+          {explBlock}
+        </li>
+      )
+    }
     return (
       <li className={qItemClass}>
         {numSpan}
         <span className="font-mono text-base tracking-widest bg-amber-100 text-amber-900 rounded-lg px-2 py-0.5 mr-2 border border-amber-200">{question.letters}</span>
         <InlineInput value={answersObj[0] || ''} onChange={v => handleChange(0, v)} checked={checked} isCorrect={isCorrect} />
         {answerReveal}
+        {explBlock}
       </li>
     )
   }
@@ -300,6 +423,7 @@ export default function QuestionItem({ question, exerciseType, checked, answer, 
         <span className="mx-1.5 text-gray-400">→</span>
         <InlineInput value={answersObj[0] || ''} onChange={v => handleChange(0, v)} checked={checked} isCorrect={isCorrect} />
         {answerReveal}
+        {explBlock}
       </li>
     )
   }
@@ -317,6 +441,7 @@ export default function QuestionItem({ question, exerciseType, checked, answer, 
         checked={checked}
       />
       {answerReveal}
+      {explBlock}
     </li>
   )
 }

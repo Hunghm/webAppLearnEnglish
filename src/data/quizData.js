@@ -77,27 +77,24 @@ const CLOUDINARY_CLOUD_NAME = 'dipe6pl88';
 // const PIXABAY_API_KEY = '56468288-5689d1fc39b7e2e6a0a37779a';
 
 export async function getImageUrl(word) {
+  const cacheKey = `img_${word}`
+  const cached = localStorage.getItem(cacheKey)
+  if (cached) return cached
+
   const keyword = (imageKeywordMap[word] ?? word).trim().replace(/\s+/g, '+');
   const url = `/api/pixabay?q=${encodeURIComponent(keyword)}&image_type=photo&per_page=3&safesearch=true`;
-  // const url = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${encodeURIComponent(keyword)}&image_type=photo&per_page=3&safesearch=true`;
+
   try {
     const response = await fetch(url);
     const data = await response.json();
 
     if (data.hits && data.hits.length > 0) {
       const index = Math.abs(hashCode(word)) % data.hits.length;
-      const pixabayUrl = data.hits[index].webformatURL;
-
-      // 🔥 BƯỚC ĐỔI ĐƯỜNG DẪN QUA CLOUDINARY:
-      // f_auto: Tự động chuyển định dạng tốt nhất (WebP/AVIF) dựa trên trình duyệt
-      // q_auto: Tự động nén chất lượng ảnh để tối ưu dung lượng mà không mờ hình
-      const cloudinaryUrl = `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/fetch/f_auto,q_auto/${encodeURIComponent(pixabayUrl)}`;
-
-      // console.log(`[Cloudinary Fetch] Từ: "${word}" ->`, cloudinaryUrl);
-      return cloudinaryUrl;
+      const imgUrl = data.hits[index].webformatURL;
+      localStorage.setItem(cacheKey, imgUrl)
+      return imgUrl;
     }
 
-    // Fallback nếu không có ảnh
     return `https://loremflickr.com/600/400/${keyword.replace(/\+/g, ',')}`;
 
   } catch (error) {

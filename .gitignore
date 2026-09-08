@@ -8,6 +8,14 @@ node_modules/.vite
 .env
 .env.local
 .env.*.local
+.evn
+*.evn
+public/b1-units/openai api/
+
+# Large source assets (keep local, don't commit)
+public/b1-units/*.pdf
+public/b1-units/Destination-B1-ocr-*.txt
+public/b1-units/Destination-B1-answerkey-ocr.txt
 
 # Build outputs
 dist
@@ -38,3 +46,4 @@ desktop.ini
 # Vite config temp files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+.env*

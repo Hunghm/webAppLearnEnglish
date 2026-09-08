@@ -1,0 +1,829 @@
+{
+  "25": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "gap_fill",
+        "title": "Complete using so or such.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "The pan was ______ hot that I nearly dropped it!",
+            "answer": "so"
+          },
+          {
+            "id": 2,
+            "sentence": "Mr Jones was ______ a kind man that I was sad when he moved.",
+            "answer": "such"
+          },
+          {
+            "id": 3,
+            "sentence": "We have ______ many pets that sometimes it's really noisy!",
+            "answer": "so"
+          },
+          {
+            "id": 4,
+            "sentence": "Alicia is ______ good at basketball that I think she could be a professional.",
+            "answer": "so"
+          },
+          {
+            "id": 5,
+            "sentence": "There was ______ a lot of smoke that I couldn't see.",
+            "answer": "such"
+          },
+          {
+            "id": 6,
+            "sentence": "Tyrone ran ______ fast that no one had a chance in the race.",
+            "answer": "so"
+          },
+          {
+            "id": 7,
+            "sentence": "Cherie is ______ popular that everyone wants to be friends with her.",
+            "answer": "so"
+          },
+          {
+            "id": 8,
+            "sentence": "Would you like to have ______ long hair that you can sit on it?",
+            "answer": "such"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "error_correction",
+        "title": "If the phrase in bold is correct, put a tick. If wrong, write the correct phrase.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Paris Hilton is such famous that she gets recognised wherever she goes.",
+            "answer": "such a famous person that"
+          },
+          {
+            "id": 2,
+            "sentence": "There were so many customers in the shop that I couldn't move!",
+            "answer": "✓"
+          },
+          {
+            "id": 3,
+            "sentence": "The man spoke such quickly that I couldn't understand a word he said.",
+            "answer": "so quickly that"
+          },
+          {
+            "id": 4,
+            "sentence": "I had so good marks that my dad bought me a new computer!",
+            "answer": "such good marks that"
+          },
+          {
+            "id": 5,
+            "sentence": "Victoria is so old that she can remember seeing a car for the first time.",
+            "answer": "✓"
+          },
+          {
+            "id": 6,
+            "sentence": "There was so a long queue that we decided to go home.",
+            "answer": "such a long queue that"
+          },
+          {
+            "id": 7,
+            "sentence": "I've got so a lot of friends that I don't have time to see them all.",
+            "answer": "such a lot of friends that/so many friends that"
+          },
+          {
+            "id": 8,
+            "sentence": "Big Brother was such successful that they're making another series.",
+            "answer": "so successful that"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "key_word_transform",
+        "title": "Complete each second sentence using the word given. Write between two and five words.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I have a lot of money and I don't know what to do with it.",
+            "answer": "such a lot of money"
+          },
+          {
+            "id": 2,
+            "sentence": "Adrian fell asleep during the film because he was very tired.",
+            "answer": "was so tired that"
+          },
+          {
+            "id": 3,
+            "sentence": "Today was so hot that I didn't want to do anything.",
+            "answer": "such a hot day"
+          },
+          {
+            "id": 4,
+            "sentence": "I didn't have time to open all my Christmas presents because I got so many!",
+            "answer": "such a lot of"
+          },
+          {
+            "id": 5,
+            "sentence": "They closed the funfair because it was very dangerous.",
+            "answer": "was so dangerous that"
+          },
+          {
+            "id": 6,
+            "sentence": "The food was so spicy that I couldn't eat it.",
+            "answer": "such spicy food"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "multiple_choice",
+        "title": "Circle the correct word or phrase.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "This soup is very salty / too salty to eat.",
+            "answer": "B"
+          },
+          {
+            "id": 2,
+            "sentence": "If you run too fast / fast enough, you might win the race.",
+            "answer": "B"
+          },
+          {
+            "id": 3,
+            "sentence": "Don't drive too fast / fast enough or you might have an accident.",
+            "answer": "A"
+          },
+          {
+            "id": 4,
+            "sentence": "Have we got too much / enough time or do we need more?",
+            "answer": "A"
+          },
+          {
+            "id": 5,
+            "sentence": "Do you think you're too strong / strong enough to lift this heavy chair?",
+            "answer": "B"
+          },
+          {
+            "id": 6,
+            "sentence": "There are too many / enough questions here!",
+            "answer": "A"
+          },
+          {
+            "id": 7,
+            "sentence": "Are you enough warm / warm enough? Shall I put the heating on?",
+            "answer": "B"
+          },
+          {
+            "id": 8,
+            "sentence": "This tea is too / enough hot to drink.",
+            "answer": "A"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "gap_fill",
+        "title": "Complete using a word from box A and a word/phrase from box B.",
+        "word_bank": [
+          "a long time",
+          "a lot of fun",
+          "beautiful",
+          "early",
+          "hard",
+          "hot",
+          "many things",
+          "sweets"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "We were having ______ at the party that I didn't want to come home.",
+            "answer": "a lot of fun"
+          },
+          {
+            "id": 2,
+            "sentence": "I put ______ in the plastic bag and it broke.",
+            "answer": "too many things"
+          },
+          {
+            "id": 3,
+            "sentence": "We didn't have ______ for everyone to have one.",
+            "answer": "enough sweets"
+          },
+          {
+            "id": 4,
+            "sentence": "Nancy is ______ that I think I'm falling in love with her.",
+            "answer": "so beautiful"
+          },
+          {
+            "id": 5,
+            "sentence": "It's raining ______ to go out.",
+            "answer": "too hard"
+          },
+          {
+            "id": 6,
+            "sentence": "When the milk is ______, pour it into the cup and stir with a spoon.",
+            "answer": "hot enough"
+          },
+          {
+            "id": 7,
+            "sentence": "We waited for ______ that I thought the bus was never going to come!",
+            "answer": "such a long time"
+          },
+          {
+            "id": 8,
+            "sentence": "Stacy got to the theatre ______ that there was no one there.",
+            "answer": "so early"
+          }
+        ]
+      },
+      {
+        "exercise": "F",
+        "type": "gap_fill",
+        "title": "Write so, such, too or enough in each gap. (Passage: My first - and last! - day at work)",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "It was (1) ______ a disaster that I lost my job!",
+            "answer": "such"
+          },
+          {
+            "id": 2,
+            "sentence": "she did it (2) ______ quickly that I didn't understand.",
+            "answer": "so"
+          },
+          {
+            "id": 3,
+            "sentence": "I wasn't brave (3) ______ to ask her to repeat it.",
+            "answer": "enough"
+          },
+          {
+            "id": 4,
+            "sentence": "I was (4) ______ busy that I started making more and more mistakes.",
+            "answer": "so"
+          },
+          {
+            "id": 5,
+            "sentence": "I made (5) ______ a lot of mistakes that the other workers noticed.",
+            "answer": "such"
+          },
+          {
+            "id": 6,
+            "sentence": "it was (6) ______ late.",
+            "answer": "too"
+          },
+          {
+            "id": 7,
+            "sentence": "I just had (7) ______ much to do that I gave up.",
+            "answer": "so"
+          },
+          {
+            "id": 8,
+            "sentence": "she was (8) ______ shocked that she fired me immediately!",
+            "answer": "so"
+          }
+        ]
+      }
+    ]
+  },
+  "26": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "gap_fill",
+        "title": "Complete using the comparative form of the words in brackets.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Wait! Your bicycle is ______ (fast) than mine!",
+            "answer": "faster"
+          },
+          {
+            "id": 2,
+            "sentence": "Phew! It's much ______ (hot) than it was yesterday, isn't it?",
+            "answer": "hotter"
+          },
+          {
+            "id": 3,
+            "sentence": "I think you look ______ (pretty) when you wear your hair up.",
+            "answer": "prettier"
+          },
+          {
+            "id": 4,
+            "sentence": "The price of batteries has gone up. They're a lot ______ (expensive) than last time.",
+            "answer": "more expensive"
+          },
+          {
+            "id": 5,
+            "sentence": "Angus hasn't been practising the piano and he's got a lot ______ (bad).",
+            "answer": "worse"
+          },
+          {
+            "id": 6,
+            "sentence": "His new film is much ______ (entertaining) than his last one.",
+            "answer": "less entertaining"
+          },
+          {
+            "id": 7,
+            "sentence": "Tell us another joke - but a ______ (short) one this time! That one took forever!",
+            "answer": "shorter"
+          },
+          {
+            "id": 8,
+            "sentence": "I didn't win the lottery. Maybe I'll be ______ (lucky) next time.",
+            "answer": "luckier"
+          },
+          {
+            "id": 9,
+            "sentence": "The Russian athlete threw the discus ______ (far) than all the others and won gold.",
+            "answer": "farther/further"
+          },
+          {
+            "id": 10,
+            "sentence": "I think these biscuits are even ______ (nice) than the last ones you made!",
+            "answer": "nicer"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "error_correction",
+        "title": "The words in bold in each sentence are wrong. Write the correct word.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "We lost the match because we played badly than the other team did.",
+            "answer": "worse"
+          },
+          {
+            "id": 2,
+            "sentence": "It rains a lot in England, so the countryside is a lot green than in Greece.",
+            "answer": "greener"
+          },
+          {
+            "id": 3,
+            "sentence": "You gave Sarah a really small piece of cake - and you've given me even little!",
+            "answer": "less"
+          },
+          {
+            "id": 4,
+            "sentence": "I must have lost weight. These jeans seem large than they were before.",
+            "answer": "larger"
+          },
+          {
+            "id": 5,
+            "sentence": "I got to the party early than everyone else, so I had to wait.",
+            "answer": "earlier"
+          },
+          {
+            "id": 6,
+            "sentence": "I hear her new CD is good than her last one. What do you think?",
+            "answer": "better"
+          },
+          {
+            "id": 7,
+            "sentence": "Our cat seems to be getting fat every day - maybe she should go on a diet!",
+            "answer": "fatter"
+          },
+          {
+            "id": 8,
+            "sentence": "I'm disappointed. I think you could have done a lot well on this test.",
+            "answer": "better"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "sentence_rewrite",
+        "title": "Rewrite using the correct comparative form of the words in the box.",
+        "word_bank": [
+          "bad",
+          "beautiful",
+          "confident",
+          "fat",
+          "happy",
+          "near (to)",
+          "short",
+          "young"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "prompt": "Joshua is much taller than Alex.",
+            "sentence": "",
+            "answer": "Alex is much shorter than Joshua"
+          },
+          {
+            "id": 2,
+            "prompt": "Theresa is more confident than Amy.",
+            "sentence": "",
+            "answer": "Amy is a lot less confident than Theresa"
+          },
+          {
+            "id": 3,
+            "prompt": "Your house is further from the school than mine.",
+            "sentence": "",
+            "answer": "My house is nearer (to) the school than yours"
+          },
+          {
+            "id": 4,
+            "prompt": "Jude is less happy than Andy about the decision.",
+            "sentence": "",
+            "answer": "Andy is happier than Jude about the decision"
+          },
+          {
+            "id": 5,
+            "prompt": "Bill is thinner than Simon.",
+            "sentence": "",
+            "answer": "Simon is fatter than Bill"
+          },
+          {
+            "id": 6,
+            "prompt": "Terry is older than Sarah-Jane.",
+            "sentence": "",
+            "answer": "Sarah-Jane is younger than Terry"
+          },
+          {
+            "id": 7,
+            "prompt": "Patricia is better than her sister on the clarinet.",
+            "sentence": "",
+            "answer": "Patricia's sister is worse than Patricia/her on the clarinet"
+          },
+          {
+            "id": 8,
+            "prompt": "The houses here are uglier than in my grandparents' village.",
+            "sentence": "",
+            "answer": "The houses in my grandparents' village are more beautiful than the houses here"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "gap_fill",
+        "title": "Complete using superlative form.",
+        "word_bank": [
+          "bad",
+          "big",
+          "far",
+          "funny",
+          "hard",
+          "kind",
+          "scary",
+          "tasty"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "This really is the ______ song I've ever heard!",
+            "answer": "worst"
+          },
+          {
+            "id": 2,
+            "sentence": "Ivy is the ______ woman I know.",
+            "answer": "kindest"
+          },
+          {
+            "id": 3,
+            "sentence": "This is the ______ joke ever!",
+            "answer": "funniest"
+          },
+          {
+            "id": 4,
+            "sentence": "This is the ______ soup you've made so far.",
+            "answer": "tastiest"
+          },
+          {
+            "id": 5,
+            "sentence": "What's the ______ thing about English grammar for you?",
+            "answer": "hardest"
+          },
+          {
+            "id": 6,
+            "sentence": "Ben was carrying the ______ present I'd ever seen.",
+            "answer": "biggest"
+          },
+          {
+            "id": 7,
+            "sentence": "We had a competition to see who could swim the ______.",
+            "answer": "farthest/furthest"
+          },
+          {
+            "id": 8,
+            "sentence": "Sandra told us the ______ ghost story she could.",
+            "answer": "scariest"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "gap_fill",
+        "title": "Complete using correct form of words in brackets. (Passage about jobs)",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "this is the (1) ______ (bad) job I've ever had.",
+            "answer": "worst"
+          },
+          {
+            "id": 2,
+            "sentence": "My last job was much (2) ______ (good) than this one.",
+            "answer": "better"
+          },
+          {
+            "id": 3,
+            "sentence": "I had a lot (3) ______ (little) work there",
+            "answer": "less"
+          },
+          {
+            "id": 4,
+            "sentence": "my boss here is (4) ______ (strict) in the whole firm",
+            "answer": "strictest"
+          },
+          {
+            "id": 5,
+            "sentence": "the working day is (5) ______ (long) than in my last job",
+            "answer": "longer"
+          },
+          {
+            "id": 6,
+            "sentence": "The (6) ______ (good) thing about it is that the office is (7) ______ (close) to my house",
+            "answer": "best"
+          },
+          {
+            "id": 7,
+            "sentence": "The (6) ______ (good) thing about it is that the office is (7) ______ (close) to my house",
+            "answer": "closer"
+          },
+          {
+            "id": 8,
+            "sentence": "now I get home (8) ______ (early) than I used to.",
+            "answer": "earlier"
+          }
+        ]
+      },
+      {
+        "exercise": "F",
+        "type": "gap_fill",
+        "title": "Complete using correct form. (With pictures)",
+        "word_bank": [
+          "clean",
+          "dirty",
+          "fast",
+          "old",
+          "slowly",
+          "young"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "'I walk (1) ______ than him.'",
+            "answer": "more slowly"
+          },
+          {
+            "id": 2,
+            "sentence": "'I walk the (2) ______ of all.'",
+            "answer": "slowest"
+          },
+          {
+            "id": 3,
+            "sentence": "'I'm the (3) ______ pigeon.'",
+            "answer": "dirtiest"
+          },
+          {
+            "id": 4,
+            "sentence": "'I'm (4) ______ than they are.'",
+            "answer": "dirtier"
+          },
+          {
+            "id": 5,
+            "sentence": "'I'm the (5) ______ pigeon.'",
+            "answer": "cleanest"
+          },
+          {
+            "id": 6,
+            "sentence": "'I ran (6) ______ of all.'",
+            "answer": "fastest"
+          },
+          {
+            "id": 7,
+            "sentence": "'I ran (7) ______ than everyone except him.'",
+            "answer": "faster"
+          },
+          {
+            "id": 8,
+            "sentence": "'They both ran (8) ______ than me.'",
+            "answer": "faster"
+          },
+          {
+            "id": 9,
+            "sentence": "'I'm the (9) ______ in the family.'",
+            "answer": "oldest"
+          },
+          {
+            "id": 10,
+            "sentence": "'And I'm the (10) ______.'",
+            "answer": "youngest"
+          }
+        ]
+      }
+    ]
+  },
+  "27": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Bob joined the ______ about six years ago.",
+            "options": {
+              "A": "ambition",
+              "B": "fame",
+              "C": "pension",
+              "D": "company"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 2,
+            "sentence": "We lost money because of the workers' ______ over money.",
+            "options": {
+              "A": "strike",
+              "B": "department",
+              "C": "colleague",
+              "D": "tax"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 3,
+            "sentence": "______ isn't everything.",
+            "options": {
+              "A": "boss",
+              "B": "interview",
+              "C": "fame",
+              "D": "poverty"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 4,
+            "sentence": "Don't sign the ______ until you've read every word.",
+            "options": {
+              "A": "industry",
+              "B": "contract",
+              "C": "staff",
+              "D": "profession"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 5,
+            "sentence": "My grandfather stopped working and now he gets a ______.",
+            "options": {
+              "A": "pressure",
+              "B": "leader",
+              "C": "pension",
+              "D": "department"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 6,
+            "sentence": "Charles worked in the same job for almost the whole of his ______.",
+            "options": {
+              "A": "colleague",
+              "B": "manager",
+              "C": "industry",
+              "D": "career"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 7,
+            "sentence": "You should be able to save money with a/an ______ of 30,000 euros per year.",
+            "options": {
+              "A": "application",
+              "B": "income",
+              "C": "leader",
+              "D": "goal"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 8,
+            "sentence": "Can I introduce you to Isaac, a ______ of mine from work?",
+            "options": {
+              "A": "profession",
+              "B": "department",
+              "C": "colleague",
+              "D": "salary"
+            },
+            "answer": "C"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "anagram",
+        "title": "Complete using a word formed from the letters given (anagram).",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I had more responsibility in my ______ job.",
+            "letters": "I O R V U E P S",
+            "answer": "previous"
+          },
+          {
+            "id": 2,
+            "sentence": "Why not open one of our new Supersaver bank ______?",
+            "letters": "C S N O A U C T",
+            "answer": "accounts"
+          },
+          {
+            "id": 3,
+            "sentence": "It's always been my ______ to work in advertising.",
+            "letters": "B T M O I I A N",
+            "answer": "ambition"
+          },
+          {
+            "id": 4,
+            "sentence": "Frank got a job in the computer ______.",
+            "letters": "D Y T U R S I N",
+            "answer": "industry"
+          },
+          {
+            "id": 5,
+            "sentence": "The family lived in ______ after Mr Bucket lost his job.",
+            "letters": "T O Y V E P R",
+            "answer": "poverty"
+          },
+          {
+            "id": 6,
+            "sentence": "His parents left him money and now Neil is extremely ______.",
+            "letters": "A E H Y L T W",
+            "answer": "wealthy"
+          },
+          {
+            "id": 7,
+            "sentence": "You usually need a degree to join the teaching ______.",
+            "letters": "O R I O F S P N S E",
+            "answer": "profession"
+          },
+          {
+            "id": 8,
+            "sentence": "All members of ______ here get three weeks holiday a year.",
+            "letters": "A T F S F",
+            "answer": "staff"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "gap_fill",
+        "title": "Complete using the correct form of the verbs in the box.",
+        "word_bank": [
+          "deserve",
+          "earn",
+          "impress",
+          "interview",
+          "retire",
+          "tax"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Isabelle really ______ her manager and soon she was given a better job.",
+            "answer": "impressed"
+          },
+          {
+            "id": 2,
+            "sentence": "My dad wants to ______ when he's sixty.",
+            "answer": "retire"
+          },
+          {
+            "id": 3,
+            "sentence": "We ______ everyone who applies for a job before making our decision.",
+            "answer": "interview"
+          },
+          {
+            "id": 4,
+            "sentence": "The government ______ everyone who works and spends the money on roads and hospitals.",
+            "answer": "taxes"
+          },
+          {
+            "id": 5,
+            "sentence": "Wendy works hard and I think she ______ a more challenging job.",
+            "answer": "deserves"
+          },
+          {
+            "id": 6,
+            "sentence": "Women still ______ less than men for the same job.",
+            "answer": "earn"
+          }
+        ]
+      }
+    ]
+  }
+}

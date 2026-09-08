@@ -1,0 +1,1449 @@
+{
+  "32": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "multiple_choice",
+        "title": "Circle the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Mum asked me if my brother has gone / had gone out.",
+            "options": {
+              "A": "has gone",
+              "B": "had gone"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 2,
+            "sentence": "Miss Smith asked Ruby if she knew / had known the answer.",
+            "options": {
+              "A": "knew",
+              "B": "had known"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 3,
+            "sentence": "The police officer asked the man if it is / was his car.",
+            "options": {
+              "A": "is",
+              "B": "was"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 4,
+            "sentence": "I asked Benjamin if he went / had been to see the exhibition.",
+            "options": {
+              "A": "went",
+              "B": "had been"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 5,
+            "sentence": "Jerry asked me if my laptop needed / will need a new battery.",
+            "options": {
+              "A": "needed",
+              "B": "will need"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 6,
+            "sentence": "I asked the Browns if they were having / had been having a barbecue.",
+            "options": {
+              "A": "were having",
+              "B": "had been having"
+            },
+            "answer": "A"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "gap_fill",
+        "title": "Write one word in each gap.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Richard asked me if I ______ be at the party.",
+            "answer": "would"
+          },
+          {
+            "id": 2,
+            "sentence": "The woman asked Ted if she ______ ask him a few questions.",
+            "answer": "might"
+          },
+          {
+            "id": 3,
+            "sentence": "Jane asked her father if they ______ go to the zoo the following day.",
+            "answer": "could"
+          },
+          {
+            "id": 4,
+            "sentence": "Sally asked her best friend whether she ______ study maths or English.",
+            "answer": "should"
+          },
+          {
+            "id": 5,
+            "sentence": "Val asked me whether I ______ write with my left hand.",
+            "answer": "could"
+          },
+          {
+            "id": 6,
+            "sentence": "Debbie asked her sister if they ______ play tennis or volleyball.",
+            "answer": "should"
+          },
+          {
+            "id": 7,
+            "sentence": "Samantha asked her parents if she ______ leave the table.",
+            "answer": "might"
+          },
+          {
+            "id": 8,
+            "sentence": "Mum asked the driver whether our bus ______ leave on time.",
+            "answer": "would"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "key_word_transform",
+        "title": "Complete each second sentence. Write between two and five words.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "'When did your brother join the army?' Rudy asked me.",
+            "answer": "when my brother had joined"
+          },
+          {
+            "id": 2,
+            "sentence": "'How was your trip to Turkey?' I asked Katherine.",
+            "answer": "her trip to Turkey had"
+          },
+          {
+            "id": 3,
+            "sentence": "'How will we find your keys in the dark?' Ashley asked Susie.",
+            "answer": "how they would find her"
+          },
+          {
+            "id": 4,
+            "sentence": "'Why was Rob on TV?' Denise asked me.",
+            "answer": "why Rob had been"
+          },
+          {
+            "id": 5,
+            "sentence": "'Who saw you at the park?' the police officer asked me.",
+            "answer": "who had seen me"
+          },
+          {
+            "id": 6,
+            "sentence": "'Who did you see at the park?' the police officer asked me.",
+            "answer": "who I had seen"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "picture_completion",
+        "title": "Look at the pictures and complete the sentences.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "My mum told ______ (Tidy your room!)",
+            "answer": "me to tidy my room"
+          },
+          {
+            "id": 2,
+            "sentence": "I ______ (Stop following me.)",
+            "answer": "told the dog to stop following me"
+          },
+          {
+            "id": 3,
+            "sentence": "The man ______ (Listen carefully.)",
+            "answer": "told the woman to listen carefully"
+          },
+          {
+            "id": 4,
+            "sentence": "The parrot ______ (Shut up!)",
+            "answer": "told Tom / the boy to shut up"
+          },
+          {
+            "id": 5,
+            "sentence": "Jenny's grandma ______ (Push harder, Jenny!)",
+            "answer": "told her to push harder"
+          },
+          {
+            "id": 6,
+            "sentence": "The magician ______ (Pick a card.)",
+            "answer": "told the girl to pick a card"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I asked the man next to me ______ me the salt.",
+            "options": {
+              "A": "pass",
+              "B": "if he passes",
+              "C": "to pass"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 2,
+            "sentence": "The shop assistant asked the woman ______ for a moment.",
+            "options": {
+              "A": "to wait",
+              "B": "waiting",
+              "C": "she wait"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 3,
+            "sentence": "Mum told Doug ______ his dirty football boots in the hall.",
+            "options": {
+              "A": "that he doesn't leave",
+              "B": "not to leave",
+              "C": "don't leave"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 4,
+            "sentence": "The police officers asked Barry ______ he had been at six o'clock.",
+            "options": {
+              "A": "telling them where",
+              "B": "where he tells them",
+              "C": "to tell them where"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 5,
+            "sentence": "I asked Mariella ______ e-mail address.",
+            "options": {
+              "A": "to give me her",
+              "B": "give me your",
+              "C": "give me her"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 6,
+            "sentence": "I asked my mum ______ a new Xbox.",
+            "options": {
+              "A": "that she get me",
+              "B": "get me",
+              "C": "to get me"
+            },
+            "answer": "C"
+          }
+        ]
+      },
+      {
+        "exercise": "F",
+        "type": "error_correction",
+        "title": "If word in bold is correct, put tick. If wrong, write correct word or phrase.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I asked Toni why had she taken my CD without asking me.",
+            "answer": "why she had taken"
+          },
+          {
+            "id": 2,
+            "sentence": "Roger told Isabelle don't make any plans for the weekend.",
+            "answer": "not to make"
+          },
+          {
+            "id": 3,
+            "sentence": "Madison asked me how much my new jeans had cost.",
+            "answer": "tick"
+          },
+          {
+            "id": 4,
+            "sentence": "Alexander asked his dad giving him some money for his school trip.",
+            "answer": "to give"
+          },
+          {
+            "id": 5,
+            "sentence": "I told Jeremy you don't move while I took his photograph.",
+            "answer": "not to move"
+          },
+          {
+            "id": 6,
+            "sentence": "Annie told her dog to sit, but it didn't.",
+            "answer": "tick"
+          }
+        ]
+      }
+    ]
+  },
+  "33": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "picture_matching",
+        "title": "Match the pictures with the verbs in the box.",
+        "word_bank": [
+          "create",
+          "design",
+          "fix",
+          "fold",
+          "match",
+          "stretch",
+          "tear"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Picture 1: ______",
+            "answer": "fix"
+          },
+          {
+            "id": 2,
+            "sentence": "Picture 2: ______",
+            "answer": "fold"
+          },
+          {
+            "id": 3,
+            "sentence": "Picture 3: ______",
+            "answer": "tear"
+          },
+          {
+            "id": 4,
+            "sentence": "Picture 4: ______",
+            "answer": "design"
+          },
+          {
+            "id": 5,
+            "sentence": "Picture 5: ______",
+            "answer": "stretch"
+          },
+          {
+            "id": 6,
+            "sentence": "Picture 6: ______",
+            "answer": "match"
+          },
+          {
+            "id": 7,
+            "sentence": "Picture 7: ______",
+            "answer": "create"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "word_swap",
+        "title": "Each word in bold is in the wrong sentence. Write the correct word.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "These jeans are too ancient. Do you have a smaller size?",
+            "answer": "tight"
+          },
+          {
+            "id": 2,
+            "sentence": "I don't like your smooth dress. It makes you look like a zebra!",
+            "answer": "striped"
+          },
+          {
+            "id": 3,
+            "sentence": "It's good to have rough skills, like being able to make your own clothes.",
+            "answer": "practical"
+          },
+          {
+            "id": 4,
+            "sentence": "Ouch! These shoes are far too checked. Have you got any in a bigger size?",
+            "answer": "loose"
+          },
+          {
+            "id": 5,
+            "sentence": "Wear that suitable shirt, the one with the red and white squares.",
+            "answer": "checked"
+          },
+          {
+            "id": 6,
+            "sentence": "The woman asked if they had any jackets loose for a one-year-old girl.",
+            "answer": "suitable"
+          },
+          {
+            "id": 7,
+            "sentence": "This woollen jumper is really striped. It makes me itch!",
+            "answer": "rough"
+          },
+          {
+            "id": 8,
+            "sentence": "The practical Egyptians almost always wore white clothes.",
+            "answer": "ancient"
+          },
+          {
+            "id": 9,
+            "sentence": "Feel this material. It's so soft and tight. I bet it's really expensive.",
+            "answer": "smooth"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "multiple_choice",
+        "title": "Circle the correct word.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "They've got fantastic paintings in the local art gallery / style.",
+            "options": {
+              "A": "gallery",
+              "B": "style"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 2,
+            "sentence": "Amy asked me if I had seen her silk / shape blouse.",
+            "options": {
+              "A": "silk",
+              "B": "shape"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 3,
+            "sentence": "We pay someone to maintain / notice the block of flats we live in.",
+            "options": {
+              "A": "maintain",
+              "B": "notice"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 4,
+            "sentence": "The latest fashion is short piles / sleeves with lots of bright colours.",
+            "options": {
+              "A": "piles",
+              "B": "sleeves"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 5,
+            "sentence": "The assistant said the T-shirts were made out of cotton / suit.",
+            "options": {
+              "A": "cotton",
+              "B": "suit"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 6,
+            "sentence": "I asked my mum what tools / improvements I needed to fix the car.",
+            "options": {
+              "A": "tools",
+              "B": "improvements"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 7,
+            "sentence": "Oscar bought some material / pattern to make a costume.",
+            "options": {
+              "A": "material",
+              "B": "pattern"
+            },
+            "answer": "A"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "gap_fill",
+        "title": "Write one word in each gap. (Passage: Dress to impress)",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Do you think carefully about what you (1) ______ on each morning when you get dressed?",
+            "answer": "put"
+          },
+          {
+            "id": 2,
+            "sentence": "What do the clothes that you (2) ______ on say about you?",
+            "answer": "have"
+          },
+          {
+            "id": 3,
+            "sentence": "when you buy clothes, always (3) ______ them on.",
+            "answer": "try"
+          },
+          {
+            "id": 4,
+            "sentence": "make sure that you can (4) ______ it up properly.",
+            "answer": "do"
+          },
+          {
+            "id": 5,
+            "sentence": "And make sure it's easy to put on and (5) ______ off.",
+            "answer": "take"
+          },
+          {
+            "id": 6,
+            "sentence": "(6) ______ out all the things you never wear.",
+            "answer": "Leave"
+          },
+          {
+            "id": 7,
+            "sentence": "you'll be able to (7) ______ it up with things that suit you.",
+            "answer": "fill"
+          },
+          {
+            "id": 8,
+            "sentence": "You could (8) ______ the sleeves off an old shirt.",
+            "answer": "cut"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "missing_word",
+        "title": "Put an arrow to show where missing word goes and write the word.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "My parents wanted to build a play area at the back our house.",
+            "answer": "of"
+          },
+          {
+            "id": 2,
+            "sentence": "Those silver boots are really fashion at the moment!",
+            "answer": "in"
+          },
+          {
+            "id": 3,
+            "sentence": "Jan said it would look nice if we put some candles the corner of the room.",
+            "answer": "in"
+          },
+          {
+            "id": 4,
+            "sentence": "We need to design a new sign to go in front the shop.",
+            "answer": "of"
+          },
+          {
+            "id": 5,
+            "sentence": "What's going to happen at end of your story?",
+            "answer": "the"
+          },
+          {
+            "id": 6,
+            "sentence": "Things become fashionable and then go out style very quickly.",
+            "answer": "of"
+          }
+        ]
+      },
+      {
+        "exercise": "F",
+        "type": "word_formation",
+        "title": "Complete by changing the form of the word in capitals.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "She must have a lot of ______ to think of ideas like that.",
+            "answer": "imagination",
+            "capital_word": "IMAGINE"
+          },
+          {
+            "id": 2,
+            "sentence": "I love the way they've designed this cup without a ______.",
+            "answer": "handle",
+            "capital_word": "HAND"
+          },
+          {
+            "id": 3,
+            "sentence": "Kevin said his favourite ______ was Mozart.",
+            "answer": "composer",
+            "capital_word": "COMPOSE"
+          },
+          {
+            "id": 4,
+            "sentence": "Leonardo da Vinci was really ______.",
+            "answer": "intelligent",
+            "capital_word": "INTELLIGENT"
+          },
+          {
+            "id": 5,
+            "sentence": "Todd is really ______. He loves painting, playing music and writing poetry.",
+            "answer": "artistic",
+            "capital_word": "ART"
+          },
+          {
+            "id": 6,
+            "sentence": "Would it be safer if all houses had windows made out of ______ glass?",
+            "answer": "unbreakable",
+            "capital_word": "BREAK"
+          },
+          {
+            "id": 7,
+            "sentence": "It took a lot of ______ to get the show right.",
+            "answer": "preparation",
+            "capital_word": "PREPARE"
+          },
+          {
+            "id": 8,
+            "sentence": "Mum asked if I wanted to go to the Dali ______.",
+            "answer": "exhibition",
+            "capital_word": "EXHIBIT"
+          },
+          {
+            "id": 9,
+            "sentence": "it's impossible to achieve ______.",
+            "answer": "perfection",
+            "capital_word": "PERFECT"
+          },
+          {
+            "id": 10,
+            "sentence": "Our art teacher gives us a lot of ______ to paint what we want to.",
+            "answer": "freedom",
+            "capital_word": "FREE"
+          }
+        ]
+      },
+      {
+        "exercise": "G",
+        "type": "multiple_choice",
+        "title": "Circle the correct word.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I was amazed by / with the picture she drew.",
+            "options": {
+              "A": "by",
+              "B": "with"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 2,
+            "sentence": "Picasso has been a huge influence in / on me as a painter.",
+            "options": {
+              "A": "in",
+              "B": "on"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 3,
+            "sentence": "Writing poetry is similar to / with writing a song.",
+            "options": {
+              "A": "to",
+              "B": "with"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 4,
+            "sentence": "it's a picture from / of fruit in a bowl.",
+            "options": {
+              "A": "from",
+              "B": "of"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 5,
+            "sentence": "I was a bit disappointed from / with his last one.",
+            "options": {
+              "A": "from",
+              "B": "with"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 6,
+            "sentence": "There's a lot involved in / on writing a symphony.",
+            "options": {
+              "A": "in",
+              "B": "on"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 7,
+            "sentence": "Derek asked if I was familiar on / with an artist called Titian.",
+            "options": {
+              "A": "on",
+              "B": "with"
+            },
+            "answer": "B"
+          }
+        ]
+      },
+      {
+        "exercise": "H",
+        "type": "gap_fill",
+        "title": "Complete using a form of the verbs from the box. Add any other words you need.",
+        "word_bank": [
+          "change",
+          "describe",
+          "explain",
+          "remind",
+          "remove"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "We need to ______ the old wallpaper ______ the walls before putting on the new one.",
+            "answer": "remove / from"
+          },
+          {
+            "id": 2,
+            "sentence": "Could you ______ how you make concrete ______ me?",
+            "answer": "explain / to"
+          },
+          {
+            "id": 3,
+            "sentence": "I would ______ this style of painting ______ quite modern.",
+            "answer": "describe / as"
+          },
+          {
+            "id": 4,
+            "sentence": "This piece of music always ______ me ______ long summer evenings.",
+            "answer": "reminds / of"
+          },
+          {
+            "id": 5,
+            "sentence": "My drawing of a horse went wrong so I ______ it ______ a camel!",
+            "answer": "changed / into"
+          }
+        ]
+      }
+    ]
+  },
+  "34": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "matching",
+        "title": "Match to make sentences. Put a cross if no match.",
+        "questions": [
+          {
+            "id": 1,
+            "left": "I've never driven",
+            "right": "a tractor.",
+            "answer": "D"
+          },
+          {
+            "id": 2,
+            "left": "We're going to have",
+            "right": "a party on Saturday.",
+            "answer": "F"
+          },
+          {
+            "id": 3,
+            "left": "Don't close",
+            "right": "the window!",
+            "answer": "A"
+          },
+          {
+            "id": 4,
+            "left": "Have you invited",
+            "right": "lots of people?",
+            "answer": "E"
+          },
+          {
+            "id": 5,
+            "left": "Our rabbit has run away",
+            "right": "",
+            "answer": "X"
+          },
+          {
+            "id": 6,
+            "left": "Of course you can borrow",
+            "right": "some money.",
+            "answer": "B"
+          },
+          {
+            "id": 7,
+            "left": "Clare has drawn",
+            "right": "a lovely picture.",
+            "answer": "C"
+          },
+          {
+            "id": 8,
+            "left": "I think I'll sit down",
+            "right": "",
+            "answer": "X"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "extra_word",
+        "title": "Circle the extra word in each sentence.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "My mum often makes for the old lady who lives next door some soup.",
+            "answer": "for"
+          },
+          {
+            "id": 2,
+            "sentence": "I won't tell to anyone your secret.",
+            "answer": "to"
+          },
+          {
+            "id": 3,
+            "sentence": "Sing to us a song!",
+            "answer": "to"
+          },
+          {
+            "id": 4,
+            "sentence": "Could you bring for me some crisps when you come?",
+            "answer": "for"
+          },
+          {
+            "id": 5,
+            "sentence": "I think I'll buy for Carl a computer game for his birthday.",
+            "answer": "for"
+          },
+          {
+            "id": 6,
+            "sentence": "That CD cost to me fifteen euros.",
+            "answer": "to"
+          },
+          {
+            "id": 7,
+            "sentence": "Dan showed to me his autograph book.",
+            "answer": "to"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "sentence_rewrite",
+        "title": "Rewrite the sentences with the direct object at the end.",
+        "questions": [
+          {
+            "id": 1,
+            "prompt": "I owe ten euros to Danny.",
+            "sentence": "",
+            "answer": "I owe Danny ten euros."
+          },
+          {
+            "id": 2,
+            "prompt": "Susan hasn't bought a birthday present for her mum yet.",
+            "sentence": "",
+            "answer": "Susan hasn't bought her mum a birthday present yet."
+          },
+          {
+            "id": 3,
+            "prompt": "You should show your new guitar to Mike.",
+            "sentence": "",
+            "answer": "You should show Mike your new guitar."
+          },
+          {
+            "id": 4,
+            "prompt": "Did you give that CD to Liz?",
+            "sentence": "",
+            "answer": "Did you give Liz that CD?"
+          },
+          {
+            "id": 5,
+            "prompt": "I'd like to teach English to young teenagers.",
+            "sentence": "",
+            "answer": "I'd like to teach young teenagers English."
+          },
+          {
+            "id": 6,
+            "prompt": "Are you going to write a letter to your grandparents?",
+            "sentence": "",
+            "answer": "Are you going to write your grandparents a letter?"
+          },
+          {
+            "id": 7,
+            "prompt": "Could you take this magazine to your dad?",
+            "sentence": "",
+            "answer": "Could you take your dad this magazine?"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "sentence_rewrite",
+        "title": "Rewrite the sentences with the indirect object at the end.",
+        "questions": [
+          {
+            "id": 1,
+            "prompt": "I'm going to read the kids a story.",
+            "sentence": "",
+            "answer": "I'm going to read a story to the kids."
+          },
+          {
+            "id": 2,
+            "prompt": "Could you pass Ed the potatoes?",
+            "sentence": "",
+            "answer": "Could you pass the potatoes to Ed?"
+          },
+          {
+            "id": 3,
+            "prompt": "Throw the dog that bone!",
+            "sentence": "",
+            "answer": "Throw that bone to the dog!"
+          },
+          {
+            "id": 4,
+            "prompt": "Why are you sending Aunty June those clothes?",
+            "sentence": "",
+            "answer": "Why are you sending those clothes to Aunty June?"
+          },
+          {
+            "id": 5,
+            "prompt": "Steve sang us his new song.",
+            "sentence": "",
+            "answer": "Steve sang his new song to us."
+          },
+          {
+            "id": 6,
+            "prompt": "I'll lend Doug the money.",
+            "sentence": "",
+            "answer": "I'll lend the money to Doug."
+          },
+          {
+            "id": 7,
+            "prompt": "I've never told my mum a lie.",
+            "sentence": "",
+            "answer": "I've never told a lie to my mum."
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "gap_fill",
+        "title": "Write one word in each gap. If no word necessary, put a dash.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "My mum is going to write a letter ______ the editor.",
+            "answer": "to"
+          },
+          {
+            "id": 2,
+            "sentence": "I paid the money ______ the shop assistant and then left.",
+            "answer": "to"
+          },
+          {
+            "id": 3,
+            "sentence": "Let's get a birthday card ______ your dad.",
+            "answer": "for"
+          },
+          {
+            "id": 4,
+            "sentence": "I'm not going to tell ______ you the answer!",
+            "answer": "-"
+          },
+          {
+            "id": 5,
+            "sentence": "I've made some sandwiches ______ you.",
+            "answer": "for"
+          },
+          {
+            "id": 6,
+            "sentence": "We'll bring ______ you that DVD tonight.",
+            "answer": "-"
+          },
+          {
+            "id": 7,
+            "sentence": "Tony has bought a book ______ Jake.",
+            "answer": "for"
+          },
+          {
+            "id": 8,
+            "sentence": "A prize was given ______ the best student.",
+            "answer": "to"
+          }
+        ]
+      },
+      {
+        "exercise": "F",
+        "type": "extra_word",
+        "title": "If a line is correct, put tick. If extra word in a line, write it. (Passage: My new hobby)",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "My uncle loves astronomy. It's his hobby.",
+            "answer": "-"
+          },
+          {
+            "id": 2,
+            "sentence": "My aunt recently bought for him a new telescope for his birthday",
+            "answer": "for"
+          },
+          {
+            "id": 3,
+            "sentence": "so he gave his old one to me!",
+            "answer": "-"
+          },
+          {
+            "id": 4,
+            "sentence": "When he bought it, it cost to him over two hundred euros!",
+            "answer": "to"
+          },
+          {
+            "id": 5,
+            "sentence": "Last weekend, he taught to me the basics.",
+            "answer": "to"
+          },
+          {
+            "id": 6,
+            "sentence": "He said he'll bring to me a book with more information",
+            "answer": "to"
+          },
+          {
+            "id": 7,
+            "sentence": "about the night sky next time he comes.",
+            "answer": "-"
+          }
+        ]
+      }
+    ]
+  },
+  "35": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "gap_fill",
+        "title": "Complete using the correct form of the verbs in brackets.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I wish I ______ (have) a million euros!",
+            "answer": "had"
+          },
+          {
+            "id": 2,
+            "sentence": "I wish we ______ (live) in a bigger house.",
+            "answer": "lived / could live"
+          },
+          {
+            "id": 3,
+            "sentence": "Becca wishes she ______ (be) old enough to drive a car.",
+            "answer": "was / were"
+          },
+          {
+            "id": 4,
+            "sentence": "Do you wish you ______ (feel) more confident about the exam tomorrow?",
+            "answer": "felt"
+          },
+          {
+            "id": 5,
+            "sentence": "I wish my computer ______ (not / be) broken.",
+            "answer": "wasn't / weren't"
+          },
+          {
+            "id": 6,
+            "sentence": "I wish I ______ (not / like) chocolate so much!",
+            "answer": "didn't like"
+          },
+          {
+            "id": 7,
+            "sentence": "Grant wishes he ______ (not / make) so many mistakes all the time.",
+            "answer": "didn't make"
+          },
+          {
+            "id": 8,
+            "sentence": "I bet they wish they ______ (not / look) so silly!",
+            "answer": "didn't look"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "gap_fill",
+        "title": "Complete using correct form of verbs in box. May need negative forms.",
+        "word_bank": [
+          "feel",
+          "give",
+          "have",
+          "live",
+          "spend",
+          "wear"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I wish I ______ in the countryside.",
+            "answer": "lived / could live"
+          },
+          {
+            "id": 2,
+            "sentence": "Tracy often wishes she ______ straight hair.",
+            "answer": "had"
+          },
+          {
+            "id": 3,
+            "sentence": "I wish our teachers ______ us less homework every day.",
+            "answer": "gave / would give"
+          },
+          {
+            "id": 4,
+            "sentence": "I wish I ______ so scared, but I do!",
+            "answer": "didn't feel"
+          },
+          {
+            "id": 5,
+            "sentence": "Do you wish you ______ contact lenses or are you happy with glasses?",
+            "answer": "wore"
+          },
+          {
+            "id": 6,
+            "sentence": "Jake's mum wishes he ______ so much money on clothes.",
+            "answer": "didn't / wouldn't spend"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "picture_completion",
+        "title": "Look at the pictures and complete the sentences.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I wish I ______ (win).",
+            "answer": "had won"
+          },
+          {
+            "id": 2,
+            "sentence": "I wish I ______ (listen) to my mother.",
+            "answer": "had listened"
+          },
+          {
+            "id": 3,
+            "sentence": "I wish we ______ (bring) a camera with us.",
+            "answer": "had brought"
+          },
+          {
+            "id": 4,
+            "sentence": "I wish I ______ (study) a bit harder for this test.",
+            "answer": "had studied"
+          },
+          {
+            "id": 5,
+            "sentence": "I wish I ______ (not / make) so many phone calls last month!",
+            "answer": "hadn't made"
+          },
+          {
+            "id": 6,
+            "sentence": "I wish he ______ (not / choose) me!",
+            "answer": "hadn't chosen"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "error_correction",
+        "title": "The words in bold are wrong. Write the correct word or phrase.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I wish I can speak German, but I never learnt it at school.",
+            "answer": "could"
+          },
+          {
+            "id": 2,
+            "sentence": "I wish you will put your toys away! It's not difficult!",
+            "answer": "would"
+          },
+          {
+            "id": 3,
+            "sentence": "Do you sometimes wish you can fly?",
+            "answer": "could"
+          },
+          {
+            "id": 4,
+            "sentence": "I wish you won't lie to me all the time!",
+            "answer": "wouldn't / didn't"
+          },
+          {
+            "id": 5,
+            "sentence": "I wish the neighbours won't make so much noise.",
+            "answer": "wouldn't / didn't"
+          },
+          {
+            "id": 6,
+            "sentence": "If only she will ask me to go to the disco with her!",
+            "answer": "would"
+          },
+          {
+            "id": 7,
+            "sentence": "If only you can come with us!",
+            "answer": "could"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I wish I ______ an MP3 player.",
+            "options": {
+              "A": "have",
+              "B": "had",
+              "C": "would have"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 2,
+            "sentence": "We all wish Tim ______ with the housework.",
+            "options": {
+              "A": "helps",
+              "B": "will help",
+              "C": "would help"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 3,
+            "sentence": "I wish I ______ to buy a lottery ticket last night.",
+            "options": {
+              "A": "remember",
+              "B": "remembered",
+              "C": "had remembered"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 4,
+            "sentence": "I wish you ______ live so far away.",
+            "options": {
+              "A": "don't",
+              "B": "didn't",
+              "C": "won't"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 5,
+            "sentence": "I wish they ______ keep changing the time of this programme.",
+            "options": {
+              "A": "couldn't",
+              "B": "wouldn't",
+              "C": "don't"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 6,
+            "sentence": "Do you wish you ______ to help Michael in the shop last weekend?",
+            "options": {
+              "A": "hadn't offered",
+              "B": "didn't offer",
+              "C": "haven't offered"
+            },
+            "answer": "A"
+          }
+        ]
+      },
+      {
+        "exercise": "F",
+        "type": "multiple_choice",
+        "title": "Circle the correct word or phrase. (Passage: 26th April 3500)",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I wish today (1) has / had never happened!",
+            "answer": "had"
+          },
+          {
+            "id": 2,
+            "sentence": "If only I (2) could / would start the day again",
+            "answer": "could"
+          },
+          {
+            "id": 3,
+            "sentence": "I really wish I (3) haven't / hadn't done that!",
+            "answer": "hadn't"
+          },
+          {
+            "id": 4,
+            "sentence": "I also wish I (4) live / lived nearer the Earth.",
+            "answer": "lived"
+          },
+          {
+            "id": 5,
+            "sentence": "(5) If only / Only if I (6) have / had a faster spaceship.",
+            "answer": "If only"
+          },
+          {
+            "id": 6,
+            "sentence": "(5) If only / Only if I (6) have / had a faster spaceship.",
+            "answer": "had"
+          },
+          {
+            "id": 7,
+            "sentence": "Oh, I wish I (7) didn't say / hadn't said that.",
+            "answer": "hadn't said"
+          },
+          {
+            "id": 9,
+            "sentence": "I just (9) wish / hope tomorrow is better than today was.",
+            "answer": "wish"
+          }
+        ]
+      }
+    ]
+  },
+  "36": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "gap_fill",
+        "title": "Complete using the words in the boxes.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Have you heard what the weather ______ is for tomorrow?",
+            "answer": "forecast"
+          },
+          {
+            "id": 2,
+            "sentence": "Britain is experiencing a ______ at the moment.",
+            "answer": "heatwave"
+          },
+          {
+            "id": 3,
+            "sentence": "It's not going to rain much, but there might be the occasional ______.",
+            "answer": "shower"
+          },
+          {
+            "id": 4,
+            "sentence": "During the thunderstorm, the ______ was so loud I hid under the bed!",
+            "answer": "thunder"
+          },
+          {
+            "id": 5,
+            "sentence": "______ hit a tree in the garden during the thunderstorm.",
+            "answer": "Lightning"
+          },
+          {
+            "id": 6,
+            "sentence": "I wish I lived in a country with a warmer ______.",
+            "answer": "climate"
+          },
+          {
+            "id": 7,
+            "sentence": "I don't see a lot of ______ because I live in a big city.",
+            "answer": "wildlife"
+          },
+          {
+            "id": 8,
+            "sentence": "It's very unusual to see this ______ of bird round here.",
+            "answer": "species"
+          },
+          {
+            "id": 9,
+            "sentence": "If it's got six legs, it's probably a/an ______.",
+            "answer": "insect"
+          },
+          {
+            "id": 10,
+            "sentence": "Humans and monkeys are different types of ______.",
+            "answer": "mammal"
+          },
+          {
+            "id": 11,
+            "sentence": "Snakes and lizards are different kinds of ______.",
+            "answer": "reptile"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "gap_fill",
+        "title": "Write one word in each gap. The first letter is given.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "If we all r______ our paper, fewer trees would be cut down.",
+            "answer": "ecycle"
+          },
+          {
+            "id": 2,
+            "sentence": "The castle is perfectly p______, so it's just like four hundred years ago.",
+            "answer": "reserved"
+          },
+          {
+            "id": 3,
+            "sentence": "If only we could go to the c______ to get some fresh air.",
+            "answer": "ountryside"
+          },
+          {
+            "id": 4,
+            "sentence": "Many plants and animals are in danger of becoming e______.",
+            "answer": "xtinct"
+          },
+          {
+            "id": 5,
+            "sentence": "Zoos give us the opportunity to see w______ animals up close.",
+            "answer": "ild"
+          },
+          {
+            "id": 6,
+            "sentence": "The weather is quite m______ here, even in the winter.",
+            "answer": "ild"
+          },
+          {
+            "id": 7,
+            "sentence": "The l______ weather forecast is usually much more accurate than the national one.",
+            "answer": "ocal"
+          },
+          {
+            "id": 8,
+            "sentence": "I wish you wouldn't drop your l______ on the ground.",
+            "answer": "itter"
+          },
+          {
+            "id": 9,
+            "sentence": "Scientists have n______ the new planet 'Sedna'.",
+            "answer": "amed"
+          },
+          {
+            "id": 10,
+            "sentence": "Looking down at the Earth from space must be an a______ experience.",
+            "answer": "mazing"
+          },
+          {
+            "id": 11,
+            "sentence": "It's f______ in here! Let's put the heating on.",
+            "answer": "reezing"
+          },
+          {
+            "id": 12,
+            "sentence": "The wildlife park is l______ 15 km outside the town.",
+            "answer": "ocated"
+          },
+          {
+            "id": 13,
+            "sentence": "If you get lost in the desert, there will be no one around to r______ you!",
+            "answer": "escue"
+          },
+          {
+            "id": 14,
+            "sentence": "Climate change is a g______ problem. Every country in the world is affected.",
+            "answer": "lobal"
+          }
+        ]
+      }
+    ]
+  }
+}

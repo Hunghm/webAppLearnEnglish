@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useExercises, groupPagesByUnit } from '../hooks/useExercises'
+import { getAllProgress, summariseUnit } from '../utils/exerciseProgress'
 import BottomNav from '../components/layout/BottomNav.jsx'
 
 export default function ExercisesPage() {
@@ -9,6 +10,8 @@ export default function ExercisesPage() {
   const [search, setSearch] = useState('')
 
   const groups = useMemo(() => groupPagesByUnit(data), [data])
+  // Re-read on every render; the page remounts on navigation so this stays fresh.
+  const progressBlob = getAllProgress()
 
   const filtered = useMemo(() => {
     if (!search.trim()) return groups
@@ -73,20 +76,42 @@ export default function ExercisesPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
               {filtered.map(group => {
                 const sections = [...new Set(group.sections.map(s => s.section))]
+                const prog = summariseUnit(group.unit, progressBlob)
+                const allDone = prog.done > 0 && prog.done >= group.totalExercises
+                const pct = group.totalExercises > 0
+                  ? Math.round((prog.done / group.totalExercises) * 100)
+                  : 0
                 return (
                   <button
                     key={group.unit}
                     onClick={() => navigate(`/exercises/${encodeURIComponent(group.unit)}`)}
                     className="bg-white rounded-xl p-4 flex items-center gap-3 shadow-sm hover:shadow-md active:scale-98 transition-all text-left border border-gray-100"
                   >
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-white text-xs flex-shrink-0" style={{ background: '#1565C0' }}>
-                      ✏️
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-white text-xs flex-shrink-0"
+                      style={{ background: allDone ? '#43A047' : '#1565C0' }}
+                    >
+                      {allDone ? '✓' : '✏️'}
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="font-semibold text-gray-800 text-sm">{group.unit}</p>
                       <p className="text-xs text-gray-400 mt-0.5">
                         {group.totalExercises} bài · {sections.slice(0, 2).join(', ')}
                       </p>
+                      {prog.done > 0 && (
+                        <div className="mt-1.5">
+                          <div className="flex justify-between text-[0.65rem] text-gray-400 mb-0.5">
+                            <span>{prog.done}/{group.totalExercises} đã làm</span>
+                            <span>{pct}%</span>
+                          </div>
+                          <div className="h-1 rounded-full overflow-hidden bg-gray-100">
+                            <div
+                              className="h-full rounded-full transition-all"
+                              style={{ width: `${pct}%`, background: allDone ? '#43A047' : '#1565C0' }}
+                            />
+                          </div>
+                        </div>
+                      )}
                     </div>
                     <svg className="w-4 h-4 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

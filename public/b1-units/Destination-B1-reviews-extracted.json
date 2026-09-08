@@ -1,0 +1,2911 @@
+{
+  "r2": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "gap_fill",
+        "title": "Complete using the words in the box.",
+        "word_bank": [
+          "exam",
+          "fact",
+          "favour",
+          "heart",
+          "instance",
+          "mark",
+          "progress",
+          "skill"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "My German teacher says I've made a lot of ______ this term!",
+            "answer": "progress"
+          },
+          {
+            "id": 2,
+            "sentence": "What time are you taking the French ______ tomorrow?",
+            "answer": "exam"
+          },
+          {
+            "id": 3,
+            "sentence": "I'm not in ______ of giving students lots of homework each night.",
+            "answer": "favour"
+          },
+          {
+            "id": 4,
+            "sentence": "Being able to drive a car is a very useful ______.",
+            "answer": "skill"
+          },
+          {
+            "id": 5,
+            "sentence": "Have we got to learn all these irregular verbs by ______?",
+            "answer": "heart"
+          },
+          {
+            "id": 6,
+            "sentence": "Some languages, like Russian for ______, don't have words for 'a', 'an' and 'the'.",
+            "answer": "instance"
+          },
+          {
+            "id": 7,
+            "sentence": "I got a very good ______ in my geography test.",
+            "answer": "mark"
+          },
+          {
+            "id": 8,
+            "sentence": "Many people hate learning phrasal verbs, but in ______ they're not that difficult.",
+            "answer": "fact"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "phrasal_verb",
+        "title": "Write a phrasal verb in the correct form to replace the words in bold. The first letter of the first word is given to help you.",
+        "questions": [
+          {
+            "id": 9,
+            "sentence": "Simon r.......................... .......................... the wrong answer and wrote the right one. (removed with a rubber)",
+            "answer": "rubbed out"
+          },
+          {
+            "id": 10,
+            "sentence": "Why did you r.......................... .......................... that piece of paper? (tear into pieces)",
+            "answer": "rip up"
+          },
+          {
+            "id": 11,
+            "sentence": "If you make a mistake, just c.......................... it .......................... . (draw a line through)",
+            "answer": "cross / out"
+          },
+          {
+            "id": 12,
+            "sentence": "You should l.......................... .......................... words you don't know in a dictionary. (find information about)",
+            "answer": "look up"
+          },
+          {
+            "id": 13,
+            "sentence": "Carol, will you r.......................... .......................... your poem to the class, please? (say out loud)",
+            "answer": "read out"
+          },
+          {
+            "id": 14,
+            "sentence": "Our teacher p.......................... .......................... that we only had five minutes left. (said)",
+            "answer": "pointed out"
+          },
+          {
+            "id": 15,
+            "sentence": "Have you all w.......................... .......................... what the homework is? (made a note of)",
+            "answer": "written down"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "word_formation",
+        "title": "Complete by changing the form of the word in capitals.",
+        "questions": [
+          {
+            "id": 16,
+            "sentence": "What's the name of Dave's driving ______?",
+            "capital_word": "INSTRUCT",
+            "answer": "instructor"
+          },
+          {
+            "id": 17,
+            "sentence": "Dictionaries and encyclopaedias are examples of ______ books.",
+            "capital_word": "REFER",
+            "answer": "reference"
+          },
+          {
+            "id": 18,
+            "sentence": "I've only been learning Arabic for a few months, so I'm still a ______.",
+            "capital_word": "BEGIN",
+            "answer": "beginner"
+          },
+          {
+            "id": 19,
+            "sentence": "In maths, you have to learn to do addition, subtraction, multiplication and ______.",
+            "capital_word": "DIVIDE",
+            "answer": "division"
+          },
+          {
+            "id": 20,
+            "sentence": "Three of your answers were ______, so you got 17 out of 20.",
+            "capital_word": "CORRECT",
+            "answer": "incorrect"
+          },
+          {
+            "id": 21,
+            "sentence": "Are you really going to take part in the singing competition? I admire your ______!",
+            "capital_word": "BRAVE",
+            "answer": "bravery"
+          },
+          {
+            "id": 22,
+            "sentence": "I think every child should get a good ______.",
+            "capital_word": "EDUCATE",
+            "answer": "education"
+          },
+          {
+            "id": 23,
+            "sentence": "There's a ______ to Albert Einstein in the town square.",
+            "capital_word": "MEMORY",
+            "answer": "memorial"
+          },
+          {
+            "id": 24,
+            "sentence": "I want complete ______, so no talking at all!",
+            "capital_word": "SILENT",
+            "answer": "silence"
+          },
+          {
+            "id": 25,
+            "sentence": "This maths problem is too difficult for you, so I'll ______ it a little.",
+            "capital_word": "SIMPLE",
+            "answer": "simplify"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer.",
+        "questions": [
+          {
+            "id": 26,
+            "sentence": "It's the first time ______ all the answers right in a test!",
+            "options": {
+              "A": "I've got",
+              "B": "I'd got",
+              "C": "I've been getting",
+              "D": "I'd been getting"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 27,
+            "sentence": "The exam ______ when Jimmy finally found the right room.",
+            "options": {
+              "A": "has already started",
+              "B": "already started",
+              "C": "had already started",
+              "D": "already starts"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 28,
+            "sentence": "______ that crossword for over an hour and you still haven't finished it!",
+            "options": {
+              "A": "You've done",
+              "B": "You'd done",
+              "C": "You've been doing",
+              "D": "You'd been doing"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 29,
+            "sentence": "When they let us go in, we ______ outside the exam room for over half an hour.",
+            "options": {
+              "A": "have stood",
+              "B": "had been standing",
+              "C": "have been standing",
+              "D": "are standing"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 30,
+            "sentence": "Clare hasn't finished her homework ______",
+            "options": {
+              "A": "already",
+              "B": "yet",
+              "C": "just",
+              "D": "ever"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 31,
+            "sentence": "Have you ______ been on a school trip?",
+            "options": {
+              "A": "yet",
+              "B": "for",
+              "C": "before",
+              "D": "ever"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 32,
+            "sentence": "Lizzie has been having dance classes ______ she was four years old.",
+            "options": {
+              "A": "for",
+              "B": "from",
+              "C": "since",
+              "D": "when"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 33,
+            "sentence": "Had you been learning French ______ several years before you took your first exam?",
+            "options": {
+              "A": "for",
+              "B": "since",
+              "C": "from",
+              "D": "when"
+            },
+            "answer": "A"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "gap_fill",
+        "title": "Write one word in each gap (Cheating passage).",
+        "questions": [
+          {
+            "id": 34,
+            "sentence": "You're doing a history test. Your friend, who's sitting next to you, really wants to succeed ______ the test.",
+            "answer": "in"
+          },
+          {
+            "id": 35,
+            "sentence": "There's a question ______ the First World War, which you've been learning ______ recently.",
+            "answer": "about"
+          },
+          {
+            "id": 36,
+            "sentence": "There's a question ______ the First World War, which you've been learning ______ recently.",
+            "answer": "about"
+          },
+          {
+            "id": 37,
+            "sentence": "You know a lot ______ it, but your friend isn't really capable ______ answering the question properly.",
+            "answer": "about"
+          },
+          {
+            "id": 38,
+            "sentence": "You know a lot ______ it, but your friend isn't really capable ______ answering the question properly.",
+            "answer": "of"
+          },
+          {
+            "id": 39,
+            "sentence": "Your friend whispers 'Help me!' to you. What should you do? Should you help your friend ______ the question, or just continue ______ your own test?",
+            "answer": "with"
+          },
+          {
+            "id": 40,
+            "sentence": "Your friend whispers 'Help me!' to you. What should you do? Should you help your friend ______ the question, or just continue ______ your own test?",
+            "answer": "with"
+          },
+          {
+            "id": 41,
+            "sentence": "Every student has to cope ______ this difficult situation at some point.",
+            "answer": "with"
+          },
+          {
+            "id": 42,
+            "sentence": "What's your opinion ______ cheating?",
+            "answer": "of/about"
+          },
+          {
+            "id": 43,
+            "sentence": "Should you help your friend cheat ______ the test or not?",
+            "answer": "in"
+          }
+        ]
+      }
+    ]
+  },
+  "r3": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "error_correction",
+        "title": "If a line is correct, put a tick (). If there is an extra word in a line, write the word.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Of course, London is famous for that its attractions like Big Ben and the Tower of London.",
+            "answer": "that"
+          },
+          {
+            "id": 2,
+            "sentence": "Millions of tourists look at these buildings every year - but not far distance from these places, there are other interesting sights.",
+            "answer": "correct"
+          },
+          {
+            "id": 3,
+            "sentence": "Millions of tourists look at these buildings every year - but not far distance from these places, there are other interesting sights.",
+            "answer": "distance"
+          },
+          {
+            "id": 4,
+            "sentence": "Next time you set off to visit London, why not plan to go to some of the places close in to the centre of the city that tourists rarely go to?",
+            "answer": "correct"
+          },
+          {
+            "id": 5,
+            "sentence": "Next time you set off to visit London, why not plan to go to some of the places close in to the centre of the city that tourists rarely go to?",
+            "answer": "in"
+          },
+          {
+            "id": 6,
+            "sentence": "Get into of a taxi and ask the driver to take you to Billingsgate fish market, for example.",
+            "answer": "of"
+          },
+          {
+            "id": 7,
+            "sentence": "When you arrive there at the market, you'll be amazed at the sights and sounds of real London.",
+            "answer": "correct"
+          },
+          {
+            "id": 8,
+            "sentence": "When you arrive there at the market, you'll be amazed at the sights and sounds of real London.",
+            "answer": "there"
+          },
+          {
+            "id": 9,
+            "sentence": "You can ask to the fish sellers about their work - and you don't have to wait on for hours to get a ticket!",
+            "answer": "to"
+          },
+          {
+            "id": 10,
+            "sentence": "You can ask to the fish sellers about their work - and you don't have to wait on for hours to get a ticket!",
+            "answer": "on"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "key_word_transformation",
+        "title": "Complete each second sentence using the word given, so that it has a similar meaning to the first sentence. Write between two and five words.",
+        "questions": [
+          {
+            "id": 1,
+            "keyword": "provide",
+            "sentence": "Did they give you a map of the area?",
+            "answer": "provide you with"
+          },
+          {
+            "id": 2,
+            "keyword": "going",
+            "sentence": "My intention is to travel to Malta by ferry.",
+            "answer": "am going to"
+          },
+          {
+            "id": 3,
+            "keyword": "coast",
+            "sentence": "I like staying by the sea when I'm on holiday.",
+            "answer": "on the coast"
+          },
+          {
+            "id": 4,
+            "keyword": "off",
+            "sentence": "Be careful when you leave the bus.",
+            "answer": "get off"
+          },
+          {
+            "id": 5,
+            "keyword": "foot",
+            "sentence": "The beach is close to the hotel, so we can walk there.",
+            "answer": "go on foot"
+          },
+          {
+            "id": 6,
+            "keyword": "car",
+            "sentence": "Why don't you drive to Brighton this weekend?",
+            "answer": "by car"
+          },
+          {
+            "id": 7,
+            "keyword": "back",
+            "sentence": "We're going to return to Bali again this summer.",
+            "answer": "go back to"
+          },
+          {
+            "id": 8,
+            "keyword": "off",
+            "sentence": "I like to watch the planes leaving the ground when I'm at the airport.",
+            "answer": "taking off"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "word_formation",
+        "title": "Complete by changing the form of the word in capitals.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "We thought of driving to Berlin, but in the end we ________________________________.",
+            "capital_word": "FLY",
+            "answer": "flew"
+          },
+          {
+            "id": 2,
+            "sentence": "Could you ask the ________________________________ to slow down a bit, please?",
+            "capital_word": "DRIVE",
+            "answer": "driver"
+          },
+          {
+            "id": 3,
+            "sentence": "Experienced ________________________________ will enjoy our hotel's comfortable double rooms.",
+            "capital_word": "TRAVEL",
+            "answer": "travellers"
+          },
+          {
+            "id": 4,
+            "sentence": "Paris is really ________________________________ in the spring. Shall we go?",
+            "capital_word": "ATTRACT",
+            "answer": "attractive"
+          },
+          {
+            "id": 5,
+            "sentence": "Let's fly in business class - it's much more ________________________________ than the cheap seats!",
+            "capital_word": "COMFORT",
+            "answer": "comfortable"
+          },
+          {
+            "id": 6,
+            "sentence": "Please check the ________________________________ time on your ticket carefully.",
+            "capital_word": "DEPART",
+            "answer": "departure"
+          },
+          {
+            "id": 7,
+            "sentence": "We looked at all the hotels and in the end we ________________________________ the Majestic.",
+            "capital_word": "CHOOSE",
+            "answer": "chose"
+          },
+          {
+            "id": 8,
+            "sentence": "I think we went in the wrong ________________________________ at the last turning and now we're lost.",
+            "capital_word": "DIRECT",
+            "answer": "direction"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I ________________________________ around the world one day.",
+            "options": {
+              "A": "travel",
+              "B": "am going to travel",
+              "C": "am travelling",
+              "D": "travelled"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 2,
+            "sentence": "Do you think Curtis ________________________________ the car race tomorrow?",
+            "options": {
+              "A": "will win",
+              "B": "wins",
+              "C": "is winning",
+              "D": "won"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 3,
+            "sentence": "What's the weather like ________________________________ Russia at the moment?",
+            "options": {
+              "A": "on",
+              "B": "at",
+              "C": "in",
+              "D": "to"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 4,
+            "sentence": "I can't come to your party because I ________________________________ my cousin that week.",
+            "options": {
+              "A": "visit",
+              "B": "will visit",
+              "C": "visited",
+              "D": "am visiting"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 5,
+            "sentence": "I think there's a picture of the hotel ________________________________ the first page .",
+            "options": {
+              "A": "on",
+              "B": "at",
+              "C": "in",
+              "D": "to"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 6,
+            "sentence": "We usually go away somewhere on holiday ________________________________ New Year.",
+            "options": {
+              "A": "on",
+              "B": "at",
+              "C": "in",
+              "D": "to"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 7,
+            "sentence": "Watch out, or you ________________________________ off the boat!",
+            "options": {
+              "A": "fall",
+              "B": "are going to fall",
+              "C": "are falling",
+              "D": "fell"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 8,
+            "sentence": "It's my birthday ________________________________ Friday, so we're spending the weekend in London.",
+            "options": {
+              "A": "on",
+              "B": "at",
+              "C": "in",
+              "D": "to"
+            },
+            "answer": "A"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I got ________________________________ the car, turned the key and realised I didn't have any petrol!",
+            "options": {
+              "A": "into",
+              "B": "off",
+              "C": "onto",
+              "D": "on"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 2,
+            "sentence": "I hope our plane leaves on ________________________________ .",
+            "options": {
+              "A": "a timetable",
+              "B": "a plan",
+              "C": "schedule",
+              "D": "hour"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 3,
+            "sentence": "My mum ________________________________ the bus to work every morning, but Dad drives.",
+            "options": {
+              "A": "catches",
+              "B": "does",
+              "C": "runs",
+              "D": "goes"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 4,
+            "sentence": "We had a long way to go so we ________________________________ off very early.",
+            "options": {
+              "A": "made",
+              "B": "set",
+              "C": "put",
+              "D": "had"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 5,
+            "sentence": "I prepared ________________________________ my trip very carefully, and I still forgot my toothbrush!",
+            "options": {
+              "A": "with",
+              "B": "on",
+              "C": "about",
+              "D": "for"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 6,
+            "sentence": "Public ________________________________ in this city is quite good, and it's not expensive.",
+            "options": {
+              "A": "travel",
+              "B": "journey",
+              "C": "vehicle",
+              "D": "transport"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 7,
+            "sentence": "Mum ________________________________ away on business quite often .",
+            "options": {
+              "A": "sets",
+              "B": "does",
+              "C": "takes",
+              "D": "goes"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 8,
+            "sentence": "It's easier to travel abroad when you can speak ________________________________ language like English .",
+            "options": {
+              "A": "a strange",
+              "B": "a foreign",
+              "C": "an unknown",
+              "D": "an outside"
+            },
+            "answer": "B"
+          }
+        ]
+      }
+    ]
+  },
+  "r5": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "gap_fill",
+        "title": "Write one word in each gap.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "One of ______ websites that has been very successful in recent years is eBay.",
+            "answer": "the"
+          },
+          {
+            "id": 2,
+            "sentence": "On eBay, people take things that belong ______ them and offer them for sale.",
+            "answer": "to"
+          },
+          {
+            "id": 3,
+            "sentence": "Other people offer ______ amount of money, and",
+            "answer": "an"
+          },
+          {
+            "id": 4,
+            "sentence": "______ person who offers the most money wins the item.",
+            "answer": "the"
+          },
+          {
+            "id": 5,
+            "sentence": "They then pay ______ the item",
+            "answer": "for"
+          },
+          {
+            "id": 6,
+            "sentence": "They then pay for the item ______ cheque or credit card.",
+            "answer": "by"
+          },
+          {
+            "id": 7,
+            "sentence": "It's ______ simple idea, but it's become a very popular way of buying and selling.",
+            "answer": "a"
+          },
+          {
+            "id": 8,
+            "sentence": "Even if you only have a ______ of money, you can often find something you want on eBay.",
+            "answer": "bit"
+          },
+          {
+            "id": 9,
+            "sentence": "Most of the items are ______ good condition,",
+            "answer": "in"
+          },
+          {
+            "id": 10,
+            "sentence": "Most of the items are in good condition, and eBay has a ______ of happy users.",
+            "answer": "lot"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "word_formation",
+        "title": "Complete by changing the form of the word in capitals when this is necessary.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I've made my ______ (DECIDE). I'm going to buy the blue one.",
+            "answer": "decision",
+            "capital_word": "DECIDE"
+          },
+          {
+            "id": 2,
+            "sentence": "This dress is wonderful - but it's a little too ______ (EXPENSE) for me.",
+            "answer": "expensive",
+            "capital_word": "EXPENSE"
+          },
+          {
+            "id": 3,
+            "sentence": "I've broken my new CD player and now it's ______ (USE)!",
+            "answer": "useless",
+            "capital_word": "USE"
+          },
+          {
+            "id": 4,
+            "sentence": "In the past, rich people often had ______ (SERVE) to do everything for them.",
+            "answer": "servants",
+            "capital_word": "SERVE"
+          },
+          {
+            "id": 5,
+            "sentence": "We offer top quality products at ______ (AFFORD) prices!",
+            "answer": "affordable",
+            "capital_word": "AFFORD"
+          },
+          {
+            "id": 6,
+            "sentence": "The advert was ______ (TRUE), so I complained to the manager.",
+            "answer": "untrue",
+            "capital_word": "TRUE"
+          },
+          {
+            "id": 7,
+            "sentence": "Please be careful with that painting - it's extremely ______ (VALUE).",
+            "answer": "valuable",
+            "capital_word": "VALUE"
+          },
+          {
+            "id": 8,
+            "sentence": "When you ______ (COMPARE) our prices with other shops, we're the cheapest!",
+            "answer": "compare",
+            "capital_word": "COMPARE"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "key_word_transformation",
+        "title": "Complete each second sentence using the word given, so that it has a similar meaning to the first sentence. Write between two and five words.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Could you lend some money to me until the weekend?",
+            "keyword": "from",
+            "answer": "borrow some money from"
+          },
+          {
+            "id": 2,
+            "sentence": "I can't decide which shoes I like most, the blue ones or the green ones.",
+            "keyword": "choose",
+            "answer": "choose between"
+          },
+          {
+            "id": 3,
+            "sentence": "Why don't you return the sweater to the shop you got it from?",
+            "keyword": "back",
+            "answer": "take the sweater back"
+          },
+          {
+            "id": 4,
+            "sentence": "It can be very worrying when you owe money to the bank.",
+            "keyword": "debt",
+            "answer": "are in debt"
+          },
+          {
+            "id": 5,
+            "sentence": "We need to go quickly or the shops will be closed.",
+            "keyword": "up",
+            "answer": "hurry up"
+          },
+          {
+            "id": 6,
+            "sentence": "I paid for the CD using notes and coins and then left the shop.",
+            "keyword": "cash",
+            "answer": "in cash"
+          }
+        ]
+      },
+      {
+        "exercise": "C_cont",
+        "type": "key_word_transformation",
+        "title": "Key word transformation continued.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I don't agree with your opinion of the new shopping centre.",
+            "keyword": "wrong",
+            "answer": "are wrong about"
+          },
+          {
+            "id": 2,
+            "sentence": "Do they rent cars here?",
+            "keyword": "rent",
+            "answer": "cars for rent"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I heard there's ______ new sports shop in town. Let's see what they have.",
+            "options": {
+              "A": "a",
+              "B": "the",
+              "C": "an",
+              "D": "one"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 2,
+            "sentence": "I don't have ______ money, so I'll have to wait to get a new coat.",
+            "options": {
+              "A": "a piece of",
+              "B": "a few",
+              "C": "much",
+              "D": "many"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 3,
+            "sentence": "It's going to be very expensive to send a person to ______.",
+            "options": {
+              "A": "a Mars",
+              "B": "one Mars",
+              "C": "the Mars",
+              "D": "Mars"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 4,
+            "sentence": "I don't know much about computers, so I asked the assistant for ______ advice.",
+            "options": {
+              "A": "a lot",
+              "B": "many",
+              "C": "a few",
+              "D": "a little"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 5,
+            "sentence": "In my experience, ______ are very friendly.",
+            "options": {
+              "A": "Chinese",
+              "B": "a Chinese",
+              "C": "the Chinese",
+              "D": "this Chinese"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 6,
+            "sentence": "Dad has to go to ______ early tomorrow to meet an important customer.",
+            "options": {
+              "A": "work",
+              "B": "the work",
+              "C": "a work",
+              "D": "that work"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 7,
+            "sentence": "Which is more important - money or ______.",
+            "options": {
+              "A": "environment",
+              "B": "the environment",
+              "C": "an environment",
+              "D": "one environment"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 8,
+            "sentence": "Apparently, it's the largest computer store in ______.",
+            "options": {
+              "A": "an Europe",
+              "B": "a Europe",
+              "C": "the Europe",
+              "D": "Europe"
+            },
+            "answer": "D"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Let me just add ______ what I'm buying to see if I've got enough money.",
+            "options": {
+              "A": "on",
+              "B": "up",
+              "C": "over",
+              "D": "in"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 2,
+            "sentence": "Bob ______ a lot of money in his brother's business and made a profit.",
+            "options": {
+              "A": "spent",
+              "B": "invested",
+              "C": "saved",
+              "D": "owed"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 3,
+            "sentence": "I'm saving all my pocket money ______ to buy a new PlayStation.",
+            "options": {
+              "A": "out",
+              "B": "down",
+              "C": "up",
+              "D": "away"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 4,
+            "sentence": "The old man took the book ______ from the shelf and looked at the price.",
+            "options": {
+              "A": "up",
+              "B": "down",
+              "C": "out",
+              "D": "back"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 5,
+            "sentence": "I couldn't sell my old magazines, so I gave them ______.",
+            "options": {
+              "A": "over",
+              "B": "off",
+              "C": "up",
+              "D": "away"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 6,
+            "sentence": "I gave the waiter a 50 note and waited for my ______.",
+            "options": {
+              "A": "change",
+              "B": "supply",
+              "C": "cash",
+              "D": "cost"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 7,
+            "sentence": "Home Lovers have got lots of ______ in their sale this year.",
+            "options": {
+              "A": "debts",
+              "B": "fortunes",
+              "C": "bargains",
+              "D": "fees"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 8,
+            "sentence": "I usually spend any money I have ______ sweets and video games.",
+            "options": {
+              "A": "on",
+              "B": "down",
+              "C": "up",
+              "D": "away"
+            },
+            "answer": "A"
+          }
+        ]
+      }
+    ]
+  },
+  "r6": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "key_word_transformation",
+        "title": "Complete each second sentence using the word given, so that it has a similar meaning to the first sentence. Write between two and five words.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I found the photo by chance when I was tidying my room. ______ the photo when I was tidying my room.",
+            "keyword": "across",
+            "answer": "came across"
+          },
+          {
+            "id": 2,
+            "sentence": "Fridges and freezers are not the same thing.\nThere ______ fridges and freezers.",
+            "keyword": "difference",
+            "answer": "is a difference between"
+          },
+          {
+            "id": 3,
+            "sentence": "Scientists should never invent their results.\nResults should never ______ scientists.",
+            "keyword": "made",
+            "answer": "be made up by"
+          },
+          {
+            "id": 4,
+            "sentence": "Don't put those plastic bags in the bin - use them again!\nDon't ______ - use them again!",
+            "keyword": "away",
+            "answer": "throw away those plastic bags / throw those plastic bags away"
+          },
+          {
+            "id": 5,
+            "sentence": "Our car stopped working on the motorway, so we had to call a mechanic.\nWe had to call a mechanic when our car ______ on the motorway.",
+            "keyword": "down",
+            "answer": "broke down"
+          },
+          {
+            "id": 6,
+            "sentence": "A new medicine was developed because of the work Dr Wang did.\nDr Wang's ______ a new medicine being developed.",
+            "keyword": "resulted",
+            "answer": "work resulted in"
+          },
+          {
+            "id": 7,
+            "sentence": "There are quite a few things that I'd like to invent!\nThere are ______ things that I'd like to invent!",
+            "keyword": "number",
+            "answer": "a number of"
+          },
+          {
+            "id": 8,
+            "sentence": "Make sure you fill the bottle with water before you start the experiment.\nMake sure the bottle ______ water before you start the experiment.",
+            "keyword": "full",
+            "answer": "is full of"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "gap_fill",
+        "title": "Write one word in each gap.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Turn all the lights ______ when you leave the room. We don't want to waste electricity!",
+            "answer": "off"
+          },
+          {
+            "id": 2,
+            "sentence": "______ my opinion, modern technology has improved all our lives.",
+            "answer": "In"
+          },
+          {
+            "id": 3,
+            "sentence": "Could you disconnect your laptop ______ the Internet when you've finished checking your e-mail?",
+            "answer": "from"
+          },
+          {
+            "id": 4,
+            "sentence": "We thought the experiment would work, but ______ the end it didn't.",
+            "answer": "in"
+          },
+          {
+            "id": 5,
+            "sentence": "______ last, someone has built a battery-powered skateboard!",
+            "answer": "At"
+          },
+          {
+            "id": 6,
+            "sentence": "How many different types ______ building can you think of?",
+            "answer": "of"
+          },
+          {
+            "id": 7,
+            "sentence": "That programme is about to start, so I'll turn ______ the TV.",
+            "answer": "on"
+          },
+          {
+            "id": 8,
+            "sentence": "Ice floats in water. Can you think of a reason ______ that?",
+            "answer": "for"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "word_formation",
+        "title": "Complete by changing the form of the word in capitals.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "The ______ (LONG) of the train is exactly 100 metres.",
+            "capital_word": "LONG",
+            "answer": "length"
+          },
+          {
+            "id": 2,
+            "sentence": "I think astronomy is absolutely ______ (FASCINATE)!",
+            "capital_word": "FASCINATE",
+            "answer": "fascinating"
+          },
+          {
+            "id": 3,
+            "sentence": "Lee and Greg are twins, but they don't dress ______ (IDENTICAL).",
+            "capital_word": "IDENTICAL",
+            "answer": "identically"
+          },
+          {
+            "id": 4,
+            "sentence": "I've come to the ______ (CONCLUDE) that no one should have a car.",
+            "capital_word": "CONCLUDE",
+            "answer": "conclusion"
+          },
+          {
+            "id": 5,
+            "sentence": "Why do all ______ (SCIENCE) have untidy hair?",
+            "capital_word": "SCIENCE",
+            "answer": "scientists"
+          },
+          {
+            "id": 6,
+            "sentence": "Pour the ______ (BOIL) water over the tea bag and leave for a few minutes.",
+            "capital_word": "BOIL",
+            "answer": "boiling"
+          },
+          {
+            "id": 7,
+            "sentence": "Make sure your ______ (MEASURE) are accurate.",
+            "capital_word": "MEASURE",
+            "answer": "measurements"
+          },
+          {
+            "id": 8,
+            "sentence": "My brother is studying ______ (CHEMIST) at university.",
+            "capital_word": "CHEMIST",
+            "answer": "chemistry"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Did someone help Alison or did she do all the calculations ______?",
+            "options": {
+              "A": "her",
+              "B": "hers",
+              "C": "herself"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 2,
+            "sentence": "That's not your calculator. It's ______.",
+            "options": {
+              "A": "me",
+              "B": "mine",
+              "C": "my"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 3,
+            "sentence": "Einstein is the person ______ showed that time can speed up and slow down.",
+            "options": {
+              "A": "which",
+              "B": "who",
+              "C": "whose"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 4,
+            "sentence": "Do you know ______ idea it was? Was it Greg's or Fiona's?",
+            "options": {
+              "A": "who",
+              "B": "which",
+              "C": "whose"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 5,
+            "sentence": "This is the laboratory ______ we do all the experiments.",
+            "options": {
+              "A": "that",
+              "B": "which",
+              "C": "where"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 6,
+            "sentence": "Novosibirsk, ______ is a big city in Siberia, is famous for its university.",
+            "options": {
+              "A": "who",
+              "B": "which",
+              "C": "where"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 7,
+            "sentence": "That's the girl ______ father says he's invented a time machine!",
+            "options": {
+              "A": "who",
+              "B": "whose",
+              "C": "that"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 8,
+            "sentence": "Is this our DVD or is it ______?",
+            "options": {
+              "A": "them",
+              "B": "their",
+              "C": "theirs"
+            },
+            "answer": "C"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer (Technology and the young passage).",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Modern technology is changing and improving all the time. Every month, scientists ______ new gadgets and ______ to help us with our daily lives, and ______ ways to make existing technology faster and better. Our homes are full of hardware (such as DVD players and computers) and ______ (such as computer games and MP3s). ______ suggests, however, that it's young people who are best able to deal with this change. Whereas teenagers have no problem ______ a DVD player, their mums and dads and grandparents often find using new technology ______ and difficult. But if you're a teenager who criticises your parents for their ______ of technological awareness, don't be too hard on them! Some time ______ the future, when you've got children of your own, your ability to deal with new technology will probably ______ and your children will feel more comfortable with new technology than you do.",
+            "options": {
+              "A": "estimate",
+              "B": "invent",
+              "C": "involve",
+              "D": "experiment"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 2,
+            "sentence": "Modern technology is changing and improving all the time. Every month, scientists invent new gadgets and ______ to help us with our daily lives, and ______ ways to make existing technology faster and better. Our homes are full of hardware (such as DVD players and computers) and ______ (such as computer games and MP3s). ______ suggests, however, that it's young people who are best able to deal with this change. Whereas teenagers have no problem ______ a DVD player, their mums and dads and grandparents often find using new technology ______ and difficult. But if you're a teenager who criticises your parents for their ______ of technological awareness, don't be too hard on them! Some time ______ the future, when you've got children of your own, your ability to deal with new technology will probably ______ and your children will feel more comfortable with new technology than you do.",
+            "options": {
+              "A": "experiments",
+              "B": "effects",
+              "C": "laboratories",
+              "D": "equipment"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 3,
+            "sentence": "Modern technology is changing and improving all the time. Every month, scientists invent new gadgets and equipment to help us with our daily lives, and ______ ways to make existing technology faster and better. Our homes are full of hardware (such as DVD players and computers) and ______ (such as computer games and MP3s). ______ suggests, however, that it's young people who are best able to deal with this change. Whereas teenagers have no problem ______ a DVD player, their mums and dads and grandparents often find using new technology ______ and difficult. But if you're a teenager who criticises your parents for their ______ of technological awareness, don't be too hard on them! Some time ______ the future, when you've got children of your own, your ability to deal with new technology will probably ______ and your children will feel more comfortable with new technology than you do.",
+            "options": {
+              "A": "involve",
+              "B": "discover",
+              "C": "decrease",
+              "D": "connect"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 4,
+            "sentence": "Modern technology is changing and improving all the time. Every month, scientists invent new gadgets and equipment to help us with our daily lives, and discover ways to make existing technology faster and better. Our homes are full of hardware (such as DVD players and computers) and ______ (such as computer games and MP3s). ______ suggests, however, that it's young people who are best able to deal with this change. Whereas teenagers have no problem ______ a DVD player, their mums and dads and grandparents often find using new technology ______ and difficult. But if you're a teenager who criticises your parents for their ______ of technological awareness, don't be too hard on them! Some time ______ the future, when you've got children of your own, your ability to deal with new technology will probably ______ and your children will feel more comfortable with new technology than you do.",
+            "options": {
+              "A": "screens",
+              "B": "gadgets",
+              "C": "software",
+              "D": "laptops"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 5,
+            "sentence": "Modern technology is changing and improving all the time. Every month, scientists invent new gadgets and equipment to help us with our daily lives, and discover ways to make existing technology faster and better. Our homes are full of hardware (such as DVD players and computers) and software (such as computer games and MP3s). ______ suggests, however, that it's young people who are best able to deal with this change. Whereas teenagers have no problem ______ a DVD player, their mums and dads and grandparents often find using new technology ______ and difficult. But if you're a teenager who criticises your parents for their ______ of technological awareness, don't be too hard on them! Some time ______ the future, when you've got children of your own, your ability to deal with new technology will probably ______ and your children will feel more comfortable with new technology than you do.",
+            "options": {
+              "A": "Research",
+              "B": "Experiment",
+              "C": "Program",
+              "D": "Technology"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 6,
+            "sentence": "Modern technology is changing and improving all the time. Every month, scientists invent new gadgets and equipment to help us with our daily lives, and discover ways to make existing technology faster and better. Our homes are full of hardware (such as DVD players and computers) and software (such as computer games and MP3s). Research suggests, however, that it's young people who are best able to deal with this change. Whereas teenagers have no problem ______ a DVD player, their mums and dads and grandparents often find using new technology ______ and difficult. But if you're a teenager who criticises your parents for their ______ of technological awareness, don't be too hard on them! Some time ______ the future, when you've got children of your own, your ability to deal with new technology will probably ______ and your children will feel more comfortable with new technology than you do.",
+            "options": {
+              "A": "involving",
+              "B": "operating",
+              "C": "discovering",
+              "D": "inventing"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 7,
+            "sentence": "Modern technology is changing and improving all the time. Every month, scientists invent new gadgets and equipment to help us with our daily lives, and discover ways to make existing technology faster and better. Our homes are full of hardware (such as DVD players and computers) and software (such as computer games and MP3s). Research suggests, however, that it's young people who are best able to deal with this change. Whereas teenagers have no problem operating a DVD player, their mums and dads and grandparents often find using new technology ______ and difficult. But if you're a teenager who criticises your parents for their ______ of technological awareness, don't be too hard on them! Some time ______ the future, when you've got children of your own, your ability to deal with new technology will probably ______ and your children will feel more comfortable with new technology than you do.",
+            "options": {
+              "A": "automatic",
+              "B": "unique",
+              "C": "sudden",
+              "D": "complicated"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 8,
+            "sentence": "Modern technology is changing and improving all the time. Every month, scientists invent new gadgets and equipment to help us with our daily lives, and discover ways to make existing technology faster and better. Our homes are full of hardware (such as DVD players and computers) and software (such as computer games and MP3s). Research suggests, however, that it's young people who are best able to deal with this change. Whereas teenagers have no problem operating a DVD player, their mums and dads and grandparents often find using new technology complicated and difficult. But if you're a teenager who criticises your parents for their ______ of technological awareness, don't be too hard on them! Some time ______ the future, when you've got children of your own, your ability to deal with new technology will probably ______ and your children will feel more comfortable with new technology than you do.",
+            "options": {
+              "A": "a research",
+              "B": "an experiment",
+              "C": "effect",
+              "D": "lack"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 9,
+            "sentence": "Modern technology is changing and improving all the time. Every month, scientists invent new gadgets and equipment to help us with our daily lives, and discover ways to make existing technology faster and better. Our homes are full of hardware (such as DVD players and computers) and software (such as computer games and MP3s). Research suggests, however, that it's young people who are best able to deal with this change. Whereas teenagers have no problem operating a DVD player, their mums and dads and grandparents often find using new technology complicated and difficult. But if you're a teenager who criticises your parents for their lack of technological awareness, don't be too hard on them! Some time ______ the future, when you've got children of your own, your ability to deal with new technology will probably ______ and your children will feel more comfortable with new technology than you do.",
+            "options": {
+              "A": "to",
+              "B": "in",
+              "C": "on",
+              "D": "at"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 10,
+            "sentence": "Modern technology is changing and improving all the time. Every month, scientists invent new gadgets and equipment to help us with our daily lives, and discover ways to make existing technology faster and better. Our homes are full of hardware (such as DVD players and computers) and software (such as computer games and MP3s). Research suggests, however, that it's young people who are best able to deal with this change. Whereas teenagers have no problem operating a DVD player, their mums and dads and grandparents often find using new technology complicated and difficult. But if you're a teenager who criticises your parents for their lack of technological awareness, don't be too hard on them! Some time in the future, when you've got children of your own, your ability to deal with new technology will probably ______ and your children will feel more comfortable with new technology than you do.",
+            "options": {
+              "A": "decrease",
+              "B": "involve",
+              "C": "lack",
+              "D": "estimate"
+            },
+            "answer": "A"
+          }
+        ]
+      }
+    ]
+  },
+  "r8": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "You should ______ me you were going to be late!",
+            "options": {
+              "A": "tell",
+              "B": "have told",
+              "C": "to tell",
+              "D": "to have told"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 2,
+            "sentence": "The football match ______ have finished by now.",
+            "options": {
+              "A": "must",
+              "B": "ought",
+              "C": "can't",
+              "D": "wouldn't"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 3,
+            "sentence": "I wonder if you know where ______.",
+            "options": {
+              "A": "is the post office?",
+              "B": "is the post office.",
+              "C": "the post office is?",
+              "D": "the post office is."
+            },
+            "answer": "C"
+          },
+          {
+            "id": 4,
+            "sentence": "You don't eat meat, ______ you?",
+            "options": {
+              "A": "are",
+              "B": "eat",
+              "C": "have",
+              "D": "do"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 5,
+            "sentence": "Let's see what's on at the cinema, ______?",
+            "options": {
+              "A": "do we",
+              "B": "shall us",
+              "C": "shall we",
+              "D": "let us"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 6,
+            "sentence": "She ______ have bought the tickets today, but I can't be sure.",
+            "options": {
+              "A": "must",
+              "B": "might",
+              "C": "can't",
+              "D": "shouldn't"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 7,
+            "sentence": "Could you tell us ______?",
+            "options": {
+              "A": "when you were born?",
+              "B": "when you were born.",
+              "C": "when were you born?",
+              "D": "when were you born."
+            },
+            "answer": "A"
+          },
+          {
+            "id": 8,
+            "sentence": "I'm sleeping in Jim's room tonight, ______?",
+            "options": {
+              "A": "am not",
+              "B": "don't",
+              "C": "aren't",
+              "D": "isn't"
+            },
+            "answer": "C"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "matching",
+        "title": "Match to make sentences.",
+        "questions": [
+          {
+            "id": 1,
+            "left": "Someone broke",
+            "right": "into our neighbour's house yesterday.",
+            "answer": "B"
+          },
+          {
+            "id": 2,
+            "left": "I'll just put",
+            "right": "these things away and then I'll be ready.",
+            "answer": "E"
+          },
+          {
+            "id": 3,
+            "left": "Mum always wakes me",
+            "right": "up at half past seven.",
+            "answer": "A"
+          },
+          {
+            "id": 4,
+            "left": "If you wash these plates",
+            "right": "up, I'll start cooking dinner.",
+            "answer": "F"
+          },
+          {
+            "id": 5,
+            "left": "The flat is empty, so you can move",
+            "right": "in whenever you like.",
+            "answer": "C"
+          },
+          {
+            "id": 6,
+            "left": "If you don't get",
+            "right": "up soon, you'll be late for school.",
+            "answer": "D"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "key_word_transform",
+        "title": "Complete each second sentence using the word given. Write between two and five words.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I'm almost certain I didn't leave my wallet in the cafe.",
+            "keyword": "can't",
+            "answer": "can't have left"
+          },
+          {
+            "id": 2,
+            "sentence": "They'll find out that you've lied to them about your age.",
+            "keyword": "away",
+            "answer": "get away with"
+          },
+          {
+            "id": 3,
+            "sentence": "Todd lost my favourite CD, but I've forgiven him.",
+            "keyword": "for",
+            "answer": "Todd for losing"
+          },
+          {
+            "id": 4,
+            "sentence": "The woman said that my uncle was a thief!",
+            "keyword": "accused",
+            "answer": "accused my uncle of being"
+          },
+          {
+            "id": 5,
+            "sentence": "Why didn't you check the time of the film?",
+            "keyword": "should",
+            "answer": "should have checked"
+          },
+          {
+            "id": 6,
+            "sentence": "It'll be difficult to reach the others as they're a long way ahead.",
+            "keyword": "up",
+            "answer": "catch up with"
+          },
+          {
+            "id": 7,
+            "sentence": "Everyone said that I'd stolen the money!",
+            "keyword": "blamed",
+            "answer": "blamed me for"
+          },
+          {
+            "id": 8,
+            "sentence": "It's possible that Jean saw Don in the town centre.",
+            "keyword": "may",
+            "answer": "may have seen"
+          },
+          {
+            "id": 9,
+            "sentence": "Our teacher thought that Trudy was responsible for the damage, but she wasn't.",
+            "keyword": "blamed",
+            "answer": "blamed the damage on"
+          },
+          {
+            "id": 10,
+            "sentence": "It was wrong of you to take that money.",
+            "keyword": "have",
+            "answer": "ought not to have taken / shouldn't have taken"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "gap_fill",
+        "title": "Complete using the words in the box.",
+        "word_bank": [
+          "age",
+          "card",
+          "club",
+          "law",
+          "public",
+          "response",
+          "teens",
+          "touch"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I've got a passport, but I haven't got an identity ______.",
+            "answer": "card"
+          },
+          {
+            "id": 2,
+            "sentence": "That kind of behaviour is okay in private, but not in ______!",
+            "answer": "public"
+          },
+          {
+            "id": 3,
+            "sentence": "I learnt to ride a bike at the ______ of three.",
+            "answer": "age"
+          },
+          {
+            "id": 4,
+            "sentence": "It's against the ______ to drive a car without a driving licence.",
+            "answer": "law"
+          },
+          {
+            "id": 5,
+            "sentence": "Could you put me in ______ with someone who knows about starting a website?",
+            "answer": "touch"
+          },
+          {
+            "id": 6,
+            "sentence": "Shall we go to the youth ______ tonight?",
+            "answer": "club"
+          },
+          {
+            "id": 7,
+            "sentence": "When I was in my ______, I wanted to break all the rules!",
+            "answer": "teens"
+          },
+          {
+            "id": 8,
+            "sentence": "I am writing in ______ to your letter of 15th November.",
+            "answer": "response"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "word_formation",
+        "title": "Use the word given in capitals to form a word. (Passage: A politician speaks...)",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "It's my (33) ______ that we all have some very important questions",
+            "capital_word": "BELIEVE",
+            "answer": "belief"
+          },
+          {
+            "id": 2,
+            "sentence": "to ask in this (34) ______.",
+            "capital_word": "ELECT",
+            "answer": "election"
+          },
+          {
+            "id": 3,
+            "sentence": "How can we achieve (35) ______ for everyone?",
+            "capital_word": "EQUAL",
+            "answer": "equality"
+          },
+          {
+            "id": 4,
+            "sentence": "we all live (36) ______ with each other?",
+            "capital_word": "PEACE",
+            "answer": "peacefully"
+          },
+          {
+            "id": 5,
+            "sentence": "who was (37) ______ 20 or 30 years ago",
+            "capital_word": "LIVE",
+            "answer": "alive/living"
+          },
+          {
+            "id": 6,
+            "sentence": "(38) ______ that life is better now",
+            "capital_word": "AGREE",
+            "answer": "agreement"
+          },
+          {
+            "id": 7,
+            "sentence": "still many local and (39) ______ problems to solve.",
+            "capital_word": "NATION",
+            "answer": "(inter)national"
+          },
+          {
+            "id": 8,
+            "sentence": "(40) ______ and vote for the only person who can really make a difference.",
+            "capital_word": "COURAGE",
+            "answer": "courageous"
+          }
+        ]
+      }
+    ]
+  },
+  "r11": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "gap_fill",
+        "title": "Write one word in each gap. (Letter from Olivia)",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I tried ______ lots of clothes",
+            "answer": "on"
+          },
+          {
+            "id": 2,
+            "sentence": "I was amazed ______ the choice in all the shops.",
+            "answer": "by"
+          },
+          {
+            "id": 3,
+            "sentence": "It reminded me ______ the time we went shopping.",
+            "answer": "of"
+          },
+          {
+            "id": 4,
+            "sentence": "I found one of those jackets that are ______ fashion at the moment",
+            "answer": "in"
+          },
+          {
+            "id": 5,
+            "sentence": "I couldn't do it ______! I needed a bigger size",
+            "answer": "up"
+          },
+          {
+            "id": 6,
+            "sentence": "Maybe I'll have another look ______ the end of this week.",
+            "answer": "at"
+          },
+          {
+            "id": 7,
+            "sentence": "they're similar ______ the ones you've got",
+            "answer": "to"
+          },
+          {
+            "id": 8,
+            "sentence": "I have them ______ at the moment and they look great!",
+            "answer": "on"
+          },
+          {
+            "id": 9,
+            "sentence": "I've changed it ______ a T-shirt!",
+            "answer": "into"
+          },
+          {
+            "id": 10,
+            "sentence": "it'll be perfect ______ the summer.",
+            "answer": "for"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "matching",
+        "title": "Match to make sentences.",
+        "questions": [
+          {
+            "id": 1,
+            "left": "She described the picture she was painting",
+            "right": "as modern, but it looked quite old-fashioned to me.",
+            "answer": "G"
+          },
+          {
+            "id": 2,
+            "left": "My sister's an architect, so she's involved",
+            "right": "in designing buildings.",
+            "answer": "A"
+          },
+          {
+            "id": 3,
+            "left": "I like Picasso's paintings, but I'm not familiar",
+            "right": "with his sculptures.",
+            "answer": "H"
+          },
+          {
+            "id": 4,
+            "left": "I tried to explain how to use oil paints",
+            "right": "to Martin, but he didn't understand.",
+            "answer": "B"
+          },
+          {
+            "id": 5,
+            "left": "They had to remove one of the paintings",
+            "right": "from the exhibition because it was damaged.",
+            "answer": "C"
+          },
+          {
+            "id": 6,
+            "left": "Vincent Van Gogh has had an influence",
+            "right": "on many other painters.",
+            "answer": "F"
+          },
+          {
+            "id": 7,
+            "left": "Darren drew a picture",
+            "right": "of a horse and it was brilliant.",
+            "answer": "E"
+          },
+          {
+            "id": 8,
+            "left": "Adding flowers to my picture changed it",
+            "right": "from a winter scene into a spring scene.",
+            "answer": "D"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "key_word_transform",
+        "title": "Complete the second sentence using the word given. Write between two and five words.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "'I want to learn how to paint,' Janet said.",
+            "keyword": "said",
+            "answer": "she wanted"
+          },
+          {
+            "id": 2,
+            "sentence": "'We're building a house outside town,' said Mrs Turner.",
+            "keyword": "they",
+            "answer": "were building"
+          },
+          {
+            "id": 3,
+            "sentence": "'We're working on our website tomorrow,' Keith said.",
+            "keyword": "day",
+            "answer": "the next day"
+          },
+          {
+            "id": 4,
+            "sentence": "'Will you draw me a picture?' Jenny asked.",
+            "keyword": "draw",
+            "answer": "me to draw her"
+          },
+          {
+            "id": 5,
+            "sentence": "'We have to paint a picture for art class,' John said.",
+            "keyword": "they",
+            "answer": "had to paint"
+          },
+          {
+            "id": 6,
+            "sentence": "'Can I see your drawing?' I asked Amy.",
+            "keyword": "if",
+            "answer": "I could"
+          },
+          {
+            "id": 7,
+            "sentence": "'You'll enjoy the show,' Belinda said to me.",
+            "keyword": "I",
+            "answer": "would enjoy"
+          },
+          {
+            "id": 8,
+            "sentence": "'Please don't take my photograph,' Hans said.",
+            "keyword": "take",
+            "answer": "not to take his"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I asked her when ______ finish making her model.",
+            "options": {
+              "A": "will she",
+              "B": "she will",
+              "C": "would she",
+              "D": "she would"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 2,
+            "sentence": "Don said he had an art lesson ______ night.",
+            "options": {
+              "A": "that",
+              "B": "the",
+              "C": "this",
+              "D": "those"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 3,
+            "sentence": "My mum told ______ my paints.",
+            "options": {
+              "A": "that I move",
+              "B": "me to move",
+              "C": "I to move to me",
+              "D": "to move me"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 4,
+            "sentence": "Tom apologised ______ ink on my picture.",
+            "options": {
+              "A": "for getting",
+              "B": "that he got",
+              "C": "to get",
+              "D": "for he gets"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 5,
+            "sentence": "Molly denied ______ my camera.",
+            "options": {
+              "A": "to lose",
+              "B": "for losing",
+              "C": "losing",
+              "D": "on losing"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 6,
+            "sentence": "Gary promised ______ me paint the outside of the house.",
+            "options": {
+              "A": "helping",
+              "B": "to help",
+              "C": "that he helps",
+              "D": "for helping"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 7,
+            "sentence": "My brother refused ______ me use his digital camera.",
+            "options": {
+              "A": "to let",
+              "B": "that he let",
+              "C": "letting",
+              "D": "for letting"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 8,
+            "sentence": "I suggest ______ a new architect.",
+            "options": {
+              "A": "to find",
+              "B": "you to find",
+              "C": "for finding",
+              "D": "finding"
+            },
+            "answer": "D"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Just put the statue ______ the corner of the room.",
+            "options": {
+              "A": "on",
+              "B": "in",
+              "C": "at",
+              "D": "over"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 2,
+            "sentence": "Do these shoes ______ my new skirt?",
+            "options": {
+              "A": "suit",
+              "B": "go",
+              "C": "match",
+              "D": "look"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 3,
+            "sentence": "green went out ______ fashion last year!",
+            "options": {
+              "A": "from",
+              "B": "of",
+              "C": "with",
+              "D": "on"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 4,
+            "sentence": "This shirt is too ______ around the neck.",
+            "options": {
+              "A": "tight",
+              "B": "smooth",
+              "C": "rough",
+              "D": "practical"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 5,
+            "sentence": "so we ______ out the modern paintings.",
+            "options": {
+              "A": "put",
+              "B": "left",
+              "C": "went",
+              "D": "made"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 6,
+            "sentence": "Why don't you ______ your clothes in half?",
+            "options": {
+              "A": "fix",
+              "B": "stretch",
+              "C": "create",
+              "D": "fold"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 7,
+            "sentence": "My new shirt has a ______ like a Chinese dragon on the back.",
+            "options": {
+              "A": "tear",
+              "B": "pile",
+              "C": "design",
+              "D": "cotton"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 8,
+            "sentence": "I filled the bucket ______ with water.",
+            "options": {
+              "A": "out",
+              "B": "on",
+              "C": "in",
+              "D": "up"
+            },
+            "answer": "D"
+          }
+        ]
+      }
+    ]
+  },
+  "r14": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "gap_fill",
+        "title": "Complete using the correct form of the verbs in the box.",
+        "word_bank": [
+          "complain",
+          "convince",
+          "criticise",
+          "deny",
+          "doubt",
+          "praise",
+          "refuse",
+          "warn"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "It took a long time to ______ Lee that poetry isn't boring.",
+            "answer": "convince"
+          },
+          {
+            "id": 2,
+            "sentence": "My dad has just ______ to increase my pocket money again.",
+            "answer": "refused"
+          },
+          {
+            "id": 3,
+            "sentence": "Stop ______ about how much work you have and just get on with it!",
+            "answer": "complaining"
+          },
+          {
+            "id": 4,
+            "sentence": "I ______ it'll be warm enough to go to the beach tomorrow.",
+            "answer": "doubt"
+          },
+          {
+            "id": 5,
+            "sentence": "We all ______ you not to trust Jerry, but you didn't listen!",
+            "answer": "warned"
+          },
+          {
+            "id": 6,
+            "sentence": "Paul Fletcher, do you ______ stealing 1,000 euros from Leicester Stores on 24th September?",
+            "answer": "deny"
+          },
+          {
+            "id": 7,
+            "sentence": "You should always ______ a puppy when it does something good.",
+            "answer": "praise"
+          },
+          {
+            "id": 8,
+            "sentence": "I wish Alex wouldn't ______ me all the time. It makes me feel useless.",
+            "answer": "criticise"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "gap_fill",
+        "title": "Write one word in each gap.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "______ my view, every problem has a solution.",
+            "answer": "In"
+          },
+          {
+            "id": 2,
+            "sentence": "Your room is ______ a terrible mess! Tidy it up!",
+            "answer": "in"
+          },
+          {
+            "id": 3,
+            "sentence": "My mum is ______ a lot of pressure at work at the moment.",
+            "answer": "under"
+          },
+          {
+            "id": 4,
+            "sentence": "Oh no! Are you ______ trouble with the police again?",
+            "answer": "in"
+          },
+          {
+            "id": 5,
+            "sentence": "We weren't ______ any real danger, I promise!",
+            "answer": "in"
+          },
+          {
+            "id": 6,
+            "sentence": "I got on the wrong train ______ mistake!",
+            "answer": "by"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "key_word_transform",
+        "title": "Complete each second sentence using the word given. Write between two and five words.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Let's throw these old clothes away.",
+            "keyword": "rid",
+            "answer": "get rid of"
+          },
+          {
+            "id": 2,
+            "sentence": "I don't think people should drive fast through the town centre.",
+            "keyword": "approve",
+            "answer": "approve of people driving"
+          },
+          {
+            "id": 3,
+            "sentence": "Do you think that ghosts exist?",
+            "keyword": "believe",
+            "answer": "believe in"
+          },
+          {
+            "id": 4,
+            "sentence": "You should solve that problem as quickly as you can.",
+            "keyword": "sort",
+            "answer": "sort out that problem"
+          },
+          {
+            "id": 5,
+            "sentence": "I'm afraid we haven't got any sandwiches left.",
+            "keyword": "run",
+            "answer": "we've run out of"
+          },
+          {
+            "id": 6,
+            "sentence": "How should teachers handle badly-behaved students?",
+            "keyword": "deal",
+            "answer": "deal with"
+          },
+          {
+            "id": 7,
+            "sentence": "If you're not careful, you'll fall!",
+            "keyword": "watch",
+            "answer": "don't watch out"
+          },
+          {
+            "id": 8,
+            "sentence": "I wouldn't buy that computer if I were you.",
+            "keyword": "advise",
+            "answer": "advise against buying"
+          }
+        ]
+      }
+    ]
+  },
+  "pt2": {
+    "exercises": [
+      {
+        "exercise": "A",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I'm not old enough to ______ in this election.",
+            "options": {
+              "A": "protest",
+              "B": "commit",
+              "C": "vote",
+              "D": "admit"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 2,
+            "sentence": "Is it really your ______ to be a professional footballer?",
+            "options": {
+              "A": "application",
+              "B": "profession",
+              "C": "ambition",
+              "D": "contract"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 3,
+            "sentence": "What we eat ______ how much energy we have during the day.",
+            "options": {
+              "A": "balances",
+              "B": "contains",
+              "C": "benefits",
+              "D": "affects"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 4,
+            "sentence": "These jeans are too ______. I think I need a bigger pair.",
+            "options": {
+              "A": "tight",
+              "B": "loose",
+              "C": "rough",
+              "D": "smooth"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 5,
+            "sentence": "Britain's ______ is fairly mild.",
+            "options": {
+              "A": "forecast",
+              "B": "climate",
+              "C": "environment",
+              "D": "heatwave"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 6,
+            "sentence": "I fell over in front of everyone at lunch. It was so ______!",
+            "options": {
+              "A": "embarrassing",
+              "B": "naughty",
+              "C": "romantic",
+              "D": "depressed"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 7,
+            "sentence": "I asked Jim to help me with the project, but he ______.",
+            "options": {
+              "A": "doubted",
+              "B": "denied",
+              "C": "refused",
+              "D": "warned"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 8,
+            "sentence": "Jeanne, ______ us that joke about the guy who knocks on the door.",
+            "options": {
+              "A": "say",
+              "B": "speak",
+              "C": "make",
+              "D": "tell"
+            },
+            "answer": "D"
+          }
+        ]
+      },
+      {
+        "exercise": "B",
+        "type": "gap_fill",
+        "title": "Write one word in each gap. (Passage: A prisoner's view)",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Although I hate (9) ______ in prison.",
+            "answer": "being"
+          },
+          {
+            "id": 2,
+            "sentence": "If I hadn't committed several burglaries, I wouldn't (10) ______ been sent here to prison.",
+            "answer": "have"
+          },
+          {
+            "id": 3,
+            "sentence": "I really (11) ______ I hadn't done the things I did.",
+            "answer": "wish"
+          },
+          {
+            "id": 4,
+            "sentence": "you can't change the past, (12) ______ you? So I'm here.",
+            "answer": "can"
+          },
+          {
+            "id": 5,
+            "sentence": "My cell is tiny - it's not much bigger (13) ______ a cupboard!",
+            "answer": "than"
+          },
+          {
+            "id": 6,
+            "sentence": "It's (14) ______ small that I can touch the door and the window at the same time!",
+            "answer": "so"
+          },
+          {
+            "id": 7,
+            "sentence": "Both (15) ______ us get on well, which is good.",
+            "answer": "of"
+          },
+          {
+            "id": 8,
+            "sentence": "none of them can visit me, but they write (16) ______ me every week.",
+            "answer": "to"
+          },
+          {
+            "id": 9,
+            "sentence": "If I get out, I (17) ______ never commit another crime.",
+            "answer": "will"
+          },
+          {
+            "id": 10,
+            "sentence": "It'll be (18) ______ a great feeling to be free again!",
+            "answer": "such"
+          }
+        ]
+      },
+      {
+        "exercise": "C",
+        "type": "key_word_transform",
+        "title": "Complete each second sentence using the word given. Write between two and five words.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Henry was three when he first performed in public.",
+            "keyword": "age",
+            "answer": "Henry first performed in public at the age of"
+          },
+          {
+            "id": 2,
+            "sentence": "Why don't you start a youth club?",
+            "keyword": "set",
+            "answer": "set up a youth club"
+          },
+          {
+            "id": 3,
+            "sentence": "How long did it take you to recover from your illness?",
+            "keyword": "over",
+            "answer": "How long did it take you to get over"
+          },
+          {
+            "id": 4,
+            "sentence": "Are you helping to organise the celebrations?",
+            "keyword": "involved",
+            "answer": "Are you involved in"
+          },
+          {
+            "id": 5,
+            "sentence": "We don't have enough time.",
+            "keyword": "short",
+            "answer": "We are short of"
+          },
+          {
+            "id": 6,
+            "sentence": "She carried on playing despite her injury.",
+            "keyword": "spite",
+            "answer": "in spite of her"
+          },
+          {
+            "id": 7,
+            "sentence": "They haven't got any bread at the supermarket.",
+            "keyword": "run",
+            "answer": "They have run out of"
+          },
+          {
+            "id": 8,
+            "sentence": "It's illegal to take a gun onto a plane in most countries.",
+            "keyword": "against",
+            "answer": "Taking a gun onto a plane is against the law"
+          },
+          {
+            "id": 9,
+            "sentence": "We had to cancel the meeting because Paul was ill.",
+            "keyword": "called",
+            "answer": "be called off"
+          },
+          {
+            "id": 10,
+            "sentence": "Spiders don't frighten me!",
+            "keyword": "afraid",
+            "answer": "I'm not afraid of"
+          }
+        ]
+      },
+      {
+        "exercise": "D",
+        "type": "word_formation",
+        "title": "Use the word given in capitals to form a word. (Passage: A new painter)",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Were you (29) ______ enough to be invited to the opening?",
+            "capital_word": "LUCK",
+            "answer": "lucky"
+          },
+          {
+            "id": 2,
+            "sentence": "seeing the new (30) ______ of Daniella Warner's paintings.",
+            "capital_word": "EXHIBIT",
+            "answer": "exhibition"
+          },
+          {
+            "id": 3,
+            "sentence": "Daniella Warner is not (31) ______ - yet -",
+            "capital_word": "FAME",
+            "answer": "famous"
+          },
+          {
+            "id": 4,
+            "sentence": "clearly an (32) ______ who has a very bright future.",
+            "capital_word": "ART",
+            "answer": "artist"
+          },
+          {
+            "id": 5,
+            "sentence": "All Daniella Warner's paintings - without (33) ______ -",
+            "capital_word": "EXCEPT",
+            "answer": "exception"
+          },
+          {
+            "id": 6,
+            "sentence": "(34) ______.",
+            "capital_word": "IMAGINE",
+            "answer": "imaginative"
+          },
+          {
+            "id": 7,
+            "sentence": "areas of outstanding (35) ______ beauty",
+            "capital_word": "NATURE",
+            "answer": "natural"
+          },
+          {
+            "id": 8,
+            "sentence": "she makes them (36) ______, lively places.",
+            "capital_word": "EXCITE",
+            "answer": "exciting"
+          },
+          {
+            "id": 9,
+            "sentence": "the subjects of (37) ______ and peace.",
+            "capital_word": "FREE",
+            "answer": "freedom"
+          },
+          {
+            "id": 10,
+            "sentence": "if anyone deserves to be a (38) ______ artist these days",
+            "capital_word": "SUCCESS",
+            "answer": "successful"
+          }
+        ]
+      },
+      {
+        "exercise": "E",
+        "type": "gap_fill",
+        "title": "Write one word in each gap.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "You shouldn't criticise people ______ the way they look.",
+            "answer": "for"
+          },
+          {
+            "id": 2,
+            "sentence": "I'm really fed up ______ studying all the time!",
+            "answer": "with"
+          },
+          {
+            "id": 3,
+            "sentence": "My brother is allergic ______ milk.",
+            "answer": "to"
+          },
+          {
+            "id": 4,
+            "sentence": "Would you describe her ______ a shy person?",
+            "answer": "as"
+          },
+          {
+            "id": 5,
+            "sentence": "Nothing is going to prevent me ______ coming to the concert!",
+            "answer": "from"
+          },
+          {
+            "id": 6,
+            "sentence": "Congratulations ______ passing your driving test!",
+            "answer": "on"
+          },
+          {
+            "id": 7,
+            "sentence": "I don't approve ______ young children wearing earrings.",
+            "answer": "of"
+          },
+          {
+            "id": 8,
+            "sentence": "Have you ever been accused ______ doing something you didn't do?",
+            "answer": "of"
+          },
+          {
+            "id": 9,
+            "sentence": "I think I might apply ______ that job at the local shop.",
+            "answer": "for"
+          },
+          {
+            "id": 10,
+            "sentence": "This song reminds me ______ our holiday last summer.",
+            "answer": "of"
+          }
+        ]
+      },
+      {
+        "exercise": "F",
+        "type": "matching",
+        "title": "Match to make sentences.",
+        "questions": [
+          {
+            "id": 1,
+            "left": "What's going",
+            "right": "on here?",
+            "answer": "D"
+          },
+          {
+            "id": 2,
+            "left": "What time did you get",
+            "right": "up this morning?",
+            "answer": "A"
+          },
+          {
+            "id": 3,
+            "left": "When are you going to give me",
+            "right": "back my book?",
+            "answer": "F"
+          },
+          {
+            "id": 4,
+            "left": "Has this milk gone",
+            "right": "off or is it okay?",
+            "answer": "H"
+          },
+          {
+            "id": 5,
+            "left": "Why don't you take",
+            "right": "off your jacket?",
+            "answer": "B"
+          },
+          {
+            "id": 6,
+            "left": "Has the fire gone",
+            "right": "out or is it still burning?",
+            "answer": "C"
+          },
+          {
+            "id": 7,
+            "left": "How did the burglars break",
+            "right": "into the building?",
+            "answer": "E"
+          },
+          {
+            "id": 8,
+            "left": "Mum, can I stay",
+            "right": "up until the film finishes?",
+            "answer": "G"
+          }
+        ]
+      },
+      {
+        "exercise": "G",
+        "type": "word_form",
+        "title": "One word in each sentence is in the wrong form. Write the correct form.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I think we're all in agree about this.",
+            "answer": "agreement"
+          },
+          {
+            "id": 2,
+            "sentence": "Carl is so boss - he's always telling us what to do.",
+            "answer": "bossy"
+          },
+          {
+            "id": 3,
+            "sentence": "My dad is a very good cooker.",
+            "answer": "cook"
+          },
+          {
+            "id": 4,
+            "sentence": "Mozart is my favourite compose.",
+            "answer": "composer"
+          },
+          {
+            "id": 5,
+            "sentence": "Motorbikes cause a lot of noise pollute.",
+            "answer": "pollution"
+          },
+          {
+            "id": 6,
+            "sentence": "Thank you for being so sympathy.",
+            "answer": "sympathetic"
+          },
+          {
+            "id": 7,
+            "sentence": "He's one of the funniest comedies I've ever seen.",
+            "answer": "comedians"
+          },
+          {
+            "id": 8,
+            "sentence": "Could I make a suggest?",
+            "answer": "suggestion"
+          },
+          {
+            "id": 9,
+            "sentence": "That shop assist wasn't very helpful, was he?",
+            "answer": "assistant"
+          },
+          {
+            "id": 10,
+            "sentence": "That's a very sense idea.",
+            "answer": "sensible"
+          }
+        ]
+      },
+      {
+        "exercise": "H",
+        "type": "gap_fill",
+        "title": "Complete using the words in the box.",
+        "word_bank": [
+          "diet",
+          "distance",
+          "fashion",
+          "least",
+          "mistake",
+          "strike",
+          "tears",
+          "touch"
+        ],
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "Do you think I need to go on a ______?",
+            "answer": "diet"
+          },
+          {
+            "id": 2,
+            "sentence": "John was in ______ earlier. Do you know why he was crying?",
+            "answer": "tears"
+          },
+          {
+            "id": 3,
+            "sentence": "Wearing clothes that are in ______ isn't very important to me.",
+            "answer": "fashion"
+          },
+          {
+            "id": 4,
+            "sentence": "We could just see Doug a long way ahead in the ______.",
+            "answer": "distance"
+          },
+          {
+            "id": 5,
+            "sentence": "I failed the history test, but at ______ I passed the geography test.",
+            "answer": "least"
+          },
+          {
+            "id": 6,
+            "sentence": "I did the wrong exercise by ______.",
+            "answer": "mistake"
+          },
+          {
+            "id": 7,
+            "sentence": "Are you still in ______ with your friends from your old school?",
+            "answer": "touch"
+          },
+          {
+            "id": 8,
+            "sentence": "The bus drivers are on ______ today, so there are no buses.",
+            "answer": "strike"
+          }
+        ]
+      },
+      {
+        "exercise": "I",
+        "type": "gap_fill",
+        "title": "Write one word in each gap.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I wonder who's going to move ______ next door.",
+            "answer": "in"
+          },
+          {
+            "id": 2,
+            "sentence": "We'll have to put the match ______ until next Saturday.",
+            "answer": "off"
+          },
+          {
+            "id": 3,
+            "sentence": "I'm going to cut ______ on the amount of coffee I drink.",
+            "answer": "down"
+          },
+          {
+            "id": 4,
+            "sentence": "We filled the car ______ with petrol before leaving.",
+            "answer": "up"
+          },
+          {
+            "id": 5,
+            "sentence": "Excuse me, can I try these shoes ______, please?",
+            "answer": "on"
+          },
+          {
+            "id": 6,
+            "sentence": "I'm going to put that poster ______ on my bedroom wall.",
+            "answer": "up"
+          },
+          {
+            "id": 7,
+            "sentence": "Hang ______! I'm not quite ready yet.",
+            "answer": "on"
+          },
+          {
+            "id": 8,
+            "sentence": "Watch ______! There's a car coming!",
+            "answer": "out"
+          }
+        ]
+      },
+      {
+        "exercise": "J",
+        "type": "multiple_choice",
+        "title": "Choose the correct answer.",
+        "questions": [
+          {
+            "id": 1,
+            "sentence": "I'm going to have a part in the play, ______ I?",
+            "options": {
+              "A": "am not",
+              "B": "don't",
+              "C": "haven't",
+              "D": "aren't"
+            },
+            "answer": "D"
+          },
+          {
+            "id": 2,
+            "sentence": "Sophie ______ have been ill today because she didn't come to school.",
+            "options": {
+              "A": "can't",
+              "B": "should",
+              "C": "must",
+              "D": "would"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 3,
+            "sentence": "I'm ______ to go on holiday on my own! I'm nineteen!",
+            "options": {
+              "A": "so old",
+              "B": "such an old",
+              "C": "too old",
+              "D": "old enough"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 4,
+            "sentence": "My MP3 player is better ______ yours!",
+            "options": {
+              "A": "from",
+              "B": "to",
+              "C": "than",
+              "D": "that"
+            },
+            "answer": "C"
+          },
+          {
+            "id": 5,
+            "sentence": "If you ______ helped me, I would never have finished on time.",
+            "options": {
+              "A": "hadn't",
+              "B": "haven't",
+              "C": "don't",
+              "D": "wouldn't"
+            },
+            "answer": "A"
+          },
+          {
+            "id": 6,
+            "sentence": "Carol asked me if you ______ the film.",
+            "options": {
+              "A": "already see",
+              "B": "had already seen",
+              "C": "already saw",
+              "D": "has already seen"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 7,
+            "sentence": "I wish you ______ be quiet for five minutes!",
+            "options": {
+              "A": "must",
+              "B": "would",
+              "C": "can",
+              "D": "should"
+            },
+            "answer": "B"
+          },
+          {
+            "id": 8,
+            "sentence": "We were made ______ up all the mess we'd made.",
+            "options": {
+              "A": "clear",
+              "B": "to clear",
+              "C": "clearing",
+              "D": "cleared"
+            },
+            "answer": "B"
+          }
+        ]
+      }
+    ]
+  }
+}
